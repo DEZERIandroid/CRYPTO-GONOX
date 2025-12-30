@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -67,3 +68,7 @@ export default tseslint.config([
   },
 ])
 ```
+=======
+# CRYPTO-GONOX
+Игровая платформа для трейдинга виртуальной криптовалюты. Соревнуйся, учи стратегии и входи в топ-лидеров — без риска для реальных средств.
+>>>>>>> 3f26140d932412c3dd84c474834b5fb8be1136aa
