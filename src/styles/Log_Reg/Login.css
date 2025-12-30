@@ -1,0 +1,107 @@
+.Login-container {
+  width: 360px;
+  margin: 80px auto;
+  padding: 32px;
+  background-color: #141318; 
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Login-container .inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.Login-container input[type="email"],
+.Login-container input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  outline: none;
+  transition: 
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.Login-container input[type="email"]::placeholder,
+.Login-container input[type="password"]::placeholder {
+  color: #bebebe;
+}
+
+.Login-container input[type="email"]:focus,
+.Login-container input[type="password"]:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+}
+
+.button-login {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: rgb(4, 90, 143);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.button-login:hover {
+  background-color: rgb(0, 72, 117);
+}
+
+.button-login:active {
+  transform: scale(0.98);
+}
+
+.error-modal {
+  width: 100%;
+  margin-top: 24px;
+  min-height: 30px;
+  max-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.error-modal > div {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: rgba(244, 67, 54, 0.15);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.form-footer {
+  width: 100%;
+  text-align: right;
+  margin-top: 8px;
+  margin-bottom: -16px;
+}
+
+.registerLink {
+  color: rgb(170, 204, 255);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.registerLink:hover {
+  color: rgb(41, 84, 150);
+}

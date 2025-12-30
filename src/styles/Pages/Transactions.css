@@ -1,0 +1,202 @@
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background-color: #0e0d12;
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background-color: #141318;
+}
+
+.filter-btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.filter-select {
+  background-color: #0e0d12;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  min-width: 180px;
+}
+
+.filter-select option {
+  background-color: #141318;
+}
+
+/* Статусы транзакций */
+.status-success {
+  color: #52c41a;
+  background: rgba(82, 196, 26, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-pending {
+  color: #faad14;
+  background: rgba(250, 173, 20, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-failed {
+  color: #f5222d;
+  background: rgba(245, 34, 45, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.transactions th,
+.transactions td {
+  padding: 15px 10px;
+}
+
+.transactions th:first-child,
+.transactions td:first-child {
+  padding: 5px 5px;
+}
+.transactions th:nth-child(2),
+.transactions td:nth-child(2) {
+  padding: 5px 5px;
+}
+
+.transactions-username {
+  font-size: 17px;
+  font-weight: 600;
+}
+.transactions-img{
+  width: 35px ;
+  height: 35px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+.transactions-symbol {
+  margin-bottom: -10px;
+  font-size: 13px;
+  text-align: center;
+  color: #bbb9b9;
+}
+.transactions-buyPrice {
+  font-weight: bold;
+}
+.transactions-amount {
+  font-size: 14px;
+  color: #bbb9b9;
+}
+
+/* ===== Адаптивность для транзакций ===== */
+
+@media (max-width: 1279px) {
+  .filter-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .pagination-btn {
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .filters {
+    gap: 10px;
+  }
+
+  .filter-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .filter-select {
+    min-width: 150px;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .pagination {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 25px;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .market-table table {
+    min-width: 650px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pagination-info {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-btn {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .market-table table {
+    min-width: 600px;
+  }
+
+  .transactions th,
+  .transactions td {
+    padding: 10px 12px;
+  }
+  .transactions th {
+    font-size: 10px;
+  }
+}

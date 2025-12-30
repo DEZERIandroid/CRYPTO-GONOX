@@ -1,0 +1,71 @@
+import { Link } from "react-router-dom"
+import { HomeIcon } from "./Icons/HomeIcon"
+import { UsersIcon } from "./Icons/UsersIcon"
+import { MarketIcon } from "./Icons/MarketIcon"
+import { TransactionsIcon } from "./Icons/TransactionsIcon"
+import { SettingsIcon } from "./Icons/Setting"
+import { Skeleton } from "antd"
+import ThemeToggle from "../assets/themeToggle"
+import "../styles/Components/Sidebar.css"
+import { useAppSelector } from "../hooks/reduxHooks"
+import { useGetUsersQuery } from "../app/api/UsersApi"
+
+
+const Sidebar = () => {
+  const { email, name, isAuthChecked } = useAppSelector(state => state.user);
+  const { data: users, } = useGetUsersQuery(undefined, {
+      pollingInterval:3000
+    });
+  const user = users?.find((u) => u.email === email); 
+  const photoURL = user?.photoURL
+
+  return (
+    <div className="sidebar">
+      <div className="sidebar-container">
+        <div className="sidebar-logo">
+          <Link to="/" className="logo"></Link>
+        </div>
+
+        <div className="user">
+          <Link to="/profile" >
+                  {user?.photoURL ? (<img className="user-avatar" src={photoURL} alt="d" />)
+                                    : <Skeleton.Avatar  active  style={{width:"90px",height:"90px"}}/>}
+          </Link>
+          <div className="user-name">
+            {isAuthChecked ? name || "-" : 
+            <Skeleton paragraph={false} active style={{ width: 80,height:29 }} />}
+          </div>
+          <button className="user-edit">Изменить</button>
+        </div>
+
+        <nav className="sidebar-items" >
+          <Link to="/" className="item">
+            <HomeIcon className="sidebar-icon"/>
+            <div className="nav-link">Главная</div>
+          </Link>
+          <Link to="/users" className="item">
+            <UsersIcon className="sidebar-icon"/>
+            <div className="nav-link">Клиенты</div>
+          </Link>
+          <Link to="/market" className="item">
+            <MarketIcon className="sidebar-icon"/>
+            <div className="nav-link">Рынок</div>
+          </Link>
+          <Link to="/transactions" className="item">
+            <TransactionsIcon className="sidebar-icon"/>
+            <div className="nav-link">Сделки</div>
+          </Link>
+          <Link to="/setting" className="item">
+            <SettingsIcon className="sidebar-icon"/>
+            <div className="nav-link">Настройки</div>
+          </Link>
+        </nav>
+        <div className="sidebar-theme-toggle">
+          <ThemeToggle />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Sidebar

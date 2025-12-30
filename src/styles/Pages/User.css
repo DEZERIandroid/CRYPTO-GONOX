@@ -1,0 +1,324 @@
+/* ====== ОСНОВНАЯ СЕТКА ====== */
+.user-content {
+  position: relative;
+  height: 100%;
+}
+
+/* ====== ШАПКА ПРОФИЛЯ ====== */
+.user-header {
+  height: 170px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  place-content: center;
+  padding: 0;
+  margin: 40px 0 0 0;
+  gap: 20px;
+}
+
+.user-info-avatar-cont {
+  display: grid;
+  place-content: center;
+}
+
+.user-info-avatar {
+  background-image: url('/src/assets/meduza.jpg');
+  width: 110px;
+  height: 110px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  margin: 0 auto;
+  transition: all 0.2s ease-in-out;
+}
+
+.user-info-avatar:hover {
+  box-shadow: 0 0px 15px rgb(0, 88, 219);
+}
+
+.user-info {
+  text-align: center;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+}
+
+.user-info-name {
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0;
+  color: #fff;
+}
+
+.user-info-email {
+  font-weight: 350;
+  color: #c5c4c4;
+}
+
+/* ====== СТАТИСТИКА ====== */
+.user-stats {
+  margin: 20px 0;
+}
+
+.stat-block {
+  margin: 20px 0;
+}
+
+/* ====== КНОПКА ВОЗВРАТА ====== */
+.return-btn {
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+/* ====== ПОРТФОЛИО ====== */
+.user-portfolio {
+  background-color: #141318;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  padding: 25px 30px;
+  animation: fadeIn 0.3s ease-in-out;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.portfolio-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.stat-block-balance {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+}
+
+.balance-user {
+  border-right: 1px solid #47434369;
+  padding:0 20px;
+}
+
+.crypto-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 300px;
+  padding-right: 5px;
+}
+
+.crypto-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0e0d12;
+  border-radius: 12px;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.crypto-item:hover {
+  background-color: #111111;
+  transform: translateY(-2px);
+}
+
+.crypto-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.crypto-left img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.crypto-name {
+  color: #c5c4c4;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.crypto-right {
+  text-align: right;
+}
+
+.crypto-amount {
+  color: #dd9e15;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.crypto-value {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.empty-portfolio {
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+  padding: 15px 0;
+}
+
+/* ====== ГРАФИК ====== */
+.user-chart {
+  width: 100%;
+  background-color: #141318;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  padding: 25px 30px;
+  margin-bottom: 20px;
+}
+
+.chart-placeholder {
+  height: 250px;
+  display: grid;
+  place-content: center;
+  color: #999;
+  font-size: 15px;
+}
+
+/* ====== АДАПТИВ ====== */
+
+/* --- 1200px --- */
+@media (max-width: 1200px) {
+  .user-header {
+    grid-template-columns: 1fr 1.5fr;
+  }
+
+  .user-info-name {
+    font-size: 26px;
+  }
+}
+
+/* --- 992px --- */
+@media (max-width: 992px) {
+  .user-header {
+    padding:10px 0;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .user-info-avatar {
+    width: 95px;
+    height: 95px;
+  }
+
+  .user-info-name {
+    font-size: 20px;
+  }
+
+  .portfolio-title {
+    font-size: 20px;
+  }
+}
+
+/* --- 768px --- */
+@media (max-width: 768px) {
+  .user-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    height: auto;
+    margin-top: 50px;
+  }
+
+  .user-info-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .user-info-name {
+    font-size: 20px;
+  }
+
+  .user-portfolio,
+  .user-chart {
+    padding: 20px;
+  }
+
+  .crypto-name {
+    font-size: 14px;
+  }
+
+  .crypto-value {
+    font-size: 14px;
+  }
+
+  .crypto-amount {
+    font-size: 13px;
+  }
+
+  .crypto-left img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* --- 576px --- */
+@media (max-width: 576px) {
+  .user-info-name {
+    font-size: 20px;
+  }
+
+  .user-info-email {
+    font-size: 14px;
+  }
+
+  .user-portfolio,
+  .user-chart {
+    padding: 15px;
+  }
+
+  .crypto-item {
+    padding: 8px 12px;
+  }
+
+  .crypto-name {
+    font-size: 13px;
+  }
+
+  .crypto-value {
+    font-size: 13px;
+  }
+
+  .portfolio-title {
+    font-size: 18px;
+  }
+}
+
+/* --- 400px --- */
+@media (max-width: 400px) {
+  .user-info-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .user-info-name {
+    font-size: 18px;
+  }
+
+  .crypto-left img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .crypto-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr ;
+  }
+
+  .crypto-right {
+    text-align: left;
+  }
+}

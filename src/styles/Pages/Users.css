@@ -1,0 +1,394 @@
+.users {
+  margin: 40px 0 0 20px;
+  max-width: 10vh;
+}
+
+.header-title {
+  font-size: 25px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  max-width: 400px;
+  background-color: #0e0d12;
+  border-radius: 50px;
+  padding: 0 25px;
+  height: 50px;
+}
+
+.input-icon {
+  font-size: 21px;
+  color: #999;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.header-input input {
+  height: 50px;
+  padding: 0 10px;
+  background-color: #0e0d12;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 18px;
+  flex: 1;
+}
+
+.header-input input:focus {
+  border-color: transparent;
+  outline: none;
+}
+
+.header-input input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.header-input input::-webkit-input-placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.add-user-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #2d81ff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-user-btn:hover {
+  background-color: #1a6ee6;
+}
+
+.user-content {
+  background-color: #141318;
+  border-radius: 16px;
+  padding: 30px;
+  min-height: 400px;
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  height: 72vh;
+}
+
+.users-table {
+  width: 100%;
+  overflow-x: auto;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.users-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.users-table th,
+.users-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.users-table td {
+  cursor: pointer;
+}
+
+.users-table th {
+  color: #aaa;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.users-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.role-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.role-admin {
+  background-color: rgba(45, 129, 255, 0.2);
+  color: #2d81ff;
+  display: grid;
+  place-content: center;
+  transition: all 0.3s ease;
+}
+.role-admin:hover {
+  box-shadow: 0 0 15px rgb(13, 110, 255);
+}
+
+.role-user {
+  background-color: rgba(103, 194, 58, 0.2);
+  color: #67c23a;
+  display: grid;
+  place-content: center;
+  transition: all 0.3s ease;
+}
+.role-user:hover {
+  box-shadow: 0 0 15px rgba(103, 194, 58, 255);
+}
+
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  color: #999;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.edit-btn:hover {
+  color: #2d81ff;
+}
+
+.delete-btn:hover {
+  color: #f5222d;
+}
+
+
+.waiting {
+  display: grid;
+  place-content: center;
+}
+
+/* ===== Адаптивность ===== */
+
+/* 1. Маленькие ноутбуки / большие планшеты (1024px - 1279px) */
+@media (max-width: 879px) {
+
+  .header-input {
+    width: 350px;
+    max-width: 350px;
+    height: 45px;
+  }
+
+  .header-input input {
+    height: 45px;
+    font-size: 16px;
+  }
+
+  .add-user-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 14px 12px;
+    font-size: 15px;
+  }
+
+  .action-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* 2. Планшеты в альбомной ориентации (768px - 1023px) */
+@media (max-width: 1023px) {
+  .header-title {
+    font-size: 22px;
+  }
+
+  .header-input {
+    width: 300px;
+    max-width: 300px;
+    height: 42px;
+    padding: 0 20px;
+  }
+
+  .header-input input {
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .input-icon {
+    font-size: 19px;
+    margin-right: 10px;
+  }
+
+  .add-user-btn {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  .users-table {
+    font-size: 14px;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 12px 10px;
+  }
+
+  .action-btn {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* 3. Мобильные устройства и планшеты в портретной ориентации (<768px) */
+@media (max-width: 767px) {
+
+  .header-title {
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .header-input {
+    width: 100%;
+    max-width: none;
+    height: 45px;
+    padding: 0 16px;
+    border-radius: 12px; /* смягчаем для мобильных */
+  }
+
+  .header-input input {
+    height: 45px;
+    font-size: 16px;
+    padding: 0 8px;
+  }
+
+  .input-icon {
+    font-size: 18px;
+    margin-right: 8px;
+  }
+
+  .add-user-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    justify-content: center;
+  }
+
+  .user-content {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .users-table {
+    font-size: 14px;
+  }
+
+  .users-table table {
+    min-width: 600px; /* чтобы не разваливалась на очень маленьких экранах */
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 12px 8px;
+    white-space: nowrap; /* предотвращаем "разрыв" содержимого */
+  }
+
+  .actions-cell {
+    gap: 8px;
+  }
+
+  .action-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  /* Дополнительно: скрываем менее важные колонки, если нужно */
+  /* .users-table th:nth-child(4),
+  .users-table td:nth-child(4) {
+    display: none;
+  } */
+}
+
+/* 4. Очень маленькие экраны (<480px) — дополнительная оптимизация */
+@media (max-width: 480px) {
+
+  .header-title {
+    font-size: 18px;
+  }
+
+  .header-input {
+    height: 40px;
+    padding: 0 12px;
+  }
+
+  .header-input input {
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .input-icon {
+    font-size: 16px;
+    margin-right: 6px;
+  }
+
+  .add-user-btn {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+
+  .action-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+  }
+
+  .role-badge {
+    padding: 3px 10px;
+    font-size: 12px;
+  }
+}
