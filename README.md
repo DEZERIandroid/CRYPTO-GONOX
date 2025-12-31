@@ -1,4 +1,4 @@
-<img width="1054" height="983" alt="Снимок экрана 2025-12-31 130133" src="https://github.com/user-attachments/assets/c5f1325d-e68e-4f82-83e3-fae1a6405bb0" /><h1 align="center">CRYPTO-GONOX</h1>
+<h1 align="center">CRYPTO-GONOX</h1>
 
 <p align="center">
   Симулятор криптотрейдинга для практики, мышления и сравнения результатов — без риска и без иллюзий.
