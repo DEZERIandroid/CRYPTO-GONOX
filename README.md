@@ -121,22 +121,15 @@ VITE_FIREBASE_PROJECT_ID=...
 [ ] Улучшение UX и мобильной версии
 
 
+---
+#Производительность:
+ - загрузка ≤ 2 сек
+ - обновление цен ≤ 5 сек
 
-graph TD
-
-User[User / Browser]
-
-User -->|UI Interaction| ReactApp[React + TypeScript App]
-
-ReactApp --> Redux[Redux Toolkit Store]
-
-Redux --> ReactApp
-
-ReactApp -->|Auth| FirebaseAuth[Firebase Auth]
-ReactApp -->|Data| Firestore[Firestore DB]
-
-ReactApp -->|Fetch Prices| CryptoAPI[Crypto Price API]
-
-Firestore -->|Portfolio / Trades| ReactApp
-FirebaseAuth -->|User Session| ReactApp
-CryptoAPI -->|Market Data| ReactApp
+Масштабируемость: ≥ 10 000 одновременных пользователей
+Безопасность: Firebase Auth, строгие правила Firestore
+Надёжность: аптайм ≥ 99.5%, обработка сбоев API
+Поддерживаемость: чистый TS/React код, тесты, документация
+Роли пользователей
+Гость: регистрация, просмотр лидерборда (ограниченно)
+Пользователь: полный доступ к трейдингу и портфелю
