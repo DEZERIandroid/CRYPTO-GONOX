@@ -68,6 +68,7 @@
 - Лидерборд
 <img width="350" height="280" alt="image" src="https://github.com/user-attachments/assets/3d8800eb-55db-4eb0-851f-902eca81c457" />
 
+
 ---
 ## 🛠️ Стек технологий
 
