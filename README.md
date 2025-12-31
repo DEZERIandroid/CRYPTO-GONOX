@@ -53,8 +53,7 @@
 ---
 ## 🖼️ Скриншоты
 
-<div style={{diplay:"grid",placeContent:"center",gridTemplateColumns:"1fr 1fr"}}>
-  - Главная
+- Главная
 <img width="350" height="280" alt="Снимок экрана 2025-12-31 130133" src="https://github.com/user-attachments/assets/f1ad5a98-6ffe-47b9-8316-de3c6bda23f0" />
 
 
@@ -72,9 +71,6 @@
 
 - Лидерборд
 <img width="350" height="280" alt="image" src="https://github.com/user-attachments/assets/3d8800eb-55db-4eb0-851f-902eca81c457" />
-
-
-</div>
 
 ---
 ## 🛠️ Стек технологий
