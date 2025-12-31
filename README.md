@@ -55,23 +55,23 @@
 
 
 - Главная
-<img width="450" height="350" alt="Снимок экрана 2025-12-31 130133" src="https://github.com/user-attachments/assets/f1ad5a98-6ffe-47b9-8316-de3c6bda23f0" />
+<img width="350" height="280" alt="Снимок экрана 2025-12-31 130133" src="https://github.com/user-attachments/assets/f1ad5a98-6ffe-47b9-8316-de3c6bda23f0" />
 
 
 - Профиль пользователя (баланс, портфель)
-<img width="450" height="350" alt="Снимок экрана 2025-12-31 130531" src="https://github.com/user-attachments/assets/1f948c05-7b28-4a08-bd38-f036b453ddc5" />
+<img width="350" height="280" alt="Снимок экрана 2025-12-31 130531" src="https://github.com/user-attachments/assets/1f948c05-7b28-4a08-bd38-f036b453ddc5" />
 
 
 - Рынок криптовалют
-<img width="450" height="350" alt="Снимок экрана 2025-12-31 130554" src="https://github.com/user-attachments/assets/04f05106-a4e8-47e0-9cb5-059147fb724c" />
+<img width="350" height="280" alt="Снимок экрана 2025-12-31 130554" src="https://github.com/user-attachments/assets/04f05106-a4e8-47e0-9cb5-059147fb724c" />
 
 
 - История транзакций
-<img width="450" height="350" alt="Снимок экрана 2025-12-31 130632" src="https://github.com/user-attachments/assets/1d2a3739-64f2-4e76-94be-9de671b55b26" />
+<img width="350" height="280" alt="Снимок экрана 2025-12-31 130632" src="https://github.com/user-attachments/assets/1d2a3739-64f2-4e76-94be-9de671b55b26" />
 
 
 - Лидерборд
-<img width="450" height="350" alt="image" src="https://github.com/user-attachments/assets/3d8800eb-55db-4eb0-851f-902eca81c457" />
+<img width="350" height="280" alt="image" src="https://github.com/user-attachments/assets/3d8800eb-55db-4eb0-851f-902eca81c457" />
 
 
 
