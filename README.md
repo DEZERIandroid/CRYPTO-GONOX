@@ -1,81 +1,105 @@
+<h1 align="center">CRYPTO-GONOX</h1>
+
+<p align="center">
+  Симулятор криптотрейдинга для практики, мышления и сравнения результатов — без риска и без иллюзий.
+</p>
+
+<p align="center">
+  <a href="https://dezeriandroid.github.io/CRYPTO-GONOX/"><b>▶ Открыть демо</b></a>
+</p>
+
+---
+
+## 📌 Зачем этот проект?
+
+**CRYPTO-GONOX** — это учебная платформа, где можно:
+
+- попробовать себя в трейдинге **без реальных денег**
+- понять, как работает рынок и твои решения
+- увидеть результат своих действий в цифрах
+- сравнить себя с другими участниками
+
+> ❗ Это **не** про заработок.  
+> Это про **мышление, дисциплину и анализ**.
+
+---
+
+## ⚙️ Как это работает
+
+- Новый пользователь получает **виртуальный баланс**
+- Цены криптовалют — **реальные**, обновляются онлайн
+- Можно покупать и продавать активы
+- Все сделки сохраняются
+- Итоговый капитал участвует в **лидерборде**
+
+Просто. Честно. Без казино-механик.
+
+---
+
+## ✨ Реализовано
+
+- 🔐 Авторизация (Firebase Auth)
+- 💰 Виртуальный баланс пользователя
+- 🔄 Реальные транзакции покупки / продажи
+- 📜 История операций
+- 👥 Просмотр профилей других пользователей
+- 🏆 Таблица лидеров
+- 📊 Графики цен активов
+- 📱 Адаптивный интерфейс
+
+---
+
+## 🖼️ Скриншоты
+
+> *Скриншоты будут добавлены позже*
+
+- Профиль пользователя (баланс, портфель)
+- Рынок криптовалют
+- История транзакций
+- Лидерборд
+
+---
+
+## 🛠️ Стек технологий
+
+- **React + TypeScript**
+- **Vite**
+- **Redux Toolkit**
+- **Firebase** (Auth, Firestore)
+- **Recharts**
+- **Chakra UI**
+- **FSD (Feature-Sliced Design)**
+
+Проект структурирован и масштабируем — не «всё в одном файле».
+
+---
+
+## 🚀 Запуск локально
+
+```bash
+git clone https://github.com/DEZERIandroid/CRYPTO-GONOX.git
+cd CRYPTO-GONOX
+npm install
+npm run dev
 
 
 
-DEMO - https://dezeriandroid.github.io/CRYPTO-GONOX/#/
+
+🔑 Firebase
+Создай .env и добавь свои ключи Firebase:
+Копировать код
+Env
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=...
 
 
 
 
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-=======
-# CRYPTO-GONOX
-Игровая платформа для трейдинга виртуальной криптовалюты. Соревнуйся, учи стратегии и входи в топ-лидеров — без риска для реальных средств.
->>>>>>> 3f26140d932412c3dd84c474834b5fb8be1136aa
+🧠 Что дальше
+[ ] История портфеля по времени
+[ ] Расширенная аналитика сделок
+[ ] Больше криптовалют
+[ ] Админ-панель
+[ ] Улучшение UX и мобильной версии
