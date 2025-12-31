@@ -119,3 +119,24 @@ VITE_FIREBASE_PROJECT_ID=...
 [ ] Админ-панель
 
 [ ] Улучшение UX и мобильной версии
+
+
+
+graph TD
+
+User[User / Browser]
+
+User -->|UI Interaction| ReactApp[React + TypeScript App]
+
+ReactApp --> Redux[Redux Toolkit Store]
+
+Redux --> ReactApp
+
+ReactApp -->|Auth| FirebaseAuth[Firebase Auth]
+ReactApp -->|Data| Firestore[Firestore DB]
+
+ReactApp -->|Fetch Prices| CryptoAPI[Crypto Price API]
+
+Firestore -->|Portfolio / Trades| ReactApp
+FirebaseAuth -->|User Session| ReactApp
+CryptoAPI -->|Market Data| ReactApp
