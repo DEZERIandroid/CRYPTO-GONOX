@@ -68,11 +68,13 @@ const MarketPage = () => {
   return (
     <div className="page-container">
       <div className="page-header">
-        <h1 className="header-title">Рынок</h1>
-        <div className="header-actions">
-          <div className="search-box">
+        <div className="header-title">
+          <div className="title-text">Рынок</div>
+        </div>
+          <div className="header-input">
             <SearchOutlined className="search-icon" />
             <input
+              className="input"
               type="text"
               placeholder="Поиск криптовалюты..."
               value={searchQuery}
@@ -89,7 +91,6 @@ const MarketPage = () => {
                 <option key={item}>{item}</option>
               ))}
             </select>
-          </div>
         </div>
       </div>
 

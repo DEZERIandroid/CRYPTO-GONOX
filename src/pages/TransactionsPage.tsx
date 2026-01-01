@@ -1,15 +1,34 @@
 import { SearchOutlined } from "@ant-design/icons";
 import "../styles/Pages/Transactions.css";
-import { useGetTransactionsQuery } from "../app/api/UsersApi";
+import { useGetTransactionsQuery, type Transaction } from "../app/api/UsersApi";
+import { useState,useMemo } from "react";
 
 const TransactionsPage = () => {
   const { data, isLoading, isError } = useGetTransactionsQuery(undefined , {
     pollingInterval:3000
   });
 
+  const [searchQuery,setSearchQuery] = useState("")
+
   const sortedData = data
     ? [...data].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     : [];
+
+  const filteredTransactions:Transaction[] = useMemo(() => {
+      if (!sortedData || !Array.isArray(sortedData)) return [];
+  
+      if (!searchQuery.trim()) {
+        return sortedData;
+      }
+  
+      const query = searchQuery.toLowerCase();
+  
+      return sortedData.filter(sortedData =>
+        (sortedData.Username && sortedData.Username.toLowerCase().includes(query)) ||
+        (sortedData.coinId && sortedData.coinId.toLowerCase().includes(query)) ||
+        (sortedData.symbol && sortedData.symbol.toLowerCase().includes(query))
+      );
+    }, [sortedData, searchQuery]);
 
   if (isLoading) {
   return (
@@ -61,20 +80,23 @@ const TransactionsPage = () => {
   return (
     <div className="page-container">
       <div className="page-header">
-        <h1 className="header-title">Транзакции</h1>
-        <div className="header-actions">
-          <div className="search-box">
-            <span className="search-icon">
-              <SearchOutlined />
-            </span>
-            <input type="text" placeholder="Поиск по адресу, ID или сумме" />
+        <div className="header-title">
+          <div className="title-text">Транзакции</div>
+        </div>
+          <div className="header-input">
+            <SearchOutlined className="search-icon" />
+            <input 
+              type="text"
+              placeholder="Поиск по адресу, ID или сумме" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
           <select className="filter-select">
             <option>За последний месяц</option>
             <option>За неделю</option>
             <option>За день</option>
           </select>
-        </div>
       </div>
 
       <div className="transactions-container">
@@ -99,8 +121,8 @@ const TransactionsPage = () => {
                 </tr>
               </thead>
               {isError == false ? (<tbody>
-                {sortedData && sortedData.length > 0 ? (
-                  sortedData.map((item, index) => {
+                {filteredTransactions && filteredTransactions.length > 0 ? (
+                  filteredTransactions.map((item, index) => {
                     const total = item.amount * item.buyPrice;
                     return (
                       <tr data-aos="fade-up" key={`${item.timestamp}-${item.coinId}-${index}`}>

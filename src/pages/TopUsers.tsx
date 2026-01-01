@@ -1,6 +1,6 @@
 import { SearchOutlined } from "@ant-design/icons"
 import { useGetTopUsersQuery } from "../app/api/UsersApi"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { Skeleton } from "antd"
 import "../styles/Pages/TopUsers.css"
 import { useNavigate } from "react-router-dom"
@@ -9,6 +9,7 @@ const TopUsers = () => {
   const {data, isLoading, isError} = useGetTopUsersQuery(undefined , {
     pollingInterval:3000
   })
+  const [searchQuery,setSearchQuery] = useState<string>("")
 
   const navigate = useNavigate()
 
@@ -18,7 +19,16 @@ const TopUsers = () => {
     return [...data].sort((a, b) => 
       (b.cryptoTotalBalance || 0) - (a.cryptoTotalBalance || 0)
     );
+    
   }, [data]);
+
+  const filteredData = useMemo(() => {
+    const query = searchQuery.toLowerCase();
+    
+    return sortedData.filter((topUsers) => topUsers.displayName && 
+                                    topUsers.displayName.toLocaleLowerCase().includes(query))
+                                
+  },[sortedData,searchQuery])
 
   if (isLoading) {
     return (
@@ -62,6 +72,8 @@ const TopUsers = () => {
           <input className="input"
            type="text" 
            placeholder="Поиск"
+           value={searchQuery}
+           onChange={(e) => setSearchQuery(e.target.value)}
            />
         </div>
       </div>
@@ -81,7 +93,7 @@ const TopUsers = () => {
               </thead>
               
               <tbody data-aos="fade-up">
-                {sortedData.map((user, index) => {
+                {filteredData.map((user, index) => {
                   let balanceClass = "";
                   if (index === 0) balanceClass = "gold-text";
                   else if (index === 1) balanceClass = "silver-text";

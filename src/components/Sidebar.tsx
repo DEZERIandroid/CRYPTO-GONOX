@@ -26,17 +26,31 @@ const Sidebar = () => {
           <Link to="/" className="logo"></Link>
         </div>
 
-        <div className="user">
-          <Link to="/profile" >
-                  {user?.photoURL ? (<img className="user-avatar" src={photoURL} alt="d" />)
-                                    : <Skeleton.Avatar  active  style={{width:"90px",height:"90px"}}/>}
-          </Link>
-          <div className="user-name">
-            {isAuthChecked ? name || "-" : 
-            <Skeleton paragraph={false} active style={{ width: 80,height:29 }} />}
+        {isAuthChecked ? (
+          user ? (
+            <div className="user">
+              <Link to="/profile">
+                {user.photoURL ? (
+                  <img className="user-avatar" src={photoURL} alt="Аватар" />
+                ) : (
+                  <Skeleton.Avatar active style={{ width: "90px", height: "90px" }} />
+                )}
+              </Link>
+              <div className="user-name">
+                {name || <Skeleton paragraph={false} active style={{ width: 80, height: 29 }} />}
+              </div>
+              <button className="user-edit">Изменить</button>
+            </div>
+          ) : null
+        ) : (
+          <div className="user">
+            <Skeleton.Avatar active style={{ width: "90px", height: "90px" }} />
+            <div className="user-name">
+              <Skeleton paragraph={false} active style={{ width: 80, height: 29 }} />
+            </div>
+            <Skeleton.Button active style={{ width: 80, height: 32 }} />
           </div>
-          <button className="user-edit">Изменить</button>
-        </div>
+        )}
 
         <nav className="sidebar-items" >
           <Link to="/" className="item">
@@ -53,7 +67,7 @@ const Sidebar = () => {
           </Link>
           <Link to="/transactions" className="item">
             <TransactionsIcon className="sidebar-icon"/>
-            <div className="nav-link">Сделки</div>
+            <div className="nav-link">Транзакции</div>
           </Link>
           <Link to="/setting" className="item">
             <SettingsIcon className="sidebar-icon"/>

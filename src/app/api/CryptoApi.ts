@@ -31,7 +31,7 @@ export const CryptoApi = createApi({
   }),
   endpoints: (builder) => ({
     getCryptos: builder.query<CryptoCoin[], void>({
-      query: () => `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1&sparkline=false`,
+      query: () => `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`,
     }),
     getCoin: builder.query<CryptoCoin, string>({
       query: (id) => `/coins/${id}`,
