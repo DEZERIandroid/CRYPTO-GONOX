@@ -34,7 +34,6 @@
 .topusers-table {
   width: 100%;
   min-height: 30vh;
-  overflow-x: auto;
 }
 
 .topusers-table table {
@@ -49,7 +48,9 @@
   padding:18px 10px;
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  max-width: 300px;
 }
+
 .topusers-table th:nth-child(-n+3),
 .topusers-table td:nth-child(-n+3) {
   border-bottom: none;

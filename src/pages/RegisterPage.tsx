@@ -166,7 +166,7 @@ const RegisterPage = () => {
       </div>
 
       <div className="form-footer">
-        <Link to="/login" className="registerLink">Нет аккаунта?</Link>
+        <Link to="/login" className="registerLink">Аккаунт имеется?</Link>
       </div>
 
 

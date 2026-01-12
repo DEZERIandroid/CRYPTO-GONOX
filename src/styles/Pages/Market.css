@@ -89,6 +89,10 @@
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+.market-table th:first-child,
+.market-table td:first-child {
+  padding: 5px ;
+}
 
 .market-table th {
   color: #aaa;

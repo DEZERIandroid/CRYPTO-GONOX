@@ -110,6 +110,18 @@
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+  max-width: 150px;
+}
+
+
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+  max-width: 300px;
+}
+
 .users-table td {
   cursor: pointer;
 }
