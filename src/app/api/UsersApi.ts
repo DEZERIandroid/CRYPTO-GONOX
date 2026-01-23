@@ -106,9 +106,13 @@ export const usersApi = createApi({
         try {
           const userRef = doc(db, "users", uid);
           const userSnap = await getDoc(userRef);
+          const MAX_AMOUNT = 0.00001
 
           if (!userSnap.exists()) {
             return { error: { status: "USER_NOT_FOUND", error: "Пользователь не найден" } };
+          }
+          if (amountCoins < MAX_AMOUNT) {
+            return { error: { status: "MAX_AMOUNT", error: "Привышен лимит количества" } };
           }
           
           const userData = userSnap.data()
@@ -123,8 +127,9 @@ export const usersApi = createApi({
 
           let updatePortfolio: any[] = [];
 
+
           const existingCoin = portfolio.find((item:any) => item.coinId === coinId)
-          if (existingCoin) {
+          if (existingCoin && amountCoins) {
             existingCoin.amount = existingCoin.amount + amountCoins
 
             updatePortfolio = [...portfolio]

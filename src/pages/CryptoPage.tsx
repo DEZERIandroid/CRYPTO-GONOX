@@ -53,7 +53,6 @@ const CryptoPage = () => {
       amountBuy * price,  
      [amountBuy,price]);
   
-  
   const handleBuy = async () => {
       if (!amountBuy || amountBuy <= 0) {
          setUnSuccess(true);
@@ -71,17 +70,22 @@ const CryptoPage = () => {
       }
 
       try {
-        await buyCrypto({
+        const result = await buyCrypto({
                           uid,coinId: id,amountCoins:Number(amountBuy),
                           currentPrice:price,image,symbol,cryptoPrice,Username})
+        if (result.error) {
+          setUnSuccess(true);
+          setBuyError(true)
+          setTimeout(() => setBuyError(false), 4500);
+          setTimeout(() => setUnSuccess(false), 1500);
+        } else {
           setIsModalOpenBuy(false)
           setAmountCoins("")
           setSuccess(true)
           setTimeout(() => setSuccess(false), 1500);
+          }
         } catch (err) {
           console.log(err)
-          setUnSuccess(true);
-          setTimeout(() => setUnSuccess(false), 1500);
       }
   }
 
