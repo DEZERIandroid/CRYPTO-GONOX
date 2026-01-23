@@ -52,7 +52,8 @@ const CryptoPage = () => {
      const totalBuy = useMemo(() => 
       amountBuy * price,  
      [amountBuy,price]);
-     
+  
+  
   const handleBuy = async () => {
       if (!amountBuy || amountBuy <= 0) {
          setUnSuccess(true);
@@ -61,7 +62,6 @@ const CryptoPage = () => {
          setTimeout(() => setUnSuccess(false), 1500);
         return;
       }
-    
       if (user?.balance === undefined || user?.balance < totalBuy) {
         setUnSuccess(true);
         setBuyError(true)
@@ -100,18 +100,22 @@ const CryptoPage = () => {
       return;
     }
     try {
-      await sellCrypto({uid,coinId:id,amountCoins:amountSell,cryptoPrice:totalSell}) 
-        setIsModalOpenSell(false)
-        setAmountCoins("")
-        setSuccess(true)
-        setTimeout(() => setSuccess(false), 1500);
-      } catch (err) {
+      const result = await sellCrypto({uid,coinId:id,amountCoins:amountSell,cryptoPrice:totalSell}) 
+      if (result.error) {
         setUnSuccess(true);
         setSellError(true)
         setTimeout(() => setSellError(false), 4500);
         setTimeout(() => setUnSuccess(false), 1500);
+      } else {
+        setIsModalOpenSell(false)
+        setAmountCoins("")
+        setSuccess(true)
+        setTimeout(() => setSuccess(false), 1500);
+      }
+      } catch (err) {
         console.log(err)
       }
+      
   }
 
 

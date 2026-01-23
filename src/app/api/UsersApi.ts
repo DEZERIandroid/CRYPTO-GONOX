@@ -188,7 +188,10 @@ export const usersApi = createApi({
               item.coinId === coinId ? { ...item, amount:item.amount - amountCoins}
             : item
             )
-            const filtredPortfolio = updatePortfolio.filter((item:any) => item.amount > 0)
+
+            const MIN_AMOUNT = 0.00001;
+            
+            const filtredPortfolio = updatePortfolio.filter((item:any) => item.amount > MIN_AMOUNT)
             
             const totalPrice = Number(cryptoPrice);
             const newBalance = Number(balance) + totalPrice;
