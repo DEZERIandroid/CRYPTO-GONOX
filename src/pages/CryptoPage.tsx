@@ -106,6 +106,10 @@ const CryptoPage = () => {
         setSuccess(true)
         setTimeout(() => setSuccess(false), 1500);
       } catch (err) {
+        setUnSuccess(true);
+        setSellError(true)
+        setTimeout(() => setSellError(false), 4500);
+        setTimeout(() => setUnSuccess(false), 1500);
         console.log(err)
       }
   }
@@ -286,7 +290,7 @@ const CryptoPage = () => {
               />
               <p>Итого: {totalSell.toFixed(2)} $</p>
               <div className="modal-buttons">
-                <button onClick={handleSell} disabled={isSelling}>
+                <button onClick={handleSell} disabled={isSelling && sellError}>
                                             {!isSelling ? 
                                               <span>Продать</span> : 
                                               <Loading/>}

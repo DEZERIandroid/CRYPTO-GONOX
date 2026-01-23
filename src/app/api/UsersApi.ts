@@ -174,32 +174,31 @@ export const usersApi = createApi({
             if (!existingCoin) {
               return { error: {status:"SELL_ERROR",error:"Монета не найдена в портфеле"}}
             }
-            
-            if (!existingCoin.amount && existingCoin.amount < amountCoins) {
+            if (existingCoin.amount < amountCoins) {
+              console.log(existingCoin == amountCoins)
               return {
                 error: {
-                  status: "SELL_ERROR",
+                  status: "SELL_ERROR", 
                   error: "Недостаточно монет для продажи, или монета не найдена",
                 },
               };
             }
-            
+
             const updatePortfolio = portfolio.map((item:any) => 
               item.coinId === coinId ? { ...item, amount:item.amount - amountCoins}
             : item
             )
-            const filtrederPortfolio = updatePortfolio.filter((item:any) => item.amount > 0)
+            const filtredPortfolio = updatePortfolio.filter((item:any) => item.amount > 0)
             
             const totalPrice = Number(cryptoPrice);
             const newBalance = Number(balance) + totalPrice;
-            console.log(totalPrice)
             if (totalPrice <= 0) {
               return { error: { status:"SELL_ERROR", error:"Некорректная сумма продажи" } }
             }
             
             await updateDoc(userRef,{
               balance:newBalance,
-              portfolio:filtrederPortfolio
+              portfolio:filtredPortfolio
             })
             
             return {data:undefined}

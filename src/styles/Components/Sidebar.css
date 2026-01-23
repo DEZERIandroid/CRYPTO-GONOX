@@ -140,6 +140,16 @@
 } 
 
 
+.skeleton-avatar {
+    width: 90px;
+    height: 90px;
+}
+
+.skeleton-name {
+    width: 90px;
+    height: 90px;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -193,6 +203,14 @@
       display: none;
   }
 
+  .skeleton-avatar {
+    transform: translateY(30px);
+  }
+
+  .skeleton-name {
+    display: none !important;
+  }
+
   .sidebar-items {
     display: flex;
     flex-direction: row;
@@ -244,5 +262,14 @@
   .item:hover .sidebar-icon,
   .item:active .sidebar-icon {
     color: white;
+  }
+}
+
+@media (max-width:600px) {
+  .item:first-child {
+    display: none;
+  }
+  .item:nth-child(2) {
+    margin-left: 25px;
   }
 }
