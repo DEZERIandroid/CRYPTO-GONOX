@@ -125,7 +125,7 @@ const TransactionsPage = () => {
                   filteredTransactions.map((item, index) => {
                     const total = item.amount * item.buyPrice;
                     return (
-                      <tr data-aos="fade-up" key={`${item.timestamp}-${item.coinId}-${index}`}>
+                      <tr data-aos="fade-in" key={`${item.timestamp}-${item.coinId}-${index}`}>
                         <td>{index + 1}</td>
                         <td className="transactions-username">{item.Username}</td>
                         <td className="transactions-imgSymbol">

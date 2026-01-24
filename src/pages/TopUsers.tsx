@@ -92,7 +92,7 @@ const TopUsers = () => {
                 </tr>
               </thead>
               
-              <tbody data-aos="fade-up">
+              <tbody data-aos="fade-in">
                 {filteredData.map((user, index) => {
                   let balanceClass = "";
                   if (index === 0) balanceClass = "gold-text";

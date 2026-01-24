@@ -1,32 +1,19 @@
 import { useAppSelector } from "../hooks/reduxHooks";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useGetUsersQuery } from "../app/api/UsersApi";
 import type { User } from "../app/api/UsersApi";
-import { ref, onValue } from "firebase/database";
-import { rtdb } from "../firebase";
 import { Skeleton } from 'antd';
 import '../styles/Pages/Users.css';
-
-
-const maskEmail = (email?: string) => {
-  if (!email) return "-";
-
-  const [name, domain] = email.split("@");
-  if (!domain || name.length <= 2) return email;
-
-  return `${name.slice(0, 2)}***${name.slice(-1)}@${domain}`;
-};
 
 const UsersPage = () => {
   const navigate = useNavigate();
 
   const user = useAppSelector((state) => state.user); 
   const [searchQuery,setSearchQuery] = useState<string>("")
-  const [onlineUsers, setOnlineUsers] = useState<Record<string, boolean>>({});
   const { data: users = [], isLoading, isError } = useGetUsersQuery(undefined , {
-    pollingInterval:3000
+    pollingInterval:1000
   });
 
   const filteredUsers:User[] = useMemo(() => {
@@ -45,32 +32,6 @@ const UsersPage = () => {
     );
   }, [users, searchQuery]);
 
-
-  
-  useEffect(() => {
-    if (!users || !users.length) return;
-
-    const unsubscribers: (() => void)[] = [];
-
-    users.forEach((u) => {
-      if (!u.id) return;
-
-      const userRef = ref(rtdb, `/status/${u.id}`);
-
-      const unsub = onValue(userRef, (snap) => {
-        const data = snap.val();
-
-        setOnlineUsers((prev) => ({
-          ...prev,
-          [u.id]: data?.state === "online"
-        }));
-      });
-
-      unsubscribers.push(unsub);
-    });
-
-    return () => unsubscribers.forEach((unsub) => unsub());
-  }, [users]);
 
   if (isLoading) return <div className="page-container">
       <div className="page-header">
@@ -112,8 +73,9 @@ const UsersPage = () => {
           <table>
             <thead>
               <tr>
+                <th>#</th>
                 <th>Имя</th>
-                <th>Email</th>
+                <th style={{display: user.role === "admin" ? "none" : "none"}}>Email</th>
                 <th>Роль</th>
                 <th>Дата регистрации</th>
                 {user?.role === "admin" && (
@@ -123,19 +85,26 @@ const UsersPage = () => {
             </thead>
             <tbody>
               {filteredUsers.map((userData) => (
-              <tr data-aos="fade-up"
+              <tr data-aos="fade-in"
                 key={userData.id}
                 className="user-row"
                 onClick={() => navigate(`/user/${userData.id}`)}
               >
-                <td style={{ color: onlineUsers[userData.id] ? "green" : "red" }}>
-                  {userData.displayName}
+                <td>
+                  {user.photoURL ? (
+                          <img
+                            src={userData.photoURL}
+                            className="users-avatar"
+                          />
+                        ) : (
+                          <img className="users-avatar"/>
+                        )}
                 </td>
                 <td>
-                  {userData.email
-                    ? user.role === "admin"
-                      ? userData.email : maskEmail(userData.email)
-                    : "-"}
+                  {userData.displayName}
+                </td>
+                <td style={{display: user.role === "admin" ? "" : "none"}}>
+                  {userData.email}
                 </td>
                 <td>
                   <span

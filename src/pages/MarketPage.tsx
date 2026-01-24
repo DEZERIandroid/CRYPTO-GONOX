@@ -109,7 +109,7 @@ const MarketPage = () => {
             </thead>
             <tbody>
               {filteredData.map((coin, index) => (
-                <tr data-aos="fade-up" onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
+                <tr data-aos="fade-in" onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
                   <td>{index + 1}</td>
                   <td>
                     <div className="coin-info">
