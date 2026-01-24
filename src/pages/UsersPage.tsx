@@ -73,9 +73,9 @@ const UsersPage = () => {
           <table>
             <thead>
               <tr>
-                <th>#</th>
+                <th style={{paddingRight: user.role === "admin" ? "45px" : ""}}>#</th>
                 <th>Имя</th>
-                <th style={{display: user.role === "admin" ? "none" : "none"}}>Email</th>
+                <th style={{display: user.role === "admin" ? "" : "none"}}>Email</th>
                 <th>Роль</th>
                 <th>Дата регистрации</th>
                 {user?.role === "admin" && (
