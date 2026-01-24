@@ -62,7 +62,7 @@ const LoginPage = () => {
       let errorMessage = "Произошла ошибка при входе";
       if (err.code === "auth/invalid-email") {
         errorMessage = "Неверный формат email";
-      } else if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
+      } else if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password" || err.code === "auth/invalid-credential") {
         errorMessage = "Неверный email или пароль";
       } else if (err.code === "auth/user-disabled") {
         errorMessage = "Ваш аккаунт отключён";

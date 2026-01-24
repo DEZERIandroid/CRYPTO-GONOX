@@ -39,7 +39,10 @@ const RegisterPage = () => {
       setError("Неверный формат email");
       return;
     }
-  
+    if (cleanName.length > 16) {
+      setError("Имя слишком длинное")
+      return
+    }
     if (cleanPassword.length < 6) {
       setError("Пароль должен содержать минимум 6 символов");
       return;
@@ -52,6 +55,7 @@ const RegisterPage = () => {
       const { user } = userCredential;
 
       const displayName = userName.trim() || user.email?.split('@')[0];
+      
 
       await setDoc(doc(db, "users", user.uid), {
         displayName: userName.trim() || email.split("@")[0],
