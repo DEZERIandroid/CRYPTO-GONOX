@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { HomeIcon } from "./Icons/HomeIcon"
-import { UsersIcon } from "./Icons/UsersIcon"
 import { MarketIcon } from "./Icons/MarketIcon"
 import { TransactionsIcon } from "./Icons/TransactionsIcon"
 import { SettingsIcon } from "./Icons/Setting"
@@ -9,7 +8,6 @@ import ThemeToggle from "../assets/themeToggle"
 import "../styles/Components/Sidebar.css"
 import { useAppSelector } from "../hooks/reduxHooks"
 import { useGetUsersQuery } from "../app/api/UsersApi"
-import { useState } from "react"
 import { UsersButton } from "./UsersButton"
 
 const Sidebar = () => {
@@ -19,7 +17,6 @@ const Sidebar = () => {
     });
   const user = users?.find((u) => u.email === email); 
   const photoURL = user?.photoURL
-const [isTopHovered, setIsTopHovered] = useState(false);
   return (
     <div className="sidebar">
       <div className="sidebar-container">

@@ -4,7 +4,7 @@ import { setUser } from "../features/userSlice";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from 'firebase/auth';
 import "../styles/Log_Reg/Register.css";
-import { setDoc, doc, serverTimestamp, Transaction } from "firebase/firestore";
+import { setDoc, doc, serverTimestamp, } from "firebase/firestore";
 import { db,auth } from "../firebase";
 import { useNavigate,Link } from "react-router-dom";
 
