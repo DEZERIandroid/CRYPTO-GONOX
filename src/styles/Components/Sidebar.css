@@ -100,7 +100,6 @@
 .item:hover .nav-link{
     color: white;
 }
-
 .sidebar-icon {
     font-size: 25px;
     margin-right: 5px;
@@ -112,6 +111,11 @@
     font-size: 16px;
     color: #bebebe;
     background-color: #1f0f5c00;
+}
+.sidebar-split-item {
+  display: flex;
+  align-items: center;
+  cursor: default; 
 }
 
 .sidebar-theme-toggle {

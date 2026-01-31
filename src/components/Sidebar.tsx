@@ -9,7 +9,8 @@ import ThemeToggle from "../assets/themeToggle"
 import "../styles/Components/Sidebar.css"
 import { useAppSelector } from "../hooks/reduxHooks"
 import { useGetUsersQuery } from "../app/api/UsersApi"
-
+import { useState } from "react"
+import { UsersButton } from "./UsersButton"
 
 const Sidebar = () => {
   const { email, name, isAuthChecked } = useAppSelector(state => state.user);
@@ -18,7 +19,7 @@ const Sidebar = () => {
     });
   const user = users?.find((u) => u.email === email); 
   const photoURL = user?.photoURL
-
+const [isTopHovered, setIsTopHovered] = useState(false);
   return (
     <div className="sidebar">
       <div className="sidebar-container">
@@ -57,10 +58,7 @@ const Sidebar = () => {
             <HomeIcon className="sidebar-icon"/>
             <div className="nav-link">Главная</div>
           </Link>
-          <Link to="/users" className="item">
-            <UsersIcon className="sidebar-icon"/>
-            <div className="nav-link">Клиенты</div>
-          </Link>
+          <UsersButton/>
           <Link to="/market" className="item">
             <MarketIcon className="sidebar-icon"/>
             <div className="nav-link">Рынок</div>

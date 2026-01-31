@@ -78,7 +78,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="Login-container">
+    <div data-aos="fade-in" data-aos-duration="150" className="Login-container">
       <div className="inputs">
         <input
           className="input-email"

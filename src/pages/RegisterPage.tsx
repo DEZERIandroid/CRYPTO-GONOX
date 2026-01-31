@@ -4,7 +4,7 @@ import { setUser } from "../features/userSlice";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from 'firebase/auth';
 import "../styles/Log_Reg/Register.css";
-import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { setDoc, doc, serverTimestamp, Transaction } from "firebase/firestore";
 import { db,auth } from "../firebase";
 import { useNavigate,Link } from "react-router-dom";
 
@@ -18,6 +18,7 @@ const RegisterPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordDoble, setPasswordDoble] = useState("");
   const [userName, setUserName] = useState("");
   const [,setRole] = useState("user")
   const [error, setError] = useState<string | null>(null);
@@ -28,6 +29,7 @@ const RegisterPage = () => {
   const Register = async () => {
     const cleanEmail = email.trim();
     const cleanPassword = password.trim();
+    const cleanPasswordDoble = passwordDoble.trim();
     const cleanName = userName.trim();
     
     if (!cleanEmail || !cleanPassword || !cleanName) {
@@ -39,12 +41,17 @@ const RegisterPage = () => {
       setError("Неверный формат email");
       return;
     }
+    
     if (cleanName.length > 16) {
       setError("Имя слишком длинное")
       return
     }
     if (cleanPassword.length < 6) {
       setError("Пароль должен содержать минимум 6 символов");
+      return;
+    }
+    if (cleanPassword !== cleanPasswordDoble) {
+      setError("Пароли не похожи");
       return;
     }
   
@@ -65,6 +72,7 @@ const RegisterPage = () => {
         cryptoTotalBalance:0,
         portfolio:[],
         createdAt: serverTimestamp(),
+        transactions:[]
       });
 
       dispatch(setUser({
@@ -75,11 +83,13 @@ const RegisterPage = () => {
         balance:500,
         cryptoTotalBalance:0,
         portfolio:[],
+        transactions:[],
       }));
 
       setEmail("");
       setUserName("");
       setPassword("");
+      setPasswordDoble("");
       setRole("user");
 
       setDisplayedName(displayName);
@@ -127,7 +137,7 @@ const RegisterPage = () => {
   }, [isModalShow]);
 
   return (
-    <div className="Register-container">
+    <div data-aos="fade-in" data-aos-duration="150" className="Register-container">
       <div className="inputs">
         <input
           className="input-name"
@@ -156,6 +166,16 @@ const RegisterPage = () => {
           value={password}
           onChange={(e) => {
             setPassword(e.target.value)
+            setError(null);
+          }}
+        />
+        <input
+          className="input-password"
+          type="password"
+          placeholder="Потверждение пароля"
+          value={passwordDoble}
+          onChange={(e) => {
+            setPasswordDoble(e.target.value)
             setError(null);
           }}
         />

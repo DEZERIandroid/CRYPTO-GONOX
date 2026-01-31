@@ -192,7 +192,7 @@ const HomePage = () => {
           {isCryptosError == false ? (<ul className="market-list">
               {filteredCrypto.map((coin) => (
                 <li className="list-item" 
-                    data-aos="fade-up"
+                    data-aos="fade-in"
                     key={coin.id}
                     onClick={() => navigate(`/crypto/${coin.id}`)}>
                   <div className="item-photo">
@@ -226,7 +226,7 @@ const HomePage = () => {
                 const total = item.amount * item.buyPrice;
                 return (
                   <li
-                    className="list-item" data-aos="fade-up"
+                    className="list-item" data-aos="fade-in"
                     key={`${item.timestamp}-${item.coinId}-${index}`}
                     onClick={() => navigate(`/transactions`)}
                   >
@@ -256,7 +256,7 @@ const HomePage = () => {
                     else if (index === 2) balanceClass = "bronze-text item-price";
 
                     return (
-                      <li data-aos="fade-up"
+                      <li data-aos="fade-in"
                           className="topusers-item list-item"
                           key={user.id}>
                           <div className="place-item">{index + 1}</div>
