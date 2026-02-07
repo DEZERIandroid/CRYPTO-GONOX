@@ -1,4 +1,4 @@
-import { SearchOutlined, LogoutOutlined } from "@ant-design/icons";
+import { SearchOutlined, LogoutOutlined,GoogleOutlined } from "@ant-design/icons";
 import { signOut } from "firebase/auth";
 import { auth, db} from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
@@ -8,6 +8,7 @@ import { clearUser } from "../features/userSlice";
 import { useGetUsersQuery } from "../app/api/UsersApi";
 import { useGetCoinsPriceQuery } from "../app/api/CryptoApi";
 import { useNavigate } from "react-router-dom";
+import { linkGoogleProvider } from "@/hooks/useGoogle";
 import { useAppSelector } from "../hooks/reduxHooks";
 import { CameraFilled } from "@ant-design/icons";
 import { useEffect,useState } from "react";
@@ -23,6 +24,7 @@ const ProfilePage = () => {
   });
   const [isModalPhotoEditShow,setIsModalPhotoEditShow] = useState(false)
   const [editPhotoURL,setEditPhotoURL] = useState("")
+  const [succesGoogle,setSuccesGoogle] = useState(false)
   const user = users?.find((u) => u.email === email); 
   const photoURL = user?.photoURL
 
@@ -30,6 +32,9 @@ const ProfilePage = () => {
   const { data: pricesData } = useGetCoinsPriceQuery(coinIds, {
     skip: coinIds.length === 0,
   });
+  const isGoogleLinked = auth.currentUser?.providerData.some(
+    p => p.providerId === "google.com"
+  );
 
   const handleLogout = async () => {
     try {
@@ -79,6 +84,18 @@ const ProfilePage = () => {
       setEditPhotoURL("")
     }
   }
+
+  const handleLinkGoogle = async () => {
+    try {
+      await linkGoogleProvider();
+      setSuccesGoogle(true)
+      setTimeout(() => {
+        setSuccesGoogle(false)
+      },1000)
+    } catch (e) {
+      console.log(e);
+    }
+  };
   
   if (isLoading)
       return (
@@ -200,6 +217,22 @@ const ProfilePage = () => {
             <span className="label">Роль:</span>
             <span className="value">{role || "-"}</span>
           </div>
+          <div className="google-add">
+            {!isGoogleLinked ? (
+              <button className="google-btn" onClick={handleLinkGoogle}>
+                <GoogleOutlined/> Привязать Google
+              </button>
+            ) : (
+              <span>Google подключён</span>
+            )}
+          </div>
+          {succesGoogle && (
+            <div className="success-google-overlay">
+              <div className="success-google-modal">
+                <h3>Google привязан</h3>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="logout-container">

@@ -42,7 +42,7 @@ export const initializeAuth = createAsyncThunk(
             const userData = userDoc.data();
             displayName = userData.displayName || displayName;
             role = userData.role || "user";
-            photoURL = userData.photoURL
+            photoURL = userData.photoURL || user.photoURL;
           }
 
           dispatch(

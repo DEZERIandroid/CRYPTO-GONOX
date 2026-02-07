@@ -111,7 +111,7 @@
   width: 100%;
   text-align: right;
   margin-top: 8px;
-  margin-bottom: -16px;
+  margin-bottom: -15px;
 }
 
 .registerLink {
@@ -122,4 +122,30 @@
 
 .registerLink:hover {
   color: rgb(41, 84, 150);
+}
+
+.google-btn-reglog {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+.google-btn-reglog:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.google-icon {
+  font-size: 18px;
+  color: #4285F4;
 }

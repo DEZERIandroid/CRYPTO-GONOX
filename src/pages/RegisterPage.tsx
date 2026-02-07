@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { authWithGoogle } from "@/hooks/useGoogle";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { setUser } from "../features/userSlice";
 import { useState, useEffect } from "react";
@@ -7,7 +8,7 @@ import "../styles/Log_Reg/Register.css";
 import { setDoc, doc, serverTimestamp, } from "firebase/firestore";
 import { db,auth } from "../firebase";
 import { useNavigate,Link } from "react-router-dom";
-import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { EyeOutlined, EyeInvisibleOutlined, GoogleOutlined } from "@ant-design/icons";
 
 const isValidEmail = (email: string): boolean => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -142,8 +143,21 @@ const RegisterPage = () => {
     setWatchingPass(!watchingPass)
   }
 
+  const handleGoogle = async () => {
+      try {
+        await authWithGoogle();
+      } catch (e: any) {
+        setError(e.code);
+      }
+  };
+
   return (
     <div data-aos="fade-in" data-aos-duration="150" className="Register-container">
+
+      <button className="google-btn-reglog" onClick={handleGoogle}>
+                  <GoogleOutlined/> Регистрация через Google
+      </button>
+
       <div className="inputs">
         <input
           className="input-name"
@@ -208,7 +222,6 @@ const RegisterPage = () => {
       <div className="form-footer">
         <Link to="/login" className="registerLink">Аккаунт имеется?</Link>
       </div>
-
 
       {error && (
         <div className="error-modal">

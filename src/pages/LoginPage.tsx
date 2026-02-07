@@ -1,11 +1,12 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { authWithGoogle } from "@/hooks/useGoogle";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { setUser } from "../features/userSlice";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { EyeInvisibleOutlined, EyeOutlined,  } from "@ant-design/icons";
+import { EyeInvisibleOutlined, EyeOutlined, GoogleOutlined } from "@ant-design/icons";
 import "../styles/Log_Reg/Login.css"
 
 const LoginPage = () => {
@@ -83,8 +84,21 @@ const LoginPage = () => {
     setWatchingPass(!watchingPass)
   }
 
+  const handleGoogle = async () => {
+    try {
+      await authWithGoogle();
+    } catch (e: any) {
+      setError(e.code);
+    }
+  };
+
   return (
     <div data-aos="fade-in" data-aos-duration="150" className="Login-container">
+      
+      <button className="google-btn-reglog" onClick={handleGoogle}>
+            <GoogleOutlined/> Вход через Google
+      </button>
+
       <div className="inputs">
         <input
           className="input-email"
@@ -120,6 +134,8 @@ const LoginPage = () => {
       <div className="form-footer">
         <Link to="/register" className="registerLink">Нет аккаунта?</Link>
       </div>
+
+      
 
       {error && <div className="error-modal">
                   <div>{error}</div>
