@@ -145,6 +145,23 @@
   font-weight: 700;
 }
 
+.button-join-small {
+  background: #75797c15;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.button-join-small:hover {
+  background-color: #181818;
+}
+
   @media (max-width:1400px) {
     .block{
       width: 400px;

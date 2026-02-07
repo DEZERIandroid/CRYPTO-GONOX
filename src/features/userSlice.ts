@@ -12,6 +12,7 @@ interface UserState {
   isAuthChecked: boolean;
   balance: number | null;
   photoURL:string | undefined,
+  authLoading: boolean;
 }
 
 const initialState: UserState = {
@@ -22,6 +23,7 @@ const initialState: UserState = {
   isAuthChecked: false,
   balance:0,
   photoURL:undefined,
+  authLoading: true,
 };
 
 export const initializeAuth = createAsyncThunk(
@@ -56,9 +58,6 @@ export const initializeAuth = createAsyncThunk(
         } else {
           dispatch(clearUser());
         }
-
-        
-
         resolve();
         unsubscribe();
       });
@@ -89,6 +88,19 @@ const userSlice = createSlice({
       state.balance = action.payload;
     }
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(initializeAuth.pending, (state) => {
+        state.authLoading = true;
+      })
+      .addCase(initializeAuth.fulfilled, (state) => {
+        state.authLoading = false;
+      })
+      .addCase(initializeAuth.rejected, (state) => {
+        state.authLoading = false;
+        state.isAuthChecked = true;
+    });
+  }
 });
 
 export const { setUser, clearUser } = userSlice.actions;

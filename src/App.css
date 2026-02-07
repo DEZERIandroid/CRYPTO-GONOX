@@ -50,6 +50,20 @@
 }
 
 
+.loading-logo {
+  animation: loadingLogo 1s ease-in-out;
+  display: grid;
+  place-content: center;
+  height: 90vh;
+}
+.loading-logo img {
+  width: 400px;
+}
+@keyframes loadingLogo {
+  0%{opacity: 0.1;transform: scale(0.97);}
+  60%{opacity: 1;transform: scale(1);}
+}
+
 
 
 /* ===== Адаптивность — переиспользуется везде ===== */
@@ -69,6 +83,9 @@
   .page-content {
     padding: 25px;
     min-height: 450px;
+  }
+  .loading-logo img {
+    width: 350px;
   }
 }
 
@@ -91,6 +108,9 @@
   .page-content {
     padding: 25px;
     min-height: 450px;
+  }
+  .loading-logo img {
+    width: 300px;
   }
 }
 
@@ -126,6 +146,9 @@
     padding: 20px;
     min-height: auto;
   }
+  .loading-logo img {
+    width: 250px;
+  }
 }
 
 /* Очень маленькие экраны */
@@ -141,5 +164,8 @@
 
   .page-content {
     padding: 15px;
+  }
+  .loading-logo img {
+    width: 200px;
   }
 }

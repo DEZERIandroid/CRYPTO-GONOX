@@ -27,17 +27,17 @@ const Sidebar = () => {
         {isAuthChecked ? (
           user ? (
             <div className="user">
-              <Link to="/profile">
+              <Link data-aos="fade-in" to="/profile">
                 {user.photoURL ? (
                   <img className="user-avatar" src={photoURL} alt="Аватар" />
                 ) : (
                   <Skeleton.Avatar active style={{ width: "90px", height: "90px" }} />
                 )}
               </Link>
-              <div className="user-name">
+              <div data-aos="fade-in" className="user-name">
                 {name || <Skeleton paragraph={false} active style={{ width: 80, height: 29 }} />}
               </div>
-              <button className="user-edit">Изменить</button>
+              <button data-aos="fade-in" className="user-edit">Изменить</button>
             </div>
           ) : null
         ) : (
@@ -51,6 +51,7 @@ const Sidebar = () => {
         )}
 
         <nav className="sidebar-items" >
+          <div style={{paddingTop: isAuthChecked ? "0px" : "30px"}}></div>
           <Link to="/" className="item">
             <HomeIcon className="sidebar-icon"/>
             <div className="nav-link">Главная</div>

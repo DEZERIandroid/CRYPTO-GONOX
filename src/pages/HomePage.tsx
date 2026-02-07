@@ -241,7 +241,13 @@ const HomePage = () => {
               })}
             </ul>
           ) : (
-            <div className="error-modal">Ошибка загрузки транзакций</div>
+            <div><div className="error-modal">
+                  <button
+                   className="button-join-small"
+                    onClick={() => navigate("/login")}>
+                          Вход
+                  </button>
+            </div></div>
         )}
         </div>
 
@@ -277,7 +283,13 @@ const HomePage = () => {
                     );
                   })}
             </ul>)
-            : <div><div className="error-modal">Ошибка загрузки топ пользователей</div></div>}
+            : <div><div className="error-modal">
+                  <button
+                   className="button-join-small"
+                    onClick={() => navigate("/loginpage")}>
+                          Вход
+                  </button>
+              </div></div>}
           </div>
         </div>
     </div>
