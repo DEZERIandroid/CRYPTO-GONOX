@@ -121,23 +121,23 @@ const ProfilePage = () => {
       <div className="profile-content">
         <div className="profile">
           <div className="profile">
-            <div className="profile-avatar" onClick={avatarEdit}>
+            <div data-aos="fade-in" className="profile-avatar" onClick={avatarEdit}>
               <img src={photoURL} alt="" />
               <CameraFilled className="avatar-edit"/>
             </div>
-            <div className="profile-name">{name || "—"}</div>
+            <div data-aos="fade-in" className="profile-name">{name || "—"}</div>
           </div>
           <div className="profile-info">
-            <div className={role === "admin" ? "profile-role-admin" : "profile-role-user"}>{role === "admin" ? "Администратор" : "Пользователь"}</div>
+            <div data-aos="fade-in" className={role === "admin" ? "profile-role-admin" : "profile-role-user"}>{role === "admin" ? "Администратор" : "Пользователь"}</div>
           </div>
           <div className="stat-block stat-block-balance">
-                <div className="balance balance-user">
+                <div data-aos="fade-in" className="balance balance-user">
                   <span className="stat-label">Баланс пользователя</span>
                   <span className="stat-value">
                     {user.balance ? user.balance.toFixed((2)) : "0"} $
                   </span>
                 </div>
-                <div className="balance balance-crypto">
+                <div  data-aos="fade-in" className="balance balance-crypto">
                   <span className="stat-label">Баланс крипты</span>
                   <span className="stat-value">
                     {user.portfolio && user.portfolio.length > 0 
@@ -150,9 +150,9 @@ const ProfilePage = () => {
         </div>
 
         <div className="user-portfolio">
-          <h3 className="portfolio-title">Портфолио</h3>
+          <h3 data-aos="fade-in" className="portfolio-title">Портфолио</h3>
           {user.portfolio && user.portfolio.length > 0 ? (
-            <div data-aos="fade-up" className="crypto-list">
+            <div data-aos="fade-in" className="crypto-list">
               {user.portfolio.map((coin, index) => {
                 const amountNum = Number(coin.amount); 
                 return (
@@ -183,27 +183,27 @@ const ProfilePage = () => {
           )}
         </div>
 
-        <div data-aos="fade-up" className="profile-details">
-          <div className="detail-item">
+        <div data-aos="fade-in" className="profile-details">
+          <div  data-aos="fade-in" className="detail-item">
             <span className="label">Имя:</span>
             <span className="value">{name || "--"}</span>
           </div>
-          <div className="detail-item">
+          <div  data-aos="fade-in" className="detail-item">
             <span className="label">Фамилия:</span>
             <span className="value"></span>
           </div>
-          <div className="detail-item">
+          <div  data-aos="fade-in" className="detail-item">
             <span className="label">Электронная почта:</span>
             <span className="value">{email || "-"}</span>
           </div>
-          <div className="detail-item">
+          <div  data-aos="fade-in" className="detail-item">
             <span className="label">Роль:</span>
             <span className="value">{role || "-"}</span>
           </div>
         </div>
 
         <div className="logout-container">
-          <button className="logout-button" onClick={handleLogout}>
+          <button data-aos="fade-in" className="logout-button" onClick={handleLogout}>
             <LogoutOutlined /> Выйти
           </button>
         </div>

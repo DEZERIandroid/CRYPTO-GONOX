@@ -5,6 +5,7 @@ import { useAppDispatch } from "../hooks/reduxHooks";
 import { setUser } from "../features/userSlice";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { EyeInvisibleOutlined, EyeOutlined,  } from "@ant-design/icons";
 import "../styles/Log_Reg/Login.css"
 
 const LoginPage = () => {
@@ -17,6 +18,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [displayedName, setDisplayedName] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [watchingPass,setWatchingPass] = useState(false)
 
   const Login = async () => {
     if (!email || !password) {
@@ -77,6 +79,10 @@ const LoginPage = () => {
     }
   };
 
+  const handleWatchPassword = () => {
+    setWatchingPass(!watchingPass)
+  }
+
   return (
     <div data-aos="fade-in" data-aos-duration="150" className="Login-container">
       <div className="inputs">
@@ -90,16 +96,21 @@ const LoginPage = () => {
             setError(null);
           }}
         />
-        <input
-          className="input-password"
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value)
-            setError(null);
-          }}
-        />
+        <div className="password-watch">
+          <input
+            className="input-password"
+            type={watchingPass ? "text" : "password"}
+            placeholder="Пароль"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value)
+              setError(null);
+            }}
+          />
+          <div className="watch" onClick={handleWatchPassword}>
+            {watchingPass ? <EyeOutlined/> : <EyeInvisibleOutlined/>}
+          </div>
+        </div>
       </div>
       
       <button className="button-login" onClick={Login}>

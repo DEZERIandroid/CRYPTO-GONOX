@@ -147,6 +147,12 @@
   gap: 4px;
 }
 
+.error {
+  display: grid;
+  place-content: center;
+  gap: 20px;
+}
+
 /* ===== Адаптивность ===== */
 
 @media (max-width: 768px) {

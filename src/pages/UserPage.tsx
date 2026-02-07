@@ -52,10 +52,10 @@ const UserPage = () => {
         </div>
       </div>
       <div className="user-content">
-         <button onClick={() => navigate("/users")} className="return-btn">
+         <button onClick={() => navigate("/topusers")} className="return-btn">
             <ArrowLeftOutlined/> Назад к списку
         </button>
-        <div data-aos="fade-up" className="user-header">
+        <div data-aos="fade-in" className="user-header">
           <div className="user-info-avatar-cont">
             <img
             src={user.photoURL || "/default-avatar.png"}
@@ -70,7 +70,7 @@ const UserPage = () => {
           </div>
         </div>
 
-        <div data-aos="fade-up" className="user-stats">
+        <div data-aos="fade-in" className="user-stats">
           <div className="stat-block">
             <span className="stat-label">Дата регистрации</span>
             <span className="stat-value">
@@ -79,7 +79,7 @@ const UserPage = () => {
                 : "Неизвестно"}
             </span>
           </div>
-          <div data-aos="fade-up" className="stat-block stat-block-balance">
+          <div data-aos="fade-in" className="stat-block stat-block-balance">
                 <div className="balance balance-user">
                   <span className="stat-label">Баланс пользователя</span>
                   <span className="stat-value">
@@ -97,12 +97,12 @@ const UserPage = () => {
           </div>
         </div>
 
-        <div data-aos="fade-up" className="user-portfolio">
+        <div data-aos="fade-in" className="user-portfolio">
           <h3 className="portfolio-title">Портфолио пользователя</h3>
           {user.portfolio && user.portfolio.length > 0 ? (
             <div className="crypto-list">
               {user.portfolio.map((coin,index) => (
-                <div data-aos="fade-up" key={coin.id || index}
+                <div data-aos="fade-in" key={coin.id || index}
                      className="crypto-item"
                      onClick={() => navigate(`/crypto/${coin.coinId}`)}>
                   <div className="crypto-left">
@@ -121,11 +121,11 @@ const UserPage = () => {
               ))}
             </div>
           ) : (
-            <p data-aos="fade-up" className="empty-portfolio">У пользователя пока нет крипты</p>
+            <p data-aos="fade-in" className="empty-portfolio">У пользователя пока нет крипты</p>
           )}
         </div>
 
-        <div data-aos="fade-up" className="user-chart">
+        <div data-aos="fade-in" className="user-chart">
           <div className="chart-placeholder">📊 Здесь будет график пользователя</div>
         </div>
       </div>

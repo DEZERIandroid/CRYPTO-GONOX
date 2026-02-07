@@ -7,6 +7,7 @@ import "../styles/Log_Reg/Register.css";
 import { setDoc, doc, serverTimestamp, } from "firebase/firestore";
 import { db,auth } from "../firebase";
 import { useNavigate,Link } from "react-router-dom";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 
 const isValidEmail = (email: string): boolean => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -25,6 +26,7 @@ const RegisterPage = () => {
   const [isModalShow, setIsModalShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [displayedName, setDisplayedName] = useState<string | undefined>("");
+  const [watchingPass,setWatchingPass] = useState(false)
 
   const Register = async () => {
     const cleanEmail = email.trim();
@@ -136,6 +138,10 @@ const RegisterPage = () => {
     return () => clearTimeout(timer);
   }, [isModalShow]);
 
+  const handleWatchPassword = () => {
+    setWatchingPass(!watchingPass)
+  }
+
   return (
     <div data-aos="fade-in" data-aos-duration="150" className="Register-container">
       <div className="inputs">
@@ -159,26 +165,36 @@ const RegisterPage = () => {
             setError(null);
           }}
         />
-        <input
-          className="input-password"
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value)
-            setError(null);
-          }}
-        />
-        <input
-          className="input-password"
-          type="password"
-          placeholder="Потверждение пароля"
-          value={passwordDoble}
-          onChange={(e) => {
-            setPasswordDoble(e.target.value)
-            setError(null);
-          }}
-        />
+        <div className="password-watch">
+          <input
+            className="input-password"
+            type={watchingPass ? "text" : "password"}
+            placeholder="Пароль"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value)
+              setError(null);
+            }}
+          />
+          <div className="watch" onClick={handleWatchPassword}>
+            {watchingPass ? <EyeOutlined/> : <EyeInvisibleOutlined/>}
+          </div>
+        </div>
+        <div className="password-watch">
+          <input
+            className="input-password"
+            type={watchingPass ? "text" : "password"}
+            placeholder="Повторите пароль"
+            value={passwordDoble}
+            onChange={(e) => {
+              setPasswordDoble(e.target.value)
+              setError(null);
+            }}
+          />
+          <div className="watch" onClick={handleWatchPassword}>
+            {watchingPass ? <EyeOutlined/> : <EyeInvisibleOutlined/>}
+          </div>
+        </div>
         <button
           className="button-register"
           onClick={Register}

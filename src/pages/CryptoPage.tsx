@@ -3,7 +3,8 @@ import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useGetCoinQuery } from "../app/api/CryptoApi";
 import { Skeleton } from "antd";
 import { RiseOutlined, FallOutlined,StarOutlined,
-         ShoppingCartOutlined,SwapOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+         ShoppingCartOutlined,SwapOutlined, ArrowLeftOutlined, 
+         StarFilled} from "@ant-design/icons";
 import "../styles/Pages/Crypto.css";
 import CoinChartWithControls from "../components/CoinChartWithControls";
 import { useBuyCryptoMutation,useSellCryptoMutation, useGetCryptoForSellQuery } from "../app/api/UsersApi";
@@ -21,12 +22,16 @@ const CryptoPage = () => {
   const { data: users } = useGetUsersQuery(undefined , {
     pollingInterval:30000
   });
-  const { data:cryptoforsell } = useGetCryptoForSellQuery(
+  const { data:cryptoforsell, } = useGetCryptoForSellQuery(
     { userId: uid, coinId: id || "" },
-    {pollingInterval:2000}
+    {pollingInterval:500}
   )
+  
     const user = users?.find((u) => u.email === email); 
   
+  const amountForSell = cryptoforsell?.amount ?? 0
+  const isFavorite = cryptoforsell?.isFavorite ?? false
+
   const { data: coin, isLoading:isCoinLoading, isError:isCoinError, } = useGetCoinQuery(id ?? skipToken);
   const [buyCrypto,{isLoading:isBuying}] = useBuyCryptoMutation()
   const [sellCrypto,{isLoading:isSelling}] = useSellCryptoMutation()
@@ -122,6 +127,11 @@ const CryptoPage = () => {
       
   }
 
+/* ----------------------- Избранное не избранное ----------------------*/
+  const handleIsFavorite = () => {
+    
+  }
+
 
   if (isCoinLoading)
     return (
@@ -198,7 +208,7 @@ const CryptoPage = () => {
         <button className="return-btn" onClick={() => navigate("/market")}>
            <ArrowLeftOutlined/>Назад
         </button>
-        <div data-aos="fade-up" className="coin-header">
+        <div data-aos="fade-in" className="coin-header">
           <div className="coin-logo">
             <img src={image} alt={coin.name} />
           </div>
@@ -224,25 +234,25 @@ const CryptoPage = () => {
               <button onClick={openSellModal} className="coin-btn sell">
                 <SwapOutlined /> Продать
               </button>
-              <button className="coin-btn favorite">
-                <StarOutlined /> В избранное
+              <button onClick={handleIsFavorite} className="coin-btn favorite">
+                {isFavorite ? <StarFilled /> : <StarOutlined/>} В избранное
               </button>
             </div>
           </div>
         </div>
 
         <div className="coin-stats">
-          <div data-aos="fade-up" className="stat-block">
+          <div data-aos="fade-in" className="stat-block">
             <span className="stat-label">Рыночная капитализация</span>
             <span className="stat-value">{marketCap ? `$${marketCap.toLocaleString()}` : "-"}</span>
           </div>
-          <div data-aos="fade-up" className="stat-block">
+          <div data-aos="fade-in" className="stat-block">
             <span className="stat-label">Объем торгов (24ч)</span>
             <span className="stat-value">{volume ? `$${volume.toLocaleString()}` : "-"}</span>
           </div>
         </div>
 
-        <div data-aos="fade-up" className="coin-chart">
+        <div data-aos="fade-in" className="coin-chart">
           {id ? (
             <CoinChartWithControls coinId={id} />
           ) : (
@@ -285,7 +295,7 @@ const CryptoPage = () => {
             <div className="buy-modal">
               <h2>Продажа {coin.name}</h2>
               <p style={{textAlign:"right"}}>
-                У вас: {cryptoforsell ?? 0}
+                У вас: {amountForSell ?? 0}
               </p>
               <input  
                 style={{borderBottom:sellError ? "1px solid red" : "none",

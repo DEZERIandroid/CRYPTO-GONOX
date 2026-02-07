@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { HomeIcon } from "./Icons/HomeIcon"
 import { MarketIcon } from "./Icons/MarketIcon"
+import { UsersIcon } from "./Icons/UsersIcon"
 import { TransactionsIcon } from "./Icons/TransactionsIcon"
 import { SettingsIcon } from "./Icons/Setting"
 import { Skeleton } from "antd"
@@ -8,7 +9,6 @@ import ThemeToggle from "../assets/themeToggle"
 import "../styles/Components/Sidebar.css"
 import { useAppSelector } from "../hooks/reduxHooks"
 import { useGetUsersQuery } from "../app/api/UsersApi"
-import { UsersButton } from "./UsersButton"
 
 const Sidebar = () => {
   const { email, name, isAuthChecked } = useAppSelector(state => state.user);
@@ -55,7 +55,10 @@ const Sidebar = () => {
             <HomeIcon className="sidebar-icon"/>
             <div className="nav-link">Главная</div>
           </Link>
-          <UsersButton/>
+          <Link to="/topusers" className="item">
+            <UsersIcon className="sidebar-icon"/>
+            <div className="nav-link">Пользователи</div>
+          </Link>
           <Link to="/market" className="item">
             <MarketIcon className="sidebar-icon"/>
             <div className="nav-link">Рынок</div>

@@ -4,9 +4,10 @@ import { Skeleton } from 'antd';
 import { useGetCryptosQuery } from "../app/api/CryptoApi";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { ReloadOutlined } from "@ant-design/icons";
 
 const MarketPage = () => {
-  const { data, isLoading, isError } = useGetCryptosQuery(undefined , {
+  const { data, isLoading, isError, refetch } = useGetCryptosQuery(undefined , {
     pollingInterval:35000
   });
   const [filter,setFilter] = useState<string>("Все")
@@ -51,6 +52,10 @@ const MarketPage = () => {
   },[data,filter,searchQuery])
 
   const filtres = ["Все","Топ-10","Растущие","Падающие"]
+
+  const handleReloadChart = () => {
+    refetch()
+  }
 
   if (isLoading) return <div className="page-container">
       <div className="page-header">
@@ -138,7 +143,11 @@ const MarketPage = () => {
               ))}
             </tbody>
           </table>
-        </div>) : <div className="error">Ошибка загрузки данных</div>}
+        </div>) : <div className="error">Ошибка загрузки данных
+                    <button className="reload-btn" onClick={handleReloadChart}>
+                              <ReloadOutlined/> Обновить
+                    </button>
+                  </div>}
       </div> 
     </div>
   );

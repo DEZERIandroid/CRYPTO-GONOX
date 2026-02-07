@@ -241,18 +241,25 @@ export const usersApi = createApi({
         }
       },
     }),
-    getCryptoForSell: builder.query<number, { userId:any; coinId: string }>({
+    getCryptoForSell: builder.query<{ amount:number, isFavorite:boolean }, { userId: any; coinId: string }>({
       providesTags: ["Users"],
       async queryFn({ userId, coinId }) {
         try {
           const snap = await getDoc(doc(db, "users", userId))
+          if (!snap.exists()) {
+            return { error: { status: 404, data: "User not found" } as any };
+          }
           const data = snap.data()
           const portfolio = data?.portfolio ?? []
+          
         
           const coin = portfolio.find((i:any) => i.coinId === coinId)
           const amount = coin?.amount ?? 0
+
+          const isFavorite = coin?.isFavorite ?? false
+
         
-          return { data: amount }
+          return { data: {amount, isFavorite} }
         } catch (error) {
           console.error(error)
           return { error: error as any }

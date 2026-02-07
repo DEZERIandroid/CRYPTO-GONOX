@@ -4,7 +4,7 @@ import { useGetTransactionsQuery, type Transaction } from "../app/api/UsersApi";
 import { useState,useMemo } from "react";
 
 const TransactionsPage = () => {
-  const { data, isLoading, isError } = useGetTransactionsQuery(undefined , {
+  const { data, isError } = useGetTransactionsQuery(undefined , {
     pollingInterval:3000
   });
 
@@ -30,53 +30,6 @@ const TransactionsPage = () => {
       );
     }, [sortedData, searchQuery]);
 
-  if (isLoading) {
-  return (
-    <div className="page-container">
-      <div className="page-header">
-        <h1 className="header-title">Транзакции</h1>
-        <div className="header-actions">
-          <div className="search-box skeleton-loading" style={{ width: "400px", height: "50px" }} />
-          <div className="filter-select skeleton-loading" style={{ width: "180px", height: "50px" }} />
-        </div>
-      </div>
-
-      <div className="transactions-container">
-        <div className="filters">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="filter-btn skeleton-loading" style={{ width: "80px", height: "36px" }} />
-          ))}
-        </div>
-
-        <div className="market-content">
-          <div className="market-table transactions">
-            <table>
-              <thead>
-                <tr>
-                  {[...Array(8)].map((_, i) => (
-                    <th key={i} style={{ height: "40px" }}></th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[...Array(6)].map((_, rowIndex) => (
-                  <tr key={rowIndex}>
-                    {[...Array(8)].map((_, colIndex) => (
-                      <td key={colIndex}>
-                        <div className="skeleton-loading" style={{ height: "20px", borderRadius: "4px" }} />
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
   return (
     <div className="page-container">
       <div className="page-header">
@@ -92,7 +45,7 @@ const TransactionsPage = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <select className="filter-select">
+          <select data-aos="fade-in" className="filter-select">
             <option>За последний месяц</option>
             <option>За неделю</option>
             <option>За день</option>
@@ -101,9 +54,9 @@ const TransactionsPage = () => {
 
       <div className="transactions-container">
         <div className="filters">
-          <button className="filter-btn active">Все</button>
-          <button className="filter-btn">Покупка</button>
-          <button className="filter-btn">Продажа</button>
+          <button data-aos="fade-in" className="filter-btn active">Все</button>
+          <button data-aos="fade-in" className="filter-btn">Покупка</button>
+          <button data-aos="fade-in" className="filter-btn">Продажа</button>
         </div>
 
         <div className="market-content">

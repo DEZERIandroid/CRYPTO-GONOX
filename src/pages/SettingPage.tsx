@@ -20,11 +20,11 @@ const SettingPage = () => {
       {/* CONTENT */}
       <div className="market-content">
         {/* УВЕДОМЛЕНИЯ */}
-        <div data-aos="fade-up" data-aos-once="false" className="settings-section">
+        <div data-aos="fade-in" className="settings-section">
           <h3 className="settings-section-title">Уведомления</h3>
 
           <div className="settings-item">
-            <div className="settings-item-info">
+            <div data-aos="fade-in"className="settings-item-info">
               <span className="settings-item-label">Email-уведомления</span>
               <span className="settings-item-desc">
                 Получать уведомления о транзакциях
@@ -34,7 +34,7 @@ const SettingPage = () => {
           </div>
 
           <div className="settings-item">
-            <div className="settings-item-info">
+            <div data-aos="fade-in" className="settings-item-info">
               <span className="settings-item-label">Push-уведомления</span>
               <span className="settings-item-desc">
                 Уведомления в браузере
@@ -45,17 +45,17 @@ const SettingPage = () => {
         </div>
 
         {/* ИНТЕРФЕЙС */}
-        <div data-aos="fade-up" data-aos-once="false" className="settings-section">
+        <div data-aos="fade-in" className="settings-section">
           <h3 className="settings-section-title">Интерфейс</h3>
 
           <div className="settings-item">
-            <div className="settings-item-info">
+            <div data-aos="fade-in" className="settings-item-info">
               <span className="settings-item-label">Тема</span>
               <span className="settings-item-desc">
                 Выбор оформления сайта
               </span>
             </div>
-            <select className="settings-select">
+            <select data-aos="fade-in" className="settings-select">
               <option>Тёмная</option>
               <option>Светлая</option>
             </select>
@@ -63,12 +63,12 @@ const SettingPage = () => {
 
           <div className="settings-item">
             <div className="settings-item-info">
-              <span className="settings-item-label">Язык</span>
-              <span className="settings-item-desc">
+              <span data-aos="fade-in" className="settings-item-label">Язык</span>
+              <span data-aos="fade-in" className="settings-item-desc">
                 Язык интерфейса
               </span>
             </div>
-            <select className="settings-select">
+            <select data-aos="fade-in" className="settings-select">
               <option>Русский</option>
               <option>English</option>
             </select>
@@ -76,11 +76,11 @@ const SettingPage = () => {
         </div>
 
         {/* ПОВЕДЕНИЕ */}
-        <div data-aos="fade-up" data-aos-once="false" className="settings-section">
+        <div data-aos="fade-in" className="settings-section">
           <h3 className="settings-section-title">Поведение</h3>
 
           <div className="settings-item">
-            <div className="settings-item-info">
+            <div data-aos="fade-in" className="settings-item-info">
               <span className="settings-item-label">Автообновление цен</span>
               <span className="settings-item-desc">
                 Обновлять курсы автоматически
@@ -90,7 +90,7 @@ const SettingPage = () => {
           </div>
 
           <div className="settings-item">
-            <div className="settings-item-info">
+            <div data-aos="fade-in" className="settings-item-info">
               <span className="settings-item-label">Анимации</span>
               <span className="settings-item-desc">
                 Плавные переходы интерфейса
@@ -101,9 +101,9 @@ const SettingPage = () => {
         </div>
 
         {/* FOOTER */}
-        <div data-aos="fade-up" data-aos-once="false" className="settings-footer">
-          <button className="settings-cancel">Отмена</button>
-          <button className="settings-save">Сохранить</button>
+        <div data-aos="fade-in" className="settings-footer">
+          <button data-aos="fade-in" className="settings-cancel">Отмена</button>
+          <button data-aos="fade-in" className="settings-save">Сохранить</button>
         </div>
       </div>
     </div>
