@@ -51,29 +51,28 @@ const Sidebar = () => {
         )}
 
         <nav className="sidebar-items" >
-          <div style={{paddingTop: isAuthChecked ? "0px" : "30px"}}></div>
-          <Link to="/" className="item">
+          <Link data-aos="fade-in" to="/" className="item">
             <HomeIcon className="sidebar-icon"/>
             <div className="nav-link">Главная</div>
           </Link>
-          <Link to="/topusers" className="item">
+          <Link data-aos="fade-in" to="/topusers" className="item">
             <UsersIcon className="sidebar-icon"/>
             <div className="nav-link">Пользователи</div>
           </Link>
-          <Link to="/market" className="item">
+          <Link data-aos="fade-in" to="/market" className="item">
             <MarketIcon className="sidebar-icon"/>
             <div className="nav-link">Рынок</div>
           </Link>
-          <Link to="/transactions" className="item">
+          <Link data-aos="fade-in" to="/transactions" className="item">
             <TransactionsIcon className="sidebar-icon"/>
             <div className="nav-link">Транзакции</div>
           </Link>
-          <Link to="/setting" className="item">
+          <Link data-aos="fade-in" to="/setting" className="item">
             <SettingsIcon className="sidebar-icon"/>
             <div className="nav-link">Настройки</div>
           </Link>
         </nav>
-        <div className="sidebar-theme-toggle">
+        <div data-aos="fade-in" className="sidebar-theme-toggle">
           <ThemeToggle />
         </div>
       </div>

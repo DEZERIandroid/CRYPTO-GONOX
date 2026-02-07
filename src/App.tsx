@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import ScrollToTop from "./components/ScrollTop";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { initializeAuth } from "./features/userSlice";
+import GonoxLogo from '/Gonoxlogo.png';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ function App() {
   if (authLoading) {
     return (
       <div className="loading-logo">
-        <img src="src/assets/Gonox.png" alt="" />
+        <img src={GonoxLogo} alt="" />
       </div>
     );
   }
