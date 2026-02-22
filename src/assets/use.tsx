@@ -17,6 +17,7 @@ type Props = {
 
 export default function ExpensesPie({ data }: Props) {
   const total = data.reduce((sum, i) => sum + i.value, 0);
+  
 
   return (
     <MotionBox
@@ -27,7 +28,6 @@ export default function ExpensesPie({ data }: Props) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
     >
-
       <Flex align="center" justify="center" position="relative" h="240px">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>

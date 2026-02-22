@@ -2,6 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import "../styles/Pages/Transactions.css";
 import { useGetTransactionsQuery, type Transaction } from "../app/api/UsersApi";
 import { useState,useMemo } from "react";
+import { FloatButton } from "antd";
 
 const TransactionsPage = () => {
   const { data, isError } = useGetTransactionsQuery(undefined , {
@@ -111,6 +112,7 @@ const TransactionsPage = () => {
           </div>
         </div>
       </div>
+      <FloatButton.BackTop className="float-button"/>
     </div>
   );
 };

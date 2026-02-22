@@ -94,8 +94,26 @@
   display: flex;
   align-items: center;
 }
+.item-actived {
+  padding: 18px;
+  transition: all 0.5s ease-in-out;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.404) ;
+  color: white;
+  padding-bottom:17px ;
+}
+
+.item-actived:hover{
+  background-color: rgb(67, 67, 67);
+}
+.item-actived:hover .nav-link{
+  color: white;
+}
 .item:hover{
-  background-color: rgb(62, 62, 62);
+  background-color: rgb(67, 67, 67);
 }
 .item:hover .nav-link{
   color: white;
@@ -112,13 +130,6 @@
   color: #bebebe;
   background-color: #1f0f5c00;
 }
-.sidebar-split-item {
-  display: flex;
-  align-items: center;
-  cursor: default; 
-  height: 60px;
-}
-
 .sidebar-theme-toggle {
   margin-top: auto;
   padding: 24px 18px 10px;
@@ -153,6 +164,157 @@
 .skeleton-name {
   width: 90px;
   height: 90px;
+}
+
+
+@keyframes buttonBorderActive {
+    0%{border: 1px solid green;}
+    100%{border: 5px solid green;}
+}
+
+
+@media (max-height:790px) {
+  .user-avatar {
+    margin-top: -30px;
+  }
+  .sidebar-items{
+    margin-bottom: 50px;
+  }
+  .sidebar-theme-toggle{
+    margin-top: -40px;
+    padding: 12px;
+  }
+}
+
+@media (max-height:735px) {
+  .sidebar-logo{
+      margin-top: -200px;
+      margin-bottom: 15px;
+    }
+    .user-avatar{
+      width: 70px;
+      height: 70px;
+      margin-top: 0px;
+    }
+    .user-edit{
+      margin-top:10px;
+      margin-bottom: -30px;
+    }
+    .item {
+      padding: 12px;
+    }
+    .user-name {
+      font-size:17px ;
+    }
+    .sidebar-items{
+      margin-bottom:0px ;
+      margin-bottom: 20px;
+      margin-top: 60px;
+    } 
+    .sidebar-theme-toggle{
+      margin: 0px;
+      margin-top: 10px;
+      margin-bottom: -200px;
+      padding: 12px;
+    }
+}
+
+@media (max-height:650px) {
+  .sidebar-items{
+      margin-bottom:0px ;
+      margin-bottom: 10px;
+      margin-top: 50px;
+    } 
+}
+@media (max-height:600px) {
+  .sidebar-items{
+      margin-bottom:0px ;
+      margin-bottom: 00px;
+      margin-top: 40px;
+    }
+  .user-avatar{
+      width: 70px;
+      height: 70px;
+      margin-top: -10px;
+      margin-bottom: 0px;
+    } 
+  .user-edit{
+      margin-top:1px;
+      margin-bottom: -35px;
+    }
+}
+@media (max-height:650px) {
+  .sidebar-items{
+    margin-bottom:0px ;
+    margin-bottom: 00px;
+    margin-top: 40px;
+  }
+  .user-avatar{
+      width: 70px;
+      height: 70px;
+      margin-top: -10px;
+      margin-bottom: 0px;
+    } 
+  .user-edit{
+      margin-top:1px;
+      margin-bottom: -35px;
+    }
+}
+
+@media (max-height:600px) {
+  .sidebar-items{
+      margin: 40px;
+  }
+  .item {
+    padding: 10px;
+  } 
+  .user-avatar{
+    margin-bottom: 10px;
+  }
+  .user-name {
+    margin-bottom: -30px;
+  }
+  .user-edit{
+    display: none;
+  }
+}
+
+@media (max-height:550px) {
+  .sidebar-items{
+    margin-top: 50px;
+    margin-bottom: -190px;
+  }
+  .item {
+    padding: 10px;
+  }
+
+  .sidebar-theme-toggle{
+    display: none;
+  }
+}
+@media (max-height:500px) {
+  .sidebar-items{
+    margin-top: -10px;
+    margin-bottom: -140px;
+  }
+  .item {
+    padding: 10px;
+  }
+  .logo {
+    display: none;
+  }
+  .user-name{
+    display: none;
+  }
+  .sidebar-theme-toggle{
+    display: none;
+  }
+  .user-avatar{
+    margin-top: 10px;
+    width: 80px;
+    height: 50px;
+    border-radius:30px;
+  }
 }
 
 @media (max-width: 768px) {

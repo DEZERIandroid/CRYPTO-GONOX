@@ -21,7 +21,7 @@
   border-radius:20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
-  inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  inset 0 0 10px 10px rgba(139, 79, 79, 0.03);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   animation: fadeIn 0.2s ease-in-out;
@@ -71,7 +71,7 @@
 }
 
 .tab {
-  padding: 10px 25px;
+  padding: 8.5px 12px;
   border: none;
   background: transparent;
   color: #c5c4c4;

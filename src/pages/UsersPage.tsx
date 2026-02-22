@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { SearchOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useGetUsersQuery } from "../app/api/UsersApi";
 import type { User } from "../app/api/UsersApi";
-import { Skeleton } from 'antd';
+import { FloatButton, Skeleton } from 'antd';
 import '../styles/Pages/Users.css';
 
 const UsersPage = () => {
@@ -143,6 +143,7 @@ const UsersPage = () => {
         <br /> 
         
       </div>
+      <FloatButton.BackTop className="float-button"/>
     </div>
   );
 };

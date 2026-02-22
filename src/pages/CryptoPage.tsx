@@ -7,7 +7,7 @@ import { RiseOutlined, FallOutlined,StarOutlined,
          StarFilled} from "@ant-design/icons";
 import "../styles/Pages/Crypto.css";
 import CoinChartWithControls from "../components/CoinChartWithControls";
-import { useBuyCryptoMutation,useSellCryptoMutation, useGetCryptoForSellQuery } from "../app/api/UsersApi";
+import { useBuyCryptoMutation,useSellCryptoMutation, useGetCryptoForSellQuery, useFavoriteCryptoMutation } from "../app/api/UsersApi";
 import { useGetUsersQuery } from "../app/api/UsersApi";
 import { useMemo, useState } from "react";
 import { useAppSelector } from "../hooks/reduxHooks";
@@ -27,14 +27,14 @@ const CryptoPage = () => {
     {pollingInterval:500}
   )
   
-    const user = users?.find((u) => u.email === email); 
+  const user = users?.find((u) => u.email === email); 
   
   const amountForSell = cryptoforsell?.amount ?? 0
-  const isFavorite = cryptoforsell?.isFavorite ?? false
 
   const { data: coin, isLoading:isCoinLoading, isError:isCoinError, } = useGetCoinQuery(id ?? skipToken);
   const [buyCrypto,{isLoading:isBuying}] = useBuyCryptoMutation()
   const [sellCrypto,{isLoading:isSelling}] = useSellCryptoMutation()
+  const [favoriteCrypto] = useFavoriteCryptoMutation()
 
   const [isModalOpenBuy, setIsModalOpenBuy] = useState(false);
   const [isModalOpenSell, setIsModalOpenSell] = useState(false);
@@ -128,9 +128,15 @@ const CryptoPage = () => {
   }
 
 /* ----------------------- Избранное не избранное ----------------------*/
-  const handleIsFavorite = () => {
-    
+  const handleIsFavorite = async () => {
+    try {
+      await favoriteCrypto({uid,coinId: id})
+    } catch (error) {
+      console.log(error)
+    }
   }
+
+  const isFavorite = user?.favoritesCrypto?.includes(id)
 
 
   if (isCoinLoading)
@@ -205,9 +211,11 @@ const CryptoPage = () => {
       </div>
 
       {!isCoinError ? (<div className="user-content crypto-content">
-        <button className="return-btn" onClick={() => navigate("/market")}>
+        <div className="return">
+          <button className="return-btn" onClick={() => navigate("/market")}>
            <ArrowLeftOutlined/>Назад
         </button>
+        </div>
         <div data-aos="fade-in" className="coin-header">
           <div className="coin-logo">
             <img src={image} alt={coin.name} />
@@ -235,7 +243,8 @@ const CryptoPage = () => {
                 <SwapOutlined /> Продать
               </button>
               <button onClick={handleIsFavorite} className="coin-btn favorite">
-                {isFavorite ? <StarFilled /> : <StarOutlined/>} В избранное
+                {isFavorite ? <StarFilled /> : <StarOutlined/>} 
+                <div style={{minWidth:"98px"}}>{isFavorite ? "В избранном" : "В избранное"}</div>
               </button>
             </div>
           </div>

@@ -64,6 +64,12 @@
   60%{opacity: 1;transform: scale(1);}
 }
 
+.float-button {
+  transition: all 0.2s ease;
+}
+.float-button:hover {
+  box-shadow: 0 0 15px rgb(13, 60, 121);
+}
 
 
 /* ===== Адаптивность — переиспользуется везде ===== */

@@ -1,7 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons"
 import { useGetTopUsersQuery } from "../app/api/UsersApi"
 import { useMemo, useState } from "react"
-import { Skeleton } from "antd"
+import { FloatButton, Skeleton } from "antd"
 import "../styles/Pages/TopUsers.css"
 import { useNavigate } from "react-router-dom"
 
@@ -129,7 +129,7 @@ const TopUsers = () => {
           <div className="empty-message">Нет данных для отображения</div>
         )}
       </div>
-
+      <FloatButton.BackTop className="float-button"/>
     </div>
   )
 }

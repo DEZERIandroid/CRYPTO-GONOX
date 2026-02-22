@@ -1,6 +1,6 @@
 import { SearchOutlined, RiseOutlined, FallOutlined } from "@ant-design/icons";
 import "../styles/Pages/Market.css"
-import { Skeleton } from 'antd';
+import { FloatButton, Skeleton } from 'antd';
 import { useGetCryptosQuery } from "../app/api/CryptoApi";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom"
@@ -149,6 +149,7 @@ const MarketPage = () => {
                     </button>
                   </div>}
       </div> 
+      <FloatButton.BackTop className="float-button"/>
     </div>
   );
 };

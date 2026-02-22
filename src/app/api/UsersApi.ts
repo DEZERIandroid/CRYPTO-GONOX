@@ -1,6 +1,7 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import { collection, getDocs, Timestamp, 
-         doc, updateDoc, getDoc} from "firebase/firestore";
+         doc, updateDoc, getDoc , arrayUnion,
+         arrayRemove} from "firebase/firestore";
 import { db } from "../../firebase";
 
 export interface User {
@@ -10,6 +11,7 @@ export interface User {
   role?: string;
   cryptoBalance?: number;
   portfolio?: any[];
+  favoritesCrypto?: any[];
   photoURL?: string;
   createdAt: string | null;
   balance?:number;
@@ -29,6 +31,10 @@ interface sellCrypto {
   coinId:undefined | string,
   amountCoins:number,
   cryptoPrice:number,
+}
+interface favoriteCrypto {
+  uid:any,
+  coinId:undefined | string
 }
 export interface Transaction {
   Username: string;
@@ -67,6 +73,7 @@ export const usersApi = createApi({
               role?: string;
               cryptoBalance?: number;
               portfolio?: any[];
+              favoritesCrypto?:any[];
               photoURL?: string;
               createdAt?: Timestamp;
               balance?:number;
@@ -79,6 +86,7 @@ export const usersApi = createApi({
               role: data.role,
               cryptoBalance: data.cryptoBalance,
               portfolio: data.portfolio,
+              favoritesCrypto: data.favoritesCrypto,
               photoURL: data.photoURL,
               createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : null,
               balance:data.balance,
@@ -213,7 +221,44 @@ export const usersApi = createApi({
           } catch (err:any) {
             return { error: {status:"SELL_ERROR", err: err.message}}
           }
-      }
+      },
+      invalidatesTags: ["Users"]
+    }),
+    favoriteCrypto : builder.mutation<void,favoriteCrypto>({
+      async queryFn({uid,coinId}) {
+          try {
+            const userRef = doc(db,"users",uid) 
+            const userSnap = await getDoc(userRef)
+            if (!userSnap.exists()) {
+                return { error: { status: "USER_NOT_FOUND", error: "Пользователь не найден" } };
+            }
+
+            const userData = userSnap.data()
+            const favorites = userData.favoritesCrypto || []
+
+            const isFavorite = favorites.includes(coinId)
+
+            if (isFavorite) {
+
+              await updateDoc(userRef, {
+                favoritesCrypto:arrayRemove(coinId)
+              })
+            } else {
+
+              await updateDoc(userRef, {
+                favoritesCrypto:arrayUnion(coinId)
+              })
+            }
+
+            return {data:undefined}
+
+          } catch (error:any) {
+            console.error("Favorite error:", error);
+            return { error: {status:"FAVORITING_ERROR", error: error.message}}
+          }
+          
+      },
+      invalidatesTags: ["Users"]
     }),
     getTransactions: builder.query<Transaction[], void>({
       providesTags: ["Users"],
@@ -241,7 +286,7 @@ export const usersApi = createApi({
         }
       },
     }),
-    getCryptoForSell: builder.query<{ amount:number, isFavorite:boolean }, { userId: any; coinId: string }>({
+    getCryptoForSell: builder.query<{ amount:number}, { userId: any; coinId: string }>({
       providesTags: ["Users"],
       async queryFn({ userId, coinId }) {
         try {
@@ -255,11 +300,8 @@ export const usersApi = createApi({
         
           const coin = portfolio.find((i:any) => i.coinId === coinId)
           const amount = coin?.amount ?? 0
-
-          const isFavorite = coin?.isFavorite ?? false
-
         
-          return { data: {amount, isFavorite} }
+          return { data: {amount} }
         } catch (error) {
           console.error(error)
           return { error: error as any }
@@ -297,5 +339,5 @@ export const { useGetUsersQuery,useGetTransactionsQuery,
                useGetTopUsersQuery,
 
               useBuyCryptoMutation,useGetCryptoForSellQuery,
-              useSellCryptoMutation
+              useSellCryptoMutation,useFavoriteCryptoMutation
                                    } = usersApi;

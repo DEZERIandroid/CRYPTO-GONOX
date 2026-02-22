@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { HomeIcon } from "./Icons/HomeIcon"
 import { MarketIcon } from "./Icons/MarketIcon"
 import { UsersIcon } from "./Icons/UsersIcon"
@@ -17,6 +17,15 @@ const Sidebar = () => {
     });
   const user = users?.find((u) => u.email === email); 
   const photoURL = user?.photoURL
+
+  const location = useLocation()
+  const isHome = location.pathname === '/';
+  const isUsers = location.pathname.startsWith('/users');
+  const isUsersTop = location.pathname.startsWith('/topusers');
+  const isMarket = location.pathname.startsWith('/market');
+  const isTransactions = location.pathname.startsWith('/transactions');
+  const isSetting = location.pathname.startsWith('/setting');
+
   return (
     <div className="sidebar">
       <div className="sidebar-container">
@@ -51,23 +60,28 @@ const Sidebar = () => {
         )}
 
         <nav className="sidebar-items" >
-          <Link data-aos="fade-in" to="/" className="item">
+          <Link data-aos="fade-in" to="/"
+                className={isHome ? "item-actived" : "item"}>
             <HomeIcon className="sidebar-icon"/>
-            <div className="nav-link">Главная</div>
+            <div className="nav-link" >Главная</div>
           </Link>
-          <Link data-aos="fade-in" to="/topusers" className="item">
+          <Link data-aos="fade-in" to="/topusers" 
+                className={isUsers || isUsersTop ? "item-actived" : "item"}>
             <UsersIcon className="sidebar-icon"/>
             <div className="nav-link">Пользователи</div>
           </Link>
-          <Link data-aos="fade-in" to="/market" className="item">
+          <Link data-aos="fade-in" to="/market" 
+                className={isMarket ? "item-actived" : "item"}>
             <MarketIcon className="sidebar-icon"/>
             <div className="nav-link">Рынок</div>
           </Link>
-          <Link data-aos="fade-in" to="/transactions" className="item">
+          <Link data-aos="fade-in" to="/transactions" 
+                className={isTransactions ? "item-actived" : "item"}>
             <TransactionsIcon className="sidebar-icon"/>
             <div className="nav-link">Транзакции</div>
           </Link>
-          <Link data-aos="fade-in" to="/setting" className="item">
+          <Link data-aos="fade-in" to="/setting"
+                className={isSetting ? "item-actived" : "item"}>
             <SettingsIcon className="sidebar-icon"/>
             <div className="nav-link">Настройки</div>
           </Link>
