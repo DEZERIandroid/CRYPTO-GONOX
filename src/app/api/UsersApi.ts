@@ -38,6 +38,7 @@ interface favoriteCrypto {
 }
 export interface Transaction {
   Username: string;
+  photoURL:undefined | string;
   coinId: string;
   buyPrice: number;
   amount: number;

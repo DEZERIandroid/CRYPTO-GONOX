@@ -1,9 +1,10 @@
 
 .filters {
-  display: flex;
-  gap: 12px;
-  margin: 20px 0;
-  flex-wrap: wrap;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+  margin: 20px 350px;
 }
 
 .filter-btn {
@@ -15,33 +16,24 @@
   font-size: 15px;
   cursor: pointer;
   transition: all 0.2s ease;
+  flex: 1 1 100%;
 }
-
 .filter-btn:hover {
   background-color: #141318;
 }
 
-.filter-btn.active {
+.filter-btn-active {
   background-color: #007bff;
   color: white;
   border-color: #007bff;
-}
-
-.filter-select {
-  background-color: #0e0d12;
-  color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 10px 16px;
-  font-size: 16px;
+  padding: 0px 16px;
+  font-size: 13px;
   cursor: pointer;
-  outline: none;
-  min-width: 180px;
+  transition: all 0.2s ease;
 }
 
-.filter-select option {
-  background-color: #141318;
-}
 
 /* Статусы транзакций */
 .status-success {
@@ -73,7 +65,6 @@
   font-weight: 500;
   display: inline-block;
 }
-
 .transactions th,
 .transactions td {
   padding: 15px 10px;
@@ -87,6 +78,10 @@
 .transactions th:nth-child(2),
 .transactions td:nth-child(2) {
   padding: 5px 5px;
+}
+.transactions th:nth-child(3),
+.transactions td:nth-child(3) {
+  max-width: 70px;
 }
 .transactions th:nth-child(4),
 .transactions td:nth-child(4),
@@ -121,15 +116,23 @@
 }
 
 /* ===== Адаптивность для транзакций ===== */
-
+@media (max-width:1850px) {
+  .filters {
+    margin: 20px 300px;
+  }
+}
+@media (max-width:1550px) {
+  .filters {
+    margin: 20px 150px;
+  }
+}
 @media (max-width: 1279px) {
+  .filters {
+    gap: 30px;
+    margin: 20px 100px;
+  }
   .filter-btn {
     padding: 8px 14px;
-    font-size: 14px;
-  }
-
-  .pagination-btn {
-    padding: 6px 14px;
     font-size: 14px;
   }
 }
@@ -137,6 +140,7 @@
 @media (max-width: 1023px) {
   .filters {
     gap: 10px;
+    margin: 20px 40px;
   }
 
   .filter-btn {
@@ -144,15 +148,6 @@
     font-size: 13px;
   }
 
-  .filter-select {
-    min-width: 150px;
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-
-  .pagination {
-    gap: 16px;
-  }
 }
 
 @media (max-width: 767px) {
@@ -162,13 +157,8 @@
     gap: 25px;
   }
 
-  .filter-select {
-    width: 100%;
-  }
-
   .filters {
-    flex-direction: column;
-    align-items: stretch;
+    margin: 20px 60px;
   }
 
   .filter-btn {
@@ -180,17 +170,12 @@
     min-width: 650px;
   }
 
-  .pagination {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .pagination-info {
-    text-align: center;
-  }
 }
 
 @media (max-width: 480px) {
+  .filters{
+    margin: 20px 10px;
+  }
   .filter-btn {
     font-size: 13px;
     padding: 8px;

@@ -1,25 +1,43 @@
 import { SearchOutlined, RiseOutlined, FallOutlined } from "@ant-design/icons";
 import "../styles/Pages/Market.css"
-import { FloatButton, Skeleton } from 'antd';
+import { FloatButton, Select, Skeleton } from 'antd';
 import { useGetCryptosQuery } from "../app/api/CryptoApi";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { ReloadOutlined } from "@ant-design/icons";
+import { useGetUsersQuery } from "@/app/api/UsersApi";
+import { useAppSelector } from "@/hooks/reduxHooks";
 
 const MarketPage = () => {
   const { data, isLoading, isError, refetch } = useGetCryptosQuery(undefined , {
-    pollingInterval:35000
+    pollingInterval:65000
   });
+  const { data: users } = useGetUsersQuery(undefined , {
+      pollingInterval:60000
+  });
+  const { email } = useAppSelector(state => state.user);
+  const user = users?.find((u) => u.email === email); 
+
   const [filter,setFilter] = useState<string>("Все")
   const [searchQuery,setSearchQuery] = useState<string>("")
 
   const navigate = useNavigate()
 
+  
+  const filtres = ["Все","Топ-10","Растущие","Падающие","Избранное"]
+
+  const selectOptions = filtres.map((item) => ({
+    value: item,
+    label: item,
+  }));
+
   const filteredData = useMemo(() => {
     if (!data) return []
 
     let result = [...data]
-
+    
+    const favoriterCrypto = user?.favoritesCrypto
+    
     if (searchQuery) {
       const query = searchQuery.toLocaleLowerCase()
       result = result.filter(
@@ -41,17 +59,21 @@ const MarketPage = () => {
         result = result
           .filter((coin) => coin.price_change_percentage_24h < 0)
           .sort((a,b) => a.price_change_percentage_24h - b.price_change_percentage_24h)
-      break
+      break;
+      case "Избранное":
+        result = result
+          .filter((coin) => favoriterCrypto?.includes(coin.id))
+      break;
       case "Все":
       default:
         result = result.sort((a,b) => b.market_cap - a.market_cap)
         break;
+
     }
 
   return result; 
   },[data,filter,searchQuery])
 
-  const filtres = ["Все","Топ-10","Растущие","Падающие"]
 
   const handleReloadChart = () => {
     refetch()
@@ -86,17 +108,12 @@ const MarketPage = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <div className="filters">
-            <select 
+            <Select   
               className="filter-select"
               value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            >
-              {filtres.map((item) => (
-                <option key={item}>{item}</option>
-              ))}
-            </select>
-        </div>
+              onChange={(value) => setFilter(value)}
+              options={selectOptions}
+            />
       </div>
 
       <div className="market-content">
@@ -114,7 +131,7 @@ const MarketPage = () => {
             </thead>
             <tbody>
               {filteredData.map((coin, index) => (
-                <tr data-aos="fade-in" onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
+                <tr data-aos="fade-in" data-aos-once="false" onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
                   <td>{index + 1}</td>
                   <td>
                     <div className="coin-info">
@@ -149,7 +166,7 @@ const MarketPage = () => {
                     </button>
                   </div>}
       </div> 
-      <FloatButton.BackTop className="float-button"/>
+      <FloatButton.BackTop  className="float-button"/>
     </div>
   );
 };

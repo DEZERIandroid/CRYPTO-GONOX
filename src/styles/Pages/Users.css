@@ -218,18 +218,7 @@
 
 /* 1. Маленькие ноутбуки / большие планшеты (1024px - 1279px) */
 @media (max-width: 879px) {
-
-  .header-input {
-    width: 350px;
-    max-width: 350px;
-    height: 45px;
-  }
-
-  .header-input input {
-    height: 45px;
-    font-size: 16px;
-  }
-
+  
   .add-user-btn {
     padding: 10px 20px;
     font-size: 15px;
@@ -249,21 +238,6 @@
 
 /* 2. Планшеты в альбомной ориентации (768px - 1023px) */
 @media (max-width: 1023px) {
-  .header-title {
-    font-size: 22px;
-  }
-
-  .header-input {
-    width: 300px;
-    max-width: 300px;
-    height: 42px;
-    padding: 0 20px;
-  }
-
-  .header-input input {
-    height: 42px;
-    font-size: 15px;
-  }
 
   .input-icon {
     font-size: 19px;

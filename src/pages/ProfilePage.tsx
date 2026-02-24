@@ -244,7 +244,7 @@ const ProfilePage = () => {
 
       {isModalPhotoEditShow && (
         <div className="photo-modal-overlay">
-          <div className="photo-modal">
+          <div data-aos="zoom-in-down" data-aos-duration="150" className="photo-modal">
             <h2>Изменить фото</h2>
 
             <input

@@ -90,7 +90,8 @@ const UserPage = () => {
                   <span className="stat-label">Баланс крипты</span>
                   <span className="stat-value">
                     {user.portfolio && user.portfolio.length > 0 
-                      ? user.portfolio.reduce((sum, coin) => sum + (coin.amount * coin.buyPrice), 0).toFixed(2)
+                      ? user.portfolio.reduce((sum, coin) =>
+                         sum + (coin.cryptoPrice || 0), 0).toFixed(2)
                       : "0"} $
                   </span>
                 </div>

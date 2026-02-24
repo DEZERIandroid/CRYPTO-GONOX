@@ -121,6 +121,7 @@
   padding: 10px 15px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .crypto-item:hover {
@@ -132,6 +133,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 200px;
 }
 
 .crypto-left img {
@@ -148,6 +150,7 @@
 
 .crypto-right {
   text-align: right;
+  min-width: 100px;
 }
 
 .crypto-amount {
@@ -246,7 +249,6 @@
   .user-chart {
     padding: 20px;
   }
-
   .crypto-name {
     font-size: 14px;
   }
@@ -279,7 +281,7 @@
   .user-chart {
     padding: 15px;
   }
-
+  
   .crypto-item {
     padding: 8px 12px;
   }
@@ -312,7 +314,6 @@
     width: 28px;
     height: 28px;
   }
-
   .crypto-item {
     display: grid;
     grid-template-columns: 3fr 1fr ;

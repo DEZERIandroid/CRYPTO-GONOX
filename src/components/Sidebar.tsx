@@ -63,27 +63,27 @@ const Sidebar = () => {
           <Link data-aos="fade-in" to="/"
                 className={isHome ? "item-actived" : "item"}>
             <HomeIcon className="sidebar-icon"/>
-            <div className="nav-link" >Главная</div>
+            <div style={{color:isHome ? "white" : ""}} className="nav-link" >Главная</div>
           </Link>
           <Link data-aos="fade-in" to="/topusers" 
                 className={isUsers || isUsersTop ? "item-actived" : "item"}>
             <UsersIcon className="sidebar-icon"/>
-            <div className="nav-link">Пользователи</div>
+            <div style={{color:isUsers || isUsersTop ? "white" : ""}} className="nav-link">Пользователи</div>
           </Link>
           <Link data-aos="fade-in" to="/market" 
                 className={isMarket ? "item-actived" : "item"}>
             <MarketIcon className="sidebar-icon"/>
-            <div className="nav-link">Рынок</div>
+            <div style={{color:isMarket ? "white" : ""}} className="nav-link">Рынок</div>
           </Link>
           <Link data-aos="fade-in" to="/transactions" 
                 className={isTransactions ? "item-actived" : "item"}>
             <TransactionsIcon className="sidebar-icon"/>
-            <div className="nav-link">Транзакции</div>
+            <div style={{color:isTransactions ? "white" : ""}} className="nav-link">Транзакции</div>
           </Link>
           <Link data-aos="fade-in" to="/setting"
                 className={isSetting ? "item-actived" : "item"}>
             <SettingsIcon className="sidebar-icon"/>
-            <div className="nav-link">Настройки</div>
+            <div style={{color:isSetting ? "white" : ""}} className="nav-link">Настройки</div>
           </Link>
         </nav>
         <div data-aos="fade-in" className="sidebar-theme-toggle">

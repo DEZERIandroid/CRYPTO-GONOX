@@ -271,7 +271,7 @@ const CryptoPage = () => {
       </div>) : <div className="user-content crypto-content"> Ошибка загрузки данных</div> }
         {isModalOpenBuy && (
           <div className="buy-modal-overlay">
-            <div className="buy-modal">
+            <div data-aos="zoom-in" data-aos-duration="150" className="buy-modal">
               <h2>Покупка {coin.name}</h2>
               <p style={{textAlign:"right",}}
                  className="stat-value">Ваш баланс : 
@@ -301,7 +301,7 @@ const CryptoPage = () => {
 
         {isModalOpenSell && (
           <div className="buy-modal-overlay">
-            <div className="buy-modal">
+            <div data-aos="zoom-in" data-aos-duration="150" className="buy-modal">
               <h2>Продажа {coin.name}</h2>
               <p style={{textAlign:"right"}}>
                 У вас: {amountForSell ?? 0}

@@ -22,17 +22,16 @@ const AppRoutes = () => {
             <Route path="/login" element={<LoginPage/>} />
             <Route path="/register" element={<RegisterPage/>} />
 
+            <Route path="/market" element={<MarketPage/>} />
+            <Route path="/crypto/:id" element={<CryptoPage/>}/>
 
           <Route element = {<ProtectedRoute />}>
             <Route path="/profile" element={<ProfilePage/>} />
 
             <Route path="/users" element={<UsersPage/>} />
             <Route path="/user/:id" element={<UserPage/>} />            
-            <Route path="/topusers" element={<TopUsers/>} />            
-
-            <Route path="/market" element={<MarketPage/>} />
-            <Route path="/crypto/:id" element={<CryptoPage/>}/>
-
+            <Route path="/topusers" element={<TopUsers/>} />
+                                    
             <Route path="/transactions" element={<TransactionsPage/>} />
             <Route path="/setting" element={<SettingsPage/>} />
           </Route>

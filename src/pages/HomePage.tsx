@@ -183,6 +183,7 @@ const HomePage = () => {
                   role="tab"
                   aria-selected={filter === label}
                   aria-controls={`panel-${label}`}
+                  defaultValue={1}
                 >
                   {label}
                 </button>

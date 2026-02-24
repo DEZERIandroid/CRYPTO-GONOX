@@ -2,15 +2,25 @@ import { SearchOutlined } from "@ant-design/icons";
 import "../styles/Pages/Transactions.css";
 import { useGetTransactionsQuery, type Transaction } from "../app/api/UsersApi";
 import { useState,useMemo } from "react";
-import { FloatButton } from "antd";
+import { FloatButton, Select } from "antd";
 
 const TransactionsPage = () => {
-  const { data, isError } = useGetTransactionsQuery(undefined , {
+  const { data, isError, isLoading } = useGetTransactionsQuery(undefined , {
     pollingInterval:3000
   });
 
   const [searchQuery,setSearchQuery] = useState("")
+  const [filter,setFilter] = useState<string>("За всё время")
+  const [filterButton,setFilterButton] = useState("Все")
 
+  const filtres = ["За всё время","За неделю","За день"]
+
+  const selectOptions = filtres.map((item) => ({
+    value: item,
+    label: item,
+  }));
+
+  
   const sortedData = data
     ? [...data].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     : [];
@@ -31,6 +41,11 @@ const TransactionsPage = () => {
       );
     }, [sortedData, searchQuery]);
 
+    if (isLoading) return 
+    <div>
+      Загрузка
+    </div>
+
   return (
     <div className="page-container">
       <div className="page-header">
@@ -46,19 +61,29 @@ const TransactionsPage = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <select data-aos="fade-in" className="filter-select">
-            <option>За последний месяц</option>
-            <option>За неделю</option>
-            <option>За день</option>
-          </select>
+          <Select   
+              className="filter-select"
+              value={filter}
+              onChange={(value) => setFilter(value)}
+              options={selectOptions}
+          />
       </div>
 
-      <div className="transactions-container">
-        <div className="filters">
-          <button data-aos="fade-in" className="filter-btn active">Все</button>
-          <button data-aos="fade-in" className="filter-btn">Покупка</button>
-          <button data-aos="fade-in" className="filter-btn">Продажа</button>
-        </div>
+      <div data-aos="fadeIn" className="transactions-container">
+        <div className="filters" role="filterslist" aria-label="Фильтр Транзакций">
+              {["Все", "Покупка", "Продажа",].map((label) => (
+                <button
+                  key={label}
+                  className={`${filterButton === label ? "filter-btn-active" : "filter-btn"}`}
+                  onClick={() => setFilterButton(label)}
+                  role="filters"
+                  aria-selected={filterButton === label}
+                  defaultValue={1}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
 
         <div className="market-content">
           <div className="market-table transactions">
@@ -81,7 +106,17 @@ const TransactionsPage = () => {
                     return (
                       <tr data-aos="fade-in" key={`${item.timestamp}-${item.coinId}-${index}`}>
                         <td>{index + 1}</td>
-                        <td className="transactions-username">{item.Username}</td>
+                        <td className="transactions-username"> 
+                            {item.photoURL ? (
+                                  <img
+                                    src={item.photoURL}
+                                    alt={item.Username}
+                                    className="user-avatar-placeholder"
+                                  />
+                                ) : (
+                                  null
+                                )} {item.Username}
+                        </td>
                         <td className="transactions-imgSymbol">
                           <img className="transactions-img"
                             src={item.image}

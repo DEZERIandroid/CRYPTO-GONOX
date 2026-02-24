@@ -40,20 +40,26 @@
   color: #999;
 }
 
-.filters .filter-select {
-  background-color: #0e0d12;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-size: 16px;
+.filter-select{
+  width: 150px;
+}
+.filter-select .ant-select-selector {
+  background-color: #0e0d12 !important;
+  color: #fff !important;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  padding: 1px 16px !important;
+  font-size: 15px !important;
   cursor: pointer;
   outline: none;
+  width:150px ;
+}
+.filter-select .ant-select-arrow {
+  color: #fff !important;
+  opacity: 0.7;
 }
 
-.filters .filter-select option {
-  background-color: #141318;
-}
 
 @keyframes fadeIn {
   0%{opacity: 0;}  
@@ -155,6 +161,16 @@
 
 /* ===== Адаптивность ===== */
 
+@media (max-width: 1164px) {
+  .market-content {
+    padding-top: 35px;
+  }
+  .market-table th,
+  .market-table td {
+    padding: 17px 20px;
+  }
+} 
+
 @media (max-width: 768px) {
   .header-title {
     font-size: 22px;
@@ -187,12 +203,14 @@
   .filters .filter-select {
     padding: 8px 12px;
     font-size: 14px;
-    min-width: 120px;
+    min-width: 150px;
+    margin: -15px 0;
   }
 
   .market-content {
     padding: 20px;
     min-height: 400px;
+    padding-top: 5px;
   }
 
   .market-table table {
@@ -250,11 +268,13 @@
     padding: 7px 10px;
     font-size: 13px;
     min-width: 110px;
+    margin: -15px 0;
   }
 
   .market-content {
     padding: 16px;
     min-height: 360px;
+    padding-top: 9px ;
   }
 
   .market-table table {
