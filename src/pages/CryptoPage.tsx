@@ -77,7 +77,7 @@ const CryptoPage = () => {
       try {
         const result = await buyCrypto({
                           uid,coinId: id,amountCoins:Number(amountBuy),
-                          currentPrice:price,image,symbol,cryptoPrice,Username})
+                          currentPrice:price,image,symbol,cryptoPrice,Username,totalBuyPrice:totalBuy})
         if (result.error) {
           setUnSuccess(true);
           setBuyError(true)

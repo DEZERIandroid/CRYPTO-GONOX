@@ -27,7 +27,7 @@ const HomePage = () => {
   })
 
   
-  const [filter,setFilter] = useState<string>("Все")
+  const [filter,setFilter] = useState<string>("Топ-3")
   const [searchQuery] = useState<string>("")
   const navigate = useNavigate()
 
@@ -175,15 +175,14 @@ const HomePage = () => {
           </div>
           <div className="market-buttons">
             <div className="tabs" role="tablist" aria-label="Фильтр криптовалют">
-              {["Топ-10", "Растущие", "Падающие",].map((label) => (
+              {["Топ-3", "Растущие", "Падающие",].map((label) => (
                 <button
                   key={label}
+                  value={filter}
                   className={`tab ${filter === label ? "active" : ""}`}
                   onClick={() => setFilter(label)}
                   role="tab"
                   aria-selected={filter === label}
-                  aria-controls={`panel-${label}`}
-                  defaultValue={1}
                 >
                   {label}
                 </button>
@@ -212,7 +211,7 @@ const HomePage = () => {
 
         {/*=============== Расходы ================ */}
         <div className="block">
-          <div className="block-title" style={{marginBottom:"-30px"}}>Расходы</div>
+          <div className="block-title" style={{marginBottom:"-40px"}}>Расходы</div>
           <ExpensesPie data-aos="fade-up" data={expenses}/>
         </div>
 
@@ -254,7 +253,7 @@ const HomePage = () => {
 
         {/*=============== Топ пользователей ================ */}
         <div className="block" onClick={() => navigate("/topusers")}>
-          <div className="block-title">Топ пользователей</div>
+          <div className="block-title-topusers block-title">Топ пользователей</div>
              {isTopusersError === false ? (<ul className="topusers-list">
                   {sortedTopUsers.slice(0,3).map((user, index) => {
                     let balanceClass = "";

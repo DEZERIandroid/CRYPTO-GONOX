@@ -1,4 +1,4 @@
-import { SearchOutlined, LogoutOutlined,GoogleOutlined } from "@ant-design/icons";
+import { SearchOutlined, LogoutOutlined,GoogleOutlined, RiseOutlined, FallOutlined } from "@ant-design/icons";
 import { signOut } from "firebase/auth";
 import { auth, db} from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
@@ -96,19 +96,29 @@ const ProfilePage = () => {
       console.log(e);
     }
   };
+
+
+  function calcPercentChange(buyPrice:number, cryptoPrice:number) {
+    return ((cryptoPrice - buyPrice) / buyPrice) * 100;
+  }
   
   if (isLoading)
-      return (
-        <div className="page-container">
-          <div className="page-header">
-            <Skeleton.Input active style={{ width: 200, height: 32 }} />
-            <div className="header-actions">
-              <Skeleton.Input active style={{ width: 250, height: 32 }} />
-            </div>
+      return (<div className="page-container">
+        <div className="page-header">
+          <div className="header-title">
+            <div className="title-text">Профиль</div>
           </div>
-          <div className="user-content">
+          <div className="header-input">
+            <SearchOutlined className="input-icon" />
+            <input className="input" type="text" placeholder="Поиск" />
+          </div>
+        </div>
+
+          <div className="user-portfolio">
             <Skeleton active paragraph={{ rows: 6 }} />
           </div>
+
+
         </div>
       );
   
@@ -180,6 +190,13 @@ const ProfilePage = () => {
                     <div className="crypto-left">
                       <img src={coin.image} alt={coin.coinId} />
                       <span className="crypto-name">{coin.symbol}</span>
+                    </div>
+                    <div className="crypto-changes"
+                      style={{color:coin.totalBuyPrice >= coin.cryptoPrice ? "red" : "green"}}>
+                      {coin.totalBuyPrice ? (
+                        <span>{coin.cryptoPrice >= coin.totalBuyPrice ? (<RiseOutlined/>) : (<FallOutlined/>)} {calcPercentChange(coin.totalBuyPrice,coin.cryptoPrice).toFixed(2)} %</span>
+                      )
+                        : null}
                     </div>
                     <div className="crypto-right">
                       <div className="crypto-amount">

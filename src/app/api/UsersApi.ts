@@ -11,6 +11,7 @@ export interface User {
   role?: string;
   cryptoBalance?: number;
   portfolio?: any[];
+  settings?: any[] | undefined;
   favoritesCrypto?: any[];
   photoURL?: string;
   createdAt: string | null;
@@ -22,9 +23,17 @@ interface buyCrypto {
   amountCoins:number,
   currentPrice:number,
   cryptoPrice:number,
+  totalBuyPrice:number,
   image:any,
   symbol:string,
   Username:string | null,
+}
+interface Settings {
+  push:boolean,
+  theme:string,
+  language:string,
+  updatenow:boolean,
+  animation:boolean,
 }
 interface sellCrypto {
   uid:any,
@@ -74,6 +83,7 @@ export const usersApi = createApi({
               role?: string;
               cryptoBalance?: number;
               portfolio?: any[];
+              settings?:any[] | undefined;
               favoritesCrypto?:any[];
               photoURL?: string;
               createdAt?: Timestamp;
@@ -87,6 +97,7 @@ export const usersApi = createApi({
               role: data.role,
               cryptoBalance: data.cryptoBalance,
               portfolio: data.portfolio,
+              settings:data.settings || undefined,
               favoritesCrypto: data.favoritesCrypto,
               photoURL: data.photoURL,
               createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : null,
@@ -111,7 +122,7 @@ export const usersApi = createApi({
     buyCrypto:builder.mutation<void,buyCrypto>({
       async queryFn({uid,coinId,amountCoins,
                      currentPrice,cryptoPrice,
-                     image,symbol,Username}) {
+                     image,symbol,Username,totalBuyPrice}) {
         try {
           const userRef = doc(db, "users", uid);
           const userSnap = await getDoc(userRef);
@@ -148,6 +159,7 @@ export const usersApi = createApi({
               amount: amountCoins,
               buyPrice: currentPrice,
               cryptoPrice,
+              totalBuyPrice,
               timestamp: Date.now(),
               date: new Date().toISOString(),
               image,
@@ -287,6 +299,25 @@ export const usersApi = createApi({
         }
       },
     }),
+    getSettings:builder.query<Settings[],{uid:any}>({
+      providesTags:["Users"],
+      async queryFn({uid}) {
+        try {
+          const userSnap = await getDoc((doc(db,"users",uid)))
+          if (!userSnap.exists()) {
+            return { error: { status: 404, data: "User not found" } as any };
+          }
+
+          const data = userSnap.data()
+          const settings = data?.settings ?? []
+
+          return {data:settings}
+        } catch (error:any) {
+          console.error("Setting get error:", error);
+          return { error: {status:"SETTINGGET_ERROR", error: error.message}}
+        }
+      }
+    }),
     getCryptoForSell: builder.query<{ amount:number}, { userId: any; coinId: string }>({
       providesTags: ["Users"],
       async queryFn({ userId, coinId }) {
@@ -337,7 +368,7 @@ export const usersApi = createApi({
 });
 
 export const { useGetUsersQuery,useGetTransactionsQuery,
-               useGetTopUsersQuery,
+               useGetTopUsersQuery,useGetSettingsQuery,
 
               useBuyCryptoMutation,useGetCryptoForSellQuery,
               useSellCryptoMutation,useFavoriteCryptoMutation

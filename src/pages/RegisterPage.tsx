@@ -75,7 +75,14 @@ const RegisterPage = () => {
         cryptoTotalBalance:0,
         portfolio:[],
         createdAt: serverTimestamp(),
-        transactions:[]
+        transactions:[],
+        settings:[{
+          push:true,
+          theme:"Тёмная",
+          language:"Русский",
+          updatenow:true,
+          animation:true,
+        }],
       });
 
       dispatch(setUser({
@@ -85,8 +92,6 @@ const RegisterPage = () => {
         role: "user",
         balance:500,
         cryptoTotalBalance:0,
-        portfolio:[],
-        transactions:[],
       }));
 
       setEmail("");

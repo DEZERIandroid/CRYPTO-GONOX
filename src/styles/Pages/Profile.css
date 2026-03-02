@@ -111,6 +111,14 @@
   border-bottom: none;
 }
 
+.crypto-changes {
+  display: grid;
+  place-content: center;
+  font-weight: 700;
+  word-spacing: 0px;
+  min-width: 100px;
+}
+
 .label {
   color: #aaa;
   font-size: 16px;
@@ -347,11 +355,15 @@
     .profile-name {
       font-size: 18px;
     }
+    
+    .profile-info {
+      margin: -35px 0;
+    }
 
     .profile-email,
     .profile-role {
       font-size: 13px;
-      margin: -20px 0 -20px 0 ;
+      margin: -30px 0 ;
     }
 
     .label,
@@ -359,10 +371,8 @@
       font-size: 14px;
     }
 
-    .crypto-left{
-      min-width: 400px;
-    }
-    .crypto-right{
-      min-width: 100px;
+    .crypto-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }

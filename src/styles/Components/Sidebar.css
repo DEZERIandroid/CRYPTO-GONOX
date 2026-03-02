@@ -65,15 +65,15 @@
   color: white;
   animation: fadeIn 1.15s ease-in-out;
 }
-.user-edit{
+.user-change{
   font-size: 13.5px;
   padding: 5px 10px;
   border-radius: 12px;
   border: 1px solid #e4e4e49f;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out !important;
   color: white;
 }
-.user-edit:hover{
+.user-change:hover{
   border: 1px solid #ffffff;
 }
 
@@ -235,7 +235,7 @@
   }
 
   .user-name,
-  .user-edit{
+  .user-change{
       display: none;
   }
 
@@ -322,7 +322,7 @@
       height: 70px;
       margin-top: 0px;
     }
-    .user-edit{
+    .user-change{
       margin-top:10px;
       margin-bottom: -30px;
     }
@@ -367,7 +367,7 @@
       margin-top: -10px;
       margin-bottom: 0px;
     } 
-  .user-edit{
+  .user-change{
       margin-top:1px;
       margin-bottom: -35px;
     }
@@ -384,7 +384,7 @@
       margin-top: -10px;
       margin-bottom: 0px;
     } 
-  .user-edit{
+  .user-change{
       margin-top:1px;
       margin-bottom: -35px;
     }
@@ -406,7 +406,7 @@
   .user-name {
     margin-bottom: -30px;
   }
-  .user-edit{
+  .user-change{
     display: none;
   }
 }

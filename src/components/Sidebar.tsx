@@ -46,7 +46,7 @@ const Sidebar = () => {
               <div data-aos="fade-in" className="user-name">
                 {name || <Skeleton paragraph={false} active style={{ width: 80, height: 29 }} />}
               </div>
-              <button data-aos="fade-in" className="user-edit">Изменить</button>
+              <button data-aos="fade-in" className="user-change">Изменить</button>
             </div>
           ) : null
         ) : (

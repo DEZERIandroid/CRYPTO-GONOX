@@ -321,3 +321,37 @@
     font-size: 12px;
   }
 }
+
+@media (max-width:480px) {
+  .block:first-child{
+    margin-top: -35px;
+    height: 300px;
+  }
+  .market-buttons {
+    margin-top: 0px;
+  }
+  .market-list {
+    margin-top: -5px;
+    margin-bottom: -30px;
+  }
+
+  .transaction-list{
+    margin: -20px 0;
+  }
+
+  .block:nth-child(2){
+    height:300px ;
+  }
+
+  .block:nth-child(3),
+  .block:nth-child(4) {
+    height: 280px;
+  }
+
+  .topusers-list {
+    margin-top: -50px;
+  }
+  .block-title-topusers {
+    margin-bottom: -20px;
+  }
+}

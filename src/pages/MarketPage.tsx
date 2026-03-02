@@ -81,14 +81,42 @@ const MarketPage = () => {
 
   if (isLoading) return <div className="page-container">
       <div className="page-header">
-        <Skeleton.Input active style={{ width: 200, height: 32 }} />
-        <div className="header-actions">
-          <Skeleton.Input active style={{ width: 250, height: 32 }} />
+        <div className="header-title">
+          <div className="title-text">Рынок</div>
         </div>
+          <div className="header-input">
+            <SearchOutlined className="search-icon" />
+            <input
+              className="input"
+              type="text"
+              placeholder="Поиск криптовалюты..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+            <Select   
+              className="filter-select"
+              value={filter}
+              onChange={(value) => setFilter(value)}
+              options={selectOptions}
+            />
       </div>
 
       <div className="user-content">
-        <Skeleton active paragraph={{ rows: 6 }} />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
       </div>
     </div>
 
@@ -117,7 +145,7 @@ const MarketPage = () => {
       </div>
 
       <div className="market-content">
-        {!isError ? (<div className="market-table">
+        <div className="market-table">
           <table>
             <thead>
               <tr>
@@ -129,7 +157,7 @@ const MarketPage = () => {
                 <th>Объём (24ч)</th>
               </tr>
             </thead>
-            <tbody>
+            {!isError ? (<tbody>
               {filteredData.map((coin, index) => (
                 <tr data-aos="fade-in" data-aos-once="false" onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
                   <td>{index + 1}</td>
@@ -158,13 +186,14 @@ const MarketPage = () => {
                   <td>${(coin.total_volume / 1e9).toFixed(1)}B</td>
                 </tr>
               ))}
-            </tbody>
-          </table>
-        </div>) : <div className="error">Ошибка загрузки данных
+            </tbody>): 
+                  <div className="error">Ошибка загрузки данных
                     <button className="reload-btn" onClick={handleReloadChart}>
                               <ReloadOutlined/> Обновить
                     </button>
                   </div>}
+          </table>
+        </div> 
       </div> 
       <FloatButton.BackTop  className="float-button"/>
     </div>

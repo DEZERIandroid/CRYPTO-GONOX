@@ -2,7 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import "../styles/Pages/Transactions.css";
 import { useGetTransactionsQuery, type Transaction } from "../app/api/UsersApi";
 import { useState,useMemo } from "react";
-import { FloatButton, Select } from "antd";
+import { FloatButton, Select, Skeleton } from "antd";
 
 const TransactionsPage = () => {
   const { data, isError, isLoading } = useGetTransactionsQuery(undefined , {
@@ -41,10 +41,61 @@ const TransactionsPage = () => {
       );
     }, [sortedData, searchQuery]);
 
-    if (isLoading) return 
-    <div>
-      Загрузка
+    if (isLoading) return <div className="page-container">
+      <div className="page-header">
+        <div className="header-title">
+          <div className="title-text">Транзакции</div>
+        </div>
+          <div className="header-input">
+            <SearchOutlined className="search-icon" />
+            <input 
+              type="text"
+              placeholder="Поиск по адресу, ID или сумме" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <Select   
+              className="filter-select"
+              value={filter}
+              onChange={(value) => setFilter(value)}
+              options={selectOptions}
+          />
+      </div>
+      <div data-aos="fadeIn" className="transactions-container">
+        <div className="filters" role="filterslist" aria-label="Фильтр Транзакций">
+              {["Все", "Покупка", "Продажа",].map((label) => (
+                <button
+                  key={label}
+                  className={`${filterButton === label ? "filter-btn-active" : "filter-btn"}`}
+                  onClick={() => setFilterButton(label)}
+                  role="filters"
+                  aria-selected={filterButton === label}
+                >
+                  {label}
+                </button>
+              ))}
+        </div>
+      </div>
+
+      <div className="user-content">
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <br />
+      </div>
     </div>
+
 
   return (
     <div className="page-container">
@@ -78,12 +129,11 @@ const TransactionsPage = () => {
                   onClick={() => setFilterButton(label)}
                   role="filters"
                   aria-selected={filterButton === label}
-                  defaultValue={1}
                 >
                   {label}
                 </button>
               ))}
-            </div>
+      </div>
 
         <div className="market-content">
           <div className="market-table transactions">

@@ -1,19 +1,46 @@
 import { SearchOutlined } from "@ant-design/icons";
-import { Switch } from "antd";
+import { Select, Switch } from "antd";
 import "../styles/Pages/Setting.css";
+import { useState } from "react";
+import { useGetSettingsQuery } from "@/app/api/UsersApi";
+import { useAppSelector } from "@/hooks/reduxHooks";
 
 const SettingPage = () => {
+  const uid = useAppSelector(state => state.user.uid);
+
+  const {data} = useGetSettingsQuery(
+    { uid: uid }
+  )
+  const [theme,setTheme] = useState("Тёмная")
+  const [Language,setLanguage] = useState("Русский")
+
+  const themes = ["Тёмная","Белая","Зелёная","Синяя","Неоновая"]
+  const Languages = ["Русский","Английский"]
+
+  const selectOptionsTheme = themes.map((item) => ({
+    value: item,
+    label: item,
+  }));
+  const selectOptionsLanguage = Languages.map((item) => ({
+    value: item,
+    label: item,
+  }));
+
+  const settings = data
+  console.log(settings)
+
   return (
     <div className="page-container">
       {/* HEADER */}
       <div className="page-header">
         <h1 className="header-title">Настройки</h1>
 
-        <div className="header-actions">
-          <div className="search-box">
-            <SearchOutlined className="search-icon" />
-            <input placeholder="Поиск настроек" />
-          </div>
+        <div className="header-input">
+          <SearchOutlined className="input-icon" />
+          <input className="input"
+           type="text" 
+           placeholder="Поиск настроек"
+           />
         </div>
       </div>
 
@@ -21,13 +48,13 @@ const SettingPage = () => {
       <div className="market-content">
         {/* УВЕДОМЛЕНИЯ */}
         <div data-aos="fade-in" className="settings-section">
-          <h3 className="settings-section-title">Уведомления</h3>
+          <h3 className="settings-section-title">Приватность и уведомления</h3>
 
           <div className="settings-item">
             <div data-aos="fade-in"className="settings-item-info">
-              <span className="settings-item-label">Email-уведомления</span>
+              <span className="settings-item-label">Приватность</span>
               <span className="settings-item-desc">
-                Получать уведомления о транзакциях
+                Скрыть портфолио от других пользователей
               </span>
             </div>
             <Switch defaultChecked />
@@ -55,10 +82,12 @@ const SettingPage = () => {
                 Выбор оформления сайта
               </span>
             </div>
-            <select data-aos="fade-in" className="settings-select">
-              <option>Тёмная</option>
-              <option>Светлая</option>
-            </select>
+            <Select 
+              className="theme-select"
+              value={theme}
+              onChange={(value) => setTheme(value)}
+              options={selectOptionsTheme}
+            />
           </div>
 
           <div className="settings-item">
@@ -68,10 +97,12 @@ const SettingPage = () => {
                 Язык интерфейса
               </span>
             </div>
-            <select data-aos="fade-in" className="settings-select">
-              <option>Русский</option>
-              <option>English</option>
-            </select>
+            <Select
+              className="theme-select"
+              value={Language}
+              onChange={(value) => setLanguage(value)}
+              options={selectOptionsLanguage}
+            />
           </div>
         </div>
 
