@@ -102,7 +102,19 @@ const MarketPage = () => {
             />
       </div>
 
-      <div className="user-content">
+      <div className="market-content">
+        <div className="market-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Криптовалюта</th>
+                <th>Цена</th>
+                <th>Изменение за 24ч</th>
+                <th>Рыночная капитализация</th>
+                <th>Объём (24ч)</th>
+              </tr>
+            </thead>
+        </div>
         <Skeleton avatar paragraph={{ rows: 1 }} />
         <br />
         <Skeleton avatar paragraph={{ rows: 1 }} />

@@ -76,6 +76,8 @@
   border-radius: 20px;
   display: inline-block;
   width: fit-content;
+  margin: 15px;
+  margin-top: -15px;
 }
 .profile-role-user {
   color: #67c23a;
@@ -86,6 +88,8 @@
   border-radius: 20px;
   display: inline-block;
   width: fit-content;
+  margin: 15px;
+  margin-top: -15px;
 }
 
 .profile-details {
@@ -141,15 +145,17 @@
   padding: 12px 24px;
   background: #f5222d;
   color: white;
-  border: none;
+  border: 1px solid #00000000;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease !important;
 }
 .logout-button:hover {
-  background: #d91b26;
+  background-color: #1d0707;
+  color: white;
+  border:1px solid #ff2d2d;
 }
 
 .google-add {
@@ -358,6 +364,13 @@
     
     .profile-info {
       margin: -35px 0;
+    }
+
+    .profile-role-admin {
+      margin-bottom: 10px;
+    }
+    .profile-role-user {
+      margin-bottom: 30px;
     }
 
     .profile-email,

@@ -46,6 +46,17 @@ const TopUsers = () => {
         </div>
       </div>
       <div className="topusers-content">
+        <div className="topusers-table">
+          <table>
+          <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Пользователь</th>
+                    <th>Баланс</th>
+                  </tr>
+          </thead>
+          </table>
+        </div>
         <ul className="transactions-list">
             {[...Array(5)].map((_, index) => (
               <li className="list-item" key={index}>

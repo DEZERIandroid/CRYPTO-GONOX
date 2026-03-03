@@ -192,9 +192,16 @@ const ProfilePage = () => {
                       <span className="crypto-name">{coin.symbol}</span>
                     </div>
                     <div className="crypto-changes"
-                      style={{color:coin.totalBuyPrice >= coin.cryptoPrice ? "red" : "green"}}>
+                      style={{
+                        color:
+                          coin.totalBuyPrice - coin.cryptoPrice === 0
+                            ? "blue"
+                            : coin.totalBuyPrice >= coin.cryptoPrice
+                            ? "red"
+                            : "green",
+                      }}>
                       {coin.totalBuyPrice ? (
-                        <span>{coin.cryptoPrice >= coin.totalBuyPrice ? (<RiseOutlined/>) : (<FallOutlined/>)} {calcPercentChange(coin.totalBuyPrice,coin.cryptoPrice).toFixed(2)} %</span>
+                        <span>{coin.totalBuyPrice - coin.cryptoPrice == 0 ? (<></>) : coin.cryptoPrice >= coin.totalBuyPrice ? (<RiseOutlined/>) : (<FallOutlined/>)} {calcPercentChange(coin.totalBuyPrice,coin.cryptoPrice).toFixed(2)} %</span>
                       )
                         : null}
                     </div>

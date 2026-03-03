@@ -55,37 +55,37 @@ const CoinChartWithControls: React.FC<CoinChartWithControlsProps> = ({ coinId })
           className={timeRange === 1 ? "active" : ""}
           onClick={() => handleTimeRangeChange(1)}
         >
-          1D
+          1 день
         </button>
         <button
           className={timeRange === 7 ? "active" : ""}
           onClick={() => handleTimeRangeChange(7)}
         >
-          7D
+          7 дней
         </button>
         <button
           className={timeRange === 30 ? "active" : ""}
           onClick={() => handleTimeRangeChange(30)}
         >
-          30D
+          30 дней
         </button>
         <button
           className={timeRange === 90 ? "active" : ""}
           onClick={() => handleTimeRangeChange(90)}
         >
-          3M
+          3 месяца
         </button>
         <button
           className={timeRange === 365 ? "active" : ""}
           onClick={() => handleTimeRangeChange(365)}
         >
-          1Y
+          1 год
         </button>
         <button
           className={timeRange === "max" ? "active" : ""}
           onClick={() => handleTimeRangeChange("max")}
         >
-          All
+          Все
         </button>
       </div>
 

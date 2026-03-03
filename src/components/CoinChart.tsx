@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -24,33 +24,125 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
     timeLabel: new Date(item.time).toLocaleDateString("ru-RU"),
   }));
 
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
   return (
     <ResponsiveContainer width="100%" height={270}>
-      <LineChart data={formattedData}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-        <XAxis
-          dataKey="timeLabel"
-          tick={{ fill: "#ccc" }}
+      <AreaChart data={formattedData}>
+        <defs>
+          {/* Основной глубокий градиент */}
+          <linearGradient id="deepBlueGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2d81ff" stopOpacity={0.65} />
+            <stop offset="40%" stopColor="#1b4ed8" stopOpacity={0.45} />
+            <stop offset="100%" stopColor="#0f172a" stopOpacity={0.2} />
+          </linearGradient>
+
+          {/* Линия с переливом */}
+          <linearGradient id="lineBlueGradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#4da3ff" />
+            <stop offset="50%" stopColor="#2d81ff" />
+            <stop offset="100%" stopColor="#1b4ed8" />
+          </linearGradient>
+
+          {/* Neon Glow */}
+          <filter id="neonGlow">
+            <feGaussianBlur stdDeviation="6" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <CartesianGrid
+          stroke="#1e293b"
+          strokeDasharray="3 3"
+          vertical={false}
         />
-        <YAxis className="Yaxic"
-          domain={["auto", "auto"]}
-          tick={{ fill: "#ccc" }}
-          tickFormatter={(value) => `$${value}`}
-        />
+
+        {!isMobile && (
+          <XAxis
+            dataKey="timeLabel"
+            tick={{ fill: "#64748b", fontSize: 12 }}
+            axisLine={{ stroke: "#1e293b" }}
+            tickLine={false}
+          />
+        )}
+        
+          <YAxis
+            domain={["auto", "auto"]}
+            tick={{ fill: "#64748b", fontSize: 12 }}
+            axisLine={false}
+            hide={isMobile}
+            tickLine={false}
+            tickFormatter={(value) => `$${value}`}
+          />
+
         <Tooltip
-          formatter={(value) => [`$${Number(value).toFixed(2)}`, "Цена"]}
-          labelFormatter={(label) => new Date(label).toLocaleString("ru-RU")}
-          contentStyle={{ backgroundColor: "#141318", border: "none", color: "#fff" }}
+          content={({ active, payload }) => {
+            if (active && payload && payload.length) {
+              return (
+                <div
+                  style={{
+                    backdropFilter: "blur(12px)",
+                    background: "rgba(15, 23, 42, 0.8)",
+                    padding: "14px 18px",
+                    borderRadius: "16px",
+                    border: "1px solid rgba(45,129,255,0.5)",
+                    boxShadow:
+                      "0 0 3px rgba(45,129,255,0.3)",
+                    color: "#fff",
+                  }}
+                >
+                  <p style={{ color: "#94a3b8", fontSize: 12 }}>
+                    {payload[0].payload.timeLabel}
+                  </p>
+                  <p
+                    style={{
+                      color: "#2d81ff",
+                      fontSize: 18,
+                      fontWeight: 700,
+                    }}
+                  >
+                    ${Number(payload[0].value).toFixed(2)}
+                  </p>
+                </div>
+              );
+            }
+            return null;
+          }}
         />
-        <Line
+
+        <Area
           type="monotone"
           dataKey="price"
-          stroke="#2d81ff"
-          strokeWidth={2}
+          stroke="url(#lineBlueGradient)"
+          strokeWidth={2.5}
+          fill="url(#deepBlueGradient)"
           dot={false}
-          activeDot={{ r: 6, fill: "#fff", stroke: "#2d81ff", strokeWidth: 2 }}
+          filter="url(#neonGlow)"
+          isAnimationActive={true}
+          animationDuration={1400}
+          activeDot={{
+            r: 7,
+            fill: "#2d81ff",
+            stroke: "#fff",
+            strokeWidth: 2,
+          }}
         />
-      </LineChart>
+      </AreaChart>
     </ResponsiveContainer>
   );
 };

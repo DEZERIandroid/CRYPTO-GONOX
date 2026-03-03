@@ -4,7 +4,8 @@ import { useGetCoinQuery } from "../app/api/CryptoApi";
 import { Skeleton } from "antd";
 import { RiseOutlined, FallOutlined,StarOutlined,
          ShoppingCartOutlined,SwapOutlined, ArrowLeftOutlined, 
-         StarFilled} from "@ant-design/icons";
+         StarFilled,
+         SearchOutlined} from "@ant-design/icons";
 import "../styles/Pages/Crypto.css";
 import CoinChartWithControls from "../components/CoinChartWithControls";
 import { useBuyCryptoMutation,useSellCryptoMutation, useGetCryptoForSellQuery, useFavoriteCryptoMutation } from "../app/api/UsersApi";
@@ -31,7 +32,9 @@ const CryptoPage = () => {
   
   const amountForSell = cryptoforsell?.amount ?? 0
 
-  const { data: coin, isLoading:isCoinLoading, isError:isCoinError, } = useGetCoinQuery(id ?? skipToken);
+  const { data: coin, isLoading:isCoinLoading, isError:isCoinError, } = useGetCoinQuery(id ?? skipToken, {
+    pollingInterval:250000
+  });
   const [buyCrypto,{isLoading:isBuying}] = useBuyCryptoMutation()
   const [sellCrypto,{isLoading:isSelling}] = useSellCryptoMutation()
   const [favoriteCrypto] = useFavoriteCryptoMutation()
@@ -201,12 +204,14 @@ const CryptoPage = () => {
     <div className="page-container">
       <div className="page-header">
         <div className="header-title">
-          <span className="title-text">{coin.name}</span>
+          <div className="title-text">{coin.id}</div>
         </div>
-        <div className="header-actions">
-          <div className="header-input">
-            <input type="text" placeholder={`Поиск по ${coin.name}...`} />
-          </div>
+        <div className="header-input">
+          <SearchOutlined className="input-icon" />
+          <input className="input"
+           type="text" 
+           placeholder="Поиск"
+           />
         </div>
       </div>
 
@@ -217,23 +222,27 @@ const CryptoPage = () => {
         </button>
         </div>
         <div data-aos="fade-in" className="coin-header">
-          <div className="coin-logo">
-            <img src={image} alt={coin.name} />
-          </div>
-          <div className="coinCryptos-info">
-            <div className="infoCrypto-text">
-              <h2>
-                <span>{coin.name}</span> 
-                <span>({coin.symbol?.toUpperCase()})</span>
-              </h2>
-              <div className="price-change">
-                <p className="coin-price">{price ? `$${price.toLocaleString()}` : "-"}</p>
-                <p className={change && change >= 0 ? "change-positive" : "change-negative"}>
-                  {change && change >= 0 ? <RiseOutlined /> : <FallOutlined />}
-                  {change ? `${Math.abs(change).toFixed(2)}%` : "-"}
-                </p>
+              <div className="coin-logo">
+                <img src={image} alt={coin.name} />
+              </div>
+              <div className="coinCryptos-info">
+                <div className="infoCrypto-text">
+                  <h2>
+                    <span>{coin.name}</span> 
+                    <span>({coin.symbol?.toUpperCase()})</span>
+                  </h2>
+                  <div className="price-change">
+                  <p className="coin-price">{price ? `$${price.toLocaleString()}` : "-"}</p>
+                  <p className={
+                    change === 0 ? "change-zero" : change > 0 ? "change-positive" : "change-negative"
+                  }>
+                    {change > 0 ? <RiseOutlined /> : change < 0 ? <FallOutlined /> : null}
+                    {change !== undefined ? `${Math.abs(change).toFixed(2)}%` : "-"}
+                  </p>
+                </div>
               </div>
             </div>
+          
 
             <div className="coin-actions">
               <button onClick={openBuyModal} className="coin-btn buy">
@@ -248,7 +257,7 @@ const CryptoPage = () => {
               </button>
             </div>
           </div>
-        </div>
+        
 
         <div className="coin-stats">
           <div data-aos="fade-in" className="stat-block">

@@ -78,7 +78,20 @@ const TransactionsPage = () => {
         </div>
       </div>
 
-      <div className="user-content">
+      <div className="market-content">
+          <div className="market-table transactions">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Пользователь</th>
+                  <th>Актив</th>
+                  <th>Количество</th>
+                  <th>Цена покупки</th>
+                  <th>Дата</th>
+                  <th>Тип</th>
+                </tr>
+              </thead>
+          </div>
         <Skeleton avatar paragraph={{ rows: 1 }} />
         <br />
         <Skeleton avatar paragraph={{ rows: 1 }} />

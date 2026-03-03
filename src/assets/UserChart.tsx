@@ -24,7 +24,7 @@ const CustomTooltip = ({ active, payload, label }:CustomTooltipProps) => {
   return (
     <div
       style={{
-        backgroundColor: "rgba(30, 30, 40, 0.95)",
+        backgroundColor: "rgba(33, 40, 30, 0.95)",
         border: "1px solid rgba(255,255,255,0.08)",
         backdropFilter: "blur(8px)",
         borderRadius: "12px",
