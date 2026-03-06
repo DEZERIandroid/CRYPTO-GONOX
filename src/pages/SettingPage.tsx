@@ -2,15 +2,10 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Select, Switch } from "antd";
 import "../styles/Pages/Setting.css";
 import { useState } from "react";
-import { useGetSettingsQuery } from "@/app/api/UsersApi";
-import { useAppSelector } from "@/hooks/reduxHooks";
 
 const SettingPage = () => {
-  const uid = useAppSelector(state => state.user.uid);
 
-  const {data} = useGetSettingsQuery(
-    { uid: uid }
-  )
+  
   const [theme,setTheme] = useState("Тёмная")
   const [Language,setLanguage] = useState("Русский")
 
