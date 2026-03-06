@@ -26,8 +26,6 @@ const SettingPage = () => {
     label: item,
   }));
 
-  const settings = data
-  console.log(settings)
 
   return (
     <div className="page-container">

@@ -57,13 +57,13 @@ const TopUsers = () => {
           </thead>
           </table>
         </div>
-        <ul className="transactions-list">
+        <ul className="topusers-list" style={{marginTop:"-250px"}}>
             {[...Array(5)].map((_, index) => (
               <li className="list-item" key={index}>
-                <Skeleton.Avatar active size="small" shape="square" style={{ width: 24, height: 24 }} />
-                <Skeleton.Input active size="small" style={{ width: 60, marginLeft: 12 }} />
-                <Skeleton.Input active size="small" style={{ width: 80, marginLeft: 12 }} />
-                <Skeleton.Input active size="small" style={{ width: 70, marginLeft: 12 }} />
+                <Skeleton.Button active size="small" style={{marginLeft:-50 }} />
+                <Skeleton.Avatar active size="large" shape="circle" style={{ width: 35, height: 35, marginLeft:-100}} />
+                <Skeleton.Input active size="small" style={{ width: 150, marginLeft:-70 }} />
+                <Skeleton.Input active size="small" style={{ width: 0, marginLeft: 12 }} />
               </li>
             ))}
           </ul>

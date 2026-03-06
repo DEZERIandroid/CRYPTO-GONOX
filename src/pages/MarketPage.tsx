@@ -104,6 +104,7 @@ const MarketPage = () => {
 
       <div className="market-content">
         <div className="market-table">
+          <table>
             <thead>
               <tr>
                 <th>#</th>
@@ -114,6 +115,7 @@ const MarketPage = () => {
                 <th>Объём (24ч)</th>
               </tr>
             </thead>
+          </table>
         </div>
         <Skeleton avatar paragraph={{ rows: 1 }} />
         <br />
