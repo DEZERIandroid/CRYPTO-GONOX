@@ -55,13 +55,15 @@ const Sidebar = () => {
         {isAuthChecked ? (
           user ? (
             <div className="user">
-              <Link data-aos="fade-in" to="/profile">
+              <div className="avatar-container">
+              <Link  data-aos="fade-in" to="/profile">
                 {user.photoURL ? (
                   <img className="user-avatar" src={photoURL} alt="Аватар" />
                 ) : (
                   <Skeleton.Avatar active style={{ width: "90px", height: "90px" }} />
                 )}
               </Link>
+              </div>
               <div data-aos="fade-in" className="user-name">
                 {name || <Skeleton paragraph={false} active style={{ width: 80, height: 29 }} />}
               </div>

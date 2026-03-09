@@ -70,8 +70,8 @@ const UserPage = () => {
           </div>
         </div>
 
-        <div data-aos="fade-in" className="user-stats">
-          <div className="stat-block">
+        <div data-aos="fade-in" className="user-stats" style={{marginBottom:30}}>
+          <div className="stat-block" style={{marginBottom:5}}>
             <span className="stat-label">Дата регистрации</span>
             <span className="stat-value">
               {user.createdAt

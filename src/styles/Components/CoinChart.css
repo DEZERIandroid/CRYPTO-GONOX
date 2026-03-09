@@ -118,7 +118,7 @@
     grid-template-columns: 1fr 1fr 1fr;
   }
   .chart-controls button {
-    padding: 10px 20px;
+    padding: 10px 19px;
     font-size: 12px;
   }
   .chart-wrapper {
@@ -139,7 +139,7 @@
     grid-template-columns: 1fr 1fr 1fr;
   }
   .chart-controls button {
-    padding: 10px 18px;
+    padding: 10px 17px;
     font-size: 12px;
   }
   .chart-wrapper {
@@ -159,7 +159,7 @@
     grid-template-columns: 1fr 1fr 1fr;
   }
   .chart-controls button {
-    padding: 10px 11px;
+    padding: 10px 10px;
     font-size: 12px;
   }
   .chart-wrapper {

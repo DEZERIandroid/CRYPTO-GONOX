@@ -265,7 +265,6 @@ const HomePage = () => {
                       <li data-aos="fade-in"
                           className="topusers-item list-item"
                           key={user.id}>
-                          <div className="place-item">{index + 1}</div>
                           {user.photoURL ? (
                             <img
                             src={user.photoURL}

@@ -72,15 +72,16 @@
 
 .transactions th:first-child,
 .transactions td:first-child {
-  padding: 5px 5px;
+  padding: 5px 0px;
 }
 .transactions th:nth-child(2),
 .transactions td:nth-child(2) {
-  padding: 5px 5px;
+  max-width:30px;
+  padding: 15px 20px;
 }
 .transactions th:nth-child(3),
 .transactions td:nth-child(3) {
-  max-width: 70px;
+  padding: 5px 5px;
 }
 .transactions th:nth-child(4),
 .transactions td:nth-child(4),
@@ -100,10 +101,15 @@
   border-radius: 50%;
   margin: 0 auto;
 }
+.transactions-imgSymbol{
+  text-align: start;
+}
 .transactions-symbol {
+  display: grid;
+  place-content: center;
   margin-bottom: -10px;
   font-size: 13px;
-  text-align: center;
+  text-align: start;
   color: #bbb9b9;
 }
 .transactions-buyPrice {
@@ -120,9 +126,28 @@
     margin: 20px 300px;
   }
 }
+@media (max-width:1700px) {
+  .transactions th:nth-child(2),
+  .transactions td:nth-child(2) {
+    max-width:55px;
+    padding: 15px 25px;
+  }
+}
+@media (max-width:1600px) {
+  .transactions th:nth-child(2),
+  .transactions td:nth-child(2) {
+    max-width:75px;
+    padding: 15px 25px;
+  }
+}
 @media (max-width:1550px) {
   .filters {
     margin: 20px 150px;
+  }
+  .transactions th:nth-child(2),
+  .transactions td:nth-child(2) {
+    max-width:105px;
+    padding: 15px 25px;
   }
 }
 @media (max-width: 1279px) {
@@ -146,7 +171,11 @@
     padding: 8px 12px;
     font-size: 13px;
   }
-
+  .transactions th:nth-child(2),
+  .transactions td:nth-child(2) {
+    max-width:85px;
+    padding: 15px 25px;
+  }
 }
 
 @media (max-width: 767px) {

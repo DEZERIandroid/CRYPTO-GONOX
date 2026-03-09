@@ -83,8 +83,8 @@ const TransactionsPage = () => {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Пользователь</th>
                   <th>Актив</th>
+                  <th>Пользователь</th>
                   <th>Количество</th>
                   <th>Цена покупки</th>
                   <th>Дата</th>
@@ -154,8 +154,8 @@ const TransactionsPage = () => {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Пользователь</th>
                   <th>Актив</th>
+                  <th>Пользователь</th>
                   <th>Количество</th>
                   <th>Цена покупки</th>
                   <th>Дата</th>
@@ -169,6 +169,15 @@ const TransactionsPage = () => {
                     return (
                       <tr data-aos="fade-in" key={`${item.timestamp}-${item.coinId}-${index}`}>
                         <td>{index + 1}</td>
+                        <td className="transactions-imgSymbol">
+                          <img className="transactions-img"
+                            src={item.image}
+                            alt={item.symbol}
+                          />
+                          <div className="transactions-symbol">
+                            {item.symbol}
+                          </div>
+                        </td>
                         <td className="transactions-username"> 
                             {item.photoURL ? (
                                   <img
@@ -179,15 +188,6 @@ const TransactionsPage = () => {
                                 ) : (
                                   null
                                 )} {item.Username}
-                        </td>
-                        <td className="transactions-imgSymbol">
-                          <img className="transactions-img"
-                            src={item.image}
-                            alt={item.symbol}
-                          />
-                          <div className="transactions-symbol">
-                            {item.symbol}
-                          </div>
                         </td>
                         <td className="transactions-amount">{item.amount}</td>
                         <td className="transactions-buyPrice">${total.toFixed(2)}</td>

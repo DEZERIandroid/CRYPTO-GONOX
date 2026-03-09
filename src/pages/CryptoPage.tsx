@@ -86,7 +86,7 @@ const CryptoPage = () => {
           setTimeout(() => setBuyError(false), 4500);
           setTimeout(() => setUnSuccess(false), 1500);
         } else {
-          buyModal.closeModal
+          buyModal.closeModal()
           setAmountCoins("")
           setSuccess(true)
           setTimeout(() => setSuccess(false), 1500);
@@ -118,7 +118,7 @@ const CryptoPage = () => {
         setTimeout(() => setSellError(false), 4500);
         setTimeout(() => setUnSuccess(false), 1500);
       } else {
-        sellModal.closeModal
+        sellModal.closeModal()
         setAmountCoins("")
         setSuccess(true)
         setTimeout(() => setSuccess(false), 1500);
@@ -337,7 +337,7 @@ const CryptoPage = () => {
         )}
 
         {success && (
-          <div className="modal-buysell">
+          <div data-aos="fade-down" className="modal-buysell">
             <div>
               Успешно
             </div>
@@ -345,7 +345,7 @@ const CryptoPage = () => {
         )}
 
         {unSuccess && (
-          <div className="modal-buysell-error">
+          <div data-aos="fade-down" className="modal-buysell-error">
             <div>
               Не успешно
             </div>

@@ -32,8 +32,8 @@
   transition: all 0.2s ease-in-out;
 }
 
-.user-info-avatar:hover {
-  box-shadow: 0 0px 15px rgb(0, 88, 219);
+.user-info-avatar-cont img:hover {
+  background-size: 50% auto;
 }
 
 .user-info {

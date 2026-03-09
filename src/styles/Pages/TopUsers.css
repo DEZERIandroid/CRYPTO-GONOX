@@ -51,6 +51,13 @@
   max-width: 200px;
 }
 
+.topusers-table tr {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.topusers-table tr:nth-child(-n+3) {
+  border-bottom: none;
+}
+
 .topusers-table th:nth-child(-n+3),
 .topusers-table td:nth-child(-n+3) {
   border-bottom: none;
@@ -71,8 +78,18 @@
   font-weight: 700;
 }
 
+.topusers-table tbody tr{
+  border-left:1px solid #14131800;
+  border-right:1px solid #14131800;
+}
+.topusers-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-left: 1px solid #ffffffbd;
+  border-right: 1px solid #ffffffbd;
+}
+
 .topusers-table tbody tr:nth-child(1) {
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.18), transparent);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.35), transparent);
   border-left: 4px solid #d4af37;
   transition: all 0.1s ease-in;
 }
@@ -81,7 +98,7 @@
 }
 
 .topusers-table tbody tr:nth-child(2) {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.14), transparent);
+  background: linear-gradient(90deg, rgba(192, 192, 192, 0.35), transparent);
   border-left: 4px solid #c0c0c0;
   transition: all 0.1s ease-in;
 }
@@ -90,7 +107,7 @@
 }
 
 .topusers-table tbody tr:nth-child(3) {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.14), transparent);
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.35), transparent);
   border-left: 4px solid #cd7f32;
   transition: all 0.1s ease-in;
 }
@@ -101,9 +118,7 @@
 .topusers-table tbody tr:nth-child(-n+3) td {
   font-weight: 600;
 }
-.topusers-table tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.04) !important;
-}
+
 
 
 
@@ -115,24 +130,24 @@
 }
 .topusers-item{
   display: grid;
-  grid-template-columns: 1fr 3fr 6fr 0fr;
+  grid-template-columns: 3fr 6fr 0fr;
   padding: 0 10px 0 10px;
   margin-top: 5px;
   text-align: start;
 }
 
 .topusers-item:nth-child(1) {
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), transparent);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.486), transparent);
   border-left: 3px solid #d4af37;
   transition: all 0.1s ease-in;
 }
 .topusers-item:nth-child(2) {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.12), transparent);
+  background: linear-gradient(90deg, rgba(192, 192, 192, 0.486), transparent);
   border-left: 3px solid #c0c0c0;
   transition: all 0.1s ease-in;
 }
 .topusers-item:nth-child(3) {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.12), transparent);
+  background: linear-gradient(90deg, rgba(205, 128, 50, 0.486), transparent);
   border-left: 3px solid #cd7f32;
   transition: all 0.1s ease-in;
 }
@@ -220,17 +235,21 @@
   }
 
   .topusers-table tbody tr:nth-child(1) {
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0.28), transparent);
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.55), transparent);
   } 
   .topusers-table tbody tr:nth-child(2) {
-    background: linear-gradient(90deg, rgba(192, 192, 192, 0.24), transparent);
+    background: linear-gradient(90deg, rgba(192, 192, 192, 0.55), transparent);
   } 
   .topusers-table tbody tr:nth-child(3) {
-     background: linear-gradient(90deg, rgba(205, 127, 50, 0.26), transparent);
+    background: linear-gradient(90deg, rgba(205, 127, 50, 0.55), transparent);
   } 
 
   .user-avatar-placeholder {
     width: 40px;
     height: 40px;
+  }
+  .topusers-item {
+    height: 55px;
+    width: 330px;
   }
 }
