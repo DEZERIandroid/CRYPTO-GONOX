@@ -22,7 +22,7 @@ const Sidebar = () => {
   const [watchingPass,setWatchingPass] = useState(false)
   const [emails, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const mainModal = useCloseModal(200)
+  const mainModal = useCloseModal(100)
   const addModal = useCloseModal(150)
   
   const user = users?.find((u) => u.email === email); 

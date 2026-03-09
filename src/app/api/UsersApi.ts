@@ -31,6 +31,7 @@ interface buyCrypto {
 interface Settings {
   push:boolean,
   theme:string,
+  privates:false,
   language:string,
   updatenow:boolean,
   animation:boolean,

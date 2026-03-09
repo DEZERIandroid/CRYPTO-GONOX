@@ -12,6 +12,7 @@ import { linkGoogleProvider } from "@/hooks/useGoogle";
 import { useAppSelector } from "../hooks/reduxHooks";
 import { CameraFilled } from "@ant-design/icons";
 import { useEffect,useState } from "react";
+import { useCloseModal } from "@/hooks/useCloseModal";
 
 import "../styles/Pages/Profile.css"
 
@@ -20,13 +21,13 @@ const ProfilePage = () => {
   const navigate = useNavigate()
   const { email, name, role } = useAppSelector(state => state.user);
   const { data: users, isLoading, isError, refetch } = useGetUsersQuery(undefined, {
-    pollingInterval:3000
+    pollingInterval:500
   });
-  const [isModalPhotoEditShow,setIsModalPhotoEditShow] = useState(false)
   const [editPhotoURL,setEditPhotoURL] = useState("")
   const [succesGoogle,setSuccesGoogle] = useState(false)
   const user = users?.find((u) => u.email === email); 
   const photoURL = user?.photoURL
+  const modal = useCloseModal(200)
 
   const coinIds = user?.portfolio?.map((coin) => coin.coinId).filter(Boolean) || [];
   const { data: pricesData } = useGetCoinsPriceQuery(coinIds, {
@@ -71,16 +72,13 @@ const ProfilePage = () => {
     }
   }, [user?.id, user?.portfolio, pricesData]);
 
-  const avatarEdit = () => {
-    setIsModalPhotoEditShow(true)
-  }
 
   const handleSaveEditPhoto = () => {
     if (editPhotoURL.trim() !== "" && editPhotoURL.length >= 10 && user?.id) {
       updateDoc(doc(db,"users",user.id), {
         photoURL:editPhotoURL
       })
-      setIsModalPhotoEditShow(false)
+       modal.closeModal
       setEditPhotoURL("")
     }
   }
@@ -148,7 +146,7 @@ const ProfilePage = () => {
       <div className="profile-content">
         <div className="profile">
           <div className="profile">
-            <div data-aos="fade-in" className="profile-avatar" onClick={avatarEdit}>
+            <div data-aos="fade-in" className="profile-avatar" onClick={modal.openModal}>
               <img src={photoURL} alt="" />
               <CameraFilled className="avatar-edit"/>
             </div>
@@ -266,9 +264,9 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      {isModalPhotoEditShow && (
-        <div className="photo-modal-overlay">
-          <div data-aos="zoom-in-down" data-aos-duration="150" className="photo-modal">
+      {modal.isOpen && (
+        <div className={`photo-modal-overlay ${modal.isClosing ? "closing" : "" }`}>
+          <div data-aos="zoom-in-down" data-aos-duration="150" className={`photo-modal ${modal.isClosing ? "closing" : ""} `}>
             <h2>Изменить фото</h2>
 
             <input
@@ -284,7 +282,7 @@ const ProfilePage = () => {
               </button>
               <button
                 className="photo-modal-cancel"
-                onClick={() => setIsModalPhotoEditShow(false)}
+                onClick={modal.closeModal}
               >
                 Отмена
               </button>

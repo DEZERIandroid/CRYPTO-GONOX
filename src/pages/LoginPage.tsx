@@ -4,7 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { setUser } from "../features/userSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { EyeInvisibleOutlined, EyeOutlined, GoogleOutlined } from "@ant-design/icons";
 import "../styles/Log_Reg/Login.css"
@@ -91,6 +91,20 @@ const LoginPage = () => {
       setError(e.code);
     }
   };
+
+  const handleLogin = (e:any) => {
+    console.log(1)
+    if (e.key == "Enter") {
+      Login()
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleLogin)
+    
+    return () => window.removeEventListener('keydown', handleLogin)
+  },[Login])
+  
 
   return (
     <div data-aos="fade-in" data-aos-duration="150" className="Login-container">

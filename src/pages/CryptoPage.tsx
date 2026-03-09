@@ -13,6 +13,7 @@ import { useGetUsersQuery } from "../app/api/UsersApi";
 import { useMemo, useState } from "react";
 import { useAppSelector } from "../hooks/reduxHooks";
 import Loading from "../assets/useLoading";
+import { useCloseModal } from "@/hooks/useCloseModal";
 
 const CryptoPage = () => {
   const navigate = useNavigate()
@@ -39,17 +40,15 @@ const CryptoPage = () => {
   const [sellCrypto,{isLoading:isSelling}] = useSellCryptoMutation()
   const [favoriteCrypto] = useFavoriteCryptoMutation()
 
-  const [isModalOpenBuy, setIsModalOpenBuy] = useState(false);
-  const [isModalOpenSell, setIsModalOpenSell] = useState(false);
+  const buyModal = useCloseModal(150)
+  const sellModal = useCloseModal(150)
+
   const [success,setSuccess] = useState(false)
   const [unSuccess,setUnSuccess] = useState(false)
   const [cryptoPrice] = useState(0)
   const [amountCoins,setAmountCoins] = useState('')
   const [buyError,setBuyError] = useState(false)
   const [sellError,setSellError] = useState(false)
-
-  const openBuyModal = () => setIsModalOpenBuy(true);
-  const openSellModal = () => setIsModalOpenSell(true);
 
   const price = coin?.market_data?.current_price?.usd ?? 0;
 
@@ -87,7 +86,7 @@ const CryptoPage = () => {
           setTimeout(() => setBuyError(false), 4500);
           setTimeout(() => setUnSuccess(false), 1500);
         } else {
-          setIsModalOpenBuy(false)
+          buyModal.closeModal
           setAmountCoins("")
           setSuccess(true)
           setTimeout(() => setSuccess(false), 1500);
@@ -119,7 +118,7 @@ const CryptoPage = () => {
         setTimeout(() => setSellError(false), 4500);
         setTimeout(() => setUnSuccess(false), 1500);
       } else {
-        setIsModalOpenSell(false)
+        sellModal.closeModal
         setAmountCoins("")
         setSuccess(true)
         setTimeout(() => setSuccess(false), 1500);
@@ -245,10 +244,10 @@ const CryptoPage = () => {
           
 
             <div className="coin-actions">
-              <button onClick={openBuyModal} className="coin-btn buy">
+              <button onClick={buyModal.openModal} className="coin-btn buy">
                 <ShoppingCartOutlined /> Купить
               </button>
-              <button onClick={openSellModal} className="coin-btn sell">
+              <button onClick={sellModal.openModal} className="coin-btn sell">
                 <SwapOutlined /> Продать
               </button>
               <button onClick={handleIsFavorite} className="coin-btn favorite">
@@ -278,9 +277,9 @@ const CryptoPage = () => {
           )}
         </div>
       </div>) : <div className="user-content crypto-content"> Ошибка загрузки данных</div> }
-        {isModalOpenBuy && (
-          <div className="buy-modal-overlay">
-            <div data-aos="zoom-in" data-aos-duration="150" className="buy-modal">
+        {buyModal.isOpen && (
+          <div className={`crypto-modal-overlay ${buyModal.isClosing ? "closing" : ""}`}>
+            <div data-aos="zoom-in" data-aos-duration="150" className={`crypto-modal ${buyModal.isClosing ? "closing" : ""}`}>
               <h2>Покупка {coin.name}</h2>
               <p style={{textAlign:"right",}}
                  className="stat-value">Ваш баланс : 
@@ -302,15 +301,15 @@ const CryptoPage = () => {
                                     <span>Купить</span> :
                                     <Loading/> }
                 </button>
-                <button onClick={() => setIsModalOpenBuy(false)}>Отмена</button>
+                <button onClick={buyModal.closeModal}>Отмена</button>
               </div>
             </div>
           </div>
         )}
 
-        {isModalOpenSell && (
-          <div className="buy-modal-overlay">
-            <div data-aos="zoom-in" data-aos-duration="150" className="buy-modal">
+        {sellModal.isOpen && (
+          <div className={`crypto-modal-overlay ${sellModal.isClosing ? "closing" : ""}`}>
+            <div data-aos="zoom-in" data-aos-duration="150" className={`crypto-modal ${sellModal.isClosing ? "closing" : ""}`}>
               <h2>Продажа {coin.name}</h2>
               <p style={{textAlign:"right"}}>
                 У вас: {amountForSell ?? 0}
@@ -331,7 +330,7 @@ const CryptoPage = () => {
                                               <span>Продать</span> : 
                                               <Loading/>}
                 </button>
-                <button onClick={() => setIsModalOpenSell(false)}>Отмена</button>
+                <button onClick={sellModal.closeModal}>Отмена</button>
               </div>
             </div>
           </div>

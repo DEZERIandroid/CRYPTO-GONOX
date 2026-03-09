@@ -151,6 +151,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease !important;
+  margin-top: -20px;
 }
 .logout-button:hover {
   background-color: #1d0707;
@@ -204,7 +205,10 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.photo-modal-overlay.closing{
+  background-color: rgba(0, 0, 0, 0);
 }
 
 
@@ -219,6 +223,11 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  
+}
+.photo-modal.closing {
+  opacity: 0;
+  transform: translateY(-30px) translateX(10px) scale(0.9);
 }
 
 .photo-modal h2 {
@@ -363,6 +372,9 @@
     .label,
     .value {
       font-size: 15px;
+    }
+    .photo-modal.closing {
+      transform: translateY(-30px) scale(0.9);
     }
   }
 

@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 
-export const useCloseModal = ({animationDuration = 200}:any) => {
+export const useCloseModal = ({animationDuration = 100}:any) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
 
@@ -18,6 +18,18 @@ export const useCloseModal = ({animationDuration = 200}:any) => {
         setIsClosing(false);
       }, animationDuration);
     }, [animationDuration]);
+
+    const closeModalKey = (e:any) => {
+      if (e.key == "Escape") {
+        closeModal()
+      }
+    }
+
+    useEffect(() => {
+      window.addEventListener("keydown",closeModalKey)
+
+      return () => window.removeEventListener("keydown",closeModalKey)
+    },[closeModal])
 
     const toggleModal = useCallback(() => {
         isOpen ? closeModal() : openModal

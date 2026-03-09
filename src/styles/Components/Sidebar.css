@@ -56,7 +56,7 @@
 }
 
 .user-avatar:hover {
-  box-shadow: 0 0px 15px rgb(241, 241, 241);
+  background-size: 120px;
 }
 
 .user-name{
@@ -187,7 +187,8 @@
 }
 
 .modal-change.closing {
-  transform: scale(0.90) translateX(-30px);
+  opacity: 0;
+  transform: scale(0.70) translateX(-120px) translateY(-20px);
   pointer-events: none;
 }
 
@@ -207,6 +208,11 @@
   border: 1px solid #bebebe2f;
   padding: 10px;
   border-radius: 15px;
+  transition: all 0.15s ease-in-out;
+}
+.account:hover {
+  background-color: #161515;
+  border: 1px solid #bebebed3;
 }
 .account-avatar {
   display: grid;
