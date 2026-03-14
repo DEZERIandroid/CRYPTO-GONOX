@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { HomeIcon } from "./Icons/HomeIcon"
 import { MarketIcon } from "./Icons/MarketIcon"
 import { UsersIcon } from "./Icons/UsersIcon"
@@ -7,14 +7,19 @@ import { SettingsIcon } from "./Icons/Setting"
 import { Skeleton } from "antd"
 import ThemeToggle from "../assets/themeToggle"
 import "../styles/Components/Sidebar.css"
-import { useAppSelector } from "../hooks/reduxHooks"
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
 import { useCloseModal } from "@/hooks/useCloseModal"
 import { useGetUsersQuery } from "../app/api/UsersApi"
 import { useState } from "react"
 import { CloseOutlined, EyeInvisibleOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons"
 import meduza from "../assets/SOL.jpg"
+import { signOut } from "firebase/auth"
+import { auth } from "@/firebase"
+import { clearUser } from "@/features/userSlice"
 
 const Sidebar = () => {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const { email, name, isAuthChecked } = useAppSelector(state => state.user);
   const { data: users, } = useGetUsersQuery(undefined, {
       pollingInterval:3000
@@ -43,6 +48,17 @@ const Sidebar = () => {
   const closeAllModal = () => {
     mainModal.closeModal()
     addModal.closeModal()
+  }
+
+  const handleLogout = () => {
+    try {
+      signOut(auth)
+      dispatch(clearUser())
+      navigate("/login" , {replace:true})
+      mainModal.closeModal()
+    } catch (error) {
+      console.error("Ошибка при выходе", error)
+    }
   }
 
   return (
@@ -133,7 +149,7 @@ const Sidebar = () => {
                               <div className="account-name">{user?.displayName}</div>
                               <div className="account-email">{user?.email}</div>
                             </div>
-                            <div className="account-leave">
+                            <div className="account-leave" onClick={handleLogout} >
                               <button className="account-leave-btn">Выйти</button>
                             </div>
                         </div>

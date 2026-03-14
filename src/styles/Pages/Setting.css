@@ -2,18 +2,18 @@
 
 .settings-content {
   background-color: #141318;
-  border-radius: 16px;
+  border-radius: 13px;
   padding: 15px 10px;
   min-height: 500px;
   color: #e0e0e0;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.2s ease-in-out;
+  animation: fadeIns 0.15s ease-in-out;
 }
 
 .settings-section {
   background-color: rgb(17, 16, 20);
-  border-radius: 16px;
+  border-radius: 10px;
   padding: 26px 30px;
   margin-bottom: 26px;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -111,6 +111,7 @@
   cursor: pointer;
   outline: none;
   width:150px;
+  font-family: "Inter", "Montserrat", sans-serif;
 }
 .select .ant-select-arrow {
   color: #fff !important;

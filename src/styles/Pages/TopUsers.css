@@ -6,24 +6,19 @@
 }
 .topusers-content {
   background-color: #141318;
-  border-radius: 16px;
+  border-radius: 10px;
   padding: 30px;
   min-height: 500px;
   color: #e0e0e0;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  animation: fadeIns 0.15s ease-in-out;
 }
 
 .user-avatar-placeholder {
   background-color: #c0c0c0;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -51,8 +46,14 @@
   max-width: 200px;
 }
 
+.topusers-table th {
+  font-size: 14px !important;
+}
 .topusers-table tr {
   border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: border 0.15s ease-out;
+  font-size: 17px;
+  font-weight: 100;
 }
 .topusers-table tr:nth-child(-n+3) {
   border-bottom: none;
@@ -64,17 +65,17 @@
 }
 
 .gold-text {
-  color: #d4af37;
+  color: #eec232;
   font-weight: 700;
 }
 
 .silver-text {
-  color: #c0c0c0;
+  color: #cfcfcf;
   font-weight: 700;
 }
 
 .bronze-text {
-  color: #cd7f32;
+  color: #fa9835;
   font-weight: 700;
 }
 
@@ -191,6 +192,26 @@
 }
 
 /* Адаптивность */
+@media (max-width:1400px) {
+  .topusers-table th {
+    font-size: 13px !important;
+  }
+  .topusers-table tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: border 0.15s ease-out;
+    font-size: 15px;
+  }  
+  .user-avatar-placeholder {
+    background-color: #c0c0c0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+}
 
 @media (max-width: 768px) {
   .topusers-content {
@@ -207,6 +228,9 @@
   .topusers-table td {
     padding: 12px;
   }
+  .topusers-table th {
+    font-size: 13px !important;
+  }  
   .user-avatar-placeholder {
     width: 45px;
     height: 45px;
@@ -235,13 +259,13 @@
   }
 
   .topusers-table tbody tr:nth-child(1) {
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0.55), transparent);
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.45), transparent);
   } 
   .topusers-table tbody tr:nth-child(2) {
-    background: linear-gradient(90deg, rgba(192, 192, 192, 0.55), transparent);
+    background: linear-gradient(90deg, rgba(192, 192, 192, 0.45), transparent);
   } 
   .topusers-table tbody tr:nth-child(3) {
-    background: linear-gradient(90deg, rgba(205, 127, 50, 0.55), transparent);
+    background: linear-gradient(90deg, rgba(205, 127, 50, 0.45), transparent);
   } 
 
   .user-avatar-placeholder {

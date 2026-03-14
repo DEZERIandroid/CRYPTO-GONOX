@@ -29,6 +29,10 @@ const RegisterPage = () => {
   const [displayedName, setDisplayedName] = useState<string | undefined>("");
   const [watchingPass,setWatchingPass] = useState(false)
 
+  const ReloadSite = () => {
+    window.location.reload()
+  }
+
   const Register = async () => {
     const cleanEmail = email.trim();
     const cleanPassword = password.trim();
@@ -102,9 +106,8 @@ const RegisterPage = () => {
 
       setDisplayedName(displayName);
       setIsModalShow(true);
-      setTimeout(() => {
-        navigate("/")
-      },2000)
+      navigate("/")
+      ReloadSite()
     } catch (err: any) {
       let errorMessage = "Не удалось зарегистрироваться";
 
@@ -235,7 +238,7 @@ const RegisterPage = () => {
       )}
 
       {isModalShow && (
-        <div className="modal">
+        <div data-aos="fade-in" data-aos-duration="50" className="modal">
           <div>Добро пожаловать, {displayedName}!</div>
           <button className="close-button" onClick={() => setIsModalShow(false)}>x</button>
         </div>

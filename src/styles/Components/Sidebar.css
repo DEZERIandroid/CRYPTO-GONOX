@@ -1,7 +1,7 @@
 .sidebar {
   position: sticky;
   top: 0;
-  width: 240px;
+  width: 300px;
   height: 100vh;
   left: 0;
   z-index: 1000;
@@ -16,7 +16,7 @@
   flex-direction: column;
   justify-content: center;
   background-color: #141318;
-  border-radius:20px;
+  border-radius: 13px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
               inset 0 0 0 1px rgba(255, 255, 255, 0.03);
@@ -30,11 +30,14 @@
 }
 .logo{
   background-image: url('/src/assets/Gonox.png');
-  width: 150px;
-  height: 40px;
+  width: 200px;
+  height: 70px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  display: grid;
+  margin-top: 10px;
+  margin-bottom: -10px;
 }
 
 .user{
@@ -45,9 +48,9 @@
 .avatar-container{
   display: flex;
   place-content: center;
-  margin-left: 5.5px;
-  width: 80px;
-  height: 80px;
+  margin-left: 9px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -59,24 +62,25 @@
 }
 
 .user-avatar:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .user-name{
-  margin: 7px 0 8px 0;
+  margin: 25px 0 8px 0;
   font-weight: 700;
+  font-size: 21px;
   color: white;
   animation: fadeIn 1.15s ease-in-out;
 }
 .user-change{
   position: relative;
-  font-size: 13.5px;
-  padding: 5px 10px;
+  font-size: 15.5px;
+  padding: 5px 14px;
   border-radius: 12px;
   border: 1px solid #e4e4e49f;
   transition: all 0.2s ease-in-out !important;
   color: white;
-  min-width: 90px;
+  min-width: 110px;
 }
 .user-change:hover{
   border: 1px solid #ffffff;
@@ -92,7 +96,7 @@
   text-align: start;
 }
 .item {
-  padding: 18px;
+  padding: 18px 35px;
   transition: all 0.2s ease-in-out;
   border-radius: 15px;
   cursor: pointer;
@@ -100,7 +104,7 @@
   align-items: center;
 }
 .item-actived {
-  padding: 18px;
+  padding: 18px 35px;
   transition: all 0.5s ease-in-out;
   border-radius: 15px;
   cursor: pointer;
@@ -131,7 +135,7 @@
 .nav-link {
   transition: all 0.2s ease-in-out;
   margin-left: 10px;
-  font-size: 16px;
+  font-size: 18px;
   color: #bebebe;
   background-color: #1f0f5c00;
 }
@@ -454,11 +458,37 @@
   100%{border: 5px solid green;}
 }
 
+@media (max-width:1500px) {
+  .logo{
+    width: 180px;
+    height: 80px;
+  }
+  .avatar-container {
+    width: 90px;
+    height: 90px;
+    margin-left: 3px;
+  }
+  .sidebar {
+    width: 240px;
+  }
+  .item {
+    padding: 18px;
+  }
+  .item-actived {
+    padding: 18px;
+  }
+  .user-change {
+    font-size: 14.5px;
+    padding: 5px 12px;
+    min-width: 90px;
+  }
+  .nav-link {
+    font-size: 17px;
+  }
+}
 
 @media (max-height:790px) {
-  .user-avatar {
-    margin-top: -30px;
-  }
+
   .sidebar-items{
     margin-bottom: 50px;
   }
@@ -594,149 +624,6 @@
   }
 }
 
-@media (max-height:735px) {
-  .sidebar-logo{
-      margin-top: -200px;
-      margin-bottom: 15px;
-    }
-    .user-avatar{
-      width: 70px;
-      height: 70px;
-      margin-top: 0px;
-    }
-    .user-change{
-      margin-top:10px;
-      margin-bottom: -30px;
-    }
-    .item {
-      padding: 12px;
-    }
-    .item-actived {
-      padding: 12px;
-    }
-    .user-name {
-      font-size:17px ;
-    }
-    .sidebar-items{
-      margin-bottom:0px ;
-      margin-bottom: 20px;
-      margin-top: 60px;
-    } 
-    .sidebar-theme-toggle{
-      margin: 0px;
-      margin-top: 10px;
-      margin-bottom: -200px;
-      padding: 12px;
-    }
-}
-
-@media (max-height:650px) {
-  .sidebar-items{
-      margin-bottom:0px ;
-      margin-bottom: 10px;
-      margin-top: 50px;
-    } 
-}
-@media (max-height:600px) {
-  .sidebar-items{
-      margin-bottom:0px ;
-      margin-bottom: 00px;
-      margin-top: 40px;
-    }
-  .user-avatar{
-      width: 70px;
-      height: 70px;
-      margin-top: -10px;
-      margin-bottom: 0px;
-    } 
-  .user-change{
-      margin-top:1px;
-      margin-bottom: -35px;
-    }
-}
-@media (max-height:650px) {
-  .sidebar-items{
-    margin-bottom:0px ;
-    margin-bottom: 00px;
-    margin-top: 40px;
-  }
-  .user-avatar{
-      width: 70px;
-      height: 70px;
-      margin-top: -10px;
-      margin-bottom: 0px;
-    } 
-  .user-change{
-      margin-top:1px;
-      margin-bottom: -35px;
-    }
-}
-
-@media (max-height:600px) {
-  .sidebar-items{
-      margin: 40px;
-  }
-  .item {
-    padding: 10px;
-  } 
-  .item-actived {
-    padding: 10px;
-  }
-  .user-avatar{
-    margin-bottom: 10px;
-  }
-  .user-name {
-    margin-bottom: -30px;
-  }
-  .user-change{
-    display: none;
-  }
-}
-
-@media (max-height:550px) {
-  .sidebar-items{
-    margin-top: 50px;
-    margin-bottom: -190px;
-  }
-  .item {
-    padding: 10px;
-  }
-
-  .sidebar-theme-toggle{
-    display: none;
-  }
-}
-@media (max-height:500px) {
-  .sidebar-items{
-    margin-top: -10px;
-    margin-bottom: -140px;
-    flex: 1;
-    padding: 0;
-  }
-  .item {
-    padding: 10px;
-  }
-  .item-actived {
-    padding: 10px;
-  }
-  .logo {
-    display: none;
-  }
-  .user-name{
-    display: none;
-  }
-  .sidebar-theme-toggle{
-    display: none;
-  }
-  .user-avatar{
-    margin-top: 10px;
-    width: 80px;
-    height: 50px;
-    border-radius:30px;
-    margin:0 -10px;
-    padding: 0;
-  }
-}
 
 
 @media (max-width:435px) {

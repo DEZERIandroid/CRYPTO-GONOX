@@ -235,7 +235,7 @@ const HomePage = () => {
                     </div>
                     <span className="item-name">{item.Username || "Пользователь"}</span>
                     <span className="item-price">${total.toFixed(2)}</span>
-                    <span className="status-success">Покупка</span>
+                    <span className="status-success home-status-success">Покупка</span>
                   </li>
                 );
               })}

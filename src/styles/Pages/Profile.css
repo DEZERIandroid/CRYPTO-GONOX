@@ -7,12 +7,7 @@
   border-radius: 16px;
   margin-bottom: 30px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  animation: fadeIn 0.25s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0%{opacity: 0;}  
-  100%{opacity: 1;}  
+  animation: fadeIns 0.15s ease-in-out;
 }
 .profile-avatar {
   width: 80px;
@@ -29,7 +24,7 @@
 }
 .profile-avatar img:hover{
   filter: grayscale(40%);
-  filter: blur(0.5px);
+  filter: blur(0.65px);
 }
 .profile-avatar:hover .avatar-edit{
   display: block;
@@ -40,12 +35,14 @@
   position: absolute;
   top: 40%;
   left: 40%;
+  animation: fadeIn 0.1s ease-in;
 }
 
 .profile-name {
   font-size: 22px;
   font-weight: 600;
   color: #ffffff;
+  text-align: center;
 }
 .profile-info {
   display: flex;

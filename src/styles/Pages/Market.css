@@ -1,44 +1,4 @@
-.header-title {
-  font-size: 25px;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-}
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  background-color: #0e0d12;
-  border-radius: 50px;
-  padding: 0 25px;
-  height: 50px;
-  width: 350px;
-}
-
-.search-icon {
-  font-size: 20px;
-  color: #999;
-  margin-right: 12px;
-}
-
-.search-box input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  font-size: 16px;
-}
-
-.search-box input::placeholder {
-  color: #999;
-}
 
 .filter-select{
   width: 150px;
@@ -55,6 +15,7 @@
   cursor: pointer;
   outline: none;
   width:150px ;
+  font-family: "Inter", "Montserrat", sans-serif;
 }
 .filter-select .ant-select-arrow {
   color: #fff !important;
@@ -62,7 +23,7 @@
 }
 
 
-@keyframes fadeIn {
+@keyframes fadeIns {
   0%{opacity: 0;}  
   100%{opacity: 1;}  
 }
@@ -71,12 +32,12 @@
 
 .market-content {
   background: linear-gradient(180deg,#141318,#1a1921);
-  border-radius: 18px;
+  border-radius: 13px;
   padding: 28px;
   min-height: 500px;
   color: #e0e0e0;
   border: 1px solid rgba(255,255,255,0.05);
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIns 0.15s ease-in-out;
 }
 
 /* ===== TABLE ===== */
@@ -101,7 +62,7 @@
 .market-table th {
   color: #888;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
   text-transform: uppercase;
 }
 
@@ -113,9 +74,11 @@
 /* ===== ROW HOVER ===== */
 
 .market-table tbody tr {
+  font-size: 17.5px;
   transition: 0.25s;
   border-radius: 12px;
   border: 1px solid #ffffff00;
+  transition: border 0.15s ease-out !important;
 }
 
 .market-table tbody tr:hover {
@@ -133,8 +96,8 @@
 }
 
 .coin-icon {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   object-fit: cover;
   transition: 0.3s;
@@ -143,6 +106,10 @@
 .coin-name .name {
   font-weight: 600;
   color: white;
+}
+.coin-prices {
+  font-weight: bolder;
+  color: rgba(255, 255, 255, 0.925);
 }
 
 .coin-name .symbol {
@@ -189,6 +156,19 @@
   }
 }
 
+
+@media (max-width:1400px) {
+  .market-table th {
+    font-size: 13px;
+  }
+  .market-table tbody tr {
+    font-size: 15px;
+  }
+  .coin-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
 
 
 @media (max-width: 1164px) {
@@ -251,7 +231,7 @@
     font-size: 14px;
     min-width: 150px;
     margin: -15px 0;
-  }
+ }
 
   .market-content {
     padding: 20px;

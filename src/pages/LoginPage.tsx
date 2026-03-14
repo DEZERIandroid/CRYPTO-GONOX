@@ -21,6 +21,10 @@ const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [watchingPass,setWatchingPass] = useState(false)
 
+  const ReloadSite = () => {
+    window.location.reload()
+  }
+
   const Login = async () => {
     if (!email || !password) {
       setError("Пожалуйста, заполните все поля");
@@ -57,10 +61,9 @@ const LoginPage = () => {
       setEmail("");
       setPassword("");
       setIsModalShow(true);
-
-      setTimeout(() => {
-        navigate("/");
-      }, 800);
+      
+      navigate("/");
+      ReloadSite()
     } catch (err: any) {
       let errorMessage = "Произошла ошибка при входе";
       if (err.code === "auth/invalid-email") {
@@ -156,7 +159,7 @@ const LoginPage = () => {
                 </div>}
 
       {isModalShow && (
-        <div className="modal">
+        <div data-aos="fade-in" data-aos-duration="50" className="modal">
           <div>Добро пожаловать, {displayedName}!</div>
           <button className="close-button" onClick={() => setIsModalShow(false)}>x</button>
         </div>

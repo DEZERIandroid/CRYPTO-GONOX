@@ -259,7 +259,7 @@ const ProfilePage = () => {
 
         <div className="logout-container">
           <button data-aos="fade-in" className="logout-button" onClick={handleLogout}>
-            <LogoutOutlined /> Выйти
+            <LogoutOutlined/> Выйти
           </button>
         </div>
       </div>

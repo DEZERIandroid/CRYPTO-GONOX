@@ -32,8 +32,12 @@ function App() {
   return (
     <>
     {showLoader && (
-      <div className="loading-logo">
-        <img className={`logo-loading ${isFading ? "fade-out" : ""}`} src={GonoxLogo} alt="" />
+      <div className={`loading-logo ${isFading ? "fade-out" : ""}`}>
+        <img
+          className={`logo-loading ${isFading ? "fade-out" : ""}`}
+          src={GonoxLogo}
+          alt=""
+        />
       </div>
     )}
       <div className="wrapper">

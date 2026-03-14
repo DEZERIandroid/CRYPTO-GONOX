@@ -28,7 +28,7 @@
   border:1px solid #2d81ff;
   border-radius: 12px;
   padding: 0px 16px;
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -38,36 +38,31 @@
 .status-success {
   color: #52c41a;
   background: rgba(82, 196, 26, 0.15);
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   display: inline-block;
 }
 
-.status-pending {
-  color: #faad14;
-  background: rgba(250, 173, 20, 0.15);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  display: inline-block;
-}
-
-.status-failed {
-  color: #f5222d;
-  background: rgba(245, 34, 45, 0.15);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  display: inline-block;
-}
 .transactions th,
 .transactions td {
   padding: 15px 10px;
   max-width: 120px;
+}
+.transactions th {
+  font-size: 14px !important
+}
+.transactions td {
+  font-size: 17px !important;
+}  
+.transactions tr {
+  font-size: 17px !important;
+}  
+.transactions-img {
+  width: 45px !important;
+  height: 45px !important;
+  font-size: 14px;
 }
 
 .transactions th:first-child,
@@ -150,6 +145,27 @@
     padding: 15px 25px;
   }
 }
+@media (max-width:1400px) {
+  .transactions th {
+    font-size: 13px !important;
+    padding: 10px 5px !important;
+  }
+  .transactions tr {
+    font-size: 15px;
+  }  
+  .transactions-img {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 14px;
+  }
+  .status-success {
+    padding: 4px 10px;
+    font-size: 13px;
+  }
+  .filter-btn-active {
+    font-size: 13px;
+  }
+}
 @media (max-width: 1279px) {
   .filters {
     gap: 30px;
@@ -170,6 +186,10 @@
   .filter-btn {
     padding: 8px 12px;
     font-size: 13px;
+  }
+  .transactions th:first-child,
+  .transactions td:first-child {
+    padding: 15px 4px !important;
   }
   .transactions th:nth-child(2),
   .transactions td:nth-child(2) {
@@ -217,7 +237,23 @@
   .transactions td {
     padding: 10px 12px;
   }
+  .transactions th:nth-child(2),
+  .transactions td:nth-child(2) {
+    padding: 0 20px !important;
+    max-width: 90px;
+  }
+  .transactions th:nth-child(3),
+  .transactions td:nth-child(3) {
+    padding: 0 10px !important;
+    min-width: 140px !important;
+  }
+  .transactions th:nth-child(4),
+  .transactions td:nth-child(4) {
+    padding: 0 10px !important;
+    max-width: 115px;
+  }
   .transactions th {
-    font-size: 10px;
+    font-size: 12px;
+    border-right: 1px solid rgba(255, 255, 255, 0.027);
   }
 }

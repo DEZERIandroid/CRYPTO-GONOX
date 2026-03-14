@@ -14,7 +14,8 @@
 .page-container {
   margin: 50px 0 0 45px;
   max-width: 170vh;
-  border-radius: 15px;
+  border-radius: 13px;
+  margin:50px 50px 0  45px;
 }
 
 .loading-container {
@@ -38,16 +39,40 @@
   display: flex;
   background-color: #141318;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 40px 70px !important;
   margin-bottom: 35px;
+  margin-top: -5px !important;
   height: 70px;
   align-items: center;
   box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 13px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 
     0 4px 12px rgba(0, 0, 0, 0.2),
     inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.title-text {
+  font-size: 27px;
+}
+
+.search-icon {
+  font-size: 20px;
+  color: #999;
+  margin-right: 12px;
+}
+
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 16px;
+}
+
+.search-box input::placeholder {
+  color: #999;
 }
 
 
@@ -59,13 +84,18 @@
   position: fixed;
   inset: 0;
   z-index: 99999;
+  overflow: hidden;
 
   opacity: 1;
-  transform: scale(1);
+  transition: opacity 0.2s ease;
+}
+
+.loading-logo.fade-out {
+  opacity: 0;
 }
 
 .logo-loading {
-  transition: all 0.35s ease-in-out;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
 .logo-loading.fade-out {
@@ -76,7 +106,7 @@
 .loading-logo img {
   width: 360px;
   position: relative;
-  animation: logoFade 1.5s ease;
+  animation: logoFade 1.2s ease;
 }
 
 .loading-logo::after {
@@ -87,15 +117,17 @@
   background: linear-gradient(
     110deg,
     transparent 40%,
-    rgba(255,255,255,0.4) 50%,
+    rgba(255, 255, 255, 0.402) 50%,
     transparent 60%
   );
-  animation: shine 2s infinite;
+  animation: shine 4.5s infinite;
 }
 
 @keyframes shine {
   0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  60% { transform: translateX(100%); }
+  95% { transform: translateX(-100%); }
+  120% { transform: translateX(100%); }
 }
 
 @keyframes logoFade {
@@ -122,12 +154,14 @@
   }
 
   .page-header {
-    padding: 0 30px;
+    padding: 10px 30px !important;
     height: 65px;
   }
-  .page-header-title {
-    font-size: 218px;
+
+  .title-text {
+    font-size: 23px;
   }
+  
   .header-input {
     width: 350px;
     max-width: 350px;
@@ -240,5 +274,11 @@
   }
   .loading-logo img {
     width: 200px;
+  }
+  .loading-logo::after {
+    animation: shine 4.2s infinite;
+  }
+  .loading-logo {
+    display: grid;
   }
 }
