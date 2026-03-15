@@ -24,6 +24,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "@uidotdev/usehooks": "^2.4.1",
     "antd": "^5.27.3",
+    "aos": "^2.3.4",
     "clsx": "^2.1.1",
     "firebase": "^12.2.1",
     "framer-motion": "^12.23.26",

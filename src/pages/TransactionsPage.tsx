@@ -95,7 +95,7 @@ const TransactionsPage = () => {
                 {[...Array(7)].map((_, i) => (
                   <tr key={i}>
                     <td colSpan={7}>
-                      <Skeleton avatar paragraph={{ rows: 1 }} />
+                      <Skeleton avatar active paragraph={{ rows: 1 }} />
                     </td>
                   </tr>
                 ))}
@@ -166,18 +166,18 @@ const TransactionsPage = () => {
                     filteredTransactions.map((item, index) => {
                       const total = item.amount * item.buyPrice;
                       return (
-                        <tr data-aos="fade-in" data-aos-once="false" key={`${item.timestamp}-${item.coinId}-${index}`}>
-                          <td>{index + 1}</td>
-                          <td className="transactions-imgSymbol">
+                        <tr key={`${item.timestamp}-${item.coinId}-${index}`}>
+                          <td data-aos="fade-in" data-aos-once="false">{index + 1}</td>
+                          <td data-aos="fade-in" data-aos-once="false" className="transactions-imgSymbol">
                             <img className="transactions-img"
                               src={item.image}
                               alt={item.symbol}
                             />
-                            <div className="transactions-symbol">
+                            <div data-aos="fade-in" data-aos-once="false" className="transactions-symbol">
                               {item.symbol}
                             </div>
                           </td>
-                          <td className="transactions-username">
+                          <td data-aos="fade-in" data-aos-once="false" className="transactions-username">
                             {item.photoURL ? (
                               <img
                                 src={item.photoURL}
@@ -186,12 +186,12 @@ const TransactionsPage = () => {
                               />
                             ) : null} {item.Username}
                           </td>
-                          <td className="transactions-amount">{item.amount}</td>
-                          <td>
+                          <td data-aos="fade-in" data-aos-once="false" className="transactions-amount">{item.amount}</td>
+                          <td data-aos="fade-in" data-aos-once="false">
                             <span className="status-success">Покупка</span>
                           </td>
-                          <td>{new Date(item.timestamp).toLocaleString()}</td>
-                          <td className="transactions-buyPrice">${total.toFixed(2)}</td>
+                          <td data-aos="fade-in" data-aos-once="false" className="transactions-data">{new Date(item.timestamp).toLocaleDateString()}</td>
+                          <td data-aos="fade-in" data-aos-once="false" className="transactions-buyPrice">${total.toFixed(2)}</td>
                         </tr>
                       );
                     })

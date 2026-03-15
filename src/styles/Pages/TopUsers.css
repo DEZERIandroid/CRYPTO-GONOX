@@ -203,8 +203,8 @@
   }  
   .user-avatar-placeholder {
     background-color: #c0c0c0;
-    width: 40px;
-    height: 40px;
+    width: 43px;
+    height: 43px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -232,8 +232,8 @@
     font-size: 13px !important;
   }  
   .user-avatar-placeholder {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
   }
 }
 

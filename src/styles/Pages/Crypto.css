@@ -246,14 +246,10 @@
   position: absolute;
   top:110px;
   right: 30px;
-  animation: fadeIn 0.18s ease-in-out;
+  animation: fadeIns 0.18s ease-in-out;
 }
 
-@keyframes fadein {
-  0%{opacity: 0;transform: translateY(20%);}
-  20%{opacity: 1;transform: translateY(5%);}
-  90%{opacity: 0;transform: translateY(-30%);}
-}
+
 
 .modal-buysell > div {
   padding: 10px 16px;

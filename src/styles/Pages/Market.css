@@ -110,6 +110,7 @@
 .coin-prices {
   font-weight: bolder;
   color: rgba(255, 255, 255, 0.925);
+  border-bottom: 1px solid #ffffff15 !important;
 }
 
 .coin-name .symbol {
@@ -191,6 +192,10 @@
   .market-table th,
   .market-table td {
     padding: 17px 18px !important;
+  }
+  .market-table th:nth-child(2),
+  .market-table td:nth-child(2) {
+    padding:17px 25px 17px 10px !important;
   }
   .coin-icon {
     width: 36px;
@@ -398,6 +403,10 @@
   .market-table th,
   .market-table td {
     padding: 12px 14px;
+  }
+  .market-table th:nth-child(2),
+  .market-table td:nth-child(2) {
+    padding:17px 5px 17px 8px !important;
   }
 
   .coin-icon {

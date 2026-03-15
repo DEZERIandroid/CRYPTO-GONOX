@@ -1,7 +1,7 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import { collection, getDocs, Timestamp, 
          doc, updateDoc, getDoc , arrayUnion,
-         arrayRemove} from "firebase/firestore";
+         arrayRemove , runTransaction} from "firebase/firestore";
 import { db } from "../../firebase";
 
 export interface User {
@@ -120,75 +120,83 @@ export const usersApi = createApi({
       },
     }),
 
-    buyCrypto:builder.mutation<void,buyCrypto>({
+    buyCrypto: builder.mutation<void, buyCrypto>({
       async queryFn({uid,coinId,amountCoins,
                      currentPrice,cryptoPrice,
                      image,symbol,Username,totalBuyPrice}) {
         try {
-          const userRef = doc(db, "users", uid);
-          const userSnap = await getDoc(userRef);
-          const MAX_AMOUNT = 0.00001
-
-          if (!userSnap.exists()) {
-            return { error: { status: "USER_NOT_FOUND", error: "Пользователь не найден" } };
-          }
-          if (amountCoins < MAX_AMOUNT) {
-            return { error: { status: "MAX_AMOUNT", error: "Привышен лимит количества" } };
-          }
+          await runTransaction(db, async (transaction) => {
           
-          const userData = userSnap.data()
-          const balance = userData.balance
-          const portfolio = userData.portfolio || []
-
-          const totalPrice = amountCoins * currentPrice
-
-          if (balance < totalPrice) {
-            return { error: {status:"NO_MONEY", error:"Недостаточно средств"}}
-          }
-
-          let updatePortfolio: any[] = [];
-
-
-          const existingCoin = portfolio.find((item:any) => item.coinId === coinId)
-          if (existingCoin && amountCoins) {
-            existingCoin.amount = existingCoin.amount + amountCoins
-
-            updatePortfolio = [...portfolio]
-          } else {
-            const NewCoin = {
-              coinId,
-              amount: amountCoins,
-              buyPrice: currentPrice,
-              cryptoPrice,
-              totalBuyPrice,
-              timestamp: Date.now(),
-              date: new Date().toISOString(),
-              image,
-              symbol,
-              Username,
+            const userRef = doc(db, "users", uid)
+            const userSnap = await transaction.get(userRef)
+          
+            const MIN_AMOUNT = 0.00001
+          
+            if (!userSnap.exists()) {
+              throw new Error("USER_NOT_FOUND")
             }
-            updatePortfolio = [...portfolio, NewCoin];
-          }
-          const newBalance = balance - totalPrice
-
-          await updateDoc(userRef, {
-            balance:newBalance,
-            portfolio:updatePortfolio
-          })
           
-          return { data: undefined };
+            if (amountCoins < MIN_AMOUNT) {
+              throw new Error("MIN_AMOUNT")
+            }
+          
+            const userData = userSnap.data()
+            const balance = userData.balance
+            const portfolio = userData.portfolio || []
+          
+            const totalPrice = amountCoins * currentPrice
+          
+            if (balance < totalPrice) {
+              throw new Error("NO_MONEY")
+            }
+          
+            let updatePortfolio: any[] = []
+          
+            const existingCoin = portfolio.find(
+              (item:any) => item.coinId === coinId
+            )
+          
+            if (existingCoin) {
+              existingCoin.amount = existingCoin.amount + amountCoins
+              updatePortfolio = [...portfolio]
+            } else {
+              const newCoin = {
+                coinId,amount: amountCoins,buyPrice: currentPrice,
+                cryptoPrice,totalBuyPrice,timestamp: Date.now(),
+                date: new Date().toISOString().split("T"),
+                image,symbol,Username,
+              }
+            
+              updatePortfolio = [...portfolio, newCoin]
+            }
+          
+            const newBalance = balance - totalPrice
+          
+            transaction.update(userRef, {
+              balance: newBalance,
+              portfolio: updatePortfolio
+            })
+          })
+        
+          return { data: undefined }
         
         } catch (error:any) {
-          return { error: { status: "BUY_ERROR", error: error.message } };
+        
+          return {
+            error: { status: "BUY_ERROR", error: error.message}
+          }
         }
       },
+    
       invalidatesTags: ["Users"]
     }),
     sellCrypto:builder.mutation<void,sellCrypto>({
       async queryFn({uid,coinId,amountCoins,cryptoPrice,}) {
           try {
+            await runTransaction (db, async (transaction) => { 
+
             const userRef = doc(db,"users",uid)
-            const userSnap = await getDoc(userRef)
+            const userSnap = await transaction.get(userRef)
             if (!userSnap.exists()) {
               return { error: { status: "USER_NOT_FOUND", error: "Пользователь не найден" } };
             }
@@ -226,11 +234,11 @@ export const usersApi = createApi({
               return { error: { status:"SELL_ERROR", error:"Некорректная сумма продажи" } }
             }
             
-            await updateDoc(userRef,{
+            transaction.update(userRef,{
               balance:newBalance,
               portfolio:filtredPortfolio
             })
-            
+          })
             return {data:undefined}
           } catch (err:any) {
             return { error: {status:"SELL_ERROR", err: err.message}}

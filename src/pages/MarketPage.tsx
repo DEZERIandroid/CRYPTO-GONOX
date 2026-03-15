@@ -117,19 +117,19 @@ const MarketPage = () => {
             </thead>
           </table>
         </div>
-        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
         <br />
-        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
         <br />
-        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
         <br />
-        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
         <br />
-        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
         <br />
-        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
         <br />
-        <Skeleton avatar paragraph={{ rows: 1 }} />
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
         <br />
       </div>
     </div>
@@ -173,31 +173,31 @@ const MarketPage = () => {
             </thead>
             {!isError ? (<tbody>
               {filteredData.map((coin, index) => (
-                <tr data-aos="fade-in" data-aos-once="false" onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
-                  <td>{index + 1}</td>
+                <tr  onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
+                  <td data-aos="fade-in" data-aos-once="false">{index + 1}</td>
                   <td>
-                    <div className="coin-info">
+                    <div data-aos="fade-in" data-aos-once="false" className="coin-info">
                       <img
                         src={coin.image}
                         alt={coin.symbol}
                         className="coin-icon"
                         
                       />
-                      <div className="coin-name">
+                      <div data-aos="fade-in" data-aos-once="false" className="coin-name">
                         <div className="name">{coin.name}</div>
                         <div className="symbol">{coin.symbol.toUpperCase()}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                  <td>
+                  <td data-aos="fade-in" data-aos-once="false" className="coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                  <td data-aos="fade-in" data-aos-once="false">
                     <span className={coin.price_change_percentage_24h >= 0 ? "change-positive" : "change-negative"}>
                       {coin.price_change_percentage_24h >= 0 ? <RiseOutlined /> : <FallOutlined />}
                       {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
                     </span>
                   </td>
-                  <td>${(coin.market_cap / 1e9).toFixed(1)}B</td>
-                  <td>${(coin.total_volume / 1e9).toFixed(1)}B</td>
+                  <td data-aos="fade-in" data-aos-once="false">${(coin.market_cap / 1e9).toFixed(1)}B</td>
+                  <td data-aos="fade-in" data-aos-once="false">${(coin.total_volume / 1e9).toFixed(1)}B</td>
                 </tr>
               ))}
             </tbody>): 

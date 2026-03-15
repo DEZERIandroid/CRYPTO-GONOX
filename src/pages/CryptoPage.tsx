@@ -64,14 +64,14 @@ const CryptoPage = () => {
       if (!amountBuy || amountBuy <= 0) {
          setUnSuccess(true);
          setBuyError(true)
-         setTimeout(() => setBuyError(false), 4500);
+         setTimeout(() => setBuyError(false), 1500);
          setTimeout(() => setUnSuccess(false), 1500);
         return;
       }
       if (user?.balance === undefined || user?.balance < totalBuy) {
         setUnSuccess(true);
         setBuyError(true)
-        setTimeout(() => setBuyError(false), 4500);
+        setTimeout(() => setBuyError(false), 1500);
         setTimeout(() => setUnSuccess(false), 1500);
         return;
       }
@@ -83,7 +83,7 @@ const CryptoPage = () => {
         if (result.error) {
           setUnSuccess(true);
           setBuyError(true)
-          setTimeout(() => setBuyError(false), 4500);
+          setTimeout(() => setBuyError(false), 1500);
           setTimeout(() => setUnSuccess(false), 1500);
         } else {
           buyModal.closeModal()
@@ -106,16 +106,18 @@ const CryptoPage = () => {
     if (!amountSell || amountSell <= 0) {
        setUnSuccess(true);
        setSellError(true)
-       setTimeout(() => setSellError(false), 4500);
+       setTimeout(() => setSellError(false), 1500);
        setTimeout(() => setUnSuccess(false), 1500);
       return;
     }
     try {
-      const result = await sellCrypto({uid,coinId:id,amountCoins:amountSell,cryptoPrice:totalSell}) 
+      const result = await sellCrypto({
+                              uid,coinId:id,amountCoins:amountSell,
+                              cryptoPrice:totalSell})
       if (result.error) {
         setUnSuccess(true);
         setSellError(true)
-        setTimeout(() => setSellError(false), 4500);
+        setTimeout(() => setSellError(false), 1500);
         setTimeout(() => setUnSuccess(false), 1500);
       } else {
         sellModal.closeModal()
@@ -281,7 +283,10 @@ const CryptoPage = () => {
           <div className={`crypto-modal-overlay ${buyModal.isClosing ? "closing" : ""}`}>
             <div data-aos="zoom-in" data-aos-duration="150" className={`crypto-modal ${buyModal.isClosing ? "closing" : ""}`}>
               <h2>Покупка {coin.name}</h2>
-              <p style={{textAlign:"right",}}
+              <p style={{textAlign:"right",
+                        color:buyError ? "red" : "white",
+                        transition:buyError ? "0.5s" : "0"
+              }}
                  className="stat-value">Ваш баланс : 
                  {user?.balance ? user.balance.toFixed((2)) : "0"}$
               </p>
@@ -311,12 +316,15 @@ const CryptoPage = () => {
           <div className={`crypto-modal-overlay ${sellModal.isClosing ? "closing" : ""}`}>
             <div data-aos="zoom-in" data-aos-duration="150" className={`crypto-modal ${sellModal.isClosing ? "closing" : ""}`}>
               <h2>Продажа {coin.name}</h2>
-              <p style={{textAlign:"right"}}>
+              <p style={{textAlign:"right",
+                        color:sellError ? "red" : "white",
+                        transition:sellError ? "0.5s" : "0"
+              }}>
                 У вас: {amountForSell ?? 0}
               </p>
               <input  
                 style={{borderBottom:sellError ? "1px solid red" : "none",
-                        transition:sellError ? "0.5s" : "0"}}
+                        transition:sellError ? "0.5s " : "0"}}
                 type="number"
                 value={amountCoins}
                 min={1}
@@ -337,7 +345,7 @@ const CryptoPage = () => {
         )}
 
         {success && (
-          <div data-aos="fade-down" className="modal-buysell">
+          <div data-aos="fade-down" data-aos-duratiom="100" className="modal-buysell">
             <div>
               Успешно
             </div>
@@ -345,7 +353,7 @@ const CryptoPage = () => {
         )}
 
         {unSuccess && (
-          <div data-aos="fade-down" className="modal-buysell-error">
+          <div data-aos="fade-down" data-aos-duratiom="100" className="modal-buysell-error">
             <div>
               Не успешно
             </div>

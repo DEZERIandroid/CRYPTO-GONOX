@@ -47,7 +47,7 @@
 
 .transactions th,
 .transactions td {
-  padding: 15px 10px;
+  padding: 23px 13px;
   max-width: 120px;
 }
 .transactions th {
@@ -67,12 +67,15 @@
 
 .transactions th:first-child,
 .transactions td:first-child {
-  padding: 5px 0px;
+  padding: 5px 5px;
 }
 .transactions th:nth-child(2),
 .transactions td:nth-child(2) {
-  max-width:30px;
+  max-width:60px !important;
   padding: 15px 20px;
+}
+.transactions th:nth-child(2) {
+  text-align: center;
 }
 .transactions th:nth-child(3),
 .transactions td:nth-child(3) {
@@ -91,21 +94,22 @@
   font-weight: 600;
 }
 .transactions-img{
-  width: 35px ;
-  height: 35px;
+  width: 40px !important;
+  height: 40px !important;
   border-radius: 50%;
   margin: 0 auto;
 }
 .transactions-imgSymbol{
-  text-align: start;
+  padding: 0 !important;
 }
 .transactions-symbol {
   display: grid;
   place-content: center;
-  margin-bottom: -10px;
+  margin-bottom: -10px !important;
   font-size: 13px;
   text-align: start;
   color: #bbb9b9;
+
 }
 .transactions-buyPrice {
   font-weight: bold;
@@ -175,6 +179,13 @@
     padding: 8px 14px;
     font-size: 14px;
   }
+  .transactions-img {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  .transactions-data {
+    min-width: 150px !important;
+  }
 }
 
 @media (max-width: 1023px) {
@@ -193,7 +204,16 @@
   }
   .transactions th:nth-child(2),
   .transactions td:nth-child(2) {
-    max-width:85px;
+    max-width:85px !important;
+    padding: 15px 25px;
+  }
+  .transactions th:nth-child(3),
+  .transactions td:nth-child(3) {
+    max-width:145px !important;
+  }
+  .transactions th:nth-child(6),
+  .transactions td:nth-child(6) {
+    min-width:135px;
     padding: 15px 25px;
   }
 }
@@ -216,6 +236,11 @@
 
   .market-table table {
     min-width: 650px;
+  }
+
+  .transactions th:nth-child(3),
+  .transactions td:nth-child(3) {
+    max-width:125px !important;
   }
 
 }

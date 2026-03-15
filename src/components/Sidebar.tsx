@@ -84,7 +84,8 @@ const Sidebar = () => {
                 {name || <Skeleton paragraph={false} active style={{ width: 80, height: 29 }} />}
               </div>
               <button onClick={mainModal.isOpen ? closeAllModal : mainModal.openModal}
-                      data-aos="fade-in" className="user-change">
+                      data-aos="fade-in" 
+                      className={`user-change ${mainModal.isClosing ? "closing" : ""}`}>
                         {mainModal.isOpen ? 'Закрыть' : 'Изменить'}
               </button>
             </div>
