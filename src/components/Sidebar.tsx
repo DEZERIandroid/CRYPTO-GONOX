@@ -11,11 +11,13 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
 import { useCloseModal } from "@/hooks/useCloseModal"
 import { useGetUsersQuery } from "../app/api/UsersApi"
 import { useState } from "react"
-import { CloseOutlined, EyeInvisibleOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons"
+import { CloseOutlined, EyeInvisibleOutlined, EyeOutlined, MenuOutlined, PlusOutlined } from "@ant-design/icons"
 import meduza from "../assets/SOL.jpg"
 import { signOut } from "firebase/auth"
 import { auth } from "@/firebase"
 import { clearUser } from "@/features/userSlice"
+import { useWindowSize } from "@uidotdev/usehooks"
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Sidebar = () => {
   const navigate = useNavigate()
@@ -24,6 +26,7 @@ const Sidebar = () => {
   const { data: users, } = useGetUsersQuery(undefined, {
       pollingInterval:3000
     });
+  const [burgerModal,setBurgerModal] = useState(false)
   const [watchingPass,setWatchingPass] = useState(false)
   const [emails, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +44,8 @@ const Sidebar = () => {
   const isTransactions = location.pathname.startsWith('/transactions');
   const isSetting = location.pathname.startsWith('/setting');
 
+  const size = useWindowSize();
+  const isMobile = size.width !== null && size.width <= 480;
 
   const handleWatchPassword = () => {
     setWatchingPass(!watchingPass)
@@ -64,6 +69,61 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-container">
+        {isMobile && (
+          <motion.div 
+            className="burger-menu"
+            onClick={() => setBurgerModal(!burgerModal)}
+            onMouseLeave={() => setBurgerModal(false)}
+            whileTap={{ scale: 1 }}
+          >
+            <MenuOutlined />
+                
+            <AnimatePresence>
+              {burgerModal && !mainModal.isOpen && (
+                <motion.nav 
+                  className="burger-items"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.13, ease: "easeInOut" }}
+                >
+                  {[
+                    { path: "/", icon: HomeIcon, label: "Главная", active: isHome },
+                    { path: "/topusers", icon: UsersIcon, label: "Пользователи", active: isUsers || isUsersTop },
+                    { path: "/market", icon: MarketIcon, label: "Рынок", active: isMarket },
+                    { path: "/transactions", icon: TransactionsIcon, label: "Транзакции", active: isTransactions },
+                    { path: "/setting", icon: SettingsIcon, label: "Настройки", active: isSetting }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item.path}
+                      initial={{ x: 0, opacity: 0 }}
+                      animate={{ y: 3, opacity: 1 }}
+                      transition={{ delay: index * 0.04, type: "spring", stiffness: 120 }}
+                    >
+                      <Link 
+                        to={item.path}
+                        className={item.active ? "burger-item-actived" : "burger-item"}
+                      >
+                        <item.icon className="sidebar-icon"/>
+                        <div className="burger-nav-link">{item.label}</div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </motion.nav>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+
+        {isAuthChecked && user && isMobile && (
+          <button 
+            onClick={mainModal.isOpen ? closeAllModal : mainModal.openModal}
+            data-aos="fade-in" 
+            className={`user-change-mobile ${mainModal.isClosing ? "closing" : ""}`}
+          >
+            {mainModal.isOpen ? 'Закрыть' : 'Изменить'}
+          </button>
+        )}
         <div className="sidebar-logo">
           <Link to="/" className="logo"></Link>
         </div>
@@ -132,9 +192,10 @@ const Sidebar = () => {
         </div>
 
         {mainModal.isOpen && (
-              <div data-aos="zoom-in-right"
+              <div data-aos={isMobile ? "zoom-in-down" : "zoom-in-right"}
                    data-aos-duration="150" 
-                   className={`modal-change ${mainModal.modalClass ? 'closing' : ''}`}>
+                   onClick={() => setBurgerModal(false)}
+                   className={isMobile ? `modal-change-mobile ${mainModal.modalClass ? 'closing' : ''}` : `modal-change ${mainModal.modalClass ? 'closing' : ''}`}>
                       <div className="exit-modal"
                            onClick={closeAllModal}>
                         <CloseOutlined className="exit-btn" />
@@ -178,7 +239,7 @@ const Sidebar = () => {
                       </div>
                       
                         {addModal.isOpen && (
-                            <div className={`account-add-modal ${addModal.modalClass ? 'closing' : ''}`}
+                            <div className={isMobile ? `account-add-modal-mobile ${addModal.modalClass ? 'closing' : ''}` : `account-add-modal ${addModal.modalClass ? 'closing' : ''}`}
                                     data-aos="zoom-in-down" 
                                     data-aos-duration="150"
                                     onClick={(e) => e.stopPropagation()} >

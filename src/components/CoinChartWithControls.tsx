@@ -50,48 +50,17 @@ const CoinChartWithControls: React.FC<CoinChartWithControlsProps> = ({ coinId })
 
   return (
     <div className="coin-chart-container">
-      <div className="chart-controls">
-        <button
-          className={timeRange === 1 ? "active" : ""}
-          onClick={() => handleTimeRangeChange(1)}
-        >
-          1 день
-        </button>
-        <button
-          className={timeRange === 7 ? "active" : ""}
-          onClick={() => handleTimeRangeChange(7)}
-        >
-          7 дней
-        </button>
-        <button
-          className={timeRange === 30 ? "active" : ""}
-          onClick={() => handleTimeRangeChange(30)}
-        >
-          30 дней
-        </button>
-        <button
-          className={timeRange === 90 ? "active" : ""}
-          onClick={() => handleTimeRangeChange(90)}
-        >
-          3 месяца
-        </button>
-        <button
-          className={timeRange === 365 ? "active" : ""}
-          onClick={() => handleTimeRangeChange(365)}
-        >
-          1 год
-        </button>
-        <button
-          className={timeRange === "max" ? "active" : ""}
-          onClick={() => handleTimeRangeChange("max")}
-        >
-          Все
-        </button>
-      </div>
-
       <div className="chart-wrapper">
         <CoinChart data={chartData} />
       </div>
+        <div className="chart-controls">
+          <button className={timeRange === 1 ? "active" : ""} onClick={() => handleTimeRangeChange(1)}>1 день</button>
+          <button className={timeRange === 7 ? "active" : ""} onClick={() => handleTimeRangeChange(7)}>7 дней</button>
+          <button className={timeRange === 30 ? "active" : ""} onClick={() => handleTimeRangeChange(30)}>30 дней</button>
+          <button className={timeRange === 90 ? "active" : ""} onClick={() => handleTimeRangeChange(90)}>3 месяца</button>
+          <button className={timeRange === 365 ? "active" : ""} onClick={() => handleTimeRangeChange(365)}>1 год</button>
+          <button className={timeRange === "max" ? "active" : ""} onClick={() => handleTimeRangeChange("max")}>Все</button>
+        </div>
     </div>
   );
 };

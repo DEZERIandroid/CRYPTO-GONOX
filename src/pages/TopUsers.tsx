@@ -30,6 +30,9 @@ const TopUsers = () => {
                                 
   },[sortedData,searchQuery])
 
+
+  
+
   if (isLoading) {
     return (
       <div className="page-container">

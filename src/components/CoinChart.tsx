@@ -25,6 +25,16 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
   }));
 
 
+  const formatNumber = (num:number) => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'k';
+    }
+    return num.toString();
+  };
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -72,37 +82,19 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
           vertical={false}
         />
 
-        {!isMobile && (
-          <XAxis
-            dataKey="timeLabel"
-            tick={{ fill: "#64748b", fontSize: 12 }}
-            axisLine={{ stroke: "#1e293b" }}
-            tickLine={false}
-          />
-        )}
-        
-          <YAxis
-            domain={["auto", "auto"]}
-            tick={{ fill: "#64748b", fontSize: 12 }}
-            axisLine={false}
-            hide={isMobile}
-            tickLine={false}
-            tickFormatter={(value) => `$${value}`}
-          />
-
         <Tooltip
           content={({ active, payload }) => {
             if (active && payload && payload.length) {
               return (
                 <div
-                  style={{
+                style={{
                     backdropFilter: "blur(12px)",
                     background: "rgba(15, 23, 42, 0.8)",
                     padding: "14px 18px",
                     borderRadius: "16px",
                     border: "1px solid rgba(45,129,255,0.5)",
                     boxShadow:
-                      "0 0 3px rgba(45,129,255,0.3)",
+                    "0 0 3px rgba(45,129,255,0.3)",
                     color: "#fff",
                   }}
                 >
@@ -129,18 +121,35 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
           type="monotone"
           dataKey="price"
           stroke="url(#lineBlueGradient)"
-          strokeWidth={2.5}
+          strokeWidth={2.3}
           fill="url(#deepBlueGradient)"
           dot={false}
           filter="url(#neonGlow)"
           isAnimationActive={true}
-          animationDuration={1400}
+          animationDuration={1500}
           activeDot={{
             r: 7,
             fill: "#2d81ff",
             stroke: "#fff",
             strokeWidth: 2,
           }}
+        />
+
+        <XAxis
+          className="Xaxis-chart"
+          dataKey="timeLabel"
+          tick={{ fill: "#64748b", fontSize: 12 }}
+          hide={isMobile}
+          axisLine={{ stroke: "#1e293b" }}
+          tickLine={false}
+        />
+        <YAxis
+            className="Yaxis-chart"
+            domain={["auto", "auto"]}
+            tick={{ fill: isMobile ? "#c6e1ff" : "#64748b", fontSize: 12,}}
+            width={isMobile ? 20 : 64}
+            axisLine={false}
+            tickFormatter={(value) => `$${isMobile ? formatNumber(value) : value}`}
         />
       </AreaChart>
     </ResponsiveContainer>

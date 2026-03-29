@@ -82,6 +82,7 @@
   animation: fadeIn 0.3s ease-in-out;
   margin-bottom: 20px;
   width: 100%;
+  margin-top: 30px;
 }
 
 .portfolio-title {
@@ -135,6 +136,10 @@
   background-color: #111111;
 }
 
+.crypto-item:first-child{
+  margin-top: 50px;
+}
+
 .crypto-left {
   display: flex;
   align-items: center;
@@ -162,6 +167,7 @@
   color: #dd9e15;
   font-size: 14px;
   font-weight: 600;
+  min-width: 105px;
 }
 
 .crypto-value {

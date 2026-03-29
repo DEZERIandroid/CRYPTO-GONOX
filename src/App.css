@@ -13,7 +13,7 @@
 
 .page-container {
   margin: 50px 0 0 45px;
-  max-width: 170vh;
+  max-width: none;
   border-radius: 13px;
   margin:50px 50px 0  45px;
 }
@@ -54,6 +54,7 @@
 
 .title-text {
   font-size: 27px;
+  white-space: nowrap;
 }
 
 .search-icon {
@@ -79,7 +80,7 @@
 .loading-logo {
   display: grid;
   place-content: center;
-  height: 100vh;
+  height: 100%;
   background: radial-gradient(circle at center, #12121a, #07070b);
   position: fixed;
   inset: 0;
@@ -125,9 +126,9 @@
 
 @keyframes shine {
   0% { transform: translateX(-100%); }
-  60% { transform: translateX(100%); }
-  95% { transform: translateX(-100%); }
-  120% { transform: translateX(100%); }
+  40% { transform: translateX(100%); }
+  65% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 @keyframes logoFade {

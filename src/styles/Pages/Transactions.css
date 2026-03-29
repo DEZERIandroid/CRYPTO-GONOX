@@ -33,7 +33,6 @@
   transition: all 0.2s ease;
 }
 
-
 /* Статусы транзакций */
 .status-success {
   color: #52c41a;
@@ -45,10 +44,15 @@
   display: inline-block;
 }
 
+.transactions {
+  padding: 8px;
+}
+
 .transactions th,
 .transactions td {
   padding: 23px 13px;
   max-width: 120px;
+  white-space: nowrap
 }
 .transactions th {
   font-size: 14px !important
@@ -86,6 +90,7 @@
 .transactions th:nth-child(5),
 .transactions td:nth-child(5){
   padding: 0 10px;
+  overflow: hidden
 }
 
 
@@ -156,7 +161,7 @@
   }
   .transactions tr {
     font-size: 15px;
-  }  
+  }
   .transactions-img {
     width: 40px !important;
     height: 40px !important;
@@ -204,12 +209,13 @@
   }
   .transactions th:nth-child(2),
   .transactions td:nth-child(2) {
-    max-width:85px !important;
-    padding: 15px 25px;
+    padding: 15px 0px !important;
+    min-width: 70px;
   }
   .transactions th:nth-child(3),
   .transactions td:nth-child(3) {
-    max-width:145px !important;
+    padding: 0 15px !important;
+    min-width:180px !important;
   }
   .transactions th:nth-child(6),
   .transactions td:nth-child(6) {
@@ -240,7 +246,7 @@
 
   .transactions th:nth-child(3),
   .transactions td:nth-child(3) {
-    max-width:125px !important;
+    min-width: 180px;
   }
 
 }
@@ -264,18 +270,16 @@
   }
   .transactions th:nth-child(2),
   .transactions td:nth-child(2) {
-    padding: 0 20px !important;
-    max-width: 90px;
+    padding: 0 5px !important;
   }
   .transactions th:nth-child(3),
   .transactions td:nth-child(3) {
     padding: 0 10px !important;
-    min-width: 140px !important;
+    min-width: 160px;
   }
   .transactions th:nth-child(4),
   .transactions td:nth-child(4) {
     padding: 0 10px !important;
-    max-width: 115px;
   }
   .transactions th {
     font-size: 12px;

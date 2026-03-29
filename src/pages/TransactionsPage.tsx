@@ -3,8 +3,10 @@ import "../styles/Pages/Transactions.css";
 import { useGetTransactionsQuery, type Transaction } from "../app/api/UsersApi";
 import { useState, useMemo } from "react";
 import { FloatButton, Select, Skeleton } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const TransactionsPage = () => {
+  const navigate = useNavigate()
   const { data, isError, isLoading } = useGetTransactionsQuery(undefined, {
     pollingInterval: 3000
   });
@@ -168,7 +170,7 @@ const TransactionsPage = () => {
                       return (
                         <tr key={`${item.timestamp}-${item.coinId}-${index}`}>
                           <td data-aos="fade-in" data-aos-once="false">{index + 1}</td>
-                          <td data-aos="fade-in" data-aos-once="false" className="transactions-imgSymbol">
+                          <td onClick={() => navigate(`/crypto/${item.coinId}`)} data-aos="fade-in" data-aos-once="false" className="transactions-imgSymbol">
                             <img className="transactions-img"
                               src={item.image}
                               alt={item.symbol}
@@ -177,7 +179,7 @@ const TransactionsPage = () => {
                               {item.symbol}
                             </div>
                           </td>
-                          <td data-aos="fade-in" data-aos-once="false" className="transactions-username">
+                          <td onClick={() => navigate(`/user/${item.Username}`)} data-aos="fade-in" data-aos-once="false" className="transactions-username">
                             {item.photoURL ? (
                               <img
                                 src={item.photoURL}

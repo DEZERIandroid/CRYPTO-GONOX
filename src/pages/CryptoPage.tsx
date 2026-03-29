@@ -259,6 +259,13 @@ const CryptoPage = () => {
             </div>
           </div>
         
+        <div data-aos="fade-in" className="coin-chart">
+          {id ? (
+            <CoinChartWithControls coinId={id} />
+          ) : (
+            <p className="error">Данные графика недоступны</p>
+          )}
+        </div>
 
         <div className="coin-stats">
           <div data-aos="fade-in" className="stat-block">
@@ -271,13 +278,6 @@ const CryptoPage = () => {
           </div>
         </div>
 
-        <div data-aos="fade-in" className="coin-chart">
-          {id ? (
-            <CoinChartWithControls coinId={id} />
-          ) : (
-            <p className="error">Данные графика недоступны</p>
-          )}
-        </div>
       </div>) : <div className="user-content crypto-content"> Ошибка загрузки данных</div> }
         {buyModal.isOpen && (
           <div className={`crypto-modal-overlay ${buyModal.isClosing ? "closing" : ""}`}>
