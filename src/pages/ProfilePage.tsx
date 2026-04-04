@@ -13,19 +13,21 @@ import { useAppSelector } from "../hooks/reduxHooks";
 import { CameraFilled } from "@ant-design/icons";
 import { useEffect,useState } from "react";
 import { useCloseModal } from "@/hooks/useCloseModal";
+import dayjs from 'dayjs';
 
 import "../styles/Pages/Profile.css"
 
 const ProfilePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { email, name, role } = useAppSelector(state => state.user);
+  const { email, name, role,  } = useAppSelector(state => state.user);
   const { data: users, isLoading, isError, refetch } = useGetUsersQuery(undefined, {
     pollingInterval:500
   });
   const [editPhotoURL,setEditPhotoURL] = useState("")
   const [succesGoogle,setSuccesGoogle] = useState(false)
   const user = users?.find((u) => u.email === email); 
+  const registerData = dayjs(user?.createdAt).format('DD.MM.YYYY');
   const photoURL = user?.photoURL
   const modal = useCloseModal(200)
 
@@ -163,7 +165,7 @@ const ProfilePage = () => {
                   </span>
                 </div>
                 <div  data-aos="fade-in" className="balance balance-crypto">
-                  <span className="stat-label">Баланс крипты</span>
+                  <span className="stat-label"><span>Баланс</span> <span>крипты</span></span>
                   <span className="stat-value">
                     {user.portfolio && user.portfolio.length > 0 
                       ? user.portfolio.reduce((sum, coin) =>
@@ -205,9 +207,13 @@ const ProfilePage = () => {
                     </div>
                     <div className="crypto-right">
                       <div className="crypto-amount">
-                        {amountNum < 0.01 
-                          ? amountNum.toFixed(5) 
-                          : amountNum.toFixed(2)} шт
+                        {
+                          amountNum < 0.01 
+                            ? amountNum.toFixed(5)
+                            : amountNum.toString().length > 7
+                              ? amountNum.toFixed(1)
+                              : amountNum.toFixed(2)
+                        } шт
                       </div>
                       <div className="crypto-value">
                         {(amountNum * (pricesData?.[coin.coinId]?.usd || coin.buyPrice)).toFixed(2)} $
@@ -222,8 +228,10 @@ const ProfilePage = () => {
           )}
         </div>
 
+
         <div data-aos="fade-in" className="profile-details">
-          <div  data-aos="fade-in" className="detail-item">
+          <div className="profile-title-details">Информация об аккаунте</div>
+          <div data-aos="fade-in" className="detail-item">
             <span className="label">Имя:</span>
             <span className="value">{name || "--"}</span>
           </div>
@@ -237,7 +245,11 @@ const ProfilePage = () => {
           </div>
           <div  data-aos="fade-in" className="detail-item">
             <span className="label">Роль:</span>
-            <span className="value">{role || "-"}</span>
+            <span className="value">{role === "user" ? "Пользователь" : "Администратор"}</span>
+          </div>
+          <div  data-aos="fade-in" className="detail-item">
+            <span className="label">Дата регистрации:</span>
+            <span className="value">{registerData}</span>
           </div>
           <div className="google-add">
             {!isGoogleLinked ? (

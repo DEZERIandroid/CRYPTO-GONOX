@@ -58,7 +58,7 @@ export interface Transaction {
   timestamp: number;
   status: 'success' | 'pending' | 'failed';
 }
-interface TopUsers {
+export interface TopUsers {
   id?:string;
   displayName?: string;
   cryptoTotalBalance?: number;

@@ -43,6 +43,7 @@ const Sidebar = () => {
   const isMarket = location.pathname.startsWith('/market');
   const isTransactions = location.pathname.startsWith('/transactions');
   const isSetting = location.pathname.startsWith('/setting');
+  const isProfile = location.pathname.startsWith('/profile');
 
   const size = useWindowSize();
   const isMobile = size.width !== null && size.width <= 480;
@@ -134,7 +135,7 @@ const Sidebar = () => {
               <div className="avatar-container">
               <Link  data-aos="fade-in" to="/profile">
                 {user.photoURL ? (
-                  <img className="user-avatar" src={photoURL} alt="Аватар" />
+                  <img  className="user-avatar" style={{border:isProfile ? "1px solid white" : ""}} src={photoURL} alt="Аватар" />
                 ) : (
                   <Skeleton.Avatar active style={{ width: "90px", height: "90px" }} />
                 )}
@@ -193,7 +194,7 @@ const Sidebar = () => {
 
         {mainModal.isOpen && (
               <div data-aos={isMobile ? "zoom-in-down" : "zoom-in-right"}
-                   data-aos-duration="150" 
+                   data-aos-duration="150"
                    onClick={() => setBurgerModal(false)}
                    className={isMobile ? `modal-change-mobile ${mainModal.modalClass ? 'closing' : ''}` : `modal-change ${mainModal.modalClass ? 'closing' : ''}`}>
                       <div className="exit-modal"

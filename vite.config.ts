@@ -10,5 +10,21 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src")
     }
+  },
+  build: {
+  rollupOptions: {
+    output: {
+      manualChunks(id) {
+        // Выносим Firebase в отдельный файл, так как он самый жирный
+        if (id.includes('node_modules/@firebase') || id.includes('node_modules/firebase')) {
+          return 'firebase-bundle';
+        }
+        // Все остальные библиотеки из node_modules пойдут в vendor
+        if (id.includes('node_modules')) {
+          return 'vendor';
+        }
+      }
+    }
   }
+}
 })

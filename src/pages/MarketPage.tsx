@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { ReloadOutlined } from "@ant-design/icons";
 import { useGetUsersQuery } from "@/app/api/UsersApi";
 import { useAppSelector } from "@/hooks/reduxHooks";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const MarketPage = () => {
   const { data, isLoading, isError, refetch } = useGetCryptosQuery(undefined , {
@@ -22,6 +23,9 @@ const MarketPage = () => {
   const [searchQuery,setSearchQuery] = useState<string>("")
 
   const navigate = useNavigate()
+
+  const size = useWindowSize()
+  const isMobile = size.width !== null && size.width >= 480
 
   
   const filtres = ["Все","Топ-10","Растущие","Падающие","Избранное"]
@@ -80,32 +84,10 @@ const MarketPage = () => {
   }
 
   if (isLoading) return <div className="page-container">
-      <div className="page-header">
-        <div className="header-title">
-          <div className="title-text">Рынок</div>
-        </div>
-          <div className="header-input">
-            <SearchOutlined className="search-icon" />
-            <input
-              className="input"
-              type="text"
-              placeholder="Поиск криптовалюты..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-            <Select   
-              className="filter-select"
-              value={filter}
-              onChange={(value) => setFilter(value)}
-              options={selectOptions}
-            />
-      </div>
-
-      <div className="market-content">
+      <div className="market-content" style={{marginTop:"10px"}}>
         <div className="market-table">
           <table>
-            <thead>
+            {isMobile ? <thead>
               <tr>
                 <th>#</th>
                 <th>Криптовалюта</th>
@@ -115,6 +97,7 @@ const MarketPage = () => {
                 <th>Объём (24ч)</th>
               </tr>
             </thead>
+            : null}
           </table>
         </div>
         <Skeleton avatar active paragraph={{ rows: 1 }} />
@@ -159,18 +142,24 @@ const MarketPage = () => {
       </div>
 
       <div className="market-content">
-        <div className="market-table">
+        <div className="market-table"
+             style={{padding:!isMobile ? "5px" : "0px"}}>
           <table>
             <thead>
               <tr>
                 <th>#</th>
                 <th>Криптовалюта</th>
                 <th>Цена</th>
-                <th>Изменение за 24ч</th>
-                <th>Рыночная капитализация</th>
-                <th>Объём (24ч)</th>
+                {isMobile ?
+                  <>
+                    <th>Изменение за 24ч</th>
+                    <th>Рыночная капитализация</th>
+                    <th>Объём (24ч)</th>
+                  </>
+                : null}
               </tr>
             </thead>
+            
             {!isError ? (<tbody>
               {filteredData.map((coin, index) => (
                 <tr onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
@@ -189,15 +178,34 @@ const MarketPage = () => {
                       </div>
                     </div>
                   </td>
-                  <td data-aos="fade-in" data-aos-once="false" className="coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                  <td data-aos="fade-in" data-aos-once="false">
-                    <span className={coin.price_change_percentage_24h >= 0 ? "change-positive" : "change-negative"}>
-                      {coin.price_change_percentage_24h >= 0 ? <RiseOutlined /> : <FallOutlined />}
-                      {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
-                    </span>
-                  </td>
-                  <td data-aos="fade-in" data-aos-once="false">${(coin.market_cap / 1e9).toFixed(1)}B</td>
-                  <td data-aos="fade-in" data-aos-once="false">${(coin.total_volume / 1e9).toFixed(1)}B</td>
+                  {isMobile ?
+                    <>
+                      <td data-aos="fade-in" data-aos-once="false" className="coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                      <td data-aos="fade-in" data-aos-once="false">
+                        <span className={coin.price_change_percentage_24h >= 0 ? "change-positive" : "change-negative"}>
+                          {coin.price_change_percentage_24h >= 0 ? <RiseOutlined /> : <FallOutlined />}
+                          {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
+                        </span>
+                      </td>
+                    </>:
+                    <>
+                      <td className="price-mobile">
+                        <div data-aos="fade-in" data-aos-once="false" className="coin-prices coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                        <div data-aos="fade-in" data-aos-once="false">
+                          <span className={coin.price_change_percentage_24h >= 0 ? "change-mobile change-positive" : "change-mobile change-negative"}>
+                            {coin.price_change_percentage_24h >= 0 ? <RiseOutlined /> : <FallOutlined />}
+                            {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
+                          </span>
+                        </div> 
+                      </td>
+                    </> 
+                  }
+                  {isMobile ? 
+                    <>
+                      <td data-aos="fade-in" data-aos-once="false">${(coin.market_cap / 1e9).toFixed(1)}B</td>
+                      <td data-aos="fade-in" data-aos-once="false">${(coin.total_volume / 1e9).toFixed(1)}B</td>
+                    </>
+                  : null}
                 </tr>
               ))}
             </tbody>): 

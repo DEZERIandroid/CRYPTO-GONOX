@@ -5,6 +5,8 @@
   animation: fadeIns 0.15s ease-in-out;
   position: relative;
   height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px !important;
 }
 
 /* ===== Заголовок монеты ===== */
@@ -13,7 +15,18 @@
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  margin-top: 40px;
+  margin-top: 50px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  padding: 15px 13px;
+  width: 100%;
+  margin-left: 0 !important;
 }
 
 .coin-logo{
@@ -23,7 +36,8 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: #0e0d12;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
   object-fit: cover;
 }
@@ -80,7 +94,8 @@
 }
 
 .return-btn {
-  background-color: rgba(14, 13, 20, 0.726);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgb(211, 211, 211);
   padding: 8px 16px;
@@ -139,9 +154,9 @@
   display: flex;
   place-content: center;
   width: 191px;
-  background-color: #141318;
-  color: #f1c40f;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #a38600;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0);
 }
 
 .coin-btn.favorite:hover {
@@ -166,7 +181,9 @@
 }
 
 .crypto-modal {
-  background-color: #141318;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.158);
   padding: 25px;
   border-radius: 20px;
   width: 400px;
@@ -189,11 +206,17 @@
   height: 50px;
   padding: 0 15px;
   border-radius: 12px;
-  border: none;
-  background-color: #0e0d12;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   color: #fff;
   font-size: 18px;
   outline: none;
+  transition: all 0.1s ease-in-out;
 }
 
 .modal-buttons {
@@ -301,12 +324,17 @@
 }
 
 .stat-block {
-  background-color: #141318;
+  background: none;
   border-radius: 16px;
   padding: 20px 30px;
   flex: 1 1 300px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
 .stat-label {
@@ -324,22 +352,31 @@
 
 /* ===== График ===== */
 .chart-placeholder {
-  background-color: #141318;
   height: 350px;
   border-radius: 20px;
   display: grid;
   place-content: center;
   color: #888;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
 .coin-chart {
-  background-color: #141318;
+  background: none;
   padding: 20px;
   border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   min-height: 300px;
 }
 
@@ -515,6 +552,7 @@
     text-align: center;
     gap: 15px;
     margin: 25px 40px;
+    margin-top: 50px;
   }
 
   .coin-logo img {

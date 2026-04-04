@@ -146,8 +146,8 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
         <YAxis
             className="Yaxis-chart"
             domain={["auto", "auto"]}
-            tick={{ fill: isMobile ? "#c6e1ff" : "#64748b", fontSize: 12,}}
-            width={isMobile ? 20 : 64}
+            tick={{ fill: isMobile ? "#c6e1ff" : "#e0e0e0", fontSize: 12,}}
+            width={isMobile ? 30 : 64}
             axisLine={false}
             tickFormatter={(value) => `$${isMobile ? formatNumber(value) : value}`}
         />

@@ -1,23 +1,32 @@
-import { Icon, Switch } from "@chakra-ui/react"
-import { FaMoon, FaSun } from "react-icons/fa"
-import "../styles/Components/Sidebar.css"
+import { Switch } from "antd";
+import { SunOutlined, MoonOutlined } from "@ant-design/icons";
+import "../styles/Components/Sidebar.css";
 
 const ThemeToggle = () => {
-  return (
-    <div>
-        <Switch.Root  className="theme" colorPalette="blue" size="lg">
-            <Switch.HiddenInput />
-            <Switch.Label color={"whiteAlpha.700"} fontSize={"17px"} className="Light">Light</Switch.Label>
-            <Switch.Control >
-              <Switch.Thumb background={"blackAlpha.500"}/>
-              <Switch.Indicator  fallback={<Icon as={FaMoon} color="gray.800" />}>
-                <Icon as={FaSun} color="yellow.400" />
-              </Switch.Indicator>
-            </Switch.Control>
-            <Switch.Label color={"whiteAlpha.700"} fontSize={"17px"} className="Dark">Dark</Switch.Label>
-        </Switch.Root>
-    </div>
-  )
-}
+  const onChange = (checked:any) => {
+    console.log(`switch to ${checked ? 'dark' : 'light'}`);
+  };
 
-export default ThemeToggle
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <span className="Light" style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '17px' }}>
+        Light
+      </span>
+
+      <Switch
+        className="theme"
+        defaultChecked
+        onChange={onChange}
+        checkedChildren={<SunOutlined style={{ color: '#fadb14' }} />} 
+        unCheckedChildren={<MoonOutlined style={{ color: '#8c8c8c' }} />}
+        size="default" 
+      />
+
+      <span className="Dark" style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '17px' }}>
+        Dark
+      </span>
+    </div>
+  );
+};
+
+export default ThemeToggle;

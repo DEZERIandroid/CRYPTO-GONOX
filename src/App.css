@@ -1,7 +1,11 @@
 .wrapper {
-    display: flex;
-    min-height: 100vh;
-    background-color: #0f0f12;
+  display: flex;
+  min-height: 100vh;
+  background: -webkit-linear-gradient(150deg, rgba(0, 84, 219, 0.750) 23%, rgb(0, 0, 0) 55%);
+  background: -moz-linear-gradient(150deg, rgba(0, 84, 219, 0.750) 23%, rgb(0, 0, 0) 55%);
+  background: linear-gradient(150deg, rgba(0, 84, 219, 0.750) 23%, rgb(0, 0, 0) 55%);
+  background-size: 200% 200%;
+  animation: gradientShift 220s ease infinite;
 }
 
 .main-content {
@@ -37,7 +41,7 @@
 
 .page-header {
   display: flex;
-  background-color: #141318;
+  backdrop-filter: blur(10px);
   justify-content: space-between;
   padding: 40px 70px !important;
   margin-bottom: 35px;
@@ -46,10 +50,13 @@
   align-items: center;
   box-sizing: border-box;
   border-radius: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
   box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.2),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
 .title-text {
@@ -81,12 +88,15 @@
   display: grid;
   place-content: center;
   height: 100%;
-  background: radial-gradient(circle at center, #12121a, #07070b);
+  background: -webkit-linear-gradient(130deg, rgb(4, 40, 99) 13%, rgb(0, 0, 0) 40%);
+  background: -moz-linear-gradient(130deg, rgb(4, 40, 99) 13%, rgb(0, 0, 0) 40%);
+  background: linear-gradient(130deg, rgb(4, 40, 99) 13%, rgb(0, 0, 0) 40%);
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
   position: fixed;
   inset: 0;
   z-index: 99999;
   overflow: hidden;
-
   opacity: 1;
   transition: opacity 0.2s ease;
 }
@@ -97,6 +107,7 @@
 
 .logo-loading {
   transition: transform 0.6s ease, opacity 0.6s ease;
+  
 }
 
 .logo-loading.fade-out {
@@ -122,6 +133,18 @@
     transparent 60%
   );
   animation: shine 4.5s infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes shine {

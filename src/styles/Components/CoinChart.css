@@ -1,5 +1,5 @@
 .coin-chart-container {
-  background-color: #141318;
+  background: rgba(0, 0, 0, 0.068);
   border-radius: 13px;
   padding: 50px 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
@@ -18,9 +18,14 @@
 }
 
 .chart-controls button {
-  background-color: #0e0d12;
   color: #aaa;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   padding: 12px 36px;
   border-radius: 12px;
   cursor: pointer;
@@ -33,14 +38,20 @@
 }
 
 .chart-controls button:hover {
-  background-color: #141416;
+  background: rgba(255, 255, 255, 0.10);
   color: white;
   border-color: #2d2f33;
   
 }
 
 .chart-controls button.active {
-  background-color: #07101d;
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   color: white;
   border-color: #2d81ff;
 }

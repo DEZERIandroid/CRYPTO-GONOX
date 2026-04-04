@@ -71,14 +71,6 @@ const UserPage = () => {
         </div>
 
         <div data-aos="fade-in" className="user-stats" style={{marginBottom:30}}>
-          <div className="stat-block" style={{marginBottom:5}}>
-            <span className="stat-label">Дата регистрации</span>
-            <span className="stat-value">
-              {user.createdAt
-                ? new Date(user.createdAt).toLocaleDateString()
-                : "Неизвестно"}
-            </span>
-          </div>
           <div data-aos="fade-in" className="stat-block stat-block-balance">
                 <div className="balance balance-user">
                   <span className="stat-label">Баланс пользователя</span>
@@ -95,6 +87,14 @@ const UserPage = () => {
                       : "0"} $
                   </span>
                 </div>
+          </div>
+          <div className="stat-block" style={{marginBottom:5}}>
+            <span className="stat-label">Дата регистрации</span>
+            <span className="stat-value stat-value-data">
+              {user.createdAt
+                ? new Date(user.createdAt).toLocaleDateString()
+                : "Неизвестно"}
+            </span>
           </div>
         </div>
 

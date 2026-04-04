@@ -5,10 +5,15 @@
   height: 40px;
 }
 .filter-select .ant-select-selector {
-  background-color: #0e0d12 !important;
   color: #fff !important;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   border-radius: 10px !important;
   padding: 1px 16px !important;
   font-size: 15px !important;
@@ -31,13 +36,19 @@
 /* ===== MARKET CARD ===== */
 
 .market-content {
-  background: linear-gradient(180deg,#141318,#1a1921);
+  backdrop-filter: blur(30px);
   border-radius: 13px;
   padding: 28px;
+  animation: fadeIns 0.15s ease-in-out;
   min-height: 500px;
   color: #e0e0e0;
-  border: 1px solid rgba(255,255,255,0.05);
-  animation: fadeIns 0.15s ease-in-out;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
 /* ===== TABLE ===== */
@@ -82,7 +93,7 @@
 }
 
 .market-table tbody tr:hover {
-  background: linear-gradient(90deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+  background: linear-gradient(90deg,rgba(255,255,255,0.08),rgba(255,255,255,0.08));
   border-left: 1px solid #ffffffbd;
   border-right: 1px solid #ffffffbd;
 }
@@ -110,7 +121,15 @@
 .coin-prices {
   font-weight: bolder;
   color: rgba(255, 255, 255, 0.925);
-  border-bottom: 1px solid #ffffff15 !important;
+}
+
+.price-mobile {
+  text-align: end !important;
+}
+
+.change-mobile {
+  display: flex;
+  justify-content: end;
 }
 
 .coin-name .symbol {
@@ -246,7 +265,6 @@
 
   .market-table table {
     font-size: 14px;
-    min-width: 550px;
   }
 
   .market-table th,
@@ -309,7 +327,6 @@
 
   .market-table table {
     font-size: 13px;
-    min-width: 500px;
   }
 
   .market-table th,
@@ -397,7 +414,6 @@
 
   .market-table table {
     font-size: 14px;
-    min-width: 550px;
   }
 
   .market-table th,
@@ -466,7 +482,8 @@
 
   .market-table table {
     font-size: 13px;
-    min-width: 500px;
+    width: 100% !important;
+    min-width: unset !important;
   }
 
   .market-table th,
@@ -483,23 +500,23 @@
   }
 
   .coin-icon {
-    width: 30px;
-    height: 30px;
+    width: 40px !important;
+    height: 40px !important;
   }
 
   .coin-name .name {
-    font-size: 14px;
+    font-size: 17px !important;
   }
 
   .coin-name .symbol {
-    font-size: 12px;
+    font-size: 14px !important;
   }
   .coin-prices {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   .change-positive,
   .change-negative {
-    font-size: 14px;
+    font-size: 15px;
   }
 }

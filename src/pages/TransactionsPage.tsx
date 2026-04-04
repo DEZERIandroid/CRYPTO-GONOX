@@ -42,6 +42,7 @@ const TransactionsPage = () => {
     );
   }, [sortedData, searchQuery]);
 
+
   if (isLoading) return (
     <div className="page-container">
       <div className="page-header">

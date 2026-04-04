@@ -8,11 +8,8 @@ body,html{
   letter-spacing: 0.1px;
 }
 
-a{
-  text-decoration: none;
-}
 
-button {
+button,a {
   background: none;
   border: none;
   padding: 0;
@@ -24,6 +21,7 @@ button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  -webkit-appearance: none;
 }
 
 
@@ -99,4 +97,14 @@ input:disabled {
 /* При наведении на элемент со скроллом — подсветка скроллбара (Firefox) */
 *:hover {
   scrollbar-color: #666 transparent;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }

@@ -15,11 +15,14 @@
   height: 99.5vh;
   flex-direction: column;
   justify-content: center;
-  background-color: #141318;
   border-radius: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
 .sidebar-logo{
@@ -100,11 +103,12 @@
 }
 .item {
   padding: 18px 35px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-out !important;
   border-radius: 15px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  border: 1px solid #00000000;
 }
 .item-actived {
   padding: 18px 35px;
@@ -113,19 +117,37 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.404) ;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   color: white;
   padding-bottom:17px ;
 }
 
 .item-actived:hover{
-  background-color: rgb(67, 67, 67);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 .item-actived:hover .nav-link{
   color: white;
 }
 .item:hover{
-  background-color: rgb(67, 67, 67);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 .item:hover .nav-link{
   color: white;
@@ -188,7 +210,9 @@
   left: 180px;
   width: 450px;
   padding: 35px;
-  background-color: #141318;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.267);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
@@ -208,7 +232,9 @@
   left: 20px;
   width: 350px;
   padding: 35px;
-  background-color: #141318;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(130px);
+  -webkit-backdrop-filter: blur(30px);
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.267);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
@@ -232,6 +258,13 @@
   min-width: 85px ;
   order: 3;
   margin-left: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 .user-change-mobile.closing {
   opacity: 0.1;
@@ -260,8 +293,13 @@
   transition: all 0.15s ease-in-out;
 }
 .account:hover {
-  background-color: #161515;
-  border: 1px solid #bebebed3;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
 
@@ -389,15 +427,19 @@
   display: grid;
   gap: 20px;
   position: absolute;
-  top: 230px;
+  top: 250px;
   left: 35px;
   width: 380px;
   padding: 35px;
-  background-color: rgb(22, 22, 24);
   border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.774);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  backdrop-filter: blur(10px);
 }
 .account-add-modal.closing {
   transform: scale(0.90) translateY(-30px);
@@ -407,15 +449,20 @@
   display: grid;
   gap: 20px;
   position: absolute;
-  top: 230px;
-  left: -10px;
+  top: 280px;
+  left: 0px;
   width: 350px;
   padding: 35px;
-  background-color: rgb(22, 22, 24);
   border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.774);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 .account-add-modal-mobile.closing {
   transform: scale(0.90) translateY(-30px);
@@ -515,7 +562,7 @@
 /* ------- BURGER -------- */
 
 .burger-menu {
-  background-color: #141318;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -528,15 +575,24 @@
 }
 
 .burger-items {
+  
   margin-top: 10px;
   margin-left: -15px;
   position: absolute;
   top: 60px; 
   width: 280px;
   max-width: 90vw;
-  background-color: rgb(22, 22, 24);
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0.344);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.178);
+  transform-origin: top;
   overflow: hidden;
   border-radius: 15px;
   padding: 10px 0;
@@ -562,7 +618,7 @@
 }
 
 .burger-item:hover {
-  background-color: rgb(67, 67, 67);
+  background: rgba(255, 255, 255, 0.15);
   color: white;
 }
 
@@ -572,8 +628,13 @@
 
 .burger-item-actived {
   color: white;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.404);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   padding-bottom: 15px;
 }
 
@@ -671,8 +732,9 @@
     align-items: center;
     z-index: 1000;
     border-radius: 0;
-    background-color: #141318;
-    padding: 0 16px;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(30px);
+    padding: 0 15px;
     box-sizing: border-box;
     width: 100%;
   }
@@ -834,6 +896,7 @@
   .sidebar-container {
     display: flex;
     justify-content: space-between;
+    padding: 0px 10px;
   }
   .burger-menu {
     display: grid;
@@ -897,11 +960,9 @@
   }
   .sidebar-container {
     display: flex;
-    justify-content: space-between;
-    padding: 15px;
-  }
-  .user-change-mobile{
-    margin-left: 20px;
+    justify-content: space-around;
+    padding: 0 10px;
+    margin-right: 30px !important;
   }
 }
 
