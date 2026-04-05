@@ -277,8 +277,11 @@ const ProfilePage = () => {
       </div>
 
       {modal.isOpen && (
-        <div className={`photo-modal-overlay ${modal.isClosing ? "closing" : "" }`}>
-          <div data-aos="zoom-in-down" data-aos-duration="150" className={`photo-modal ${modal.isClosing ? "closing" : ""} `}>
+        <div className={`photo-modal-overlay ${modal.isClosing ? "closing" : "" }`}
+             onClick={() => modal.closeModal()}>
+          <div data-aos="zoom-in-down" data-aos-duration="150"
+               className={`photo-modal ${modal.isClosing ? "closing" : ""} `}
+               onClick={(e) => e.stopPropagation()}>
             <h2>Изменить фото</h2>
 
             <input

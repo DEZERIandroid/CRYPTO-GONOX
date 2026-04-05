@@ -79,41 +79,9 @@ const Sidebar = () => {
           >
             <MenuOutlined />
                 
-            <AnimatePresence>
-              {burgerModal && !mainModal.isOpen && (
-                <motion.nav 
-                  className="burger-items"
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.13, ease: "easeInOut" }}
-                >
-                  {[
-                    { path: "/", icon: HomeIcon, label: "Главная", active: isHome },
-                    { path: "/topusers", icon: UsersIcon, label: "Пользователи", active: isUsers || isUsersTop },
-                    { path: "/market", icon: MarketIcon, label: "Рынок", active: isMarket },
-                    { path: "/transactions", icon: TransactionsIcon, label: "Транзакции", active: isTransactions },
-                    { path: "/setting", icon: SettingsIcon, label: "Настройки", active: isSetting }
-                  ].map((item, index) => (
-                    <motion.div
-                      key={item.path}
-                      initial={{ x: 0, opacity: 0 }}
-                      animate={{ y: 3, opacity: 1 }}
-                      transition={{ delay: index * 0.04, type: "spring", stiffness: 120 }}
-                    >
-                      <Link 
-                        to={item.path}
-                        className={item.active ? "burger-item-actived" : "burger-item"}
-                      >
-                        <item.icon className="sidebar-icon"/>
-                        <div className="burger-nav-link">{item.label}</div>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </motion.nav>
-              )}
-            </AnimatePresence>
+            
           </motion.div>
+          
         )}
 
         {isAuthChecked && user && isMobile && (
@@ -191,11 +159,54 @@ const Sidebar = () => {
         <div data-aos="fade-in" className="sidebar-theme-toggle">
           <ThemeToggle />
         </div>
+        
+      </div>
 
-        {mainModal.isOpen && (
+
+      <AnimatePresence>
+        {burgerModal && !mainModal.isOpen && (
+          <div className="burger-modal-overlay" 
+               onClick={() => setBurgerModal(false)}>
+          <motion.nav 
+            className="burger-items"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.13, ease: "easeInOut" }}
+          >
+            {[
+              { path: "/", icon: HomeIcon, label: "Главная", active: isHome },
+              { path: "/topusers", icon: UsersIcon, label: "Пользователи", active: isUsers || isUsersTop },
+              { path: "/market", icon: MarketIcon, label: "Рынок", active: isMarket },
+              { path: "/transactions", icon: TransactionsIcon, label: "Транзакции", active: isTransactions },
+              { path: "/setting", icon: SettingsIcon, label: "Настройки", active: isSetting }
+            ].map((item, index) => (
+              <motion.div
+                key={item.path}
+                initial={{ x: 0, opacity: 0 }}
+                animate={{ y: 3, opacity: 1 }}
+                transition={{ delay: index * 0.04, type: "spring", stiffness: 120 }}
+              >
+                <Link 
+                  to={item.path}
+                  className={item.active ? "burger-item-actived" : "burger-item"}
+                >
+                  <item.icon className="sidebar-icon"/>
+                  <div className="burger-nav-link">{item.label}</div>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.nav>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {mainModal.isOpen && (
+              <div className="modal-overlay"
+                   onClick={closeAllModal}>
               <div data-aos={isMobile ? "zoom-in-down" : "zoom-in-right"}
                    data-aos-duration="150"
-                   onClick={() => setBurgerModal(false)}
+                   onClick={(e) => e.stopPropagation()}
                    className={isMobile ? `modal-change-mobile ${mainModal.modalClass ? 'closing' : ''}` : `modal-change ${mainModal.modalClass ? 'closing' : ''}`}>
                       <div className="exit-modal"
                            onClick={closeAllModal}>
@@ -235,57 +246,63 @@ const Sidebar = () => {
                       <div className="account-add">
                          <button className="account-add-btn" 
                                  onClick={addModal.isOpen ? addModal.closeModal : addModal.openModal}>
-                           <PlusOutlined className="plus"/>Добавить аккаунт
+                           {!addModal.isOpen ? 
+                            <><PlusOutlined className="plus"/>Добавить аккаунт</> 
+                            : <><CloseOutlined className="plus"/>Закрыть</>
+                           }
                          </button>
-                      </div>
-                      
-                        {addModal.isOpen && (
-                            <div className={isMobile ? `account-add-modal-mobile ${addModal.modalClass ? 'closing' : ''}` : `account-add-modal ${addModal.modalClass ? 'closing' : ''}`}
-                                    data-aos="zoom-in-down" 
-                                    data-aos-duration="150"
-                                    onClick={(e) => e.stopPropagation()} >
-                                <div className="account-add-modal-inputs">
-                                  <input
-                                      className="account-add-modal-input-email"
-                                      type="email"
-                                      placeholder="Почта"
-                                      value={emails}
-                                      onChange={(e) => {
-                                        setEmail(e.target.value)
-                                      }}
-                                    />
-                                    <div className="account-add-modal-password-watch">
-                                      <input
-                                        className="account-add-modal-input-password"
-                                        type={watchingPass ? "text" : "password"}
-                                        placeholder="Пароль"
-                                        value={password}
-                                        onChange={(e) => {
-                                          setPassword(e.target.value)
-                                        }}
-                                      />
-                                      <div className="account-add-modal-watch" onClick={handleWatchPassword}>
-                                        {watchingPass ? <EyeOutlined/> : <EyeInvisibleOutlined/>}
-                                      </div>
-                                    </div>
-                                </div>
-                                <div className="buttons-account">
-                                  <button className="button-add-account"
-                                          onClick={addModal.closeModal}
-                                  >
-                                    Добавить
-                                  </button>
-                                  <button className="button-modal-close"
-                                          onClick={addModal.closeModal}
-                                  >
-                                    Отмена
-                                  </button>
-                                </div>
-                              </div>
-                        )}
-                        </div>
+                      </div>           
+                </div>
+                </div>
         )}
-      </div>
+          {addModal.isOpen && (
+                <div className="modal-overlay"
+                     onClick={() => addModal.closeModal()}>
+                <div className={isMobile ? `account-add-modal-mobile ${addModal.modalClass ? 'closing' : ''}` : `account-add-modal ${addModal.modalClass ? 'closing' : ''}`}
+                      data-aos="zoom-in-down" 
+                      data-aos-duration="150"
+                      onClick={(e) => e.stopPropagation()} >
+                  <div className="account-add-modal-inputs">
+                    <input
+                        className="account-add-modal-input-email"
+                        type="email"
+                        placeholder="Почта"
+                        value={emails}
+                        onChange={(e) => {
+                          setEmail(e.target.value)
+                        }}
+                      />
+                      <div className="account-add-modal-password-watch">
+                        <input
+                          className="account-add-modal-input-password"
+                          type={watchingPass ? "text" : "password"}
+                          placeholder="Пароль"
+                          value={password}
+                          onChange={(e) => {
+                            setPassword(e.target.value)
+                          }}
+                        />
+                        <div className="account-add-modal-watch" onClick={handleWatchPassword}>
+                          {watchingPass ? <EyeOutlined/> : <EyeInvisibleOutlined/>}
+                        </div>
+                      </div>
+                  </div>
+                  <div className="buttons-account">
+                    <button className="button-add-account"
+                            onClick={addModal.closeModal}
+                    >
+                      Добавить
+                    </button>
+                    <button className="button-modal-close"
+                            onClick={addModal.closeModal}
+                    >
+                      Отмена
+                    </button>
+                  </div>
+                </div>
+                </div>
+            )}
+            
     </div>
   )
 }

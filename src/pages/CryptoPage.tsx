@@ -280,8 +280,11 @@ const CryptoPage = () => {
 
       </div>) : <div className="user-content crypto-content"> Ошибка загрузки данных</div> }
         {buyModal.isOpen && (
-          <div className={`crypto-modal-overlay ${buyModal.isClosing ? "closing" : ""}`}>
-            <div data-aos="zoom-in" data-aos-duration="150" className={`crypto-modal ${buyModal.isClosing ? "closing" : ""}`}>
+          <div className={`crypto-modal-overlay ${buyModal.isClosing ? "closing" : ""}`}
+               onClick={() => buyModal.closeModal()}>
+            <div data-aos="zoom-in" data-aos-duration="150"
+                className={`crypto-modal ${buyModal.isClosing ? "closing" : ""}`}
+                onClick={(e) => e.stopPropagation()}>
               <h2>Покупка {coin.name}</h2>
               <p style={{textAlign:"right",
                         color:buyError ? "red" : "white",
@@ -313,8 +316,11 @@ const CryptoPage = () => {
         )}
 
         {sellModal.isOpen && (
-          <div className={`crypto-modal-overlay ${sellModal.isClosing ? "closing" : ""}`}>
-            <div data-aos="zoom-in" data-aos-duration="150" className={`crypto-modal ${sellModal.isClosing ? "closing" : ""}`}>
+          <div className={`crypto-modal-overlay ${sellModal.isClosing ? "closing" : ""}`}
+               onClick={() => sellModal.closeModal()}>
+            <div data-aos="zoom-in" data-aos-duration="150"
+                 className={`crypto-modal ${sellModal.isClosing ? "closing" : ""}`}
+                 onClick={(e) => e.stopPropagation()}>
               <h2>Продажа {coin.name}</h2>
               <p style={{textAlign:"right",
                         color:sellError ? "red" : "white",

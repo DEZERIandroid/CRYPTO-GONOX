@@ -25,7 +25,10 @@ const MarketPage = () => {
   const navigate = useNavigate()
 
   const size = useWindowSize()
-  const isMobile = size.width !== null && size.width >= 480
+  const isReady = size.width !== null;
+  const isMobile = size.width !== null && size.width >= 480;
+
+  
 
   
   const filtres = ["Все","Топ-10","Растущие","Падающие","Избранное"]
@@ -82,24 +85,52 @@ const MarketPage = () => {
   const handleReloadChart = () => {
     refetch()
   }
-
+  if (!isReady) return null;
   if (isLoading) return <div className="page-container">
+      <div className="page-header">
+        <div className="header-title">
+          <div className="title-text">Рынок</div>
+        </div>
+          <div className="header-input">
+            <SearchOutlined className="search-icon" />
+            <input
+              className="input"
+              type="text"
+              placeholder="Поиск криптовалюты..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+            <Select   
+              className="filter-select"
+              value={filter}
+              onChange={(value) => setFilter(value)}
+              options={selectOptions}
+            />
+      </div>
       <div className="market-content" style={{marginTop:"10px"}}>
         <div className="market-table">
           <table>
-            {isMobile ? <thead>
+            <thead>
               <tr>
                 <th>#</th>
                 <th>Криптовалюта</th>
                 <th>Цена</th>
-                <th>Изменение за 24ч</th>
-                <th>Рыночная капитализация</th>
-                <th>Объём (24ч)</th>
+                {isMobile ? 
+                  <>
+                    <th>Изменение за 24ч</th>
+                    <th>Рыночная капитализация</th>
+                    <th>Объём (24ч)</th>
+                  </>
+                : null}
               </tr>
             </thead>
-            : null}
           </table>
         </div>
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
+        <br />
+        <Skeleton avatar active paragraph={{ rows: 1 }} />
+        <br />
         <Skeleton avatar active paragraph={{ rows: 1 }} />
         <br />
         <Skeleton avatar active paragraph={{ rows: 1 }} />
@@ -217,7 +248,7 @@ const MarketPage = () => {
           </table>
         </div> 
       </div> 
-      <FloatButton.BackTop  className="float-button"/>
+      <FloatButton.BackTop className="float-button"/>
     </div>
   );
 };

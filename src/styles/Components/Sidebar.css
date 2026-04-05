@@ -80,6 +80,7 @@
   font-size: 15.5px;
   padding: 5px 14px;
   border-radius: 12px;
+  background-color: #bebebe0e;
   border: 1px solid #e4e4e49f;
   transition: all 0.2s ease-in-out !important;
   color: white;
@@ -203,7 +204,19 @@
 
 
 /* ----- Modal ------- */
-
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); 
+  
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  z-index: 999;
+}
 .modal-change {
   position: absolute;
   top: 230px;
@@ -227,19 +240,19 @@
 }
 
 .modal-change-mobile {
-  position: absolute;
-  top: 80px;
-  left: 20px;
+  position: relative;
   width: 350px;
   padding: 35px;
+  margin-bottom: 200px;
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(130px);
+  backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.267);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
               inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   transition: transform 0.1s ease-in-out;
+  z-index: 2000;
 }
 .modal-change-mobile.closing {
   opacity: 0;
@@ -265,6 +278,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  z-index: 1000;
 }
 .user-change-mobile.closing {
   opacity: 0.1;
@@ -393,6 +407,7 @@
   padding: 9px 20px;
   font-size: 15px;
   margin:10px 0 -10px 0;
+  min-width: 198px;
 }
 .account-add-btn:hover {
   background-color: #07101d;
@@ -400,7 +415,7 @@
   border:1px solid #2d81ff;
 }
 .plus{
-  transform: translateY(1px);
+  transform: translateY(-0.5px);
 }
 .exit-modal {
   cursor: pointer;
@@ -427,13 +442,13 @@
   display: grid;
   gap: 20px;
   position: absolute;
-  top: 250px;
-  left: 35px;
+  top: 470px;
+  left: 215px;
   width: 380px;
   padding: 35px;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.144);
+  border: 1px solid rgba(255, 255, 255, 0.244);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
@@ -448,9 +463,6 @@
 .account-add-modal-mobile{
   display: grid;
   gap: 20px;
-  position: absolute;
-  top: 280px;
-  left: 0px;
   width: 350px;
   padding: 35px;
   border-radius: 15px;
@@ -561,6 +573,19 @@
 
 /* ------- BURGER -------- */
 
+.burger-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
 .burger-menu {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 7px;
@@ -575,10 +600,10 @@
 }
 
 .burger-items {
-  
   margin-top: 10px;
   margin-left: -15px;
   position: absolute;
+  left: 30px;
   top: 60px; 
   width: 280px;
   max-width: 90vw;
@@ -732,8 +757,7 @@
     align-items: center;
     z-index: 1000;
     border-radius: 0;
-    background: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(30px);
+    
     padding: 0 15px;
     box-sizing: border-box;
     width: 100%;
@@ -743,6 +767,8 @@
     flex-direction: row;
     height: 100%;
     justify-content: space-between;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(30px);
     align-items: center;
     padding:0 15px;
     gap: 16px;
