@@ -5,7 +5,7 @@
   background: -moz-linear-gradient(150deg, rgba(0, 84, 219, 0.750) 23%, rgb(0, 0, 0) 55%);
   background: linear-gradient(150deg, rgba(0, 84, 219, 0.750) 23%, rgb(0, 0, 0) 55%);
   background-size: 200% 200%;
-  animation: gradientShift 220s ease infinite;
+  animation: gradientShift 275s ease infinite;
 }
 
 .main-content {
@@ -137,13 +137,13 @@
 
 @keyframes gradientShift {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 40%;
   }
   50% {
-    background-position: 100% 50%;
+    background-position: 100% 75%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0% 40%;
   }
 }
 
@@ -287,6 +287,7 @@
   .page-header {
     padding: 15px;
     gap: 10px;
+    margin-top: 65px !important;
   }
 
   .page-header-title {

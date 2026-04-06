@@ -74,7 +74,6 @@ const Sidebar = () => {
           <motion.div 
             className="burger-menu"
             onClick={() => setBurgerModal(!burgerModal)}
-            onMouseLeave={() => setBurgerModal(false)}
             whileTap={{ scale: 1 }}
           >
             <MenuOutlined />

@@ -14,6 +14,7 @@ import { useMemo, useState } from "react";
 import { useAppSelector } from "../hooks/reduxHooks";
 import Loading from "../assets/useLoading";
 import { useCloseModal } from "@/hooks/useCloseModal";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const CryptoPage = () => {
   const navigate = useNavigate()
@@ -28,6 +29,9 @@ const CryptoPage = () => {
     { userId: uid, coinId: id || "" },
     {pollingInterval:500}
   )
+
+  const size = useWindowSize()
+  const isMobile = size.width !== null && size.width >= 480
   
   const user = users?.find((u) => u.email === email); 
   
@@ -245,14 +249,22 @@ const CryptoPage = () => {
             </div>
           
 
-            <div className="coin-actions">
-              <button onClick={buyModal.openModal} className="coin-btn buy">
-                <ShoppingCartOutlined /> Купить
-              </button>
-              <button onClick={sellModal.openModal} className="coin-btn sell">
-                <SwapOutlined /> Продать
-              </button>
-              <button onClick={handleIsFavorite} className="coin-btn favorite">
+            
+             <div className="coin-actions">
+              {isMobile ?
+                <>
+                  <button onClick={buyModal.openModal} className="coin-btn buy">
+                    <ShoppingCartOutlined /> Купить
+                  </button>
+                  <button onClick={sellModal.openModal} className="coin-btn sell">
+                    <SwapOutlined /> Продать
+                  </button>
+                </>
+               : null
+              }
+              <button onClick={handleIsFavorite} 
+                      className="coin-btn favorite"
+                      style={{backgroundColor:isFavorite ? "#b49920" : "#221d0d41"}}>
                 {isFavorite ? <StarFilled /> : <StarOutlined/>} 
                 <div style={{minWidth:"98px"}}>{isFavorite ? "В избранном" : "В избранное"}</div>
               </button>
@@ -365,6 +377,17 @@ const CryptoPage = () => {
             </div>
           </div>
         )}
+        {!isMobile ? 
+          <div className="coin-actions-mobile">
+            <button onClick={buyModal.openModal} className="coin-btn buy">
+              <ShoppingCartOutlined /> Купить
+            </button>
+            <button onClick={sellModal.openModal} className="coin-btn sell">
+              <SwapOutlined /> Продать
+            </button>
+          </div>
+         : null 
+        }
     </div>
   );
 };

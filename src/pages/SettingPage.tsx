@@ -153,6 +153,7 @@ const SettingPage = () => {
         {/* FOOTER */}
         <div data-aos="fade-in" className="settings-footer">
           <button data-aos="fade-in" className="settings-save">Сохранить</button>
+          <button data-aos="fade-in" className="settings-restore">Сбросить</button>
         </div>
       </div>
     </div>

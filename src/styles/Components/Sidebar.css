@@ -880,6 +880,9 @@
     padding-bottom: 3px;
     display: none;
   }
+  .sidebar {
+    padding: 0 10px;
+  }
   .sidebar-container {
     display: flex;
     justify-content: space-between;
@@ -988,7 +991,6 @@
     display: flex;
     justify-content: space-around;
     padding: 0 10px;
-    margin-right: 30px !important;
   }
 }
 
