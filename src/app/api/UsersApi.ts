@@ -14,7 +14,7 @@ export interface User {
   settings?: any[] | undefined;
   favoritesCrypto?: any[];
   photoURL?: string;
-  createdAt: string | null;
+  createdAt: string | Timestamp;
   balance?:number;
   cryptoTotalBalance?: number;
 }
@@ -29,7 +29,7 @@ interface buyCrypto {
   symbol:string,
   Username:string | null,
 }
-interface Settings {
+export interface Settings {
   push:boolean,
   theme:string,
   privates:false,
@@ -82,7 +82,7 @@ export const usersApi = createApi({
               settings?:any[] | undefined;
               favoritesCrypto?:any[];
               photoURL?: string;
-              createdAt?: Timestamp;
+              createdAt?: string | Timestamp;
               balance?:number;
             };
 
@@ -96,7 +96,7 @@ export const usersApi = createApi({
               settings:data.settings || undefined,
               favoritesCrypto: data.favoritesCrypto,
               photoURL: data.photoURL,
-              createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : null,
+              createdAt: (data.createdAt as any)?.toDate ? (data.createdAt as any).toDate().toISOString() : null,
               balance:data.balance,
             };
           });

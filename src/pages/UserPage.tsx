@@ -5,6 +5,7 @@ import "../styles/Pages/User.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useGetCoinsPriceQuery } from "../app/api/CryptoApi"
 import useGetUser from "@/hooks/useGetUser";
+import type { Timestamp } from "firebase/firestore";
 
 const UserPage = () => {
   const navigate = useNavigate()
@@ -89,9 +90,7 @@ const UserPage = () => {
           <div className="stat-block" style={{marginBottom:5}}>
             <span className="stat-label">Дата регистрации</span>
             <span className="stat-value stat-value-data">
-              {user.createdAt
-                ? new Date(user.createdAt).toLocaleDateString()
-                : "Неизвестно"}
+                {(user.createdAt as Timestamp).toDate().toLocaleDateString()}
             </span>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { useAppDispatch } from "../hooks/reduxHooks";
 import { setUser } from "../features/userSlice";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { EyeInvisibleOutlined, EyeOutlined, GoogleOutlined } from "@ant-design/icons";
+import { EyeInvisibleOutlined, EyeOutlined, GoogleOutlined, UserOutlined } from "@ant-design/icons";
 import "../styles/Log_Reg/Login.css"
 
 const LoginPage = () => {
@@ -83,6 +83,44 @@ const LoginPage = () => {
     }
   };
 
+  const LoginGuest = async () => {
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, "guest@gmail.com", "guest_1234");
+      const { user } = userCredential;
+
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const displayName = userData.displayName || user.email?.split('@')[0] || "Пользователь";
+
+        dispatch(setUser({
+          uid: user.uid,
+          email: user.email,
+          name: displayName,
+          role: userData.role || "user",
+        }));
+
+        setDisplayedName(displayName);
+      } else {
+        console.error("Пользователь не найден в Firestore");
+        setDisplayedName("Пользователь");
+      }
+
+      setEmail("");
+      setPassword("");
+      setIsModalShow(true);
+      
+      navigate("/");
+      ReloadSite()
+    } catch (err: any) {
+        console.log(err)
+    }
+  };
+
   const handleWatchPassword = () => {
     setWatchingPass(!watchingPass)
   }
@@ -112,9 +150,14 @@ const LoginPage = () => {
   return (
     <div data-aos="fade-in" data-aos-duration="150" className="Login-container">
       
-      <button className="google-btn-reglog" onClick={handleGoogle}>
-            <GoogleOutlined/> Вход через Google
-      </button>
+      <div className="login-btns">
+        <button className="google-btn-reglog" onClick={handleGoogle}>
+            <GoogleOutlined/> Через Google
+        </button>
+        <button className="google-btn-reglog" onClick={LoginGuest}>
+            <UserOutlined/> Как гость
+        </button>
+      </div>
 
       <div className="inputs">
         <input

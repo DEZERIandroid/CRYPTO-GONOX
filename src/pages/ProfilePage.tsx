@@ -12,7 +12,6 @@ import { useAppSelector } from "../hooks/reduxHooks";
 import { CameraFilled } from "@ant-design/icons";
 import { useEffect,useState } from "react";
 import { useCloseModal } from "@/hooks/useCloseModal";
-import dayjs from 'dayjs';
 
 import "../styles/Pages/Profile.css"
 import useGetUser from "@/hooks/useGetUser";
@@ -25,7 +24,7 @@ const ProfilePage = () => {
   const [editPhotoURL,setEditPhotoURL] = useState("")
   const [succesGoogle,setSuccesGoogle] = useState(false)
   const user = users?.find((u) => u.email === email); 
-  const registerData = dayjs(user?.createdAt).format('DD.MM.YYYY');
+  const registerData = (user?.createdAt as any)?.toDate?.() ? (user?.createdAt as any).toDate().toLocaleDateString() : "Загрузка...";
   const photoURL = user?.photoURL
   const modal = useCloseModal(200)
 

@@ -2,15 +2,14 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Select, Switch } from "antd";
 import "../styles/Pages/Setting.css";
 import { useEffect, useState } from "react";
-import { useGetSettingsQuery } from "@/app/api/UsersApi";
+import { type User, } from "@/app/api/UsersApi";
+import { doc, setDoc, onSnapshot } from "firebase/firestore";
+import { db } from "@/firebase";
 import { useAppSelector } from "@/hooks/reduxHooks";
 
 const SettingPage = () => {
-  const uid = useAppSelector(state => state.user.uid);
+  const user = useAppSelector(state => state.user)
 
-  const {data} = useGetSettingsQuery(
-    { uid: uid }
-  )
   const [theme,setTheme] = useState("Тёмная")
   const [isPrivate,setIsPrivate] = useState(false)
   const [isPush,setIsPush] = useState(true)
@@ -29,20 +28,40 @@ const SettingPage = () => {
     value: item,
     label: item,
   }));
-  
+
   useEffect(() => {
-    if (data && data.length > 0) {
-      const settings = data[0];
-      if (settings) {
-        setTheme(settings.theme || "Тёмная");
-        setLanguage(settings.language || "Русский");
-        setIsPrivate(!!settings.privates);
-        setIsPush(!!settings.push);
-        setIsAutoUpdate(!!settings.updatenow);
-        setIsAnimation(!!settings.animation);
+    if (!user?.uid) return;
+
+    const userDocRef = doc(db, "users", user.uid);
+
+    const unsubscribe = onSnapshot(userDocRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.data() as User;
+        const s = data.settings?.[0];
+
+        if (s) {
+          setTheme(s.theme || "Тёмная");
+          setLanguage(s.language || "Русский");
+          setIsPrivate(!!s.privates);
+          setIsPush(!!s.push);
+          setIsAutoUpdate(!!s.updatenow);
+          setIsAnimation(!!s.animation);
+        }
+      } else {
+        setDoc(userDocRef, {
+          settings: [{
+            push: true,
+            theme: "Тёмная",
+            language: "Русский",
+            updatenow: true,
+            animation: true,
+          }]
+        });
       }
-    }
-  }, [data]);
+    });
+
+    return () => unsubscribe();
+  }, [user?.uid]);
 
   return (
     <div className="page-container">

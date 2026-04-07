@@ -5,7 +5,7 @@ import { SearchOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons"
 import type { User } from "../app/api/UsersApi";
 import { FloatButton, Skeleton } from 'antd';
 import '../styles/Pages/Users.css';
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query, Timestamp } from "firebase/firestore";
 import { db } from "@/firebase";
 
 const UsersPage = () => {
@@ -162,9 +162,7 @@ const UsersPage = () => {
                   </span>
                 </td>
                 <td>
-                  {userData.createdAt
-                    ? new Date(userData.createdAt).toLocaleDateString()
-                    : "-"}
+                  {(userData.createdAt as Timestamp).toDate().toLocaleDateString()}
                 </td>
                 {user?.role === "admin" && (
                   <td style={{display: user.role == "admin" ? "flex" : "none"}}

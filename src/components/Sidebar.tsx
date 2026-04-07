@@ -24,6 +24,7 @@ const Sidebar = () => {
   const dispatch = useAppDispatch()
   const { email, name, isAuthChecked } = useAppSelector(state => state.user);
   const { users } = useGetUser()
+  const userMain = useAppSelector(state => state.user)
   const [burgerModal,setBurgerModal] = useState(false)
   const [watchingPass,setWatchingPass] = useState(false)
   const [emails, setEmail] = useState("");
@@ -90,7 +91,8 @@ const Sidebar = () => {
             {mainModal.isOpen ? 'Закрыть' : 'Изменить'}
           </button>
         )}
-        <div className="sidebar-logo">
+        <div className="sidebar-logo"
+             style={{marginRight:!userMain?.uid && isMobile ? "30px" : ''}}>
           <Link to="/" className="logo"></Link>
         </div>
 
