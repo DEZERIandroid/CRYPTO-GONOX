@@ -58,6 +58,8 @@
   font-size: 22px;
   font-weight: 600;
   height: 80px;
+  transition: all 0.15s ease-out;
+  border: 1px solid #00000000;
 }
 
 .market-buttons {

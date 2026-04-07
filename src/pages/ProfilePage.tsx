@@ -5,7 +5,6 @@ import { doc, updateDoc } from "firebase/firestore";
 import { Skeleton } from "antd";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../features/userSlice";
-import { useGetUsersQuery } from "../app/api/UsersApi";
 import { useGetCoinsPriceQuery } from "../app/api/CryptoApi";
 import { useNavigate } from "react-router-dom";
 import { linkGoogleProvider } from "@/hooks/useGoogle";
@@ -16,14 +15,13 @@ import { useCloseModal } from "@/hooks/useCloseModal";
 import dayjs from 'dayjs';
 
 import "../styles/Pages/Profile.css"
+import useGetUser from "@/hooks/useGetUser";
 
 const ProfilePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { email, name, role,  } = useAppSelector(state => state.user);
-  const { data: users, isLoading, isError, refetch } = useGetUsersQuery(undefined, {
-    pollingInterval:500
-  });
+  const { users,loading:isLoading,error:isError, refetch } = useGetUser()
   const [editPhotoURL,setEditPhotoURL] = useState("")
   const [succesGoogle,setSuccesGoogle] = useState(false)
   const user = users?.find((u) => u.email === email); 

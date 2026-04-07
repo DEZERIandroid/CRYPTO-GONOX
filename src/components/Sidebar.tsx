@@ -9,7 +9,6 @@ import ThemeToggle from "../assets/themeToggle"
 import "../styles/Components/Sidebar.css"
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
 import { useCloseModal } from "@/hooks/useCloseModal"
-import { useGetUsersQuery } from "../app/api/UsersApi"
 import { useState } from "react"
 import { CloseOutlined, EyeInvisibleOutlined, EyeOutlined, MenuOutlined, PlusOutlined } from "@ant-design/icons"
 import meduza from "../assets/SOL.jpg"
@@ -18,14 +17,13 @@ import { auth } from "@/firebase"
 import { clearUser } from "@/features/userSlice"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { motion, AnimatePresence } from 'framer-motion';
+import useGetUser from "@/hooks/useGetUser"
 
 const Sidebar = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { email, name, isAuthChecked } = useAppSelector(state => state.user);
-  const { data: users, } = useGetUsersQuery(undefined, {
-      pollingInterval:3000
-    });
+  const { users } = useGetUser()
   const [burgerModal,setBurgerModal] = useState(false)
   const [watchingPass,setWatchingPass] = useState(false)
   const [emails, setEmail] = useState("");

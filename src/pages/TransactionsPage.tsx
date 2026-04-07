@@ -129,8 +129,8 @@ const TransactionsPage = () => {
         <Select
           className="filter-select"
           value={filter}
-          onChange={(value) => setFilter(value)}
-          options={selectOptions}
+          onChange={setFilter}
+          options={filtres.map(f => ({ label: f, value: f }))}
         />
       </div>
 

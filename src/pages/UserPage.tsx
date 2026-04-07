@@ -1,17 +1,15 @@
 import { useParams } from "react-router-dom";
-import { useGetUsersQuery } from "../app/api/UsersApi";
 import { Skeleton } from "antd";
 import { useNavigate } from "react-router-dom";
 import "../styles/Pages/User.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useGetCoinsPriceQuery } from "../app/api/CryptoApi"
+import useGetUser from "@/hooks/useGetUser";
 
 const UserPage = () => {
   const navigate = useNavigate()
   const { id } = useParams();
-  const { data: users, isLoading:usersLoading, isError, refetch } = useGetUsersQuery(undefined , {
-    pollingInterval:3000
-  });
+  const { users,loading:usersLoading,error:isError, refetch } = useGetUser()
 
   const user = users?.find((u) => u.id === id);
   const coinIds = user?.portfolio?.map((coin) => coin.coinId) || [];

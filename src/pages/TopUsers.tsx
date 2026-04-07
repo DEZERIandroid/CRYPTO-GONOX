@@ -1,56 +1,16 @@
 import { SearchOutlined } from "@ant-design/icons"
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { FloatButton, Skeleton } from "antd"
 import "../styles/Pages/TopUsers.css"
 import { useNavigate } from "react-router-dom"
-import { collection, query,onSnapshot, orderBy } from "firebase/firestore"
-import { db } from "@/firebase"
-import type { TopUsers as ITopUser } from "../app/api/UsersApi"
+import useGetUser from "@/hooks/useGetUser"
 
 const TopUsers = () => {
-  const [topUsers,setTopUsers] = useState<ITopUser[]>([])
-  const [isLoading,setIsloading] = useState(true)
-  const [isError,setIsError] = useState<string | null>(null)
+  const {users:topUsers,loading:isLoading,error:isError} = useGetUser()
   const [searchQuery,setSearchQuery] = useState<string>("")
 
   const navigate = useNavigate()
 
-  
-  
-  const getErrorMessage = (code:string) => {
-    switch (code) {
-      case 'permission-denied':
-        return "У вас недостаточно прав для просмотра этого списка.";
-        case 'unavailable':
-        return "Сервис временно недоступен. Проверьте подключение к интернету.";
-        default:
-        return "Произошла непредвиденная ошибка.";
-      }
-    };
-  
-    useEffect(() => {
-      const q = query(collection(db, "users"), orderBy("displayName"));
-    
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const usersData = snapshot.docs.map(doc => ({
-          id: doc.id,
-        ...doc.data()
-      }));
-      
-      setTopUsers(usersData);
-      setIsloading(false)
-      setIsError(null)
-
-    },(error) => {
-      console.error("Код ошибки:",error.code)
-      const errorMessge = getErrorMessage(error.code)
-      setIsError(errorMessge)
-
-      setIsloading(false)
-    })
-    
-    return () => unsubscribe();
-  }, []);
   
   const sortedData = useMemo(() => {
     if (!topUsers) return [];

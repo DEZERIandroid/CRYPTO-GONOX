@@ -1,11 +1,12 @@
 import { useState, useMemo } from "react";
 import { SearchOutlined, RiseOutlined, FallOutlined } from "@ant-design/icons";
 import { useGetCryptosQuery } from "../app/api/CryptoApi";
-import { useGetTopUsersQuery, useGetTransactionsQuery } from "../app/api/UsersApi";
+import { useGetTransactionsQuery } from "../app/api/UsersApi";
 import ExpensesPie from "../assets/use";
 import { Skeleton } from 'antd';
 import "../styles/Pages/Home.css"
 import { useNavigate } from "react-router-dom";
+import useGetUser from "@/hooks/useGetUser";
 
 const HomePage = () => {
   const {data: cryptosData,isLoading: isCryptosLoading,
@@ -13,20 +14,14 @@ const HomePage = () => {
         } = useGetCryptosQuery(undefined , {
     pollingInterval:100000
   });
-
   const {data: transactionsData,isLoading: isTransactionsLoading,
                                   isError: isTransactionsError
       } = useGetTransactionsQuery(undefined , {
     pollingInterval:100000
   });
+  const {users:topusersData,loading:isTopusersLoading,error:isTopusersError} = useGetUser()
 
-  const {data:topusersData, isLoading:isTopusersLoading,
-                            isError:isTopusersError
-      } = useGetTopUsersQuery(undefined , {
-    pollingInterval:2500
-  })
 
-  
   const [filter,setFilter] = useState<string>("Топ-3")
   const [searchQuery] = useState<string>("")
   const navigate = useNavigate()
@@ -252,9 +247,10 @@ const HomePage = () => {
         </div>
 
         {/*=============== Топ пользователей ================ */}
-        <div className="block" onClick={() => navigate("/topusers")}>
-          <div className="block-title-topusers block-title">Топ пользователей</div>
-             {isTopusersError === false ? (<ul className="topusers-list">
+        <div className="block">
+          <div className="block-title-topusers block-title"
+              onClick={() => navigate("/topusers")}>Топ пользователей</div>
+             {!isTopusersError ? (<ul className="topusers-list">
                   {sortedTopUsers.slice(0,3).map((user, index) => {
                     let balanceClass = "";
                     if (index === 0) balanceClass = "gold-text item-price";
@@ -264,6 +260,7 @@ const HomePage = () => {
                     return (
                       <li data-aos="fade-in"
                           className="topusers-item list-item"
+                          onClick={() => navigate(`/user/${user.id}`)}
                           key={user.id}>
                           {user.photoURL ? (
                             <img

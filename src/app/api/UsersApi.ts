@@ -16,6 +16,7 @@ export interface User {
   photoURL?: string;
   createdAt: string | null;
   balance?:number;
+  cryptoTotalBalance?: number;
 }
 interface buyCrypto {
   uid:any,
@@ -57,12 +58,6 @@ export interface Transaction {
   symbol: string;
   timestamp: number;
   status: 'success' | 'pending' | 'failed';
-}
-export interface TopUsers {
-  id?:string;
-  displayName?: string;
-  cryptoTotalBalance?: number;
-  photoURL?: string;
 }
 
 export const usersApi = createApi({
@@ -350,7 +345,7 @@ export const usersApi = createApi({
       }
     }),
     
-    getTopUsers: builder.query<TopUsers[], void>({
+    getTopUsers: builder.query<User[], void>({
       providesTags: ["Users"],
       async queryFn() {
         try {
@@ -359,7 +354,7 @@ export const usersApi = createApi({
         
           const topUsers = snapshot.docs.map((doc) => ({
             id:doc.id,
-            ...(doc.data() as Omit<TopUsers,"id">),
+            ...(doc.data() as Omit<User,"id">),
           }));
         
           return { data: topUsers };

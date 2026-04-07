@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { HashRouter } from "react-router-dom"
 import { ChakraProvider, } from '@chakra-ui/react';
-import { ConfigProvider, theme } from 'antd';
+import GlassConfigProvider from './hooks/GlassConfigProvider';
 import { Provider } from 'react-redux'
 import store from './app/store'
 import './index.css'
@@ -13,9 +13,9 @@ createRoot(document.getElementById('root')!).render(
   <HashRouter>
     <Provider store={store}>
         <ChakraProvider value={system}>
-          <ConfigProvider theme={{algorithm: theme.darkAlgorithm}}>
+          <GlassConfigProvider>
             <App />
-          </ConfigProvider>
+          </GlassConfigProvider>
         </ChakraProvider>
     </Provider>
   </HashRouter>

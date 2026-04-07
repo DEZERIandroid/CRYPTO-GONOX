@@ -100,7 +100,7 @@ const SettingPage = () => {
               </span>
             </div>
             <Select 
-              className="select"
+              className="filter-select select"
               value={theme}
               onChange={(value) => setTheme(value)}
               options={selectOptionsTheme}
@@ -115,7 +115,7 @@ const SettingPage = () => {
               </span>
             </div>
             <Select
-              className="select language-select"
+              className="filter-select select language-select"
               value={Language}
               onChange={(value) => setLanguage(value)}
               options={selectOptionsLanguage}

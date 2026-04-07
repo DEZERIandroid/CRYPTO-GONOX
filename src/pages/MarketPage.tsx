@@ -5,17 +5,15 @@ import { useGetCryptosQuery } from "../app/api/CryptoApi";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { ReloadOutlined } from "@ant-design/icons";
-import { useGetUsersQuery } from "@/app/api/UsersApi";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { useWindowSize } from "@uidotdev/usehooks";
+import useGetUser from "@/hooks/useGetUser";
 
 const MarketPage = () => {
   const { data, isLoading, isError, refetch } = useGetCryptosQuery(undefined , {
     pollingInterval:65000
   });
-  const { data: users } = useGetUsersQuery(undefined , {
-      pollingInterval:60000
-  });
+  const { users } = useGetUser()
   const { email } = useAppSelector(state => state.user);
   const user = users?.find((u) => u.email === email); 
 
@@ -204,7 +202,7 @@ const MarketPage = () => {
                         
                       />
                       <div data-aos="fade-in" data-aos-once="false" className="coin-name">
-                        <div className="name">{coin.name}</div>
+                        <div className="name">{coin.name?.length <= 22 ? coin.name : coin.symbol}</div>
                         <div className="symbol">{coin.symbol.toUpperCase()}</div>
                       </div>
                     </div>

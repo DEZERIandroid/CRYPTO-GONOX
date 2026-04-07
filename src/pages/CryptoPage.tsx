@@ -9,12 +9,12 @@ import { RiseOutlined, FallOutlined,StarOutlined,
 import "../styles/Pages/Crypto.css";
 import CoinChartWithControls from "../components/CoinChartWithControls";
 import { useBuyCryptoMutation,useSellCryptoMutation, useGetCryptoForSellQuery, useFavoriteCryptoMutation } from "../app/api/UsersApi";
-import { useGetUsersQuery } from "../app/api/UsersApi";
 import { useMemo, useState } from "react";
 import { useAppSelector } from "../hooks/reduxHooks";
 import Loading from "../assets/useLoading";
 import { useCloseModal } from "@/hooks/useCloseModal";
 import { useWindowSize } from "@uidotdev/usehooks";
+import useGetUser from "@/hooks/useGetUser";
 
 const CryptoPage = () => {
   const navigate = useNavigate()
@@ -22,9 +22,7 @@ const CryptoPage = () => {
   const uid = useAppSelector(state => state.user.uid);
   const Username = useAppSelector(state => state.user.name)
   const { email } = useAppSelector(state => state.user);
-  const { data: users } = useGetUsersQuery(undefined , {
-    pollingInterval:30000
-  });
+  const { users } = useGetUser()
   const { data:cryptoforsell, } = useGetCryptoForSellQuery(
     { userId: uid, coinId: id || "" },
     {pollingInterval:500}
@@ -176,6 +174,9 @@ const CryptoPage = () => {
                 </div>
               </div>
             </div>
+            <div className="coin-chart">
+              <Skeleton active paragraph={{ rows: 8 }} />
+            </div>
 
             <div className="coin-stats">
               <div className="stat-block">
@@ -189,9 +190,6 @@ const CryptoPage = () => {
               </div>
             </div>
 
-            <div className="coin-chart">
-              <Skeleton active paragraph={{ rows: 8 }} />
-            </div>
           </div>
         </div>
     );
