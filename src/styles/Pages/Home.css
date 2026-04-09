@@ -206,7 +206,6 @@
   place-content: center;
 }
 
-
   @media (max-width:1400px) {
     .block{
       width: 400px;
@@ -244,13 +243,13 @@
     
     .tabs {
       border-radius: 30px;
-      padding: 4px;
+      padding: px;
       width: fit-content;
       margin:-10px 0 ;
     }
     
     .tab {
-      padding: 8px 9px;
+      padding: 7px 4px;
       font-size: 14px;
     }
     

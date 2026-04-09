@@ -65,13 +65,6 @@ const HomePage = () => {
       return result; 
     },[cryptosData,filter,searchQuery])
     
-    const sortedTransactions = useMemo(() => {
-      if (!transactionsData) return [];
-      return [...transactionsData].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
-    }, [transactionsData]);
-
     const sortedTopUsers = useMemo(() => {
       if (!topusersData) return []
       return [...topusersData].sort(
@@ -213,7 +206,7 @@ const HomePage = () => {
           </div>
           {!isTransactionsError ? (
             <ul className="transaction-list market-list">
-              {sortedTransactions.slice(0, 3).map((item, index) => {
+              {transactionsData.slice(0, 3).map((item, index) => {
                 return (
                   <li
                     className="list-item" data-aos="fade-in"

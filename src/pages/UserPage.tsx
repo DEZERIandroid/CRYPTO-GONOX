@@ -2,20 +2,24 @@ import { useParams } from "react-router-dom";
 import { Skeleton } from "antd";
 import { useNavigate } from "react-router-dom";
 import "../styles/Pages/User.css";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import { useGetCoinsPriceQuery } from "../app/api/CryptoApi"
 import useGetUser from "@/hooks/useGetUser";
 import type { Timestamp } from "firebase/firestore";
+import { useCloseModal } from "@/hooks/useCloseModal";
 
 const UserPage = () => {
   const navigate = useNavigate()
   const { id } = useParams();
   const { users,loading:usersLoading,error:isError, refetch } = useGetUser()
+  const photomodal = useCloseModal(200)
 
   const user = users?.find((u) => u.id === id);
+  const photo = user?.photoURL
   const coinIds = user?.portfolio?.map((coin) => coin.coinId) || [];
   const { data: pricesData, isLoading: pricesLoading } = useGetCoinsPriceQuery(coinIds);
 
+  console.log(photomodal)
   
   if (usersLoading && pricesLoading)
     return (
@@ -55,7 +59,8 @@ const UserPage = () => {
             <ArrowLeftOutlined/> Назад к списку
         </button>
         <div data-aos="fade-in" className="user-header">
-          <div className="user-info-avatar-cont">
+          <div className="user-info-avatar-cont"
+               onClick={() => photomodal.openModal()}>
             <img
             src={user.photoURL || "/default-avatar.png"}
             className="user-info-avatar"
@@ -126,7 +131,26 @@ const UserPage = () => {
         <div data-aos="fade-in" className="user-chart">
           <div className="chart-placeholder">📊 Здесь будет график пользователя</div>
         </div>
-      </div>
+      </div> 
+      {photomodal.isOpen ? 
+        <div className={`photomodal-overlay ${photomodal.isClosing ? "closing" : "" }`}
+             data-aos="fade-in"
+             onClick={() => photomodal.closeModal()}
+        >
+            <div data-aos="zoom-in-down" data-aos-duration="150"
+               className={`photomodal ${photomodal.isClosing ? "closing" : ""} `}
+               onClick={(e) => e.stopPropagation()}
+            >
+              <div className="close-photomodal"
+                   onClick={() => photomodal.closeModal()}
+              >
+                <CloseOutlined />
+              </div>
+              <img src={photo} alt="" />
+            </div>
+        </div>
+      : null}
+      
     </div>
   );
 };

@@ -32,7 +32,7 @@ export const useCloseModal = ({animationDuration = 100}:any) => {
     },[closeModal])
 
     const toggleModal = useCallback(() => {
-        isOpen ? closeModal() : openModal
+        isOpen ? closeModal() : openModal()
     },[isOpen,openModal,closeModal])
 
   return {

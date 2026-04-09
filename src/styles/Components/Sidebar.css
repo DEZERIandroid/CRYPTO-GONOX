@@ -49,9 +49,9 @@
   text-align: center;
 }
 .avatar-container{
-  display: flex;
+  display: grid;
   place-content: center;
-  margin-left: 6px !important;
+  margin-left: 12px !important;
   width: 95px;
   height: 95px;
   border-radius: 50%;
@@ -84,7 +84,8 @@
   border: 1px solid #e4e4e49f;
   transition: all 0.2s ease-in-out !important;
   color: white;
-  min-width: 110px ;
+  min-width: 110px;
+  max-width: 110px;
 }
 .user-change.closing {
   opacity: 0.1;
