@@ -86,6 +86,8 @@
   color: white;
   min-width: 110px;
   max-width: 110px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .user-change.closing {
   opacity: 0.1;
@@ -363,6 +365,8 @@
   transition: all 0.2s ease-in-out !important;
   color: white;
   min-width: 87px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .account-leave-btn:hover {
   background-color: #1d0707;
@@ -380,6 +384,8 @@
   border: 1px solid #e4e4e49f;
   transition: all 0.2s ease-in-out !important;
   color: white;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .account-change-btn:hover {
   background-color: #071d0d;
@@ -392,6 +398,8 @@
   display: grid;
   place-content: center;
   margin-top: 10px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .account-add-btn{
@@ -431,6 +439,8 @@
 .exit-btn {
   transition: all 0.1s ease-in-out;
   font-size: 15px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .exit-modal:hover .exit-btn{
   color: red;
@@ -547,6 +557,8 @@
   background-color: #4caf50;
   color: #fff;
   border: 1px solid #00000000;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .button-add-account:hover{
   background-color: #071d0d;
@@ -564,6 +576,8 @@
   background-color: #e53935;
   color: #fff;
   border: 1px solid #00000000;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .button-modal-close:hover{
   background-color: #1d0707;
@@ -637,6 +651,8 @@
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .burger-item {

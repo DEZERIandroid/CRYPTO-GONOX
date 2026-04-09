@@ -23,6 +23,8 @@
   cursor: pointer;
   transition: all 0.2s ease;
   flex: 1 1 100%;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .filter-btn:nth-child(2) {
   color: #52c41a;
@@ -63,6 +65,8 @@
   font-size: 15px;
   cursor: pointer;
   transition: all 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .filter-btn-active:nth-child(2) {
