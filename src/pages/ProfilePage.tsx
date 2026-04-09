@@ -22,11 +22,13 @@ const ProfilePage = () => {
   const { email, name, role,  } = useAppSelector(state => state.user);
   const { users,loading:isLoading,error:isError, refetch } = useGetUser()
   const [editPhotoURL,setEditPhotoURL] = useState("")
-  const [succesGoogle,setSuccesGoogle] = useState(false)
+  const [successGoogle,setSuccesGoogle] = useState(false)
   const user = users?.find((u) => u.email === email); 
   const registerData = (user?.createdAt as any)?.toDate?.() ? (user?.createdAt as any).toDate().toLocaleDateString() : "Загрузка...";
   const photoURL = user?.photoURL
   const modal = useCloseModal(200)
+
+  const guest = name && name !== "Гость"
 
   const coinIds = user?.portfolio?.map((coin) => coin.coinId).filter(Boolean) || [];
   const { data: pricesData } = useGetCoinsPriceQuery(coinIds, {
@@ -249,15 +251,17 @@ const ProfilePage = () => {
             <span className="value">{registerData}</span>
           </div>
           <div className="google-add">
-            {!isGoogleLinked ? (
+            {!isGoogleLinked && guest ? (
               <button className="google-btn" onClick={handleLinkGoogle}>
                 <GoogleOutlined/> Привязать Google
               </button>
             ) : (
-              <span>Google подключён</span>
+              <>
+                {guest && <span>Google подключён</span>}
+              </>
             )}
           </div>
-          {succesGoogle && (
+          {successGoogle &&(
             <div className="success-google-overlay">
               <div className="success-google-modal">
                 <h3>Google привязан</h3>

@@ -1,12 +1,12 @@
 import { useState, useMemo } from "react";
 import { SearchOutlined, RiseOutlined, FallOutlined } from "@ant-design/icons";
 import { useGetCryptosQuery } from "../app/api/CryptoApi";
-import { useGetTransactionsQuery } from "../app/api/UsersApi";
 import ExpensesPie from "../assets/use";
 import { Skeleton } from 'antd';
 import "../styles/Pages/Home.css"
 import { useNavigate } from "react-router-dom";
 import useGetUser from "@/hooks/useGetUser";
+import { useGetTransactions } from "@/hooks/useGetTransactions";
 
 const HomePage = () => {
   const {data: cryptosData,isLoading: isCryptosLoading,
@@ -14,11 +14,7 @@ const HomePage = () => {
         } = useGetCryptosQuery(undefined , {
     pollingInterval:100000
   });
-  const {data: transactionsData,isLoading: isTransactionsLoading,
-                                  isError: isTransactionsError
-      } = useGetTransactionsQuery(undefined , {
-    pollingInterval:100000
-  });
+  const {transactions:transactionsData,loading:isTransactionsLoading,error:isTransactionsError} = useGetTransactions()
   const {users:topusersData,loading:isTopusersLoading,error:isTopusersError} = useGetUser()
 
 
@@ -72,7 +68,7 @@ const HomePage = () => {
     const sortedTransactions = useMemo(() => {
       if (!transactionsData) return [];
       return [...transactionsData].sort(
-        (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
       );
     }, [transactionsData]);
 
@@ -215,22 +211,26 @@ const HomePage = () => {
           <div className="block-title" onClick={() => navigate("/transactions")}>
             Транзакции
           </div>
-          {isTransactionsError === false ? (
+          {!isTransactionsError ? (
             <ul className="transaction-list market-list">
               {sortedTransactions.slice(0, 3).map((item, index) => {
-                const total = item.amount * item.buyPrice;
                 return (
                   <li
                     className="list-item" data-aos="fade-in"
-                    key={`${item.timestamp}-${item.coinId}-${index}`}
+                    key={`${item.date}-${item.coin}-${index}`}
                     onClick={() => navigate(`/transactions`)}
                   >
                     <div className="item-photo">
                       <img src={item.image || "/src/assets/meduza.jpg"} alt={item.symbol} />
                     </div>
-                    <span className="item-name">{item.Username || "Пользователь"}</span>
-                    <span className="item-price">${total.toFixed(2)}</span>
-                    <span className="status-success home-status-success">Покупка</span>
+                    <span className="item-name">{item.userName || "Пользователь"}</span>
+                    <span className="item-price">${item.Price.toFixed(2)}</span>
+                    <span data-aos="fade-in" data-aos-once="false">
+                        {item.status === "buy" 
+                                  ? (<span className="status-buy home-status">Покупка</span>)
+                                  : (<span className="status-sell home-status">Продажа</span>)
+                        }
+                    </span>
                   </li>
                 );
               })}

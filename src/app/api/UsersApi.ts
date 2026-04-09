@@ -1,7 +1,8 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import { collection, getDocs, Timestamp, 
          doc, updateDoc, getDoc , arrayUnion,
-         arrayRemove , runTransaction} from "firebase/firestore";
+         arrayRemove , runTransaction,
+         addDoc} from "firebase/firestore";
 import { db } from "../../firebase";
 
 export interface User {
@@ -42,22 +43,24 @@ interface sellCrypto {
   coinId:undefined | string,
   amountCoins:number,
   cryptoPrice:number,
+  image:any,
+  symbol:string,
+  Username:string | null,
 }
 interface favoriteCrypto {
   uid:any,
   coinId:undefined | string
 }
 export interface Transaction {
-  Username: string;
-  photoURL:undefined | string;
-  coinId: string;
-  buyPrice: number;
-  amount: number;
-  date: string;
-  image: string;
-  symbol: string;
-  timestamp: number;
-  status: 'success' | 'pending' | 'failed';
+  userId: any,
+  userName:string,
+  coin: string,
+  symbol:string,
+  image:string,
+  Price:number,
+  amount: number,
+  date: any,
+  status:"buy" | "sell"
 }
 
 export const usersApi = createApi({
@@ -122,6 +125,7 @@ export const usersApi = createApi({
         try {
           await runTransaction(db, async (transaction) => {
           
+            /* Обновление документа пользователя */
             const userRef = doc(db, "users", uid)
             const userSnap = await transaction.get(userRef)
           
@@ -150,7 +154,6 @@ export const usersApi = createApi({
             const existingCoin = portfolio.find(
               (item:any) => item.coinId === coinId
             )
-          
             if (existingCoin) {
               existingCoin.amount = existingCoin.amount + amountCoins
               updatePortfolio = [...portfolio]
@@ -166,15 +169,38 @@ export const usersApi = createApi({
             }
           
             const newBalance = balance - totalPrice
-          
+
+            const addTransactionBuy = async () => {
+              try {
+                await addDoc(collection(db, "transactions"), {
+                              userId: uid,
+                              userName:Username,
+                              coin: coinId,
+                              symbol:symbol,
+                              image:image,
+                              Price:totalBuyPrice,
+                              amount: amountCoins,
+                              date: new Date().toISOString().split("T"),
+                              status:"buy"
+                });
+                
+              } catch (error:any) {
+                console.error("ADD TRANSACTION ERROR:", error);
+                return { error };
+                }
+            } 
+            addTransactionBuy()
+            
+
             transaction.update(userRef, {
               balance: newBalance,
               portfolio: updatePortfolio
             })
+            
           })
-        
+
           return { data: undefined }
-        
+      
         } catch (error:any) {
         
           return {
@@ -186,7 +212,9 @@ export const usersApi = createApi({
       invalidatesTags: ["Users"]
     }),
     sellCrypto:builder.mutation<void,sellCrypto>({
-      async queryFn({uid,coinId,amountCoins,cryptoPrice,}) {
+      async queryFn({uid,coinId,amountCoins,
+                     image,symbol,cryptoPrice,
+                     Username}) {
           try {
             await runTransaction (db, async (transaction) => { 
 
@@ -205,7 +233,6 @@ export const usersApi = createApi({
               return { error: {status:"SELL_ERROR",error:"Монета не найдена в портфеле"}}
             }
             if (existingCoin.amount < amountCoins) {
-              console.log(existingCoin == amountCoins)
               return {
                 error: {
                   status: "SELL_ERROR", 
@@ -228,6 +255,28 @@ export const usersApi = createApi({
             if (totalPrice <= 0) {
               return { error: { status:"SELL_ERROR", error:"Некорректная сумма продажи" } }
             }
+
+            const addTransactionSell = async () => {
+              try {
+                await addDoc(collection(db, "transactions"), {
+                              userId: uid,
+                              userName:Username,
+                              coin: coinId,
+                              symbol:symbol,
+                              image:image,
+                              Price:cryptoPrice,
+                              amount: amountCoins,
+                              date: new Date().toISOString().split("T"),
+                              status:"sell"
+                });
+                
+                
+              } catch (error:any) {
+                console.error("ADD TRANSACTION ERROR:", error);
+                return { error };
+                }
+            } 
+            addTransactionSell()
             
             transaction.update(userRef,{
               balance:newBalance,
@@ -292,7 +341,7 @@ export const usersApi = createApi({
             Transactions = Transactions.concat(portfolio);
           });
         
-          Transactions.sort((a, b) => b.timestamp - a.timestamp);
+          Transactions.sort((a, b) => b.date - a.date);
         
           return { data: Transactions };
         } catch (error) {

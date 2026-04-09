@@ -1,18 +1,19 @@
 import { SearchOutlined } from "@ant-design/icons";
 import "../styles/Pages/Transactions.css";
-import { useGetTransactionsQuery, type Transaction } from "../app/api/UsersApi";
+import { type Transaction } from "../app/api/UsersApi";
 import { useState, useMemo } from "react";
 import { FloatButton, Select, Skeleton } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useGetTransactions } from "@/hooks/useGetTransactions";
+
 
 const TransactionsPage = () => {
   const navigate = useNavigate()
-  const { data, isError, isLoading } = useGetTransactionsQuery(undefined, {
-    pollingInterval: 3000
-  });
+
+  const { transactions, loading:isLoading, error:isError } = useGetTransactions()
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [filter, setFilter] = useState<string>("За всё время");
+  const [filterTime, setFilterTime] = useState<string>("За всё время");
   const [filterButton, setFilterButton] = useState("Все");
 
   const filtres = ["За всё время", "За неделю", "За день"];
@@ -22,26 +23,42 @@ const TransactionsPage = () => {
     label: item,
   }));
 
-  const sortedData = data
-    ? [...data].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+  const sortedData = transactions
+    ? [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     : [];
 
   const filteredTransactions: Transaction[] = useMemo(() => {
-    if (!sortedData || !Array.isArray(sortedData)) return [];
+        if (!sortedData || !Array.isArray(sortedData)) return [];
 
-    if (!searchQuery.trim()) {
-      return sortedData;
-    }
+        let filtered = sortedData;
 
-    const query = searchQuery.toLowerCase();
+        // фильтрация по статусу
+        switch (filterButton) { 
+          case "Покупка":
+            filtered = filtered.filter((t) => t.status === "buy");
+            break;
+          case "Продажа":
+            filtered = filtered.filter((t) => t.status === "sell");
+            break;
+          case "Все":
+          default:
+            break;
+        }
+      
+        // фильтрация по поиску
+        if (searchQuery.trim()) {
+          const query = searchQuery.toLowerCase();
+          filtered = filtered.filter(
+            (t) =>
+              (t.userName && t.userName.toLowerCase().includes(query)) ||
+              (t.coin && t.coin.toLowerCase().includes(query)) ||
+              (t.symbol && t.symbol.toLowerCase().includes(query))
+          );
+        }
+      
+        return filtered;
 
-    return sortedData.filter((sortedData) =>
-      (sortedData.Username && sortedData.Username.toLowerCase().includes(query)) ||
-      (sortedData.coinId && sortedData.coinId.toLowerCase().includes(query)) ||
-      (sortedData.symbol && sortedData.symbol.toLowerCase().includes(query))
-    );
-  }, [sortedData, searchQuery]);
-
+  }, [sortedData, searchQuery, filterButton]);  
 
   if (isLoading) return (
     <div className="page-container">
@@ -59,9 +76,9 @@ const TransactionsPage = () => {
           />
         </div>
         <Select
-          className="filter-select"
-          value={filter}
-          onChange={(value) => setFilter(value)}
+          className="transactions-filter"
+          value={filterTime}
+          onChange={(value) => setFilterTime(value)}
           options={selectOptions}
         />
       </div>
@@ -128,8 +145,8 @@ const TransactionsPage = () => {
         </div>
         <Select
           className="filter-select"
-          value={filter}
-          onChange={setFilter}
+          value={filterTime}
+          onChange={setFilterTime}
           options={filtres.map(f => ({ label: f, value: f }))}
         />
       </div>
@@ -160,18 +177,17 @@ const TransactionsPage = () => {
                   <th>Количество</th>
                   <th>Тип</th>
                   <th>Дата</th>
-                  <th>Цена</th>
+                  <th>Сумма</th>
                 </tr>
               </thead>
               {!isError ? (
                 <tbody>
                   {filteredTransactions && filteredTransactions.length > 0 ? (
                     filteredTransactions.map((item, index) => {
-                      const total = item.amount * item.buyPrice;
                       return (
-                        <tr key={`${item.timestamp}-${item.coinId}-${index}`}>
+                        <tr key={`${item.date}-${item.coin}-${index}`}>
                           <td data-aos="fade-in" data-aos-once="false">{index + 1}</td>
-                          <td onClick={() => navigate(`/crypto/${item.coinId}`)} data-aos="fade-in" data-aos-once="false" className="transactions-imgSymbol">
+                          <td onClick={() => navigate(`/crypto/${item.coin}`)} data-aos="fade-in" data-aos-once="false" className="transactions-imgSymbol">
                             <img className="transactions-img"
                               src={item.image}
                               alt={item.symbol}
@@ -180,21 +196,18 @@ const TransactionsPage = () => {
                               {item.symbol}
                             </div>
                           </td>
-                          <td onClick={() => navigate(`/user/${item.Username}`)} data-aos="fade-in" data-aos-once="false" className="transactions-username">
-                            {item.photoURL ? (
-                              <img
-                                src={item.photoURL}
-                                alt={item.Username}
-                                className="user-avatar-placeholder"
-                              />
-                            ) : null} {item.Username}
+                          <td onClick={() => navigate(`/user/${item.userName}`)} data-aos="fade-in" data-aos-once="false" className="transactions-userName">
+                            {item.userName}
                           </td>
                           <td data-aos="fade-in" data-aos-once="false" className="transactions-amount">{item.amount}</td>
                           <td data-aos="fade-in" data-aos-once="false">
-                            <span className="status-success">Покупка</span>
+                            {item.status === "buy" 
+                                      ? (<span className="status-buy">Покупка</span>)
+                                      : (<span className="status-sell">Продажа</span>)
+                            }
                           </td>
-                          <td data-aos="fade-in" data-aos-once="false" className="transactions-data">{new Date(item.timestamp).toLocaleDateString()}</td>
-                          <td data-aos="fade-in" data-aos-once="false" className="transactions-buyPrice">${total.toFixed(2)}</td>
+                          <td data-aos="fade-in" data-aos-once="false" className="transactions-data">{new Date(item.date).toLocaleDateString()}</td>
+                          <td data-aos="fade-in" data-aos-once="false" className="transactions-buyPrice">${item.Price.toFixed(2)}</td>
                         </tr>
                       );
                     })

@@ -54,7 +54,6 @@ const CryptoPage = () => {
 
   const price = coin?.market_data?.current_price?.usd ?? 0;
 
-
 /* ------------------------ Покупка крипты ----------------------- */
 
   const amountBuy = Number(amountCoins);
@@ -87,6 +86,8 @@ const CryptoPage = () => {
           setBuyError(true)
           setTimeout(() => setBuyError(false), 1500);
           setTimeout(() => setUnSuccess(false), 1500);
+
+          
         } else {
           buyModal.closeModal()
           setAmountCoins("")
@@ -115,7 +116,8 @@ const CryptoPage = () => {
     try {
       const result = await sellCrypto({
                               uid,coinId:id,amountCoins:amountSell,
-                              cryptoPrice:totalSell})
+                              image,symbol,cryptoPrice:totalSell,
+                                                        Username})
       if (result.error) {
         setUnSuccess(true);
         setSellError(true)

@@ -206,12 +206,6 @@
   place-content: center;
 }
 
-.home-status-success {
-  display: grid;
-  text-align: center !important;
-  max-width: 100px;
-}
-
   @media (max-width:1400px) {
     .block{
       width: 400px;
