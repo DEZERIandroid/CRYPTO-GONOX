@@ -202,9 +202,10 @@
 
 .transaction-list li {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   place-content: center;
 }
+
 
   @media (max-width:1400px) {
     .block{

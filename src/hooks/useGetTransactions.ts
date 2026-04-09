@@ -1,9 +1,9 @@
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { auth, db } from "@/firebase";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "@/firebase";
 import { useEffect, useState } from "react";
 import type { Transaction } from "@/app/api/UsersApi";
 
-export function useGetTransactions() {
+export const useGetTransactions = () => {
   const [transactions,setTransactions] = useState<Transaction[]>([])
   const [loading,setLoading] = useState(true)
   const [error,setError] = useState<string | null>(null)
@@ -22,7 +22,7 @@ export function useGetTransactions() {
     useEffect(() => {
         const q = query(
           collection(db, "transactions"),
-          where("userId", "==", auth.currentUser?.uid)
+          orderBy("date", "desc") 
         );
     
         const unsubscribe = onSnapshot(q, (snapshot) => {
