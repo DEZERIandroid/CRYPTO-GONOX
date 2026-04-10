@@ -277,7 +277,7 @@
   place-content: center;
   background: rgba(255, 255, 255, 0);
   border: 1px solid rgba(255, 255, 255, 0.137);
-  border-radius: 20px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease-out;
   padding: 15px;
@@ -287,7 +287,6 @@
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.253);
-  border-radius: 20px;
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
@@ -372,6 +371,27 @@
   .crypto-left img {
     width: 43px;
     height: 43px;
+  }
+  .photomodal {
+    width: 330px;
+    height: 330px;
+  }
+  .photomodal.closing {
+    transform: scale(0.9) translateX(0px) translateY(-20px);
+  }
+  .close-photomodal {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    display: grid;
+    place-content: center;
+    background: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(255, 255, 255, 0.137);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    padding: 13px;
+    height: 45px;
   }
 }
 

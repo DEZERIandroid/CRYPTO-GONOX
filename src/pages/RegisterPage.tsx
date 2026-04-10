@@ -87,6 +87,11 @@ const RegisterPage = () => {
           updatenow:true,
           animation:true,
         }],
+        accountsForSwitch:[{
+            name:cleanName,
+            email:cleanEmail,
+            password:cleanPassword,
+        }]
       });
 
       dispatch(setUser({

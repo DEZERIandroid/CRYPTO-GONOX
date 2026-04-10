@@ -168,10 +168,10 @@ const Sidebar = () => {
                onClick={() => setBurgerModal(false)}>
           <motion.nav 
             className="burger-items"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.13, ease: "easeInOut" }}
+            initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)"}}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+            transition={{ duration: 0.13, ease: "easeOut" }}
           >
             {[
               { path: "/", icon: HomeIcon, label: "Главная", active: isHome },
@@ -179,12 +179,11 @@ const Sidebar = () => {
               { path: "/market", icon: MarketIcon, label: "Рынок", active: isMarket },
               { path: "/transactions", icon: TransactionsIcon, label: "Транзакции", active: isTransactions },
               { path: "/setting", icon: SettingsIcon, label: "Настройки", active: isSetting }
-            ].map((item, index) => (
+            ].map((item) => (
               <motion.div
                 key={item.path}
-                initial={{ x: 0, opacity: 0 }}
-                animate={{ y: 3, opacity: 1 }}
-                transition={{ delay: index * 0.04, type: "spring", stiffness: 120 }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
               >
                 <Link 
                   to={item.path}

@@ -13,6 +13,7 @@ export interface User {
   cryptoBalance?: number;
   portfolio?: any[];
   settings?: any[] | undefined;
+  accountsForSwitch? : any[] | undefined;
   favoritesCrypto?: any[];
   photoURL?: string;
   createdAt: string | Timestamp;

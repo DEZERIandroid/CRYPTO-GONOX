@@ -151,7 +151,7 @@
 
 .item-photo {
   display: grid;
-  place-content: center;
+  place-content: start;
 }
 .item-photo img {
   width: 45px;
@@ -269,7 +269,7 @@
     }
     
     .item-photo img{
-      width: 35px;
+      width: 40px !important; 
     }
     .item-name {
       font-size: 12px;
@@ -336,7 +336,7 @@
   }
 
   .block {
-    width: 90%;
+    width: 95% !important;
     border-radius: 16px;
     margin-bottom: 20px;
   }
@@ -357,7 +357,7 @@
   }
 
   .list-item {
-    grid-template-columns: 1fr 0.1fr 1.5fr 1fr;
+    grid-template-columns: 1fr 0.5fr 1.5fr 1fr !important;
     height: 50px;
     font-size: 14px;
   }
@@ -377,30 +377,45 @@
   .market-list {
     max-height: 200px;
   }
+  .topusers-item  {
+    margin: 4px 0px !important;
+    height: 50px !important;
+  }
 }
 
 @media (max-width:480px) {
   .block {
     width: 100%;
-    margin: 7px 0;
+    margin: 0px 0;
   }
   .block:first-child{
-    margin-top: -35px;
+    margin-top: -40px;
     height: 300px;
   }
+  .tabs {
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .tab {
+    padding: 7px 7px;
+    font-size: 14px;
+  }
+
   .market-buttons {
-    margin-top: 0px;
+    margin-top: -5px;
   }
   .market-list {
-    margin-top: -5px;
-    margin-bottom: -30px;
+    margin-bottom: -20px;
     max-height: 200px;
   }
 
   .list-item {
-    grid-template-columns: 1.3fr 0.1fr fr 1fr;
+    grid-template-columns: 1fr 0.1fr 1fr 1fr;
+    margin: 8px 10px;
+    padding:0 15px;
   }
-
+  
   .transaction-list{
     margin: -20px 0;
   }
@@ -420,4 +435,14 @@
   .block-title-topusers {
     margin-bottom: -20px;
   }
+  .topusers-item  {
+    margin: 3.5px 10px !important;
+    height: 50px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+}
+
+@media screen {
+  
 }

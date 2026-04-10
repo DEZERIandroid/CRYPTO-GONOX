@@ -9,6 +9,7 @@ import { useAppSelector } from "@/hooks/reduxHooks";
 
 const SettingPage = () => {
   const user = useAppSelector(state => state.user)
+  const { email, name } = useAppSelector(state => state.user)
 
   const [theme,setTheme] = useState("Тёмная")
   const [isPrivate,setIsPrivate] = useState(false)
@@ -55,6 +56,32 @@ const SettingPage = () => {
             language: "Русский",
             updatenow: true,
             animation: true,
+          }]
+        });
+      }
+    });
+
+    return () => unsubscribe();
+  }, [user?.uid]);
+
+  useEffect(() => {
+    if (!user?.uid) return;
+
+    const userDocRef = doc(db, "users", user.uid);
+
+    const unsubscribe = onSnapshot(userDocRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.data() as User;
+        const s = data.accountsForSwitch?.[0];
+
+        if (s) {
+          
+        }
+      } else {
+        setDoc(userDocRef, {
+          accountsForSwitch:[{
+            name:name,
+            email:email,
           }]
         });
       }

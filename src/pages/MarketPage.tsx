@@ -173,7 +173,7 @@ const MarketPage = () => {
       <div className="market-content">
         <div className="market-table"
              style={{padding:!isMobile ? "5px" : "0px"}}>
-          <table>
+          <table style={{display:isError ? "grid" : "", placeContent:isError ? "center" : ""}}>
             <thead>
               <tr>
                 <th>#</th>

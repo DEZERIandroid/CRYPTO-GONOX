@@ -19,8 +19,6 @@ const UserPage = () => {
   const coinIds = user?.portfolio?.map((coin) => coin.coinId) || [];
   const { data: pricesData, isLoading: pricesLoading } = useGetCoinsPriceQuery(coinIds);
 
-  console.log(photomodal)
-  
   if (usersLoading && pricesLoading)
     return (
   <div className="page-container">
