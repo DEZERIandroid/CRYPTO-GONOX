@@ -73,7 +73,7 @@ const HomePage = () => {
     },[topusersData])
 
     if (isCryptosLoading && isTransactionsLoading && isTopusersLoading) return
-          <div className="home-content">
+          <div className="home-content" data-aos="fade-in">
             <div className="block">
               <div className="block-title" onClick={() => navigate("/transactions")}>
                 Рынок
@@ -151,7 +151,7 @@ const HomePage = () => {
            />
         </div>
       </div>
-      <div className="home-content">
+      <div className="home-content" data-aos="fade-in">
         {/*=============== Маркет ================ */}
         <div className="block">
           <div className="block-title" onClick={() => navigate("/market")}>

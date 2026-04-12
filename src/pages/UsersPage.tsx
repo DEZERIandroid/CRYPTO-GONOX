@@ -69,7 +69,7 @@ const UsersPage = () => {
   }, [users, searchQuery]);
 
 
-  if (isLoading) return <div className="page-container">
+  if (isLoading) return <div className="page-container" data-aos="fade-in">
       <div className="page-header">
         <h1 className="header-title">
           <span className="title-text">Пользователи</span>
@@ -96,7 +96,7 @@ const UsersPage = () => {
 
 
   return (
-    <div className="page-container">
+    <div className="page-container" data-aos="fade-in">
       <div className="page-header">
         <h1 className="header-title">
           <span className="title-text">Пользователи</span>

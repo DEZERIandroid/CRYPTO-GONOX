@@ -91,7 +91,7 @@ const SettingPage = () => {
   }, [user?.uid]);
 
   return (
-    <div className="page-container">
+    <div className="page-container" data-aos="fade-in">
       {/* HEADER */}
       <div className="page-header">
         <h1 className="header-title">{Language === "Аварский" ? "Настройкаялзаби" : "Настройки"}</h1>

@@ -34,7 +34,7 @@ const TopUsers = () => {
 
   if (isLoading) {
     return (
-      <div className="page-container">
+      <div className="page-container" data-aos="fade-in">
       <div className="page-header">
         <div className="header-title">
           <div className="title-text">Топ пользователей</div>
@@ -77,7 +77,7 @@ const TopUsers = () => {
   }
 
   return (
-  <div className="page-container">
+  <div className="page-container" data-aos="fade-in">
     <div className="page-header">
       <div className="header-title">
         <div className="title-text">Топ пользователей</div>

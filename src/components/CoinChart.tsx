@@ -126,7 +126,7 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
           dot={false}
           filter="url(#neonGlow)"
           isAnimationActive={true}
-          animationDuration={1500}
+          animationDuration={900}
           activeDot={{
             r: 7,
             fill: "#2d81ff",

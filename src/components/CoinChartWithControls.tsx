@@ -30,9 +30,9 @@ const CoinChartWithControls: React.FC<CoinChartWithControlsProps> = ({ coinId })
   if (isLoading)
   return (
     <div className="chart-skeleton">
-      <Skeleton.Input active style={{ width: "80%", height: 300 }} />
+      <Skeleton.Input active style={{ width: "100%", height: 300 }} />
       <div className="chart-skeleton-text">
-        <Skeleton active paragraph={{ rows: 2 }} />
+        <Skeleton  active paragraph={{ rows: 2 }} />
       </div>
     </div>
   );

@@ -84,7 +84,7 @@ const MarketPage = () => {
     refetch()
   }
   if (!isReady) return null;
-  if (isLoading) return <div className="page-container">
+  if (isLoading) return <div className="page-container" data-aos="fade-in">
       <div className="page-header">
         <div className="header-title">
           <div className="title-text">Рынок</div>
@@ -106,7 +106,7 @@ const MarketPage = () => {
               options={selectOptions}
             />
       </div>
-      <div className="market-content" style={{marginTop:"10px"}}>
+      <div className="market-content" style={{marginTop:"10px"}} data-aos="fade-in">
         <div className="market-table">
           <table>
             <thead>

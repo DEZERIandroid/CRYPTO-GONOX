@@ -131,7 +131,7 @@ const ProfilePage = () => {
         </div>
       );
 
-    if (!user) return <div className="loading-container">Пользователь не найден <button onClick={() => navigate("/login")} className="button-login">Логин</button> </div>;
+    if (!user) return <div className="loading-container" >Пользователь не найден <button onClick={() => navigate("/login")} className="button-login">Логин</button> </div>;
   return (
     <div className="page-container">
       <div className="page-header">
@@ -144,7 +144,7 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <div className="profile-content">
+      <div className="profile-content" data-aos="fade-in">
         <div className="profile">
           <div className="profile">
             <div data-aos="fade-in" className="profile-avatar" onClick={modal.openModal}>

@@ -21,7 +21,7 @@ const UserPage = () => {
 
   if (usersLoading && pricesLoading)
     return (
-  <div className="page-container">
+  <div className="page-container" data-aos="fade-in">
         <div className="page-header">
           <Skeleton.Input active style={{ width: 200, height: 32 }} />
           <div className="header-actions">
@@ -46,7 +46,7 @@ const UserPage = () => {
     
     if (!user) return <div className="loading-container">Пользователь не найден</div>;
   return (
-    <div className="page-container">
+    <div className="page-container" data-aos="fade-in">
       <div className="page-header">
         <h1 className="header-title">Профиль пользователя {user.displayName}</h1>
         <div className="header-actions">

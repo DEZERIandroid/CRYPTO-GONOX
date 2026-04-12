@@ -177,7 +177,7 @@ const CryptoPage = () => {
 
   if (isCoinLoading)
     return (
-        <div className="page-container">
+        <div className="page-container" data-aos="fade-in">
           
           <div className="user-content crypto-content">
             <Skeleton.Button active style={{ width: 120, height: 36, marginBottom: 24 }} />
@@ -248,7 +248,8 @@ const CryptoPage = () => {
         </div>
       </div>
 
-      {!isCoinError ? (<div className="user-content crypto-content">
+      {!isCoinError ? 
+      (<div className="user-content crypto-content" data-aos="fade-in">
         <div className="return">
           <button className="return-btn" onClick={() => navigate("/market")}>
            <ArrowLeftOutlined/>Назад
