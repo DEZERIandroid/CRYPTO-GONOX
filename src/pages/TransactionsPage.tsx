@@ -112,7 +112,7 @@ const TransactionsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {[...Array(7)].map((_, i) => (
+                {[...Array(15)].map((_, i) => (
                   <tr key={i}>
                     <td colSpan={7}>
                       <Skeleton avatar active paragraph={{ rows: 1 }} />
