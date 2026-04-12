@@ -8,34 +8,55 @@ import { RiseOutlined, FallOutlined,StarOutlined,
          SearchOutlined} from "@ant-design/icons";
 import "../styles/Pages/Crypto.css";
 import CoinChartWithControls from "../components/CoinChartWithControls";
-import { useBuyCryptoMutation,useSellCryptoMutation, useGetCryptoForSellQuery, useFavoriteCryptoMutation } from "../app/api/UsersApi";
-import { useMemo, useState } from "react";
+import { useBuyCryptoMutation,useSellCryptoMutation, useFavoriteCryptoMutation, type CryptoForSell } from "../app/api/UsersApi";
+import { useEffect, useMemo, useState } from "react";
 import { useAppSelector } from "../hooks/reduxHooks";
 import Loading from "../assets/useLoading";
 import { useCloseModal } from "@/hooks/useCloseModal";
 import { useWindowSize } from "@uidotdev/usehooks";
 import useGetUser from "@/hooks/useGetUser";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "@/firebase";
 
 const CryptoPage = () => {
   const navigate = useNavigate()
-  const { id } = useParams();
+  const { id:coinId } = useParams();
   const uid = useAppSelector(state => state.user.uid);
   const Username = useAppSelector(state => state.user.name)
   const { email } = useAppSelector(state => state.user);
   const { users } = useGetUser()
-  const { data:cryptoforsell, } = useGetCryptoForSellQuery(
-    { userId: uid, coinId: id || "" },
-    {pollingInterval:500}
-  )
+  const [cryptoforsell,setCryptoForSell] = useState(0)
+
+  useEffect(() => {
+    if (!uid || !coinId) return;
+
+    const userDocRef = doc(db,"users",uid)
+    
+    const unsubscribe = onSnapshot(userDocRef,(snapshot) => {
+      if (snapshot.exists()) {
+        
+        const data = snapshot.data()
+        const crptfrsl = data.portfolio || []
+
+        if (crptfrsl) {
+          const coin = crptfrsl.find((coin:CryptoForSell) => coin.coinId === coinId)
+          const amount = coin?.amount ?? 0
+
+          console.log(amount)
+          setCryptoForSell(amount)
+        }
+      }
+    })
+
+    return () => unsubscribe()
+  },[])
 
   const size = useWindowSize()
   const isMobile = size.width !== null && size.width >= 480
   
   const user = users?.find((u) => u.email === email); 
-  
-  const amountForSell = cryptoforsell?.amount ?? 0
 
-  const { data: coin, isLoading:isCoinLoading, isError:isCoinError, } = useGetCoinQuery(id ?? skipToken, {
+  const { data: coin, isLoading:isCoinLoading, isError:isCoinError, } = useGetCoinQuery(coinId ?? skipToken, {
     pollingInterval:250000
   });
   const [buyCrypto,{isLoading:isBuying}] = useBuyCryptoMutation()
@@ -79,7 +100,7 @@ const CryptoPage = () => {
 
       try {
         const result = await buyCrypto({
-                          uid,coinId: id,amountCoins:Number(amountBuy),
+                          uid,coinId: coinId,amountCoins:Number(amountBuy),
                           currentPrice:price,image,symbol,cryptoPrice,Username,totalBuyPrice:totalBuy})
         if (result.error) {
           setUnSuccess(true);
@@ -113,9 +134,16 @@ const CryptoPage = () => {
        setTimeout(() => setUnSuccess(false), 1500);
       return;
     }
+    if (amountSell > cryptoforsell) {
+       setUnSuccess(true);
+       setSellError(true)
+       setTimeout(() => setSellError(false), 1500);
+       setTimeout(() => setUnSuccess(false), 1500);
+      return;
+    }
     try {
       const result = await sellCrypto({
-                              uid,coinId:id,amountCoins:amountSell,
+                              uid,coinId:coinId,amountCoins:amountSell,
                               image,symbol,cryptoPrice:totalSell,
                                                         Username})
       if (result.error) {
@@ -138,13 +166,13 @@ const CryptoPage = () => {
 /* ----------------------- Избранное не избранное ----------------------*/
   const handleIsFavorite = async () => {
     try {
-      await favoriteCrypto({uid,coinId: id})
+      await favoriteCrypto({uid,coinId: coinId})
     } catch (error) {
       console.log(error)
     }
   }
 
-  const isFavorite = user?.favoritesCrypto?.includes(id)
+  const isFavorite = user?.favoritesCrypto?.includes(coinId)
 
 
   if (isCoinLoading)
@@ -272,8 +300,8 @@ const CryptoPage = () => {
           </div>
         
         <div data-aos="fade-in" className="coin-chart">
-          {id ? (
-            <CoinChartWithControls coinId={id} />
+          {coinId ? (
+            <CoinChartWithControls coinId={coinId} />
           ) : (
             <p className="error">Данные графика недоступны</p>
           )}
@@ -338,7 +366,7 @@ const CryptoPage = () => {
                         color:sellError ? "red" : "white",
                         transition:sellError ? "0.5s" : "0"
               }}>
-                У вас: {amountForSell ?? 0}
+                У вас: {cryptoforsell ?? 0}
               </p>
               <input  
                 style={{borderBottom:sellError ? "1px solid red" : "none",

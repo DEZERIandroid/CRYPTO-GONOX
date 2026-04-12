@@ -52,6 +52,11 @@ interface favoriteCrypto {
   uid:any,
   coinId:undefined | string
 }
+export interface CryptoForSell {
+  amount:number,
+  userId: any,
+  coinId: string,
+}
 export interface Transaction {
   userId: any,
   userName:string,
@@ -227,7 +232,7 @@ export const usersApi = createApi({
             
             const userData = userSnap.data()
             const balance = userData.balance
-            const portfolio = userData.portfolio
+            const portfolio = userData.portfolio || []
             
             const existingCoin = portfolio.find((i:any) => i.coinId === coinId)
             if (!existingCoin) {
@@ -372,7 +377,7 @@ export const usersApi = createApi({
         }
       }
     }),
-    getCryptoForSell: builder.query<{ amount:number}, { userId: any; coinId: string }>({
+    getCryptoForSell: builder.query<{amount:number}, { userId: any; coinId: string} >({
       providesTags: ["Users"],
       async queryFn({ userId, coinId }) {
         try {
