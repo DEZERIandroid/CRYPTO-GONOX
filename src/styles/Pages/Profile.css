@@ -422,6 +422,10 @@
     .profile-info {
       margin: -35px 0;
     }
+    .user-portfolio {
+      margin-top: -20px !important;
+      margin-bottom: 10px !important;
+    }
 
     .profile-role-admin {
       margin: -30px;
