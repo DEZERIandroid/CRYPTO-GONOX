@@ -362,7 +362,8 @@
   .transactions th:nth-child(3),
   .transactions td:nth-child(3) {
     padding: 0 10px !important;
-    min-width: 160px;
+    min-width: 130px !important;
+    overflow: hidden;
   }
   .transactions th:nth-child(4),
   .transactions td:nth-child(4) {
