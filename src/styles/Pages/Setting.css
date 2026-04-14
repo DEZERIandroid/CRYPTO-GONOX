@@ -14,6 +14,9 @@
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
   animation: fadeIns 0.15s ease-in-out;
+  margin-bottom: 10px;
+  max-height: 825px;
+  overflow-y: scroll;
 }
 
 .settings-section {
@@ -185,7 +188,21 @@
 
 /* ===== ADAPTIVE ===== */
 
+@media (max-width:1279px) {
+  .settings-content {
+    max-height: 860px;
+  }
+}
+@media (max-width:1023px) {
+  .settings-content {
+    max-height: 855px;
+  }
+}
+
 @media (max-width: 768px) {
+  .market-content {
+    max-height: 8505px;
+  }
   .select{
     width: 134px;
   }

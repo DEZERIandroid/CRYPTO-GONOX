@@ -7,6 +7,9 @@
   height: 100%;
   background: rgba(255, 255, 255, 0.05);
   padding-bottom: 10px !important;
+  margin-bottom: 10px;
+  max-height: 825px;
+  overflow-y: scroll;
 }
 
 /* ===== Заголовок монеты ===== */
@@ -15,7 +18,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  margin-top: 30px;
+  margin-top: 0px;
   background: rgba(255, 255, 255, 0.01);
   border: 1px solid rgba(255, 255, 255, 0.144);
   box-shadow: 
@@ -353,6 +356,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  margin-top: 80px ;
 }
 
 .stat-block {
@@ -497,6 +501,13 @@
 
 /* Ноутбуки и десктопы (1200px–1599px) */
 @media (max-width: 1599px) and (min-width: 1200px) {
+  .coin-header {
+    display: flex;
+  }
+  .coin-actions{
+    flex: 1;
+    place-content: center;
+  }
   .coinCryptos-info{
     display: grid;
     place-content: center;
@@ -512,6 +523,20 @@
   }
   .stat-value {
     font-size: 20px;
+  }
+}
+
+@media (max-width:1279px) {
+  .crypto-content {
+    max-height: 860px;
+  }
+  .coin-stats{
+    margin-top: 100px !important;
+  }
+}
+@media (max-width:1023px) {
+  .crypto-content {
+    max-height: 855px;
   }
 }
 
@@ -550,6 +575,7 @@
     display: grid;
     place-content: center;
     grid-template-columns: 1fr 1fr;
+    margin-top: 100px !important;
   }
   .stat-block {
     flex: 1 1 45%;
@@ -561,10 +587,11 @@
     display: grid;
     place-content: center;
     grid-template-columns: 1fr 1fr;
+    margin-top: 0px !important;
+    margin-top: 130px !important;
   }
   .stat-block {
     padding: 20px;
-    margin: 0 -10px;
   }
   .coin-logo{
     padding-left: 0px;
@@ -575,6 +602,7 @@
   .crypto-content {
     gap: 20px;
     padding: 0 10px;
+    max-height: 8250px;
   }
 
   /* ==== Заголовок монеты ==== */
@@ -584,7 +612,7 @@
     text-align: center;
     gap: 15px;
     margin: 25px 40px;
-    margin-top: 50px;
+    margin-top: 50px !important;
   }
 
   .coin-logo img {
@@ -639,6 +667,7 @@
   .coin-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin-top: 0px !important;
   }
 
   .stat-block {

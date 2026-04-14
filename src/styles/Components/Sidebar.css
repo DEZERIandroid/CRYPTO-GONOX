@@ -12,7 +12,7 @@
 
 .sidebar-container {
   display: flex;
-  height: 99.5vh;
+  height: 95vh;
   flex-direction: column;
   justify-content: center;
   border-radius: 13px;
@@ -23,6 +23,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  margin-left:10px;
+  margin-top: 25px;
 }
 
 .sidebar-logo{
@@ -751,9 +753,24 @@
     font-size: 17px;
   }
 }
-
+@media (max-width:1279px) {
+  .sidebar-container {
+    margin-top: 15px;
+    height: 97vh;
+  }
+}
+@media (max-width:1023px) {
+  .sidebar-container {
+    margin-top: 25px;
+    height: 95vh;
+  }
+}
 @media (max-height:790px) {
-
+  .sidebar-container {
+    margin-top: 450px ;
+    height: 10vh;
+  }
+  
   .sidebar-items{
     margin-bottom: 50px;
   }
@@ -790,6 +807,8 @@
     padding:0 15px;
     gap: 16px;
     width: 100%;
+    margin-left:0px;
+    margin-top: 0;
   }
 
   .sidebar-logo {
@@ -848,27 +867,12 @@
   }
 
   .item {
-    flex: 0 0 auto;
-    min-width: 56px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border-radius: 12px;
-    cursor: pointer;
+    padding: 10px 15px;
   }
   .item-actived {
-    flex: 0 0 auto;
-    min-width: 56px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border-radius: 12px;
-    cursor: pointer;
+    padding: 10px 15px;
   }
+
 
   .sidebar-icon {
     transform: scale(0.9);
@@ -1011,3 +1015,49 @@
   }
 }
 
+
+
+@media (max-height:880px) {
+  .logo {
+    margin-top: 0;
+  }
+  .user {
+    margin: -10px 0;
+  }
+  .sidebar-items {
+    margin-bottom: 0;
+  }
+  .home-content {
+    margin-top: 0;
+  }
+}
+@media (max-height:805px) {
+  .logo {
+    margin-top: 0;
+  }
+  .user {
+    margin: -20px 0;
+  }
+  .sidebar-items {
+    margin-top: 50px;
+  }
+  .item {
+    padding:15px 15px;
+  }
+  .item-actived {
+    padding:15px 15px;
+  }
+}
+@media (max-height:791px) {
+  .logo {
+    margin-top: -40px;
+  }
+  .sidebar-items {
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+  .sidebar-theme-toggle {
+    margin-top: 0px;
+    margin-bottom: -50px;
+  }
+}

@@ -18,10 +18,6 @@ const TransactionsPage = () => {
 
   const filtres = ["За всё время", "За неделю", "За день"];
 
-  const selectOptions = filtres.map((item) => ({
-    value: item,
-    label: item,
-  }));
 
   const sortedData = transactions
     ? [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -166,7 +162,7 @@ const TransactionsPage = () => {
           ))}
         </div>
 
-        <div className="market-content">
+        <div className="transactions-content market-content ">
           <div className="market-table transactions">
             <table>
               <thead>
@@ -186,28 +182,28 @@ const TransactionsPage = () => {
                     filteredTransactions.map((item, index) => {
                       return (
                         <tr key={`${item.date}-${item.coin}-${index}`}>
-                          <td data-aos="fade-in" data-aos-once="false">{index + 1}</td>
-                          <td onClick={() => navigate(`/crypto/${item.coin}`)} data-aos="fade-in" data-aos-once="false" className="transactions-imgSymbol">
+                          <td>{index + 1}</td>
+                          <td onClick={() => navigate(`/crypto/${item.coin}`)} className="transactions-imgSymbol">
                             <img className="transactions-img"
                               src={item.image}
                               alt={item.symbol}
                             />
-                            <div data-aos="fade-in" data-aos-once="false" className="transactions-symbol">
+                            <div className="transactions-symbol">
                               {item.symbol}
                             </div>
                           </td>
-                          <td onClick={() => navigate(`/user/${item.userName}`)} data-aos="fade-in" data-aos-once="false" className="transactions-userName">
+                          <td onClick={() => navigate(`/user/${item.userName}`)} className="transactions-userName">
                             {item.userName}
                           </td>
-                          <td data-aos="fade-in" data-aos-once="false" className="transactions-amount">{item.amount}</td>
-                          <td data-aos="fade-in" data-aos-once="false">
+                          <td className="transactions-amount">{item.amount}</td>
+                          <td>
                             {item.status === "buy" 
                                       ? (<span className="status-buy">Покупка</span>)
                                       : (<span className="status-sell">Продажа</span>)
                             }
                           </td>
-                          <td data-aos="fade-in" data-aos-once="false" className="transactions-data">{new Date(item.date).toLocaleDateString()}</td>
-                          <td data-aos="fade-in" data-aos-once="false" className="transactions-buyPrice">${item.Price.toFixed(2)}</td>
+                          <td className="transactions-data">{new Date(item.date).toLocaleDateString()}</td>
+                          <td className="transactions-buyPrice">${item.Price.toFixed(2)}</td>
                         </tr>
                       );
                     })

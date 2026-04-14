@@ -1,3 +1,25 @@
+/* ===== MARKET CARD ===== */
+
+.market-content {
+  backdrop-filter: blur(30px);
+  border-radius: 13px;
+  padding: 28px;
+  animation: fadeIns 0.15s ease-in-out;
+  min-height: 500px;
+  max-height: 825px;
+  overflow-y: scroll;
+  color: #e0e0e0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+}
+
+/* ===== FILTERS z===== */
+
 .filter-select{
   width: 150px;
   height: 40px;
@@ -30,24 +52,6 @@
 @keyframes fadeIns {
   0%{opacity: 0;}  
   100%{opacity: 1;}  
-}
-
-/* ===== MARKET CARD ===== */
-
-.market-content {
-  backdrop-filter: blur(30px);
-  border-radius: 13px;
-  padding: 28px;
-  animation: fadeIns 0.15s ease-in-out;
-  min-height: 500px;
-  color: #e0e0e0;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.144);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
 /* ===== TABLE ===== */
@@ -190,6 +194,13 @@
   }
 }
 
+@media (max-width:1279px) {
+  .market-content {
+    max-height: 860px;
+  }
+}
+
+
 
 @media (max-width: 1164px) {
   .market-content {
@@ -204,6 +215,13 @@
     height: 36px;
   }
 } 
+
+@media (max-width:1023px) {
+  .market-content {
+    max-height: 855px;
+  }
+}
+
 @media (max-width: 1000px) {
   .market-content {
     padding-top: 35px;
@@ -222,6 +240,9 @@
   }
 }
 @media (max-width: 768px) {
+  .market-content {
+    max-height: 8550px;
+  }
   .header-title {
     font-size: 22px;
     margin-top: 0px !important;

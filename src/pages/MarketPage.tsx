@@ -192,16 +192,16 @@ const MarketPage = () => {
             {!isError ? (<tbody>
               {filteredData.map((coin, index) => (
                 <tr onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
-                  <td data-aos="fade-in" data-aos-once="false">{index + 1}</td>
+                  <td>{index + 1}</td>
                   <td>
-                    <div data-aos="fade-in" data-aos-once="false" className="coin-info">
+                    <div className="coin-info">
                       <img
                         src={coin.image}
                         alt={coin.symbol}
                         className="coin-icon"
                         
                       />
-                      <div data-aos="fade-in" data-aos-once="false" className="coin-name">
+                      <div className="coin-name">
                         <div className="name">{coin.name?.length <= 22 ? coin.name : coin.symbol}</div>
                         <div className="symbol">{coin.symbol.toUpperCase()}</div>
                       </div>
@@ -209,8 +209,8 @@ const MarketPage = () => {
                   </td>
                   {isMobile ?
                     <>
-                      <td data-aos="fade-in" data-aos-once="false" className="coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                      <td data-aos="fade-in" data-aos-once="false">
+                      <td className="coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                      <td>
                         <span className={coin.price_change_percentage_24h >= 0 ? "change-positive" : "change-negative"}>
                           {coin.price_change_percentage_24h >= 0 ? <RiseOutlined /> : <FallOutlined />}
                           {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
@@ -219,8 +219,8 @@ const MarketPage = () => {
                     </>:
                     <>
                       <td className="price-mobile">
-                        <div data-aos="fade-in" data-aos-once="false" className="coin-prices coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                        <div data-aos="fade-in" data-aos-once="false">
+                        <div className="coin-prices coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                        <div>
                           <span className={coin.price_change_percentage_24h >= 0 ? "change-mobile change-positive" : "change-mobile change-negative"}>
                             {coin.price_change_percentage_24h >= 0 ? <RiseOutlined /> : <FallOutlined />}
                             {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
@@ -231,8 +231,8 @@ const MarketPage = () => {
                   }
                   {isMobile ? 
                     <>
-                      <td data-aos="fade-in" data-aos-once="false">${(coin.market_cap / 1e9).toFixed(1)}B</td>
-                      <td data-aos="fade-in" data-aos-once="false">${(coin.total_volume / 1e9).toFixed(1)}B</td>
+                      <td>${(coin.market_cap / 1e9).toFixed(1)}B</td>
+                      <td>${(coin.total_volume / 1e9).toFixed(1)}B</td>
                     </>
                   : null}
                 </tr>

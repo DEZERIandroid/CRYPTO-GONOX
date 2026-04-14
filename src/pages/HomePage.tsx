@@ -255,15 +255,17 @@ const HomePage = () => {
                           className="topusers-item list-item"
                           onClick={() => navigate(`/user/${user.id}`)}
                           key={user.id}>
-                          {user.photoURL ? (
-                            <img
-                            src={user.photoURL}
-                            alt={user.displayName}
-                            className="user-avatar-placeholder"
-                            />
-                          ) : (
-                            <img className="user-avatar-placeholder"  />
-                          )}
+                          <div className="topusers-item-photo">
+                            {user.photoURL ? (
+                              <img
+                                src={user.photoURL}
+                                alt={user.displayName}
+                                className="user-avatar-placeholder"
+                                />
+                              ) : (
+                                <img className="user-avatar-placeholder"  />
+                            )}
+                          </div>
                           <span className="topusers-name item-name">{user.displayName || "Аноним"}</span>
                           <span className={balanceClass}>
                             ${user.cryptoTotalBalance?.toFixed(2) || "0.00"}

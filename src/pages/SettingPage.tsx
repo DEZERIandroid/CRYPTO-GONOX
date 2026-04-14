@@ -11,7 +11,7 @@ const SettingPage = () => {
   const user = useAppSelector(state => state.user)
   const { email, name } = useAppSelector(state => state.user)
 
-  const [theme,setTheme] = useState("Тёмная")
+  const [theme,setTheme] = useState("Gonox")
   const [isPrivate,setIsPrivate] = useState(false)
   const [isPush,setIsPush] = useState(true)
   const [Language,setLanguage] = useState("Русский")

@@ -68,9 +68,7 @@
 
 | Рынок криптовалют | Криптовалюта | История транзакций |
 | :---: | :---: | :---: |
-| <img width="100%" alt="Рынок" src="https://github.com/user-attachments/assets/e5042d4b-959f-4530-9427-94a421d26c7d" /> 
-| <img width="100%" alt="Криптовалюта" src="https://github.com/user-attachments/assets/01266ead-b688-44be-add1-86010f0c45b7" />
-| <img width="100%" alt="Транзакции" src="https://github.com/user-attachments/assets/f3fb4902-6928-40ec-b9bc-d800f2d701f9" /> |
+| <img width="100%" alt="Рынок" src="https://github.com/user-attachments/assets/e5042d4b-959f-4530-9427-94a421d26c7d" /> | <img width="100%" alt="Криптовалюта" src="https://github.com/user-attachments/assets/01266ead-b688-44be-add1-86010f0c45b7" /> | <img width="100%" alt="Транзакции" src="https://github.com/user-attachments/assets/f3fb4902-6928-40ec-b9bc-d800f2d701f9" /> |
 | *Список доступных монет и цены* | *Страница покупки/продажи крипты* | *История всех ваших сделок* |
 
 | Лидерборд |

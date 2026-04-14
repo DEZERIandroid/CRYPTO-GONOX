@@ -177,8 +177,19 @@ const CryptoPage = () => {
 
   if (isCoinLoading)
     return (
-        <div className="page-container" data-aos="fade-in">
-          
+        <div className="page-container" >
+          <div className="page-header">
+            <div className="header-title">
+              <div className="title-text"></div>
+            </div>
+            <div className="header-input">
+              <SearchOutlined className="input-icon" />
+              <input className="input"
+               type="text" 
+               placeholder="Поиск"
+               />
+            </div>
+          </div>
           <div className="user-content crypto-content">
             <Skeleton.Button active style={{ width: 120, height: 36, marginBottom: 24 }} />
 
@@ -255,7 +266,7 @@ const CryptoPage = () => {
            <ArrowLeftOutlined/>Назад
         </button>
         </div>
-        <div data-aos="fade-in" className="coin-header">
+        <div  className="coin-header">
               <div className="coin-logo">
                 <img src={image} alt={coin.name} />
               </div>
@@ -300,7 +311,7 @@ const CryptoPage = () => {
             </div>
           </div>
         
-        <div data-aos="fade-in" className="coin-chart">
+        <div  className="coin-chart">
           {coinId ? (
             <CoinChartWithControls coinId={coinId} />
           ) : (
@@ -309,11 +320,11 @@ const CryptoPage = () => {
         </div>
 
         <div className="coin-stats">
-          <div data-aos="fade-in" className="stat-block">
+          <div  className="stat-block">
             <span className="stat-label">Рыночная капитализация</span>
             <span className="stat-value">{marketCap ? `$${marketCap.toLocaleString()}` : "-"}</span>
           </div>
-          <div data-aos="fade-in" className="stat-block">
+          <div  className="stat-block">
             <span className="stat-label">Объем торгов (24ч)</span>
             <span className="stat-value">{volume ? `$${volume.toLocaleString()}` : "-"}</span>
           </div>

@@ -1,22 +1,25 @@
+.topusers-content {
+  border-radius: 10px;
+  padding: 30px;
+  min-height: 500px;
+  max-height: 825px;
+  overflow-y: scroll;
+  color: #e0e0e0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+  0 8px 32px rgba(0, 0, 0, 0.1),
+  inset 0 1px 0 rgba(255, 255, 255, 0.3),
+  inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+  inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  animation: fadeIns 0.15s ease-in-out;
+  margin-bottom: 10px;
+}
 .topusers-container {
   padding: 30px;
   max-width: 1200px;
   margin: 0 auto;
   color: #ffffff;
-}
-.topusers-content {
-  border-radius: 10px;
-  padding: 30px;
-  min-height: 500px;
-  color: #e0e0e0;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.144);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 0px 0px rgba(255, 255, 255, 0);
-  animation: fadeIns 0.15s ease-in-out;
 }
 
 .user-avatar-placeholder {
@@ -131,12 +134,12 @@
   display: grid;
   place-content: center;
   margin: 0 20px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .topusers-item{
   display: grid;
   grid-template-columns: 1fr 3fr 1fr !important;
-  margin-top: 5px;
+  margin-top: 10px;
   text-align: start;
 }
 
@@ -219,11 +222,30 @@
     font-size: 14px;
   }
   .topusers-list {
-    margin: 0 10px;
-    margin-top: 20px;
+    margin: 15px 15px;
+  }
+  .topusers-item{
+    margin: 5px;
   }
 }
-
+@media (max-width:1279px) {
+  .topusers-content {
+    max-height: 860px;
+  }
+}
+@media (max-width:1023px) {
+  .topusers-content {
+    max-height: 850px !important;
+  }
+}
+@media (max-width: 900px) {
+  .topusers-item {
+    margin: 4px 10px !important;
+    padding:0 18px;
+    grid-template-columns: 1fr 4.8fr 1fr !important;
+    height: 60px !important;
+  }
+}
 @media (max-width: 768px) {
   .topusers-content {
     padding: 20px;
@@ -245,6 +267,12 @@
   .user-avatar-placeholder {
     width: 40px;
     height: 40px;
+  }
+  .topusers-item {
+    margin: 4px 20px !important;
+    padding:0 18px;
+    grid-template-columns: 1fr 4.8fr 1fr !important;
+    height: 60px !important;
   }
 }
 
@@ -284,12 +312,24 @@
     height: 40px;
   }
   .topusers-item {
-    margin: 4px 10px !important;
+    display: flex;
+    margin: 4px 15px !important;
+    padding:0 15px !important;
+    margin: 4px 5px !important;
+    height: 50px !important;
   }
   .topusers-username {
     display: flex;
     align-items: center;
     gap: 12px;
     min-width: 180px;
+  }
+  .topusers-item-photo {
+    min-width: 45px;
+  }
+  .topusers-item .item-name {
+    margin-left: 8px;
+    flex: 1;
+    text-align: start;
   }
 }
