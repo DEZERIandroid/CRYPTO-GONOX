@@ -121,7 +121,7 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
           type="monotone"
           dataKey="price"
           stroke="url(#lineBlueGradient)"
-          strokeWidth={2.3}
+          strokeWidth={2}
           fill="url(#deepBlueGradient)"
           dot={false}
           filter="url(#neonGlow)"

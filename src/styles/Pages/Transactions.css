@@ -103,11 +103,10 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
-  padding: 4px 12px;
+  padding: 5px 8px;
   border-radius: 20px;
   font-size: 15px;
   font-weight: 500;
-  display: inline-block;
   width: 97px;
 }
 .status-sell {
@@ -120,11 +119,10 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
-  padding: 4px 12px;
+  padding: 5px 5px;
   border-radius: 20px;
   font-size: 15px;
   font-weight: 500;
-  display: inline-block;
   width: 97px;
 }
 
@@ -340,7 +338,7 @@
 
 @media (max-width: 480px) {
   .filters{
-    margin: 20px 10px;
+    margin: 10px 10px;
   }
   .filter-btn {
     font-size: 13px;
@@ -372,15 +370,5 @@
   .transactions th {
     font-size: 12px;
     border-right: 1px solid rgba(255, 255, 255, 0.027);
-  }
-  .status-buy {
-    padding: 4px;
-    font-size: 15px;
-    width: 90px;
-  }
-  .status-sell {
-    padding: 4px;
-    font-size: 15px;
-    width: 90px;
   }
 }

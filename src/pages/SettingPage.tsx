@@ -18,7 +18,7 @@ const SettingPage = () => {
   const [isAutoUpdate,setIsAutoUpdate] = useState(true)
   const [isAnimation,setIsAnimation] = useState(true)
 
-  const themes = ["Тёмная","Белая","Зелёная","Синяя","Неоновая"]
+  const themes = ["Тёмная","Белая","Gonox","Синяя","Неоновая"]
   const Languages = ["Русский","Английский","Аварский"]
 
   const selectOptionsTheme = themes.map((item) => ({

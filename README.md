@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Demo%20Available-brightgreen?style=for-the-badge&logo=rocket" alt="Status">
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2.0.0-blue?style=for-the-badge" alt="Version">
 </p>
 
 <p align="center">
@@ -63,17 +63,19 @@
 
 | Главная | Профиль пользователя |
 | :---: | :---: |
-| <img width="100%" alt="Главная" src="https://github.com/user-attachments/assets/f1ad5a98-6ffe-47b9-8316-de3c6bda23f0" /> | <img width="100%" alt="Профиль" src="https://github.com/user-attachments/assets/1f948c05-7b28-4a08-bd38-f036b453ddc5" /> |
-| *Баланс, портфель и быстрый доступ* | *Детальная информация об активах* |
+| <img width="100%" alt="Главная" src="https://github.com/user-attachments/assets/3b878216-bec5-496d-a604-c63f78da9742" /> | <img width="100%" alt="Профиль" src="https://github.com/user-attachments/assets/cab95cbf-6964-4dca-a1be-a10bedb46cda" /> |
+| *Баланс, портфель и быстрый доступ* | *Профиль пользователя и портфолио* |
 
-| Рынок криптовалют | История транзакций |
-| :---: | :---: |
-| <img width="100%" alt="Рынок" src="https://github.com/user-attachments/assets/04f05106-a4e8-47e0-9cb5-059147fb724c" /> | <img width="100%" alt="История" src="https://github.com/user-attachments/assets/1d2a3739-64f2-4e76-94be-9de671b55b26" /> |
-| *Список доступных монет и цены* | *Полный лог всех ваших сделок* |
+| Рынок криптовалют | Криптовалюта | История транзакций |
+| :---: | :---: | :---: |
+| <img width="100%" alt="Рынок" src="https://github.com/user-attachments/assets/e5042d4b-959f-4530-9427-94a421d26c7d" /> 
+| <img width="100%" alt="Криптовалюта" src="https://github.com/user-attachments/assets/01266ead-b688-44be-add1-86010f0c45b7" />
+| <img width="100%" alt="Транзакции" src="https://github.com/user-attachments/assets/f3fb4902-6928-40ec-b9bc-d800f2d701f9" /> |
+| *Список доступных монет и цены* | *Страница покупки/продажи крипты* | *История всех ваших сделок* |
 
 | Лидерборд |
 | :---: |
-| <img width="70%" alt="Лидерборд" src="https://github.com/user-attachments/assets/3d8800eb-55db-4eb0-851f-902eca81c457" /> |
+| <img width="100%" alt="Лидерборд" src="https://github.com/user-attachments/assets/c53e19d9-8ff1-4a28-8d8c-2672a48003a2" /> |
 | *Топ лучших трейдеров платформы* |
 
 </details>
@@ -141,7 +143,7 @@ npm run dev
 
 ## 🗺️ Что дальше (Roadmap)
 
-- [ ] История изменения стоимости портфеля по времени  
+- [  ] История изменения стоимости портфеля по времени  
 - [ ] Расширенная аналитика сделок (PnL, ROI)  
 - [ ] Добавление большего количества криптовалютных пар  
 - [ ] Полноценная админ-панель для управления платформой  

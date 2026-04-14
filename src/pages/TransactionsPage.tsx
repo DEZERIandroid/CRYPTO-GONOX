@@ -76,10 +76,10 @@ const TransactionsPage = () => {
           />
         </div>
         <Select
-          className="transactions-filter"
+          className="filter-select"
           value={filterTime}
-          onChange={(value) => setFilterTime(value)}
-          options={selectOptions}
+          onChange={setFilterTime}
+          options={filtres.map(f => ({ label: f, value: f }))}
         />
       </div>
       <div data-aos="fadeIn" className="transactions-container">
@@ -112,7 +112,7 @@ const TransactionsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {[...Array(15)].map((_, i) => (
+                {[...Array(20)].map((_, i) => (
                   <tr key={i}>
                     <td colSpan={7}>
                       <Skeleton avatar active paragraph={{ rows: 1 }} />
