@@ -1,24 +1,59 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Select, Switch } from "antd";
 import "../styles/Pages/Setting.css";
-import { useEffect, useState } from "react";
-import { type User, } from "@/app/api/UsersApi";
-import { doc, setDoc, onSnapshot } from "firebase/firestore";
-import { db } from "@/firebase";
+import { useEffect, useState } from "react"
 import { useAppSelector } from "@/hooks/reduxHooks";
+import { db } from "@/firebase"
+import { doc, onSnapshot, updateDoc } from "firebase/firestore"
+import type { User } from "@/app/api/UsersApi"
 
 const SettingPage = () => {
-  const user = useAppSelector(state => state.user)
-  const { email, name } = useAppSelector(state => state.user)
-
   const [theme,setTheme] = useState("Gonox")
   const [isPrivate,setIsPrivate] = useState(false)
   const [isPush,setIsPush] = useState(true)
   const [Language,setLanguage] = useState("Русский")
   const [isAutoUpdate,setIsAutoUpdate] = useState(true)
   const [isAnimation,setIsAnimation] = useState(true)
+  
+  const user = useAppSelector(state => state.user)
+    useEffect(() => {
+        if (!user.uid) return
 
-  const themes = ["Тёмная","Белая","Gonox","Синяя","Неоновая"]
+        const userDocRef = doc(db,"users",user.uid)
+
+        const unsubscribe = onSnapshot(userDocRef, (snapshot) => {
+            if(snapshot.exists()) {
+                const data = snapshot.data() as User
+                const s = data.settings?.[0]
+
+                if (s) {
+                          setTheme(s.theme || "Gonox");
+                          setLanguage(s.language || "Русский");
+                          setIsPrivate(!!s.private);
+                          setIsPush(!!s.push);
+                          setIsAutoUpdate(!!s.updatenow);
+                          setIsAnimation(!!s.animation);
+                        }
+                  } else {
+                    updateDoc(userDocRef, {
+                      settings: [{
+                        push: true,
+                        private:"false",
+                        theme: "Тёмная",
+                        language: "Русский",
+                        updatenow: true,
+                        animation: true,
+                      }]
+                    });
+            }
+            
+        })
+
+        return () => unsubscribe()
+        
+    },[])
+
+  const themes = ["Gonox","Тёмная","Белая","Зелёная","Синяя","Неоновая"]
   const Languages = ["Русский","Английский","Аварский"]
 
   const selectOptionsTheme = themes.map((item) => ({
@@ -30,65 +65,29 @@ const SettingPage = () => {
     label: item,
   }));
 
-  useEffect(() => {
-    if (!user?.uid) return;
+  const ReloadSite = () => {
+    window.location.reload()
+  }
 
-    const userDocRef = doc(db, "users", user.uid);
+  const saveSettings = async () => {
+    if (!user.uid) return
+    
+    const userRef = doc(db,"users",user.uid) 
+    
+    await updateDoc(userRef, {
+            settings:[{
+              push:isPush,
+              theme:theme,
+              private:isPrivate,
+              language:Language,
+              updatenow:isAutoUpdate,
+              animation:isAnimation,
+            }],
+      });
+    
+    ReloadSite()
+  }
 
-    const unsubscribe = onSnapshot(userDocRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.data() as User;
-        const s = data.settings?.[0];
-
-        if (s) {
-          setTheme(s.theme || "Тёмная");
-          setLanguage(s.language || "Русский");
-          setIsPrivate(!!s.privates);
-          setIsPush(!!s.push);
-          setIsAutoUpdate(!!s.updatenow);
-          setIsAnimation(!!s.animation);
-        }
-      } else {
-        setDoc(userDocRef, {
-          settings: [{
-            push: true,
-            theme: "Тёмная",
-            language: "Русский",
-            updatenow: true,
-            animation: true,
-          }]
-        });
-      }
-    });
-
-    return () => unsubscribe();
-  }, [user?.uid]);
-
-  useEffect(() => {
-    if (!user?.uid) return;
-
-    const userDocRef = doc(db, "users", user.uid);
-
-    const unsubscribe = onSnapshot(userDocRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.data() as User;
-        const s = data.accountsForSwitch?.[0];
-
-        if (s) {
-          
-        }
-      } else {
-        setDoc(userDocRef, {
-          accountsForSwitch:[{
-            name:name,
-            email:email,
-          }]
-        });
-      }
-    });
-
-    return () => unsubscribe();
-  }, [user?.uid]);
 
   return (
     <div className="page-container" data-aos="fade-in">
@@ -115,7 +114,7 @@ const SettingPage = () => {
             <div data-aos="fade-in"className="settings-item-info">
               <span className="settings-item-label">{Language === "Аварский" ? "Бахчин" : "Приватность"}</span>
               <span className="settings-item-desc">
-                {Language === "Аварский" ? "Цогидал гӀадамаздалсан бахчизе" : "Скрыть портфолио от других пользователей"}
+                {Language === "Аварский" ? "Цогидал гIадамазsалсан бахчизе" : "Скрыть портфолио от других пользователей"}
               </span>
             </div>
             <Switch checked={isPrivate} 
@@ -198,7 +197,7 @@ const SettingPage = () => {
 
         {/* FOOTER */}
         <div data-aos="fade-in" className="settings-footer">
-          <button data-aos="fade-in" className="settings-save">Сохранить</button>
+          <button onClick={saveSettings} data-aos="fade-in" className="settings-save">Сохранить</button>
           <button data-aos="fade-in" className="settings-restore">Сбросить</button>
         </div>
       </div>

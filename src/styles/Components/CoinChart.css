@@ -4,7 +4,9 @@
   padding: 50px 3px;
   position: relative;
 }
-
+.chart-graph {
+  margin-top: -60px;
+}
 .chart-controls {
   display: flex;
   gap: 10px;
@@ -12,7 +14,6 @@
   justify-content: center;
   align-items: center;
   margin-top: 28px !important;
-  margin-bottom: -35px !important;
 }
 
 .chart-controls button {
@@ -84,6 +85,7 @@
   }
 }
 @media (max-width:1000px) {
+  
   .chart-controls {
     gap: 6px;
     margin: -33px 0 5px 0;
@@ -96,6 +98,9 @@
 }
 
 @media (max-width: 768px) {
+  .chart-graph {
+    margin-top: 0;
+  }
   .chart-controls {
     gap: 6px;
     margin: -3px 0 5px 0;

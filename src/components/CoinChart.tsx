@@ -49,7 +49,7 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
   }, []);
 
   return (
-    <ResponsiveContainer width="100%" height={270}>
+    <ResponsiveContainer className="chart-graph" width="100%" height={270}>
       <AreaChart data={formattedData}>
         <defs>
           {/* Основной глубокий градиент */}

@@ -242,6 +242,7 @@
 @media (max-width: 768px) {
   .market-content {
     max-height: 8550px;
+    overflow: hidden;
   }
   .header-title {
     font-size: 22px;

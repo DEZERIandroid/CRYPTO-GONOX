@@ -200,8 +200,9 @@
 }
 
 @media (max-width: 768px) {
-  .market-content {
+  .settings-content {
     max-height: 8505px;
+    overflow: hidden;
   }
   .select{
     width: 134px;

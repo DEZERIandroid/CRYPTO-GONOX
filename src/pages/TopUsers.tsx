@@ -29,8 +29,6 @@ const TopUsers = () => {
                     topUsers.displayName.toLocaleLowerCase().includes(query))                  
   },[sortedData,searchQuery])
 
-                                  
-                                  
 
   if (isLoading) {
     return (

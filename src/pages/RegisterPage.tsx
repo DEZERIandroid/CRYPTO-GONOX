@@ -82,7 +82,8 @@ const RegisterPage = () => {
         transactions:[],
         settings:[{
           push:true,
-          theme:"Тёмная",
+          theme:"Gonox",
+          private:false,
           language:"Русский",
           updatenow:true,
           animation:true,
@@ -101,6 +102,9 @@ const RegisterPage = () => {
         role: "user",
         balance:500,
         cryptoTotalBalance:0,
+        settings:[
+          
+        ]
       }));
 
       setEmail("");

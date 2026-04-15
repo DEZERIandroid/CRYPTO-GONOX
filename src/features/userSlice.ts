@@ -13,6 +13,7 @@ interface UserState {
   balance: number | null;
   photoURL:string | undefined,
   authLoading: boolean;
+  theme:string | null
 }
 
 const initialState: UserState = {
@@ -24,6 +25,7 @@ const initialState: UserState = {
   balance:0,
   photoURL:undefined,
   authLoading: true,
+  theme:null
 };
 
 export const initializeAuth = createAsyncThunk(
@@ -37,12 +39,14 @@ export const initializeAuth = createAsyncThunk(
           let displayName = user.email?.split("@")[0] || "Пользователь";
           let role = "user";
           let photoURL
+          let theme
 
           if (userDoc.exists()) {
             const userData = userDoc.data();
             displayName = userData.displayName || displayName;
             role = userData.role || "user";
             photoURL = userData.photoURL || user.photoURL;
+            theme = userData.settings?.[0].theme
           }
 
           dispatch(
@@ -51,7 +55,8 @@ export const initializeAuth = createAsyncThunk(
               email: user.email,
               name: displayName,
               role,
-              photoURL
+              photoURL,
+              theme
             })
           );
           initPresence()
@@ -76,6 +81,7 @@ const userSlice = createSlice({
       state.role = action.payload.role;
       state.photoURL = action.payload.photoURL;
       state.isAuthChecked = true;
+      state.theme = action.payload.theme
     },
     clearUser: (state) => {
       state.uid = null;
@@ -83,6 +89,7 @@ const userSlice = createSlice({
       state.name = null;
       state.role = null;
       state.isAuthChecked = true;
+      state.theme = null
     },
     updateBalance: (state, action) => {
       state.balance = action.payload;

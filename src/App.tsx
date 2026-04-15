@@ -1,7 +1,6 @@
 import AppRoutes from "./Routes/AppRoutes"
 import Sidebar from "./components/Sidebar"
 import './App.css'
-
 import { useEffect,useState } from "react";
 import ScrollToTop from "./components/ScrollTop";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
@@ -11,7 +10,8 @@ import GonoxLogo from '/Gonoxlogo.png';
 function App() {
   const dispatch = useAppDispatch();
   const authLoading = useAppSelector(state => state.user.authLoading);
-  
+  const { theme } = useAppSelector(state => state.user)
+
   const [showLoader, setShowLoader] = useState(true);
   const [isFading, setIsFading] = useState(false);
 
@@ -28,6 +28,17 @@ function App() {
     }
   }, [authLoading]);
 
+  type ThemeType = "gonox" | "Тёмная" | "Белая" | "Зелёная" | "Синяя" | "Неоновая";
+  const themeMap: Record<ThemeType, string> = {
+      "gonox": "grad-gonox",
+      "Тёмная": "grad-slate",
+      "Белая": "grad-white",
+      "Зелёная" : "grad-green",
+      "Синяя": "grad-blue",
+      "Неоновая": "grad-neon"
+  };
+
+  const currentGrad = themeMap[theme as ThemeType] || "none";
   
   return (
     <>
@@ -40,7 +51,7 @@ function App() {
         />
       </div>
     )}
-      <div className="wrapper">
+      <div className={`wrapper ${currentGrad}`}>
         <Sidebar />
 
         <div className="main-content">

@@ -339,3 +339,51 @@
     display: grid;
   }
 }
+
+.grad-gonox {
+    background: -webkit-linear-gradient(150deg, rgba(0, 84, 219, 0.750) 23%, rgb(0, 0, 0) 55%);
+    background: -moz-linear-gradient(150deg, rgba(0, 84, 219, 0.750) 23%, rgb(0, 0, 0) 55%);
+    background: linear-gradient(150deg, rgba(0, 84, 219, 0.750) 23%, rgb(0, 0, 0) 55%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}
+
+.grad-slate {
+    background: -webkit-linear-gradient(150deg, rgba(0, 0, 0, 0.9) 13%, rgb(0, 0, 0) 55%);
+    background: -moz-linear-gradient(150deg, rgba(0, 0, 0, 0.9) 13%, rgb(0, 0, 0) 55%);
+    background: linear-gradient(150deg, rgba(0, 0, 0, 0.9) 13%, rgb(0, 0, 0) 55%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}
+
+.grad-white {
+    background: -webkit-linear-gradient(150deg, rgba(200, 220, 255, 0.8) 23%, rgb(255, 255, 255) 55%);
+    background: -moz-linear-gradient(150deg, rgba(200, 220, 255, 0.8) 23%, rgb(255, 255, 255) 55%);
+    background: linear-gradient(150deg, rgba(200, 220, 255, 0.8) 23%, rgb(255, 255, 255) 55%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}
+
+.grad-green {
+    background: -webkit-linear-gradient(150deg, rgba(6, 87, 37, 0.75) 23%, rgb(0, 0, 0) 55%);
+    background: -moz-linear-gradient(150deg, rgba(8, 122, 52, 0.75) 23%, rgb(0, 0, 0) 55%);
+    background: linear-gradient(150deg, rgba(4, 92, 38, 0.75) 23%, rgb(0, 0, 0) 55%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}
+
+.grad-blue {
+    background: -webkit-linear-gradient(150deg, rgba(0, 123, 255, 0.9) 23%, rgb(0, 30, 80) 55%);
+    background: -moz-linear-gradient(150deg, rgba(0, 123, 255, 0.9) 23%, rgb(0, 30, 80) 55%);
+    background: linear-gradient(150deg, rgba(0, 123, 255, 0.9) 23%, rgb(0, 30, 80) 55%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}
+
+.grad-neon {
+    background: -webkit-linear-gradient(150deg, rgba(255, 0, 255, 0.438) 23%, rgb(20, 0, 40) 55%);
+    background: -moz-linear-gradient(150deg, rgba(255, 0, 255, 0.438) 23%, rgb(20, 0, 40) 55%);
+    background: linear-gradient(150deg, rgba(255, 0, 255, 0.438) 23%, rgb(20, 0, 40) 55%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}

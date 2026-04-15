@@ -260,7 +260,7 @@ const CryptoPage = () => {
       </div>
 
       {!isCoinError ? 
-      (<div className="user-content crypto-content" data-aos="fade-in">
+      (<div className="user-content crypto-content">
         <div className="return">
           <button className="return-btn" onClick={() => navigate("/market")}>
            <ArrowLeftOutlined/>Назад

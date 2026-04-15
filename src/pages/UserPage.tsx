@@ -46,6 +46,7 @@ const UserPage = () => {
     
     if (!user) return <div className="loading-container">Пользователь не найден</div>;
   return (
+    <>
     <div className="page-container" data-aos="fade-in">
       <div className="page-header">
         <h1 className="header-title">Профиль пользователя {user.displayName}</h1>
@@ -130,6 +131,7 @@ const UserPage = () => {
           <div className="chart-placeholder">📊 Здесь будет график пользователя</div>
         </div>
       </div> 
+    </div>
       {photomodal.isOpen ? 
         <div className={`photomodal-overlay ${photomodal.isClosing ? "closing" : "" }`}
              data-aos="fade-in"
@@ -148,8 +150,7 @@ const UserPage = () => {
             </div>
         </div>
       : null}
-      
-    </div>
+    </>
   );
 };
 

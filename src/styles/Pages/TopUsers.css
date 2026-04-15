@@ -224,8 +224,9 @@
   .topusers-list {
     margin: 15px 15px;
   }
-  .topusers-item{
+  .topusers-item {
     margin: 5px;
+    display: flex !important;
   }
 }
 @media (max-width:1279px) {
@@ -250,6 +251,8 @@
   .topusers-content {
     padding: 20px;
     min-height: 400px;
+    max-height: 3505px !important;
+    overflow: hidden;
   }
 
   .topusers-table table {
