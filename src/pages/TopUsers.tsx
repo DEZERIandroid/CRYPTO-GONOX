@@ -4,6 +4,7 @@ import { FloatButton, Skeleton } from "antd"
 import "../styles/Pages/TopUsers.css"
 import { useNavigate } from "react-router-dom"
 import useGetUser from "@/hooks/useGetUser"
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const TopUsers = () => {
   const {users:topUsers,loading:isLoading,error:isError} = useGetUser()
@@ -11,6 +12,8 @@ const TopUsers = () => {
 
   const navigate = useNavigate()
 
+  const size = useWindowSize()
+  const isMobile = size.width !== null && size.width >= 480;
   
   const sortedData = useMemo(() => {
     if (!topUsers) return [];
@@ -134,7 +137,7 @@ const TopUsers = () => {
                   else if (index === 2) balanceClass = "bronze-text";
 
                   return (
-                    <tr onClick={() => navigate(`/user/${user.id}`)} key={user.id}>
+                    <tr data-aos={isMobile ? "none" : "fade-in"} onClick={() => navigate(`/user/${user.id}`)} key={user.id}>
                       <td>{index + 1}</td>
                       <td className="topusers-username">
                         {user.photoURL ? (

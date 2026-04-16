@@ -179,29 +179,27 @@ const MarketPage = () => {
                 <th>#</th>
                 <th>Криптовалюта</th>
                 <th>Цена</th>
-                {isMobile ?
-                  <>
-                    <th>Изменение за 24ч</th>
-                    <th>Рыночная капитализация</th>
-                    <th>Объём (24ч)</th>
-                  </>
-                : null}
+                <th className="coin-buynost">Изменение за 24ч</th>
+                <th className="coin-buynost">Рыночная капитализация</th>
+                <th className="coin-buynost">Объём (24ч)</th>
               </tr>
             </thead>
             
             {!isError ? (<tbody>
               {filteredData.map((coin, index) => (
                 <tr onClick={() => navigate(`/crypto/${coin.id}`)} key={coin.id}>
-                  <td>{index + 1}</td>
+                  <td data-aos={isMobile ? "none" : "fade-in"}>{index + 1}</td>
                   <td>
-                    <div className="coin-info">
+                    <div className="coin-info"
+                          data-aos={isMobile ? "none" : "fade-in"}>
                       <img
                         src={coin.image}
                         alt={coin.symbol}
                         className="coin-icon"
                         
                       />
-                      <div className="coin-name">
+                      <div className="coin-name"
+                           data-aos={isMobile ? "none" : "fade-in"}>
                         <div className="name">{coin.name?.length <= 22 ? coin.name : coin.symbol}</div>
                         <div className="symbol">{coin.symbol.toUpperCase()}</div>
                       </div>
@@ -219,22 +217,20 @@ const MarketPage = () => {
                     </>:
                     <>
                       <td className="price-mobile">
-                        <div className="coin-prices coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                        <div data-aos={isMobile ? "none" : "fade-in"} className="coin-prices coin-prices">${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                         <div>
-                          <span className={coin.price_change_percentage_24h >= 0 ? "change-mobile change-positive" : "change-mobile change-negative"}>
+                          <span data-aos={isMobile ? "none" : "fade-in"} className={coin.price_change_percentage_24h >= 0 ? "change-mobile change-positive" : "change-mobile change-negative"}>
                             {coin.price_change_percentage_24h >= 0 ? <RiseOutlined /> : <FallOutlined />}
                             {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
                           </span>
                         </div> 
                       </td>
                     </> 
-                  }
-                  {isMobile ? 
-                    <>
-                      <td>${(coin.market_cap / 1e9).toFixed(1)}B</td>
-                      <td>${(coin.total_volume / 1e9).toFixed(1)}B</td>
-                    </>
-                  : null}
+                  } 
+                    
+                    <td className="coin-buynost">${(coin.market_cap / 1e9).toFixed(1)}B</td>
+                    <td className="coin-buynost">${(coin.total_volume / 1e9).toFixed(1)}B</td>
+                    
                 </tr>
               ))}
             </tbody>): 

@@ -365,9 +365,9 @@
 }
 
 .grad-green {
-    background: -webkit-linear-gradient(150deg, rgba(6, 87, 37, 0.75) 23%, rgb(0, 0, 0) 55%);
-    background: -moz-linear-gradient(150deg, rgba(8, 122, 52, 0.75) 23%, rgb(0, 0, 0) 55%);
-    background: linear-gradient(150deg, rgba(4, 92, 38, 0.75) 23%, rgb(0, 0, 0) 55%);
+    background: -webkit-linear-gradient(150deg, rgba(6, 87, 37, 0.75) 23%, rgb(0, 0, 0) 50%);
+    background: -moz-linear-gradient(150deg, rgba(8, 122, 52, 0.75) 23%, rgb(0, 0, 0) 50%);
+    background: linear-gradient(150deg, rgba(4, 92, 38, 0.75) 23%, rgb(0, 0, 0) 50%);
     background-size: 200% 200%;
     animation: gradientShift 295s ease infinite;
 }

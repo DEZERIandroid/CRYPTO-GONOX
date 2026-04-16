@@ -139,7 +139,7 @@ const Sidebar = () => {
             <UsersIcon className="sidebar-icon"/>
             <div style={{color:isUsers || isUsersTop ? "white" : ""}} className="nav-link">Пользователи</div>
           </Link>
-          <Link data-aos="fade-in" to="/market" 
+          <Link to="/market" 
                 className={isMarket ? "item-actived" : "item"}>
             <MarketIcon className="sidebar-icon"/>
             <div style={{color:isMarket ? "white" : ""}} className="nav-link">Рынок</div>

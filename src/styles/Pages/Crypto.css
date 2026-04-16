@@ -97,9 +97,13 @@
 }
 
 .return-btn {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   color: rgb(211, 211, 211);
   padding: 8px 16px;
   border-radius: 12px;
@@ -171,6 +175,7 @@
 
 
 
+
 .coin-actions-mobile {
   position: fixed;
   bottom: 0;
@@ -194,6 +199,9 @@
   border-top-right-radius: 15px;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+}
+.crypto-favorite-mobile{
+  display: none;
 }
 
 /* ===== Модалка ===== */
@@ -356,10 +364,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  margin-top: 80px ;
 }
 
 .stat-block {
+  text-align: center;
   background: none;
   border-radius: 16px;
   padding: 20px 30px;
@@ -530,9 +538,6 @@
   .crypto-content {
     max-height: 860px;
   }
-  .coin-stats{
-    margin-top: 100px !important;
-  }
 }
 @media (max-width:1023px) {
   .crypto-content {
@@ -575,7 +580,7 @@
     display: grid;
     place-content: center;
     grid-template-columns: 1fr 1fr;
-    margin-top: 100px !important;
+    margin-top: 40px !important;
   }
   .stat-block {
     flex: 1 1 45%;
@@ -656,10 +661,9 @@
     margin-top:10px;
     margin-left:0px;
     margin-bottom: -45px;
+    display: flex;
   }
   .return-btn {
-    position: relative;
-    margin: 0 auto;
     font-size: 14px;
     padding: 7px 14px;
   }
@@ -775,12 +779,11 @@
   .coin-header {
     gap: 15px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     place-content: center;
-    margin-bottom: 10px;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 5px;
     margin-top: 50px;
-    padding-bottom: 0px ; 
+    padding: 10px 25px;
   }
 
   .coinCryptos-info h2 {
@@ -788,12 +791,7 @@
   }
 
   .coin-actions {
-    gap: 10px;
-    margin-left: 0px; 
-    justify-content: center;
-    grid-column: span 3;
-    margin-top: -15px;
-    padding: 0 15px;
+    display: none;
   }
 
   .coin-btn {
@@ -819,8 +817,6 @@
     padding: 10px;
   }
   .coin-logo{
-    display: grid;
-    place-content: center;
     min-width: 70px;
   }
 
@@ -837,6 +833,43 @@
   .coin-chart {
     border-radius: 16px;
   }
+
+  .return {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-top: 15px;
+    margin-bottom: -55px;
+  }
+  .return-btn {
+    margin: 0;
+  }
+  .crypto-favorite-mobile {
+    display: grid;
+    place-content: center;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.144);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 0px 0px rgba(255, 255, 255, 0);
+    border-radius: 13px;
+    padding: 11px 11px;
+    transition: all 0.2s ease-in-out;
+    
+  }
+  .crypto-favorite-mobile.Favorite {
+    color: #f1c40f;
+    border:1px solid #f1c40f28;
+  }
+
+  .crypto-favorite-mobile:hover {
+    background: rgba(255, 255, 255, 0.144);
+    color: white;
+    border-color: #2d2f33;
+  }
+
 }
 
 /* (до 360px) */

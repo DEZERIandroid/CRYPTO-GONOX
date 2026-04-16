@@ -5,7 +5,7 @@ import { useState, useMemo } from "react";
 import { FloatButton, Select, Skeleton } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useGetTransactions } from "@/hooks/useGetTransactions";
-
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const TransactionsPage = () => {
   const navigate = useNavigate()
@@ -18,6 +18,8 @@ const TransactionsPage = () => {
 
   const filtres = ["За всё время", "За неделю", "За день"];
 
+  const size = useWindowSize()
+  const isMobile = size.width !== null && size.width >= 480;
 
   const sortedData = transactions
     ? [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -182,8 +184,8 @@ const TransactionsPage = () => {
                     filteredTransactions.map((item, index) => {
                       return (
                         <tr key={`${item.date}-${item.coin}-${index}`}>
-                          <td>{index + 1}</td>
-                          <td onClick={() => navigate(`/crypto/${item.coin}`)} className="transactions-imgSymbol">
+                          <td data-aos={isMobile ? "none" : "fade-in"}>{index + 1}</td>
+                          <td data-aos={isMobile ? "none" : "fade-in"} onClick={() => navigate(`/crypto/${item.coin}`)} className="transactions-imgSymbol">
                             <img className="transactions-img"
                               src={item.image}
                               alt={item.symbol}
@@ -192,18 +194,18 @@ const TransactionsPage = () => {
                               {item.symbol}
                             </div>
                           </td>
-                          <td onClick={() => navigate(`/user/${item.userName}`)} className="transactions-userName">
+                          <td data-aos={isMobile ? "none" : "fade-in"} onClick={() => navigate(`/user/${item.userName}`)} className="transactions-userName">
                             {item.userName}
                           </td>
-                          <td className="transactions-amount">{item.amount}</td>
+                          <td data-aos={isMobile ? "none" : "fade-in"} className="transactions-amount">{item.amount}</td>
                           <td>
                             {item.status === "buy" 
                                       ? (<span className="status-buy">Покупка</span>)
                                       : (<span className="status-sell">Продажа</span>)
                             }
                           </td>
-                          <td className="transactions-data">{new Date(item.date).toLocaleDateString()}</td>
-                          <td className="transactions-buyPrice">${item.Price.toFixed(2)}</td>
+                          <td data-aos={isMobile ? "none" : "fade-in"} className="transactions-data">{new Date(item.date).toLocaleDateString()}</td>
+                          <td data-aos={isMobile ? "none" : "fade-in"} className="transactions-buyPrice">${item.Price.toFixed(2)}</td>
                         </tr>
                       );
                     })

@@ -13,7 +13,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 28px !important;
+  margin-top: 35px !important;
 }
 
 .chart-controls button {
@@ -123,6 +123,11 @@
 @media (max-width: 480px) {
   .Yaxis-chart {
     transform: translateX(30px);
+  }
+  .coin-chart-container {
+    background: rgba(0, 0, 0, 0.018);
+    border-radius: 13px;
+    padding: 30px 3px;
   }
   .chart-controls {
     gap: 6px;

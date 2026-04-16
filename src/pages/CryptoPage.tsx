@@ -42,7 +42,6 @@ const CryptoPage = () => {
           const coin = crptfrsl.find((coin:CryptoForSell) => coin.coinId === coinId)
           const amount = coin?.amount ?? 0
 
-          console.log(amount)
           setCryptoForSell(amount)
         }
       }
@@ -190,48 +189,105 @@ const CryptoPage = () => {
                />
             </div>
           </div>
-          <div className="user-content crypto-content">
-            <Skeleton.Button active style={{ width: 120, height: 36, marginBottom: 24 }} />
+          {isMobile ? (
+                <div className="user-content crypto-content">
+                <Skeleton.Button active style={{ width: 120, height: 336, marginBottom: 24 }} />
 
-            <div className="coin-header">
-              <div className="coin-logo">
-                <Skeleton.Avatar active size={72} shape="circle" />
-              </div>
+                <div className="coin-header">
+                  <div className="coin-logo">
+                    <Skeleton.Avatar active size={72} shape="circle" />
+                  </div>
 
-              <div className="coinCryptos-info">
-                <div className="infoCrypto-text">
-                  <Skeleton.Input active style={{ width: 220, height: 28, marginBottom: 12 }} />
+                  <div className="coinCryptos-info">
+                    <div className="infoCrypto-text">
+                      <Skeleton.Input active style={{ width: 220, height: 28, marginBottom: 12 }} />
 
-                  <div className="price-change">
-                    <Skeleton.Input active style={{ width: 140, height: 24 }} />
-                    <Skeleton.Input active style={{ width: 80, height: 24 }} />
+                      <div className="price-change">
+                        <Skeleton.Input active style={{ width: 140, height: 24 }} />
+                        <Skeleton.Input active style={{ width: 80, height: 24 }} />
+                      </div>
+                    </div>
+
+                    <div className="coin-actions">
+                      <Skeleton.Button active style={{ width: 110, height: 36 }} />
+                      <Skeleton.Button active style={{ width: 110, height: 36 }} />
+                      <Skeleton.Button active style={{ width: 130, height: 36 }} />
+                    </div>
                   </div>
                 </div>
+                <div className="coin-chart">
+                  <Skeleton active paragraph={{ rows: 8 }} />
+                </div>
 
-                <div className="coin-actions">
-                  <Skeleton.Button active style={{ width: 110, height: 36 }} />
-                  <Skeleton.Button active style={{ width: 110, height: 36 }} />
-                  <Skeleton.Button active style={{ width: 130, height: 36 }} />
+                <div className="coin-stats">
+                  <div className="stat-block">
+                    <Skeleton.Input active style={{ width: 180, height: 20, marginBottom: 8 }} />
+                    <Skeleton.Input active style={{ width: 160, height: 24 }} />
+                  </div>
+
+                  <div className="stat-block">
+                    <Skeleton.Input active style={{ width: 180, height: 20, marginBottom: 8 }} />
+                    <Skeleton.Input active style={{ width: 160, height: 24 }} />
+                  </div>
+                </div>
+              </div>
+          ) : (
+            <div className="user-content crypto-content">
+              {/* Блок возврата (Назад + Избранное) */}
+              <div className="return" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <Skeleton.Button active style={{ width: 70, height: 35, borderRadius: '12px' }} />
+                {/* Скелетон для кнопки избранного в мобилке (круглая/квадратная справа) */}
+                <div className="crypto-favorite-mobile" style={{ border: 'none', background: 'none' }}>
+                  <Skeleton.Avatar active size={20} shape="square" style={{ borderRadius: '13px' }} />
+                </div>
+              </div>
+                    
+              <div className="coin-header">
+                <div className="coin-logo">
+                  <Skeleton.Avatar active size={50} shape="circle" />
+                </div>
+                    
+                <div className="coinCryptos-info">
+                  <div className="infoCrypto-text" style={{ alignItems: 'center' }}>
+                    {/* Название монеты */}
+                    <Skeleton.Button active style={{ width:50, height: 50 }} />
+                    
+                    <div className="price-change">
+                      <Skeleton.Button active style={{ width: 28, height: 28, }} />
+                      <Skeleton.Button active style={{ width: 28, height: 28 }} />
+                    </div>
+                  </div>
+                    
+                  {/* Кнопки действий - скрываем на маленьких экранах, как в вашем CSS (display: none для .coin-actions) */}
+                  {!isMobile && (
+                    <div className="coin-actions" style={{ marginTop: '20px' }}>
+                      <Skeleton.Button active style={{ width: 110, height: 40, borderRadius: '12px' }} />
+                      <Skeleton.Button active style={{ width: 110, height: 40, borderRadius: '12px' }} />
+                      <Skeleton.Button active style={{ width: 150, height: 40, borderRadius: '12px' }} />
+                    </div>
+                  )}
+                </div>
+              </div>
+                
+              {/* График */}
+              <div className="coin-chart" style={{display:"grid", placeContent:"center"}}>
+                <Skeleton.Button active style={{ width: 310, height: 220, borderRadius: '12px' }}/>
+              </div>
+                
+              {/* Метрики - на мобилках они станут в 1 колонку или 2 в зависимости от ширины */}
+              <div className="coin-stats">
+                <div className="stat-block">
+                  <Skeleton.Input active style={{ width: '80%', height: 15, marginBottom: 8 }} />
+                  <Skeleton.Input active style={{ width: '60%', height: 24 }} />
+              </div>
+                
+                <div className="stat-block">
+                  <Skeleton.Input active style={{ width: '80%', height: 15, marginBottom: 8 }} />
+                  <Skeleton.Input active style={{ width: '60%', height: 24 }} />
                 </div>
               </div>
             </div>
-            <div className="coin-chart">
-              <Skeleton active paragraph={{ rows: 8 }} />
-            </div>
-
-            <div className="coin-stats">
-              <div className="stat-block">
-                <Skeleton.Input active style={{ width: 180, height: 20, marginBottom: 8 }} />
-                <Skeleton.Input active style={{ width: 160, height: 24 }} />
-              </div>
-
-              <div className="stat-block">
-                <Skeleton.Input active style={{ width: 180, height: 20, marginBottom: 8 }} />
-                <Skeleton.Input active style={{ width: 160, height: 24 }} />
-              </div>
-            </div>
-
-          </div>
+          )}
         </div>
     );
 
@@ -263,10 +319,15 @@ const CryptoPage = () => {
       (<div className="user-content crypto-content">
         <div className="return">
           <button className="return-btn" onClick={() => navigate("/market")}>
-           <ArrowLeftOutlined/>Назад
-        </button>
+             <ArrowLeftOutlined/>Назад
+          </button>
+          <div className={`crypto-favorite-mobile ${isFavorite ? "Favorite" : ""}`}
+               onClick={handleIsFavorite}>
+            {isFavorite ? <StarFilled /> : <StarOutlined/>} 
+          </div>
         </div>
-        <div  className="coin-header">
+        <div className="coin-header"
+            data-aos={isMobile ? "none" : "fade-in"}>
               <div className="coin-logo">
                 <img src={image} alt={coin.name} />
               </div>
@@ -290,28 +351,25 @@ const CryptoPage = () => {
           
 
             
-             <div className="coin-actions">
-              {isMobile ?
-                <>
-                  <button onClick={buyModal.openModal} className="coin-btn buy">
-                    <ShoppingCartOutlined /> Купить
-                  </button>
-                  <button onClick={sellModal.openModal} className="coin-btn sell">
-                    <SwapOutlined /> Продать
-                  </button>
-                </>
-               : null
-              }
-              <button onClick={handleIsFavorite} 
-                      className="coin-btn favorite"
-                      style={{backgroundColor:isFavorite ? "#b49920" : "#221d0d41"}}>
-                {isFavorite ? <StarFilled /> : <StarOutlined/>} 
-                <div style={{minWidth:"98px"}}>{isFavorite ? "В избранном" : "В избранное"}</div>
-              </button>
+             <div className="coin-actions" 
+                  data-aos={isMobile ? "none" : "fade-in"}>
+                <button onClick={buyModal.openModal} className="coin-btn buy">
+                  <ShoppingCartOutlined /> Купить
+                </button>
+                <button onClick={sellModal.openModal} className="coin-btn sell">
+                  <SwapOutlined /> Продать
+                </button>
+                <button onClick={handleIsFavorite} 
+                    className="coin-btn favorite"
+                    style={{backgroundColor:isFavorite ? "#b49920" : "#221d0d41"}}>
+                  {isFavorite ? <StarFilled /> : <StarOutlined/>} 
+                  <div style={{minWidth:"98px"}}>{isFavorite ? "В избранном" : "В избранное"}</div>
+                </button>
             </div>
           </div>
         
-        <div  className="coin-chart">
+        <div  className="coin-chart"
+              data-aos={isMobile ? "none" : "fade-in"}>
           {coinId ? (
             <CoinChartWithControls coinId={coinId} />
           ) : (
@@ -320,11 +378,13 @@ const CryptoPage = () => {
         </div>
 
         <div className="coin-stats">
-          <div  className="stat-block">
+          <div  className="stat-block"
+                data-aos={isMobile ? "none" : "fade-in"}>
             <span className="stat-label">Рыночная капитализация</span>
             <span className="stat-value">{marketCap ? `$${marketCap.toLocaleString()}` : "-"}</span>
           </div>
-          <div  className="stat-block">
+          <div  className="stat-block"
+                data-aos={isMobile ? "none" : "fade-in"}>
             <span className="stat-label">Объем торгов (24ч)</span>
             <span className="stat-value">{volume ? `$${volume.toLocaleString()}` : "-"}</span>
           </div>

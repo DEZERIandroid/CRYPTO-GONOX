@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useGetCoinChartQuery } from "../app/api/CryptoApi";
 import CoinChart from "./CoinChart";
-import { Skeleton } from "antd";
 import "../styles/Components/CoinChart.css"; 
 import { ReloadOutlined } from "@ant-design/icons";
-import { useWindowSize } from "@uidotdev/usehooks";
 
 interface CoinChartWithControlsProps {
   coinId: string;
@@ -28,17 +26,10 @@ const CoinChartWithControls: React.FC<CoinChartWithControlsProps> = ({ coinId })
     refetch()
   }
 
-  const size = useWindowSize()
-  const isMobile = size.width !== null && size.width >= 480
-
   if (isLoading)
   return (
-    <div className="chart-skeleton">
-      <Skeleton.Input active style={{ width:isMobile ? "100vh" : "35vh" , height: isMobile ? 300 : 250 }} />
-      <div className="chart-skeleton-text">
-        <Skeleton  active paragraph={{ rows: 2 }} />
-      </div>
-    </div>
+    <>
+    </>
   );
   if (isError)
   return (
