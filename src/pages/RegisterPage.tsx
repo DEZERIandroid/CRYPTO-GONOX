@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import bcrypt from 'bcryptjs';
 import { authWithGoogle } from "@/hooks/useGoogle";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { setUser } from "../features/userSlice";
@@ -61,6 +62,9 @@ const RegisterPage = () => {
       setError("Пароли не похожи");
       return;
     }
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(cleanPassword, salt);
   
     setError(null);
     setIsLoading(true);
@@ -79,7 +83,7 @@ const RegisterPage = () => {
         cryptoTotalBalance:0,
         portfolio:[],
         createdAt: serverTimestamp(),
-        transactions:[],
+        privatedAccount: false,
         settings:[{
           push:true,
           theme:"Gonox",
@@ -91,7 +95,7 @@ const RegisterPage = () => {
         accountsForSwitch:[{
             name:cleanName,
             email:cleanEmail,
-            password:cleanPassword,
+            password:hashedPassword,
         }]
       });
 

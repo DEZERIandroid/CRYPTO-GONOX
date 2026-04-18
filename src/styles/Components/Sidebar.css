@@ -261,7 +261,7 @@
 }
 .modal-change-mobile.closing {
   opacity: 0;
-  transform: scale(0.70) translateX(50px) translateY(-120px);
+  transform: scale(0.70) translateX(40px) translateY(-170px);
   pointer-events: none;
 }
 
@@ -350,7 +350,7 @@
 .account-email {
   font-size: 13px;
   color: #bebebe;
-  min-width: 250px;
+  min-width: 140px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -490,7 +490,7 @@
   overflow: hidden;
 }
 .account-add-modal-mobile.closing {
-  transform: scale(0.90) translateY(-30px);
+  transform: scale(0.90) translateY(5px);
   pointer-events: none;
 }
 .account-add-modal-inputs {
@@ -586,6 +586,117 @@
   color: white;
   border:1px solid #ff2d2d;
 }
+
+
+
+
+
+
+
+
+
+
+
+.account-info-modal{
+  position: absolute;
+  top: 330px;
+  left: 215px;
+  width: 350px;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.350);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  backdrop-filter: blur(10px);
+}
+.account-info-modal.closing {
+  transform: scale(0.90) translateY(-20px);
+  pointer-events: none;
+}
+.account-info-modal-mobile{
+  width: 320px;
+  padding: 15px;
+  margin-bottom: 70px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.350);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+.account-info-modal-mobile.closing {
+  transform: scale(0.90) translateY(-10px);
+  pointer-events: none;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+.account-info-name {
+  font-size: 23px;
+  font-weight: bolder;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.account-info-email {
+  font-size: 17px;
+  color: #bebebe;
+  min-width: 140px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-info-buttons {
+  display: flex;
+  place-content: center;
+  gap: 15px;
+}
+.account-info-btn {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 15.5px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid #00000000;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.edit-account-btn {
+  background-color: #489c4b;
+  color: #fff;
+}
+.edit-account-btn:hover{
+  background-color: #071d0d;
+  color: white;
+  border:1px solid #3aa13e;
+}
+.remove-account-btn {
+  
+  background-color: rgb(184, 38, 36);
+  color: #fff;
+}
+.remove-account-btn:hover {
+  background-color: #1d0707;
+  color: white;
+  border:1px solid #ff2d2d;
+}
+
 
 
 /* ------- BURGER -------- */
@@ -763,20 +874,6 @@
   .sidebar-container {
     margin-top: 25px;
     height: 95vh;
-  }
-}
-@media (max-height:790px) {
-  .sidebar-container {
-    margin-top: 450px ;
-    height: 10vh;
-  }
-  
-  .sidebar-items{
-    margin-bottom: 50px;
-  }
-  .sidebar-theme-toggle{
-    margin-top: -40px;
-    padding: 12px;
   }
 }
 
@@ -1020,7 +1117,7 @@
 
 
 
-@media (min-width: 1200px) and (max-height: 800px) {
+@media (min-width: 1000px) and (max-height: 800px) {
   .logo {
     margin-top: 0;
   }
@@ -1034,7 +1131,7 @@
     margin-top: 0;
   }
 }
-@media (min-width: 1200px) and (max-height:805px) {
+@media (min-width: 1000px) and (max-height:805px) {
   .logo {
     margin-top: 0;
   }
@@ -1051,16 +1148,22 @@
     padding:15px 15px;
   }
 }
-@media (min-width: 1200px) and (max-height:791px) {
+@media (min-width: 1000px) and (max-height:791px) {
   .logo {
-    margin-top: -40px;
+    margin-bottom: -45px;
+  }
+  .user {
+    margin-bottom: -30px;
+  }
+  .avatar-container {
+    margin-left: 5px !important;
+    margin-bottom: -20px;
   }
   .sidebar-items {
     margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   .sidebar-theme-toggle {
-    margin-top: 0px;
-    margin-bottom: -50px;
+    margin-bottom: 50px;
   }
 }

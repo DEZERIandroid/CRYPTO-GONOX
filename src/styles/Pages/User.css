@@ -480,3 +480,14 @@
     margin:-5px 0;
   }
 }
+
+@media (min-width: 1000px) and (max-height:1000px) {
+  .user-content {
+    height: 80.5vh;
+  }
+}
+@media (min-width: 1000px) and (max-height:791px) {
+  .user-content {
+    height: 79.5vh;
+  }
+}

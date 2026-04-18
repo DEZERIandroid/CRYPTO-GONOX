@@ -25,6 +25,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "antd": "^5.27.3",
     "aos": "^2.3.4",
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "firebase": "^12.2.1",

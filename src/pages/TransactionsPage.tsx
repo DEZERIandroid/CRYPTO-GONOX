@@ -78,6 +78,7 @@ const TransactionsPage = () => {
           value={filterTime}
           onChange={setFilterTime}
           options={filtres.map(f => ({ label: f, value: f }))}
+          data-aos="fade-in"
         />
       </div>
       <div data-aos="fadeIn" className="transactions-container">
@@ -110,8 +111,8 @@ const TransactionsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {[...Array(20)].map((_, i) => (
-                  <tr key={i}>
+                {[...Array(15)].map((_, i) => (
+                  <tr data-aos="fade-in" key={i}>
                     <td colSpan={7}>
                       <Skeleton avatar active paragraph={{ rows: 1 }} />
                     </td>

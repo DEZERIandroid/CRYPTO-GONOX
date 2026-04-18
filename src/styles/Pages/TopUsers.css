@@ -2,7 +2,7 @@
   border-radius: 10px;
   padding: 30px;
   min-height: 500px;
-  max-height: 825px;
+  max-height: 845px; 
   overflow-y: scroll;
   color: #e0e0e0;
   background: rgba(255, 255, 255, 0.05);
@@ -334,5 +334,16 @@
     margin-left: 8px;
     flex: 1;
     text-align: start;
+  }
+}
+
+@media (min-width: 1000px) and (max-height:1000px) {
+  .topusers-content {
+    height: 81vh;
+  }
+}
+@media (min-width: 1000px) and (max-height:791px) {
+  .topusers-content {
+    height: 79.7vh;
   }
 }

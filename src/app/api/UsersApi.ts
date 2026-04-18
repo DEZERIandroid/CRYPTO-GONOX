@@ -68,6 +68,13 @@ export interface Transaction {
   date: any,
   status:"buy" | "sell"
 }
+export interface accountsForSwitch {
+  id:any,
+  name:string,
+  email:string,
+  password:string,
+  photoURL:string,
+}
 
 export const usersApi = createApi({
   reducerPath: "usersApi",

@@ -191,32 +191,27 @@ const CryptoPage = () => {
           </div>
           {isMobile ? (
                 <div className="user-content crypto-content">
-                <Skeleton.Button active style={{ width: 120, height: 336, marginBottom: 24 }} />
+                <Skeleton.Button active style={{ width: 35, height: 26}} />
 
                 <div className="coin-header">
                   <div className="coin-logo">
-                    <Skeleton.Avatar active size={72} shape="circle" />
+                    <Skeleton.Avatar active size={90} shape="circle" />
                   </div>
 
                   <div className="coinCryptos-info">
                     <div className="infoCrypto-text">
-                      <Skeleton.Input active style={{ width: 220, height: 28, marginBottom: 12 }} />
-
-                      <div className="price-change">
-                        <Skeleton.Input active style={{ width: 140, height: 24 }} />
-                        <Skeleton.Input active style={{ width: 80, height: 24 }} />
-                      </div>
+                      <Skeleton.Input active style={{ width: 120, height: 65 }} />
+                      <Skeleton.Input active style={{ width: 120, height: 65, marginRight:50 }} />
+                    <div className="price-change">
+                        <Skeleton.Input active style={{ width: 140, height: 45 }} />
+                        <Skeleton.Input active style={{ width: 80, height: 45, margin:"0 10px"}} />
+                        <Skeleton.Input active style={{ width: 80, height: 45 }} />
                     </div>
-
-                    <div className="coin-actions">
-                      <Skeleton.Button active style={{ width: 110, height: 36 }} />
-                      <Skeleton.Button active style={{ width: 110, height: 36 }} />
-                      <Skeleton.Button active style={{ width: 130, height: 36 }} />
                     </div>
                   </div>
                 </div>
-                <div className="coin-chart">
-                  <Skeleton active paragraph={{ rows: 8 }} />
+                <div className="coin-chart" style={{display:"grid", placeContent:"center", borderRadius: '15px'}}>
+                  <Skeleton.Button active style={{ width:size.width !== null && size.width >= 1400 ? 1100 : 600, height: 250, borderRadius: '15px' }}/>
                 </div>
 
                 <div className="coin-stats">
@@ -235,26 +230,26 @@ const CryptoPage = () => {
             <div className="user-content crypto-content">
               {/* Блок возврата (Назад + Избранное) */}
               <div className="return" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                <Skeleton.Button active style={{ width: 70, height: 35, borderRadius: '12px' }} />
+                <Skeleton.Button active style={{ width: 75, height: 35, borderRadius: '12px' }} />
                 {/* Скелетон для кнопки избранного в мобилке (круглая/квадратная справа) */}
                 <div className="crypto-favorite-mobile" style={{ border: 'none', background: 'none' }}>
-                  <Skeleton.Avatar active size={20} shape="square" style={{ borderRadius: '13px' }} />
+                  <Skeleton.Avatar active size={25} shape="square" style={{ borderRadius: '13px' }} />
                 </div>
               </div>
                     
               <div className="coin-header">
                 <div className="coin-logo">
-                  <Skeleton.Avatar active size={50} shape="circle" />
+                  <Skeleton.Avatar active size={60} shape="circle" />
                 </div>
                     
                 <div className="coinCryptos-info">
                   <div className="infoCrypto-text" style={{ alignItems: 'center' }}>
                     {/* Название монеты */}
-                    <Skeleton.Button active style={{ width:50, height: 50 }} />
+                    <Skeleton.Button active style={{ width:60, height: 64 }} />
                     
                     <div className="price-change">
-                      <Skeleton.Button active style={{ width: 28, height: 28, }} />
-                      <Skeleton.Button active style={{ width: 28, height: 28 }} />
+                      <Skeleton.Button active style={{ width: 32, height: 32, }} />
+                      <Skeleton.Button active style={{ width: 32, height: 32 }} />
                     </div>
                   </div>
                     
@@ -271,7 +266,7 @@ const CryptoPage = () => {
                 
               {/* График */}
               <div className="coin-chart" style={{display:"grid", placeContent:"center"}}>
-                <Skeleton.Button active style={{ width: 310, height: 220, borderRadius: '12px' }}/>
+                <Skeleton.Button active style={{ width: 310, height: 240, borderRadius: '12px' }}/>
               </div>
                 
               {/* Метрики - на мобилках они станут в 1 колонку или 2 в зависимости от ширины */}
