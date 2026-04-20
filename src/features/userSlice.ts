@@ -4,7 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { initPresence } from "./presence";
 
-interface UserState {
+export interface UserState {
   uid: string | null;
   email: string | null;
   name: string | null;

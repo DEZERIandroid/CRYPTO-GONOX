@@ -28,14 +28,23 @@ function App() {
     }
   }, [authLoading]);
 
-  type ThemeType = "gonox" | "Тёмная" | "Белая" | "Зелёная" | "Синяя" | "Неоновая";
+  type ThemeType = "gonox" | "Тёмная" | "Белая" | "Зелёная" |
+                   "Синяя" | "Неоновая" | "Фиолетовая" |
+                   "Оранжевая" | "Красная" | "Космическая" |
+                   "Солнечная" | "Аврора";
   const themeMap: Record<ThemeType, string> = {
       "gonox": "grad-gonox",
       "Тёмная": "grad-slate",
       "Белая": "grad-white",
       "Зелёная" : "grad-green",
       "Синяя": "grad-blue",
-      "Неоновая": "grad-neon"
+      "Неоновая": "grad-neon",
+      "Фиолетовая": "grad-purple",
+      "Оранжевая": "grad-orange",
+      "Красная": "grad-red",
+      "Космическая": "grad-cosmic",
+      "Солнечная": "grad-sunset",
+      "Аврора": "grad-aurora" ,
   };
 
   const currentGrad = themeMap[theme as ThemeType] || "none";

@@ -19,13 +19,7 @@
   justify-content: space-between;
   gap: 40px;
   margin-top: 0px;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.144);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+
   border-radius: 15px;
   padding: 15px 13px;
   width: 100%;
@@ -364,6 +358,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  margin-top: -50px;
 }
 
 .stat-block {
@@ -410,19 +405,6 @@
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
-.coin-chart {
-  background: none;
-  padding: 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0);
-  border: 1px solid rgba(255, 255, 255, 0.144);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 0px 0px rgba(255, 255, 255, 0);
-  min-height: 300px;
-}
 
 
 .chart-error {
@@ -781,7 +763,7 @@
     display: grid;
     place-content: center;
     grid-template-columns: 1fr 1fr;
-    margin-bottom: 5px;
+    margin-bottom: -10px;
     margin-top: 50px;
     padding: 10px 25px;
   }
@@ -808,8 +790,9 @@
 
   .coin-stats {
     display: grid;
-    gap: 15px;
+    gap: 5px;
     grid-template-columns: 1fr;
+    margin-top: -20px !important;
   }
 
   .stat-block {

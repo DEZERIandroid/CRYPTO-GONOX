@@ -26,15 +26,6 @@ const ExpensesPie: React.FC<ExpensesPieProps> = ({ data }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card
-        bordered={false}
-        style={{
-          borderRadius: "16px",
-          background: "var(--ant-color-bg-container)",
-          boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.05)",
-        }}
-        styles={{ body: { padding: "20px" } }} // В новых версиях antd используется styles.body
-      >
         <div
           style={{
             display: "flex",
@@ -112,7 +103,6 @@ const ExpensesPie: React.FC<ExpensesPieProps> = ({ data }) => {
             </Text>
           </div>
         </div>
-      </Card>
     </motion.div>
   );
 };

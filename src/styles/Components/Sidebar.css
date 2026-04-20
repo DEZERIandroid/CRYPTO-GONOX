@@ -265,6 +265,11 @@
   pointer-events: none;
 }
 
+.title {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 .user-change-mobile{
   position: relative;
   font-size: 13.5px;
@@ -307,6 +312,12 @@
   gap: 15px;
   cursor: pointer;
   border: 1px solid #bebebe2f;
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   padding: 10px;
   border-radius: 15px;
   transition: all 0.15s ease-in-out;
@@ -316,8 +327,8 @@
   border: 1px solid rgba(255, 255, 255, 0.144);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
@@ -354,6 +365,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 140px;
 }
 .account-leave {
   display: grid;
@@ -431,9 +443,9 @@
 .exit-modal {
   cursor: pointer;
   position: absolute;
-  top: 6px;
+  top: 10px;
   right: 6px;
-  padding: 0px 7px;
+  padding: 1px 9px;
   padding-bottom: 1px;
   border: 1px solid #bebebe2a;
   border-radius: 9px;
@@ -542,13 +554,12 @@
 
 .buttons-account {
   display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 5px;
+  place-content: center;
   margin-bottom: -10px;
 }
 
 .button-add-account{
+  flex: 1;
   padding: 8px 16px;
   border-radius: 12px;
   border: none;
@@ -567,28 +578,10 @@
   color: white;
   border:1px solid #3aa13e;
 }
-.button-modal-close{
-  padding: 8px 16px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-size: 15.5px;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  background-color: #e53935;
-  color: #fff;
-  border: 1px solid #00000000;
-  user-select: none;
-  -webkit-user-select: none;
+
+.error-add {
+  margin: 5px 0 -20px 0;
 }
-.button-modal-close:hover{
-  background-color: #1d0707;
-  color: white;
-  border:1px solid #ff2d2d;
-}
-
-
-
 
 
 
@@ -697,6 +690,29 @@
   border:1px solid #ff2d2d;
 }
 
+
+
+
+
+
+.password-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.671);
+}
+.password-modal {
+  padding: 20px;
+  top: 350px;
+  left:280px ;
+  border: 1px solid rgba(255, 255, 255, 0.397);
+}
+.password-modal-mobile {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.397);
+}
+.password-modal-watch {
+  position: absolute;
+  top: 61px;
+  right: 23px;
+}
 
 
 /* ------- BURGER -------- */

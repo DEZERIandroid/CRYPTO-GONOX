@@ -121,7 +121,7 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
           type="monotone"
           dataKey="price"
           stroke="url(#lineBlueGradient)"
-          strokeWidth={2}
+          strokeWidth={1.5}
           fill="url(#deepBlueGradient)"
           dot={false}
           filter="url(#neonGlow)"
@@ -146,10 +146,16 @@ const CoinChart: React.FC<CoinChartProps> = ({ data }) => {
         <YAxis
             className="Yaxis-chart"
             domain={["auto", "auto"]}
-            tick={{ fill: isMobile ? "#c6e1ff" : "#e0e0e0", fontSize: 12,}}
             width={isMobile ? 30 : 64}
             axisLine={false}
             tickFormatter={(value) => `$${isMobile ? formatNumber(value) : value}`}
+            mirror={true} 
+            tick={{ 
+              fill: isMobile ? "#c6e1ff" : "rgb(201, 220, 233)", 
+              fontSize: 12,
+              dx: isMobile ? -35 : -10 
+            }}
+            tickLine={false}
         />
       </AreaChart>
     </ResponsiveContainer>

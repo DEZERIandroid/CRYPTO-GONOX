@@ -399,3 +399,50 @@
     background-size: 200% 200%;
     animation: gradientShift 295s ease infinite;
 }
+
+.grad-purple {
+    background: -webkit-linear-gradient(150deg, rgba(120, 0, 255, 0.7) 23%, rgb(20, 0, 50) 55%);
+    background: -moz-linear-gradient(150deg, rgba(120, 0, 255, 0.7) 23%, rgb(20, 0, 50) 55%);
+    background: linear-gradient(150deg, rgba(120, 0, 255, 0.7) 23%, rgb(20, 0, 50) 55%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}
+
+.grad-orange {
+    background: -webkit-linear-gradient(150deg, rgba(255, 140, 0, 0.8) 23%, rgb(40, 10, 0) 55%);
+    background: -moz-linear-gradient(150deg, rgba(255, 140, 0, 0.8) 23%, rgb(40, 10, 0) 55%);
+    background: linear-gradient(150deg, rgba(255, 140, 0, 0.8) 23%, rgb(40, 10, 0) 55%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}
+
+.grad-red {
+    background: -webkit-linear-gradient(150deg, rgba(143, 13, 43, 0.75) 23%, rgb(40, 0, 10) 45%);
+    background: -moz-linear-gradient(150deg, rgba(245, 0, 60, 0.75) 23%, rgb(40, 0, 10) 45%);
+    background: linear-gradient(150deg, rgba(245, 0, 60, 0.75) 23%, rgb(40, 0, 10) 45%);
+    background-size: 200% 200%;
+    animation: gradientShift 295s ease infinite;
+}
+.grad-cosmic {
+    background: -webkit-linear-gradient(150deg, rgba(10, 0, 40, 0.9) 20%, rgba(0, 120, 255, 0.5) 50%, rgba(180, 0, 255, 0.4) 80%);
+    background: -moz-linear-gradient(150deg, rgba(10, 0, 40, 0.9) 20%, rgba(0, 120, 255, 0.5) 50%, rgba(180, 0, 255, 0.4) 80%);
+    background: linear-gradient(150deg, rgba(10, 0, 40, 0.9) 20%, rgba(0, 120, 255, 0.5) 50%, rgba(180, 0, 255, 0.4) 80%);
+    background-size: 300% 300%;
+    animation: gradientShift 180s ease infinite;
+}
+
+.grad-sunset {
+    background: -webkit-linear-gradient(150deg, rgba(255, 94, 0, 0.85) 15%, rgba(255, 0, 120, 0.6) 50%, rgba(40, 0, 60, 0.9) 85%);
+    background: -moz-linear-gradient(150deg, rgba(255, 94, 0, 0.85) 15%, rgba(255, 0, 120, 0.6) 50%, rgba(40, 0, 60, 0.9) 85%);
+    background: linear-gradient(150deg, rgba(255, 94, 0, 0.85) 15%, rgba(255, 0, 120, 0.6) 50%, rgba(40, 0, 60, 0.9) 85%);
+    background-size: 300% 300%;
+    animation: gradientShift 200s ease infinite;
+}
+
+.grad-aurora {
+    background: -webkit-linear-gradient(150deg, rgba(0, 255, 180, 0.4) 10%, rgba(0, 100, 255, 0.5) 45%, rgba(120, 0, 255, 0.6) 80%);
+    background: -moz-linear-gradient(150deg, rgba(0, 255, 180, 0.4) 10%, rgba(0, 100, 255, 0.5) 45%, rgba(120, 0, 255, 0.6) 80%);
+    background: linear-gradient(150deg, rgba(0, 255, 180, 0.4) 10%, rgba(0, 100, 255, 0.5) 45%, rgba(120, 0, 255, 0.6) 80%);
+    background-size: 300% 300%;
+    animation: gradientShift 220s ease infinite;
+}
