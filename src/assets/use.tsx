@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
-import { Card, Typography } from "antd";
+import { Typography } from "antd";
 
 const { Text } = Typography;
 
