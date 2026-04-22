@@ -1,5 +1,6 @@
 .transactions-content {
-  max-height: 760px ;
+  min-height: 760px;
+  max-height: 855px; 
 }
 
 
@@ -267,7 +268,8 @@
 }
 @media (max-width: 1279px) {
   .transactions-content {
-    max-height: 803px ;
+    min-height: 803px;
+    max-height: 835px; 
   }
   .filters {
     gap: 30px;
@@ -288,7 +290,8 @@
 
 @media (max-width: 1023px) {
   .transactions-content {
-    max-height: 800px ;
+    min-height: 800px ;
+    max-height: 790px ;
   }
   .filters {
     gap: 10px;

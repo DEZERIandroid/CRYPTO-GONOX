@@ -19,11 +19,21 @@
   justify-content: space-between;
   gap: 40px;
   margin-top: 0px;
-
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 0px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
   border-radius: 15px;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   padding: 15px 13px;
   width: 100%;
   margin-left: 0 !important;
+  padding: 30px;
 }
 
 .coin-logo{
@@ -91,7 +101,7 @@
 }
 
 .return-btn {
-  background: rgba(255, 255, 255, 0.01);
+  background: rgba(255, 255, 255, 0.0);
   border: 1px solid rgba(255, 255, 255, 0.144);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
@@ -112,7 +122,7 @@
   margin: 5px 0 0 5px;
 }
 .return-btn:hover {
-  background-color: rgba(104, 104, 104, 0.164);
+  background-color: rgba(104, 104, 104, 0.2);
 }
 
 .coin-btn {
@@ -172,6 +182,7 @@
 
 .coin-actions-mobile {
   position: fixed;
+  z-index: 1000;
   bottom: 0;
   left: 0;
   width: 95%;
@@ -231,6 +242,14 @@
 }
 
 .crypto-modal h2 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+.cryptoinfo-mobile {
+  display: flex;
+  flex-direction: column;
   color: #fff;
   font-size: 22px;
   font-weight: 600;
@@ -367,7 +386,7 @@
   border-radius: 16px;
   padding: 20px 30px;
   flex: 1 1 300px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.01);
   border: 1px solid rgba(255, 255, 255, 0.144);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
@@ -403,9 +422,24 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  
 }
-
-
+.coin-chart {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 0px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  border-top: none;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  padding: 0 30px;
+  margin-top: -30px !important;
+  margin-bottom: 40px;
+}
 
 .chart-error {
   display: flex;
@@ -554,6 +588,7 @@
   }
   .coin-actions {
     justify-content: center;
+    flex-wrap: wrap;
   }
   .chart-placeholder {
     height: 300px;
@@ -567,6 +602,7 @@
   .stat-block {
     flex: 1 1 45%;
     margin: 0;
+    margin-top: -100px;
   }
 }
 @media (max-width: 820px){
@@ -603,6 +639,9 @@
     margin-top: 50px !important;
   }
 
+  .coin-chart {
+    margin-top: -45px !important;
+  }
   .coin-logo img {
     width: 80px;
     height: 80px;
@@ -678,6 +717,7 @@
     min-height: 250px;
     height: auto;
     padding: 15px;
+    
   }
 
   .error {
@@ -751,6 +791,10 @@
     padding: 20px 30px;
     margin: 0px ;
   }
+
+  .coin-chart {
+    margin-top: -40px !important;
+  }
 }
 
 /* (до 480px) */
@@ -762,12 +806,20 @@
     gap: 15px;
     display: grid;
     place-content: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: -10px;
     margin-top: 50px;
-    padding: 10px 25px;
+    padding: 20px 25px;
   }
 
+  .coinCryptos-info {
+    display: grid;
+    place-content: center;
+  }
+  .infoCrypto-text {
+    display: grid;
+    place-content: center;
+  }
   .coinCryptos-info h2 {
     font-size: 20px;
   }
@@ -801,6 +853,8 @@
   }
   .coin-logo{
     min-width: 70px;
+    display: grid;
+    place-content: center;
   }
 
   .coin-logo img {
@@ -815,6 +869,9 @@
   .chart-placeholder,
   .coin-chart {
     border-radius: 16px;
+  }
+  .coin-chart {
+    margin-top: -10px !important;
   }
 
   .return {

@@ -277,7 +277,7 @@ const HomePage = () => {
             : <div><div className="error-modal">
                   <button
                    className="button-join-small"
-                    onClick={() => navigate("/loginpage")}>
+                    onClick={() => navigate("/login")}>
                           Вход
                   </button>
               </div></div>}

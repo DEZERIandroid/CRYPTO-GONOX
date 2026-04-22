@@ -4,7 +4,6 @@
   backdrop-filter: blur(10px);
   border-radius: 13px;
   padding: 15px 10px;
-  min-height: 500px;
   color: #e0e0e0;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.144);
@@ -15,7 +14,8 @@
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
   animation: fadeIns 0.15s ease-in-out;
   margin-bottom: 10px;
-  max-height: 825px;
+  min-height: 824px;
+  max-height: 855px; 
   overflow-y: scroll;
 }
 
@@ -190,7 +190,8 @@
 
 @media (max-width:1279px) {
   .settings-content {
-    max-height: 860px;
+    min-height: 860px;
+    max-height: 855px; 
   }
 }
 @media (max-width:1023px) {

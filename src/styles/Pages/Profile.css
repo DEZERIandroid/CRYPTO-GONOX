@@ -81,12 +81,11 @@
   font-size: 14px;
   font-weight: 500;
   padding: 4px 12px;
-  margin: -20px 0;
   border-radius: 20px;
   display: inline-block;
   width: fit-content;
-  margin: -30px;
-  margin-bottom: -20px;
+  margin: -40px;
+  margin-bottom: -10px;
 }
 .profile-role-user {
   color: #67c23a;
@@ -97,8 +96,8 @@
   border-radius: 20px;
   display: inline-block;
   width: fit-content;
-  margin: -30px;
-  margin-bottom: -20px;
+  margin: -40px;
+  margin-bottom: -10px;
 }
 
 .profile-details {
@@ -118,7 +117,9 @@
 .user-portfolio {
   margin-top: -10px;
 }
-
+.stat-block-balance {
+  margin: 0 !important;
+}
 .detail-item {
   display: flex;
   justify-content: space-between;

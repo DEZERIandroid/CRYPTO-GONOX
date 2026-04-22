@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { authWithGoogle } from "@/hooks/useGoogle";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { setUser } from "../features/userSlice";
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { EyeInvisibleOutlined, EyeOutlined, GoogleOutlined, UserOutlined } from "@ant-design/icons";
 import "../styles/Log_Reg/Login.css"
+import bcrypt from "bcryptjs";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -44,6 +45,16 @@ const LoginPage = () => {
         const userData = userDoc.data();
         console.log("Данные из Firestore:", userData);
         const displayName = userData.displayName || user.email?.split('@')[0] || "Пользователь";
+
+      
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(password, salt);
+
+        const passwordData = userData.password
+        if (!passwordData) {
+          await updateDoc(doc(db, "users", user.uid), { password: hashedPassword });
+        }
+
 
         dispatch(setUser({
           uid: user.uid,
@@ -115,7 +126,6 @@ const LoginPage = () => {
       setIsModalShow(true);
       
       navigate("/");
-      ReloadSite()
     } catch (err: any) {
         console.log(err)
     }

@@ -50,6 +50,7 @@ const CryptoPage = () => {
     return () => unsubscribe()
   },[])
 
+
   const size = useWindowSize()
   const isMobile = size.width !== null && size.width >= 480
   
@@ -73,6 +74,9 @@ const CryptoPage = () => {
   const [sellError,setSellError] = useState(false)
 
   const price = coin?.market_data?.current_price?.usd ?? 0;
+
+  const id = coin?.id;
+  const titleText = id ? id[0].toUpperCase() + id.slice(1) : "";
 
 /* ------------------------ Покупка крипты ----------------------- */
 
@@ -241,12 +245,10 @@ const CryptoPage = () => {
                 <div className="coin-logo">
                   <Skeleton.Avatar active size={60} shape="circle" />
                 </div>
-                    
+                {/* Название монеты */}
+                <Skeleton.Button active style={{ width:60, height: 64 }} />
                 <div className="coinCryptos-info">
                   <div className="infoCrypto-text" style={{ alignItems: 'center' }}>
-                    {/* Название монеты */}
-                    <Skeleton.Button active style={{ width:60, height: 64 }} />
-                    
                     <div className="price-change">
                       <Skeleton.Button active style={{ width: 32, height: 32, }} />
                       <Skeleton.Button active style={{ width: 32, height: 32 }} />
@@ -299,7 +301,7 @@ const CryptoPage = () => {
     <div className="page-container">
       <div className="page-header">
         <div className="header-title">
-          <div className="title-text">{coin.id}</div>
+          <div className="title-text">{titleText}</div>
         </div>
         <div className="header-input">
           <SearchOutlined className="input-icon" />
@@ -326,12 +328,17 @@ const CryptoPage = () => {
               <div className="coin-logo">
                 <img src={image} alt={coin.name} />
               </div>
-              <div className="coinCryptos-info">
-                <div className="infoCrypto-text">
-                  <h2>
+              {!isMobile && <h2 className="cryptoinfo-mobile">
                     <span>{coin.name}</span> 
                     <span>({coin.symbol?.toUpperCase()})</span>
-                  </h2>
+                </h2>
+              }
+              <div className="coinCryptos-info">
+                <div className="infoCrypto-text">
+                  {isMobile && <h2>
+                    <span>{coin.name}</span> 
+                    <span>({coin.symbol?.toUpperCase()})</span>
+                  </h2>}
                   <div className="price-change">
                   <p className="coin-price">{price ? `$${price.toLocaleString()}` : "-"}</p>
                   <p className={

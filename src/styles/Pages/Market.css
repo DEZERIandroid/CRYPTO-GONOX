@@ -5,7 +5,7 @@
   border-radius: 13px;
   padding: 28px;
   animation: fadeIns 0.15s ease-in-out;
-  min-height: 500px;
+  min-height: 820px;
   max-height: 825px;
   overflow-y: scroll;
   color: #e0e0e0;
@@ -192,11 +192,16 @@
     width: 40px;
     height: 40px;
   }
+  .market-content {
+    min-height: 825px;
+    max-height: 855px; 
+  }
 }
 
 @media (max-width:1279px) {
   .market-content {
-    max-height: 860px;
+    min-height: 860px;
+    max-height: 855px; 
   }
 }
 

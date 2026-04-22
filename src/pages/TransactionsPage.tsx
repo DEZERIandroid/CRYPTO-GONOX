@@ -2,7 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import "../styles/Pages/Transactions.css";
 import { type Transaction } from "../app/api/UsersApi";
 import { useState, useMemo } from "react";
-import { FloatButton, Select, Skeleton } from "antd";
+import { FloatButton, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useGetTransactions } from "@/hooks/useGetTransactions";
 import { useWindowSize } from "@uidotdev/usehooks";
@@ -80,48 +80,6 @@ const TransactionsPage = () => {
           options={filtres.map(f => ({ label: f, value: f }))}
           data-aos="fade-in"
         />
-      </div>
-      <div data-aos="fadeIn" className="transactions-container">
-        <div className="filters" role="filterslist" aria-label="Фильтр Транзакций">
-          {["Все", "Покупка", "Продажа"].map((label) => (
-            <button
-              key={label}
-              className={`${filterButton === label ? "filter-btn-active" : "filter-btn"}`}
-              onClick={() => setFilterButton(label)}
-              role="filters"
-              aria-selected={filterButton === label}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-
-        <div className="market-content">
-          <div className="market-table transactions">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Актив</th>
-                  <th>Пользователь</th>
-                  <th>Количество</th>
-                  <th>Тип</th>
-                  <th>Дата</th>
-                  <th>Цена</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...Array(15)].map((_, i) => (
-                  <tr data-aos="fade-in" key={i}>
-                    <td colSpan={7}>
-                      <Skeleton avatar active paragraph={{ rows: 1 }} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
       <FloatButton.BackTop className="float-button" />
     </div>

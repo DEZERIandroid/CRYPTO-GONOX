@@ -5,7 +5,7 @@ import { MarketIcon } from "./Icons/MarketIcon"
 import { UsersIcon } from "./Icons/UsersIcon"
 import { TransactionsIcon } from "./Icons/TransactionsIcon"
 import { SettingsIcon } from "./Icons/Setting"
-import { Skeleton } from "antd"
+import { Skeleton, Tooltip } from "antd"
 import ThemeToggle from "../assets/themeToggle"
 import "../styles/Components/Sidebar.css"
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
@@ -19,7 +19,7 @@ import { clearUser } from "@/features/userSlice"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { motion, AnimatePresence } from 'framer-motion';
 import useGetUser from "@/hooks/useGetUser"
-import { doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
 import type { accountsForSwitch } from '@/app/api/UsersApi';
 
 const isValidEmail = (email: string): boolean => {
@@ -29,7 +29,7 @@ const isValidEmail = (email: string): boolean => {
 const Sidebar = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { email, name, isAuthChecked, uid} = useAppSelector(state => state.user);
+  const { email, name, isAuthChecked, uid, photoURL:PhotoURL} = useAppSelector(state => state.user);
   const { users } = useGetUser()
   const userMain = useAppSelector(state => state.user)
   const [burgerModal,setBurgerModal] = useState(false)
@@ -38,15 +38,17 @@ const Sidebar = () => {
   const [emails, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error,setError] = useState<string | null>(null)
-  const [errorAdd,setErrorAdd] = useState<string | null>(null)
+  const [errorClosing,setErrorClosing] = useState(false)
   const [accounts,setAccounts] = useState([])
   const [nameforSwitch,setNameforSwitch] = useState("")
   const [emailforSwitch,setEmailforSwitch] = useState("")
+  const [photoforSwitch,setPhotoforSwitch] = useState("")
   const [passwordInput,setPasswordInput] = useState("")
   const mainModal = useCloseModal(100)
   const addModal = useCloseModal(150)
   const accountModal = useCloseModal(150)
   const passwordModal = useCloseModal(150)
+  const leaveConfirmModal = useCloseModal(150)
   
   const user = users?.find((u) => u.email === email); 
   const photoURL = user?.photoURL
@@ -75,6 +77,7 @@ const Sidebar = () => {
     addModal.closeModal()
     accountModal.closeModal()
     passwordModal.closeModal()
+    leaveConfirmModal.closeModal()
   }
   const handleLogout = (e:any) => {
     e.stopPropagation()
@@ -88,6 +91,14 @@ const Sidebar = () => {
       console.error("Ошибка при выходе", error)
     }
   }
+
+  const handleRegisterTo = () => {
+    closeAllModal()
+    signOut(auth)
+    dispatch(clearUser())
+    navigate("/register")
+  }
+  
   const switchModalOpen = (item:{email:string}) => {
     setEmailforSwitch(item.email)
     passwordModal.openModal()
@@ -144,45 +155,84 @@ const Sidebar = () => {
       console.error("Ошибка при выходе", error)
     }
   }
-  const salt = bcrypt.genSaltSync(10);
-  const hashedPassword = bcrypt.hashSync(password, salt);
 
   const addNewAccount = async () => {
-    const cleanEmail = emails.trim();
+    const cleanEmail = emails.trim().toLowerCase();
     const cleanPassword = password.trim();
     const cleanName = names.trim();
     
     if (!cleanEmail || !cleanPassword || !cleanName) {
-      setErrorAdd("Пожалуйста, заполните все поля");
+      setError("Пожалуйста, заполните все поля");
       return;
     }
   
     if (!isValidEmail(cleanEmail)) {
-      setErrorAdd("Неверный формат email");
+      setError("Неверный формат email");
       return;
     }
     
     if (cleanName.length > 16) {
-      setErrorAdd("Имя слишком длинное")
+      setError("Имя слишком длинное")
       return
     }
     if (cleanPassword.length < 6) {
-      setErrorAdd("Пароль должен содержать минимум 6 символов");
+      setError("Пароль должен содержать минимум 6 символов");
       return;
     }
 
     try {
       if (!uid) return
 
+      const usersCol = collection(db,"users")
+      const snapshot = await getDocs(usersCol);
+
+      const users = snapshot.docs.map((doc) => {
+                        const data = doc.data() as {
+                          uid:any,
+                          email?: string;
+                          password?:string | any,
+                          photoURL:string
+                        };
+                      
+                        return {
+                          uid:doc.id,
+                          email: data.email,
+                          password:data.password,
+                          photoURL:data.photoURL
+                        };
+                    });
+      const user = users.find(user => user.email == emails)
+      if (!user) {
+        setError("Пользователь не найден");
+        return;
+      }
+      const hashedPassword = user.password
+      if (!hashedPassword) {
+        setError("Профиль требует обновления. Войдите в тот аккаунт обычным способом.");
+        return
+      } 
+      const isMatch = bcrypt.compareSync(password, hashedPassword);
+      
+      if (!isMatch) {
+        setError("Неправильный пароль");
+        return;
+      }
+
+
+
+
+
+      
       const userDocRef = doc(db,"users",uid)
-      const userSnap = await getDoc(userDocRef)
-      const userData = userSnap.data()
+      
+      const userDoc = await getDoc(doc(db, "users",uid));
+      
+      const userData = userDoc.data()
       const accounts = userData?.accountsForSwitch || []
 
       const isDuplicate = accounts.some((acc: any) => 
                             acc.email?.trim().toLowerCase() === cleanEmail
                           );
-
       if (accounts.length >= 5) {
         setError("Cлишком много аккаунтов");
         return
@@ -193,32 +243,41 @@ const Sidebar = () => {
         console.log("Дубликат найден:", cleanEmail);
         return
       }
-
+      
       if (accounts) {
-        updateDoc(userDocRef, {
-          accountsForSwitch:[...accounts,{
-            name:names,
-            email:emails,
-            password:hashedPassword
-          }]
-        })
+        const userDocRef = doc(db,"users",uid)
+        const userDoc = await getDoc(doc(db, "users",uid));
+        const userData = userDoc.data()
+        const accounts = userData?.accountsForSwitch || []
+        
+          if (accounts) {
+              updateDoc(userDocRef, {
+                accountsForSwitch:[...accounts,{
+                  name:cleanName,
+                  email:emails,
+                  password:hashedPassword,
+                  photoURL:user.photoURL
+                }]
+            })
+        }
+
         setEmail("")
         setName("")
         setPassword("")
         setError(null)
+        addModal.closeModal()
       } else {
-          updateDoc(userDocRef, {
+          await updateDoc(userDocRef, {
             accountsForSwitch:[{
-              name:name,
-              email:email,
-              password:""
             }]
           })
         }
       addModal.closeModal()
+      console.log(2)
     } catch (error) {
       console.log(error)
     }
+    
   }
 
   useEffect(() => {
@@ -233,27 +292,40 @@ const Sidebar = () => {
         if (accountsForSwitch) {
           setAccounts(accountsForSwitch)
         }
-        
-        const userObj = accountsForSwitch.find((item:any) => item.email == email)
-        if (userObj && userObj.uid) {
-          const userObjRef = doc(db,"users",userObj.uid)
-          console.log(userObj)
-          updateDoc(userObjRef, {
-            ...accountsForSwitch ,accountsForSwitch:[{
-              photoURL: photoURL
-            }]
-          })
-        }
       }
     })
     return () => unsubscribe()
   },[uid])
 
+  useEffect(() => {
+    if (!error) return
 
-  const accountInfoOpen = (EmailPassword:{name:string,email:string}) => {
+    setErrorClosing(false)
+    
+    const closingTimer = setTimeout(() => {
+      setErrorClosing(true)
+    },3500)
+    
+    const clearTimer = setTimeout(() => {
+      setError("")
+      setErrorClosing(false)
+    },3600)
+    return () => {
+      clearTimeout(closingTimer)
+      clearTimeout(clearTimer)
+    }
+    
+  },[error])
+
+  const accountInfoOpen = (EmailPassword:{name:string,email:string,photoURL:string}) => {
     accountModal.openModal()
     setNameforSwitch(EmailPassword.name)
     setEmailforSwitch(EmailPassword.email)
+    setPhotoforSwitch(EmailPassword.photoURL)
+  }
+
+  const deleteAccount = () => {
+    alert("Агьигьа")
   }
   
   return (
@@ -402,13 +474,32 @@ const Sidebar = () => {
                         <CloseOutlined className="exit-btn" />
                       </div>
                       <div className="accounts">
-                        {accounts.length > 0 ? 
-                          <>
+                        <div className="account">
+                          <div className="account-avatar">
+                            {PhotoURL
+                                      ? <><img src={PhotoURL} alt="" /></> 
+                                      : <Skeleton.Avatar active style={{ width: "40px", height: "40px",}} />
+                            }
+                          </div>
+                          <div className="account-text">
+                            <div className="account-name">{name}</div>
+                            <div className="account-email">{email}</div>
+                          </div>
+                            <div className="account-leave" onClick={(e) => e.stopPropagation()}>
+                              <button className="account-leave-btn" 
+                                      onClick={handleLogout} >
+                                Выйти
+                              </button>
+                            </div>
+                        </div>
                             {accounts.map((item:accountsForSwitch,index) => (
                                 <div className="account" key={index}
                                      onClick={() => accountInfoOpen(item)}>
                                   <div className="account-avatar">
-                                    <Skeleton.Avatar active style={{ width: "40px", height: "40px",}} />
+                                    {item.photoURL
+                                              ? <><img src={item.photoURL} alt="" /></> 
+                                              : <Skeleton.Avatar active style={{ width: "40px", height: "40px",}} />
+                                    }
                                   </div>
                                   <div className="account-text">
                                     <div className="account-name">{item.name}</div>
@@ -416,9 +507,8 @@ const Sidebar = () => {
                                   </div>
                                   {email == item.email ?
                                     <div className="account-leave" onClick={(e) => e.stopPropagation()}>
-                                      <button className="account-leave-btn" 
-                                              onClick={handleLogout} >
-                                        Выйти
+                                      <button className="account-leave-btn">
+                                        Удалить
                                       </button>
                                     </div>
                                   :  
@@ -432,8 +522,6 @@ const Sidebar = () => {
                                  
                                 </div>
                               ))}
-                         </>
-                          : <div>Аккаунтов нет</div>}
                       </div>
 
                       <div className="account-add">
@@ -452,7 +540,7 @@ const Sidebar = () => {
                 <div className="modal-overlay"
                      onClick={() => addModal.closeModal()}>
                 <div className={isMobile ? `account-add-modal-mobile ${addModal.modalClass ? 'closing' : ''}` : `account-add-modal ${addModal.modalClass ? 'closing' : ''}`}
-                      data-aos={isMobile ? "zoom-in" : "zoom-in-down"} 
+                      data-aos={isMobile ? "zoom-in" : "zoom-in"} 
                       data-aos-duration="150"
                       onClick={(e) => e.stopPropagation()} >
                   <div className="title" style={{margin:"-10px 0 -5px 0"}}>Пароль от аккаунта</div>
@@ -498,6 +586,11 @@ const Sidebar = () => {
                         <div className="account-add-modal-watch" onClick={handleWatchPassword}>
                           {watchingPass ? <EyeOutlined/> : <EyeInvisibleOutlined/>}
                         </div>
+                        <div className="account-add-footer">
+                                <button onClick={() => leaveConfirmModal.openModal()} className="registerLink account-register-addlink">
+                                  Хотите создать аккаунт?
+                                </button>
+                        </div>
                       </div>
                   </div>
                   <div className="buttons-account">
@@ -507,11 +600,45 @@ const Sidebar = () => {
                       Добавить
                     </button>
                   </div>
-                  {error && <div className="error-modal error-add">
-                                <div>{errorAdd}</div>
-                            </div>
+                  {error && 
+                    <div className={`error-modal error-add ${errorClosing ? 'fade-out' : 'fade-in'}`}>
+                        <div>{error}</div>
+                    </div>
                   }
                 </div>
+                </div>
+            )}
+
+            {leaveConfirmModal.isOpen && (
+               <div className="leave-confirm-modal-ovarlay "
+                   onClick={() => leaveConfirmModal.closeModal()}>
+                  <div className={isMobile ? `leave-confirm-modal-mobile 
+                                    ${leaveConfirmModal.modalClass ? 'closing' : ''}`
+                                    : `leave-confirm-modal ${leaveConfirmModal.modalClass ? 'closing' : ''}`}
+                       data-aos={isMobile ? "zoom-in-up" : "zoom-in"} 
+                       data-aos-duration="150"
+                       onClick={(e) => e.stopPropagation()}
+                  >
+                      <div className="leave-block">
+                        <span className='leave-text'>
+                          Уверены что хотите выйти из 
+                            <Tooltip placement="top" title={email}>
+                                <span style={{color:"#3b82f6"}}> текущего </span>
+                            </Tooltip>
+                           аккаунта?
+                        </span>
+                      </div>
+                      <div className="account-info-buttons ">
+                        <button className="account-info-btn edit-account-btn leave-btnon"
+                                onClick={handleRegisterTo}>
+                          Да
+                        </button>
+                        <button className="account-info-btn remove-account-btn leave-btnon"
+                                onClick={() => leaveConfirmModal.closeModal()}>
+                          Нет
+                        </button>
+                      </div>
+                  </div>
                 </div>
             )}
             
@@ -532,7 +659,10 @@ const Sidebar = () => {
                       <div className="account-info">
                         <div className="account-info-text">
                             <div className="account-avatar">
-                                <Skeleton.Avatar active style={{ width: "60px", height: "60px",}} />
+                                {photoforSwitch
+                                              ? <><img src={photoforSwitch} alt="" style={{width:"65px",height:"65px"}}/></> 
+                                              : <Skeleton.Avatar active style={{ width: "40px", height: "40px",}} />
+                                    }
                             </div>
                             <div className="account-info-name">
                               {nameforSwitch}
@@ -543,7 +673,10 @@ const Sidebar = () => {
                         </div>
                         <div className="account-info-buttons">
                           <button className="account-info-btn edit-account-btn">Редактировать</button>
-                          <button className="account-info-btn remove-account-btn">Удалить</button>
+                          <button className="account-info-btn remove-account-btn"
+                                  onClick={deleteAccount}>
+                                    Удалить
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -584,6 +717,11 @@ const Sidebar = () => {
                           <button className="button-login" onClick={() => handleSwitch(emailforSwitch)}>
                             Войти
                           </button>
+                          {error && 
+                            <div className={`error-modal error-add ${errorClosing ? 'fade-out' : 'fade-in'}`} >
+                                <div>{error}</div>
+                            </div>
+                          }
                         </div>
                       </div>
                     )}

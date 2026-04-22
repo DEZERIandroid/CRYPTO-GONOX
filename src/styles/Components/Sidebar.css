@@ -208,7 +208,83 @@
 
 
 
-/* ----- Modal ------- */
+/* ---------------------------------------------- */
+/* ------------------ MODAL --------------------- */
+/* ---------------------------------------------- */
+
+.leave-confirm-modal-ovarlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000b6;
+  z-index: 10000000;
+  display: grid;
+  place-content: center;
+}
+
+.leave-confirm-modal {
+  position: absolute;
+  top: 450px;
+  left: 300px;
+  width: 350px;
+  padding: 20px 15px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.363);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  z-index: 20000;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+}
+.leave-confirm-modal-mobile {
+  position: relative;
+  width: 325px;
+  padding: 22px 15px;
+  margin-bottom: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.363);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition: transform 0.1s ease-in-out;
+  z-index: 20000;
+  display: grid;
+  place-content: center;
+  gap: 20px;
+}
+.leave-confirm-modal.closing {
+  opacity: 0; transform: translateY(5px) translateX(15px) scale(0.75);
+}
+.leave-confirm-modal-mobile.closing {
+  opacity: 0; transform: translateY(45px) scale(0.75);
+}
+
+.leave-block {
+  display: grid;
+  place-content: center;
+  max-width: 250px;
+}
+
+.leave-text {
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.leave-btnon{
+  padding: 9px 40px !important;
+}
+
+
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -224,8 +300,8 @@
 }
 .modal-change {
   position: absolute;
-  top: 230px;
-  left: 180px;
+  top: 160px;
+  left: 270px;
   width: 450px;
   padding: 35px;
   background: rgba(255, 255, 255, 0.03);
@@ -240,7 +316,7 @@
 
 .modal-change.closing {
   opacity: 0;
-  transform: scale(0.70) translateX(-120px) translateY(-20px);
+  transform: scale(0.70) translateX(-200px) translateY(20px);
   pointer-events: none;
 }
 
@@ -365,7 +441,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 140px;
+  max-width: 165px;
 }
 .account-leave {
   display: grid;
@@ -467,8 +543,8 @@
   display: grid;
   gap: 20px;
   position: absolute;
-  top: 470px;
-  left: 215px;
+  top: 300px;
+  left: 305px;
   width: 380px;
   padding: 35px;
   border-radius: 15px;
@@ -482,7 +558,7 @@
   backdrop-filter: blur(10px);
 }
 .account-add-modal.closing {
-  transform: scale(0.90) translateY(-30px);
+  transform: scale(0.90);
   pointer-events: none;
 }
 .account-add-modal-mobile{
@@ -560,16 +636,16 @@
 
 .button-add-account{
   flex: 1;
-  padding: 8px 16px;
+  padding: 11px 16px;
   border-radius: 12px;
   border: none;
   cursor: pointer;
   font-size: 15.5px;
   font-weight: 600;
   transition: all 0.2s ease;
-  background-color: #4caf50;
+  background-color: #419244;
   color: #fff;
-  border: 1px solid #00000000;
+  border: 1px solid #ffffff8c;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -581,9 +657,27 @@
 
 .error-add {
   margin: 5px 0 -20px 0;
+  animation: FadeIn 0.2s ease-in-out;
+}
+.fade-in { opacity: 1; transition: opacity 0.1s; }
+.fade-out { opacity: 0; transition: opacity 0.1s; }
+
+@keyframes FadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-
+.account-add-footer {
+  text-align: end;
+  transform: translateY(10px);
+}
+.account-register-addlink {
+  font-size: 17px;
+}
 
 
 
@@ -680,7 +774,6 @@
   border:1px solid #3aa13e;
 }
 .remove-account-btn {
-  
   background-color: rgb(184, 38, 36);
   color: #fff;
 }

@@ -1,5 +1,4 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import bcrypt from 'bcryptjs';
 import { authWithGoogle } from "@/hooks/useGoogle";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { setUser } from "../features/userSlice";
@@ -10,6 +9,7 @@ import { setDoc, doc, serverTimestamp, } from "firebase/firestore";
 import { db,auth } from "../firebase";
 import { useNavigate,Link } from "react-router-dom";
 import { EyeOutlined, EyeInvisibleOutlined, GoogleOutlined } from "@ant-design/icons";
+import bcrypt from "bcryptjs";
 
 const isValidEmail = (email: string): boolean => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -39,6 +39,9 @@ const RegisterPage = () => {
     const cleanPassword = password.trim();
     const cleanPasswordDoble = passwordDoble.trim();
     const cleanName = userName.trim();
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
     
     if (!cleanEmail || !cleanPassword || !cleanName) {
       setError("Пожалуйста, заполните все поля");
@@ -62,9 +65,6 @@ const RegisterPage = () => {
       setError("Пароли не похожи");
       return;
     }
-
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(cleanPassword, salt);
   
     setError(null);
     setIsLoading(true);
@@ -84,6 +84,7 @@ const RegisterPage = () => {
         portfolio:[],
         createdAt: serverTimestamp(),
         privatedAccount: false,
+        password:hashedPassword,
         settings:[{
           push:true,
           theme:"Gonox",
@@ -93,9 +94,6 @@ const RegisterPage = () => {
           animation:true,
         }],
         accountsForSwitch:[{
-            name:cleanName,
-            email:cleanEmail,
-            password:hashedPassword,
         }]
       });
 
