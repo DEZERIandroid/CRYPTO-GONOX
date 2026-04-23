@@ -3,6 +3,8 @@ import { useGetCoinChartQuery } from "../app/api/CryptoApi";
 import CoinChart from "./CoinChart";
 import "../styles/Components/CoinChart.css"; 
 import { ReloadOutlined } from "@ant-design/icons";
+import { Skeleton } from "antd";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 interface CoinChartWithControlsProps {
   coinId: string;
@@ -10,6 +12,8 @@ interface CoinChartWithControlsProps {
 
 const CoinChartWithControls: React.FC<CoinChartWithControlsProps> = ({ coinId }) => {
   const [timeRange, setTimeRange] = useState<number | string>(7);
+  const size = useWindowSize()
+  const isMobile = size.width !== null && size.width >= 480;
 
   const { data, isLoading, isError, refetch } = useGetCoinChartQuery(
     { id: coinId, days: timeRange },
@@ -29,11 +33,14 @@ const CoinChartWithControls: React.FC<CoinChartWithControlsProps> = ({ coinId })
   if (isLoading)
   return (
     <>
+    <div className="coin-chart" style={{display:"grid", placeContent:"center", borderRadius: '15px',marginTop:!isMobile ? "" : "100px"}}>
+        <Skeleton.Button active style={{ width:size.width !== null && size.width >= 1400 ? 1100 : !isMobile ? 320 : 600, height: 250, borderRadius: '15px' }}/>
+    </div>
     </>
   );
   if (isError)
   return (
-    <div className="coin-chart-container">
+    <div className="coin-chart-container" style={{marginTop:!isMobile ? "" : "-100px"}}>
       <div className="chart-wrapper chart-error">
         <p className="error">Ошибка загрузки графика</p>
         <button className="reload-btn" onClick={handleReloadChart}>

@@ -81,6 +81,21 @@ const TransactionsPage = () => {
           data-aos="fade-in"
         />
       </div>
+      <div data-aos="fade-in" className="transactions-container">
+          <div className="filters" role="filterslist" aria-label="Фильтр Транзакций">
+            {["Все", "Покупка", "Продажа"].map((label) => (
+              <button
+                key={label}
+                className={`${filterButton === label ? "filter-btn-active" : "filter-btn"}`}
+                onClick={() => setFilterButton(label)}
+                role="filters"
+                aria-selected={filterButton === label}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
       <FloatButton.BackTop className="float-button" />
     </div>
   );
@@ -107,8 +122,8 @@ const TransactionsPage = () => {
           options={filtres.map(f => ({ label: f, value: f }))}
         />
       </div>
-
-      <div data-aos="fadeIn" className="transactions-container">
+    
+      <div data-aos="fade-in" className="transactions-container">
         <div className="filters" role="filterslist" aria-label="Фильтр Транзакций">
           {["Все", "Покупка", "Продажа"].map((label) => (
             <button

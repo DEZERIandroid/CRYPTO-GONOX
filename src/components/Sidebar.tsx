@@ -420,7 +420,6 @@ const Sidebar = () => {
         <div data-aos="fade-in" className="sidebar-theme-toggle">
           <ThemeToggle />
         </div>
-        
       </div>
 
 
@@ -615,7 +614,7 @@ const Sidebar = () => {
                   <div className={isMobile ? `leave-confirm-modal-mobile 
                                     ${leaveConfirmModal.modalClass ? 'closing' : ''}`
                                     : `leave-confirm-modal ${leaveConfirmModal.modalClass ? 'closing' : ''}`}
-                       data-aos={isMobile ? "zoom-in-up" : "zoom-in"} 
+                       data-aos="zoom-in" 
                        data-aos-duration="150"
                        onClick={(e) => e.stopPropagation()}
                   >
@@ -628,7 +627,7 @@ const Sidebar = () => {
                            аккаунта?
                         </span>
                       </div>
-                      <div className="account-info-buttons ">
+                      <div className="leave-buttons">
                         <button className="account-info-btn edit-account-btn leave-btnon"
                                 onClick={handleRegisterTo}>
                           Да

@@ -3,6 +3,7 @@
   border-radius: 13px;
   padding: 50px 3px;
   position: relative;
+  
 }
 .chart-graph {
   margin-top: -70px;
@@ -32,6 +33,11 @@
   transition: all 0.3s ease;
   user-select: none;
   -webkit-user-select: none;
+
+  /* Newwwwwwwwww*/
+  overflow: hidden;
+  isolation: isolate;
+  position: relative;
 }
 
 .Yaxic{

@@ -17,6 +17,12 @@
   min-height: 824px;
   max-height: 855px; 
   overflow-y: scroll;
+
+  /* Newwwwwwwwww*/
+  background: rgba(255, 255, 255, 0.025);
+  isolation: isolate;
+  backdrop-filter: blur(10px) brightness(1.1);
+  -webkit-backdrop-filter: blur(10px) brightness(1.1);
 }
 
 .settings-section {
@@ -31,6 +37,10 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
+
+  /* Newwwwwwwwww*/
+  background: rgba(255, 255, 255, 0.00);
+  isolation: isolate;
 }
 
 .settings-section-title {

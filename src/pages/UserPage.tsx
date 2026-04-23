@@ -91,7 +91,7 @@ const UserPage = () => {
                   </span>
                 </div>
           </div>
-          <div className="stat-block" style={{marginBottom:5}}>
+          <div className="stat-block date-reg" style={{marginBottom:5}}>
             <span className="stat-label">Дата регистрации</span>
             <span className="stat-value stat-value-data">
                 {(user.createdAt as Timestamp).toDate().toLocaleDateString()}

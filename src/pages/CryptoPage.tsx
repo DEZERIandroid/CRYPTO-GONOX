@@ -214,7 +214,7 @@ const CryptoPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="coin-chart" style={{display:"grid", placeContent:"center", borderRadius: '15px'}}>
+                <div className="coin-chart" style={{display:"grid", placeContent:"center", borderRadius: '15px',paddingBottom:"80px"}}>
                   <Skeleton.Button active style={{ width:size.width !== null && size.width >= 1400 ? 1100 : 600, height: 250, borderRadius: '15px' }}/>
                 </div>
 
