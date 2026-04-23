@@ -9,6 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { EyeInvisibleOutlined, EyeOutlined, GoogleOutlined, UserOutlined } from "@ant-design/icons";
 import "../styles/Log_Reg/Login.css"
 import bcrypt from "bcryptjs";
+import Loading from "@/assets/useLoading";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -198,7 +199,12 @@ const LoginPage = () => {
       </div>
       
       <button className="button-login" onClick={Login}>
-        {isLoading ? "Вход..." : "Вход"}
+        {!isLoading 
+                  ? <span>Вход</span> 
+                  : <div style={{display:"grid",placeContent:"center"}}>
+                      <Loading/>
+                    </div> 
+        }
       </button>
 
       <div className="form-footer">

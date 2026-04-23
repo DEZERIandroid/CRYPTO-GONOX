@@ -134,8 +134,8 @@ const Sidebar = () => {
 
       const userCredential = await signInWithEmailAndPassword(auth,email,passwordInput)
       const { user } = userCredential
-      ReloadSite()
       navigate(`${thisLocation}`)
+      ReloadSite()
 
       const userDoc = await getDoc(doc(db, "users", user.uid));
 
@@ -316,6 +316,7 @@ const Sidebar = () => {
     }
     
   },[error])
+
 
   const accountInfoOpen = (EmailPassword:{name:string,email:string,photoURL:string}) => {
     accountModal.openModal()

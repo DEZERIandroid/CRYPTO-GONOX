@@ -285,7 +285,7 @@
   opacity: 0; transform: translateY(5px) translateX(15px) scale(0.75);
 }
 .leave-confirm-modal-mobile.closing {
-  opacity: 0; transform: translateY(45px) scale(0.75);
+  opacity: 0; transform: translateY(10px) translateX(10px) scale(0.75);
 }
 
 .leave-block {
@@ -323,7 +323,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.55); 
   
   display: flex;
   justify-content: center; 
@@ -361,7 +361,7 @@
 .modal-change-mobile {
   position: relative;
   width: 350px;
-  padding: 35px;
+  padding: 35px 20px;
   margin-bottom: 200px;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(30px);
@@ -402,7 +402,7 @@
   order: 3;
   margin-left: 50px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.144);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
@@ -411,7 +411,7 @@
   z-index: 1000;
 
   /* Newwwwwwwwww*/
-  background: rgba(255, 255, 255, 0.015);
+  background: rgba(255, 255, 255, 0.0);
   isolation: isolate;
   backdrop-filter: blur(10px) brightness(1.1);
   -webkit-backdrop-filter: blur(10px) brightness(1.1);
@@ -426,16 +426,17 @@
 
 .accounts {
   display: grid;
-  place-content: center;
   gap: 5px;
   margin-top: 5px;
+  max-height: 200px;
+  overflow-y: scroll;
+  padding-right: 2px;
 }
 
 .account {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
   cursor: pointer;
   border: 1px solid #bebebe2f;
   background: rgba(255, 255, 255, 0.02);
@@ -977,11 +978,6 @@
 
 .burger-item {
   color: #dbdbdb;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 0px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -2px 0 rgba(255, 255, 255, 0.015),
-    inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
 .burger-item:hover {
@@ -1122,7 +1118,7 @@
     width: 100%;
     margin-left:0px;
     margin-top: 0; 
-    border-radius: 20px;
+    border-radius: 15px;
 
       /* Newwwwwwwwww*/
     background: rgba(255, 255, 255, 0.05);
@@ -1224,7 +1220,7 @@
     display: none;
   }
   .sidebar {
-    padding: 0 10px;
+    padding: 0 8px;
   }
   .sidebar-container {
     display: flex;

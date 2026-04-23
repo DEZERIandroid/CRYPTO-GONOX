@@ -322,6 +322,10 @@
     margin: 4px 5px !important;
     height: 50px !important;
   }
+  .topusers-username {
+    min-width: 200px;
+    overflow: hidden;
+  }
   .topusers-item-photo {
     min-width: 40px;
   }
